@@ -12,14 +12,14 @@ https://www.figma.com/proto/Z5SWa6KmOufBDFreUojx7mL0/ReWorks?node-id=409%3A503&s
 
 # User Stories: what can I do on this app?
 
- 1- As a user, I want to see pointers on how to upload a good photo.
+ 1. As a user, I want to see pointers on how to upload a good photo.
  
- 2- As a user, I want to upload a photo of the clothes I want to be reused.
+ 1. As a user, I want to upload a photo of the clothes I want to be reused.
  
- 3- As a user, I want to see the headline details about the photo I uploaded.
+ 1. As a user, I want to see the headline details about the photo I uploaded.
  
- 4- As a user, I want to add/update/edit the details.
+ 1. As a user, I want to add/update/edit the details.
  
- 5- As a user, I want to sign up/login to save my items and their data.
+ 1. As a user, I want to sign up/login to save my items and their data.
  
- 6- As an admin, I want to see a table has all these items info.
+ 1. As an admin, I want to see a table has all these items info.
