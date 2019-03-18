@@ -8,7 +8,7 @@ eComit aims to help users make their wardrobe visible, provide information on ea
 In addition to providing users with information about their item, it also serves as an admin tool for the ReWorks team.
 
 # Link to the prototype: 
-https://www.figma.com/proto/Z5SWa6KmOufBDFreUojx7mL0/ReWorks?node-id=249%3A74&scaling=min-zoom
+https://www.figma.com/proto/Z5SWa6KmOufBDFreUojx7mL0/ReWorks?node-id=409%3A503&scaling=min-zoom
 
 # User Stories: what can I do on this app?
 
