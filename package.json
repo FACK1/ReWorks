@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint ./server",
-    "eslint:fix": "eslint --fix ./server"
+    "eslint:fix": "eslint --fix ./server",
+    "dev": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,10 @@
   },
   "homepage": "https://github.com/FACK1/ReWorks#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "env2": "^2.2.2",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19",
+    "nodemon": "^1.18.10"
   },
   "devDependencies": {
     "eslint": "^5.15.3",
