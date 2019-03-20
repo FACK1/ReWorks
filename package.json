@@ -1,0 +1,31 @@
+{
+  "name": "reworks",
+  "version": "1.0.0",
+  "description": "The fashion industry is currently very unsustainable, with millions of clothes being wasted each year. Many of us don’t know what to do with our extra piles of clothes lying around and, more often than not, these clothes are thrown in a dump rather than being recycled, sold, or repurposed. Recently, even when we give to charity, they cannot deal with the amount of items donated. So what’s the solution?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint ./server",
+    "eslint:fix": "eslint --fix ./server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FACK1/ReWorks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FACK1/ReWorks/issues"
+  },
+  "homepage": "https://github.com/FACK1/ReWorks#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4"
+  }
+}
