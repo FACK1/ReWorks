@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint ./server",
     "eslint:fix": "eslint --fix ./server",
-    "dev": "nodemon server/server.js"
+    "client": " cd client  && SKIP_PREFLIGHT_CHECK=true npm run build",
+    "dev": " npm run client && nodemon ./server/server.js ",
+    "start": "node ./server/server.js"
   },
   "repository": {
     "type": "git",
