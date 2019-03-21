@@ -23,9 +23,14 @@
   },
   "homepage": "https://github.com/FACK1/ReWorks#readme",
   "dependencies": {
+    "aws-sdk": "^2.425.0",
+    "bluebird": "^3.5.3",
     "env2": "^2.2.2",
     "express": "^4.16.4",
+    "file-type": "^10.9.0",
+    "fs": "0.0.1-security",
     "mongoose": "^5.4.19",
+    "multiparty": "^4.2.1",
     "nodemon": "^1.18.10"
   },
   "devDependencies": {
