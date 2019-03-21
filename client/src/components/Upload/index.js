@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../Shared/Header';
-import Footer from '../Shared/Footer';
+import Title from '../Shared/Title';
 
-class FileUpload extends Component {
+
+class Upload extends Component {
 
   handleUploadFile = (event) => {
     const data = new FormData();
@@ -17,14 +18,13 @@ class FileUpload extends Component {
   render () {
     return (
 <React.Fragment>
+<Title/>
   <Header/>
   <form onSubmit={this.submitFile}>
     <input label='upload file' type='file' onChange={this.handleUploadFile} />
     <br/>
-    <img id="logo" src={this.state.loc} alt="Smiley face" height="300" width="300"/>
   </form>
-  <Footer/>
-<React.Fragment/>
+</React.Fragment>
     );
   }
 }
