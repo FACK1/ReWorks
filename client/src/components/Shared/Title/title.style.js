@@ -7,5 +7,4 @@ text-align:center;
 @media (max-width: 650px) {
   font-size: 30px;
 }
-
 `;
