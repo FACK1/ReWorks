@@ -1,7 +1,15 @@
-const express = require('express');
 const path = require('path');
-require('env2')('config.env');
+const express = require('express');
 
 const app = express();
+require('env2')('config.env');
+
+const router = require('./router');
+
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+
+app.use(router);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+});
 module.exports = app;
