@@ -12,7 +12,6 @@ class Upload extends Component {
     const data = new FormData();
     data.append('file', event.target.files[0]);
     axios.post('/add-to-amazon', data).then(response => {
-      console.log(response);
       this.setState({ loc: `${response.data.Location}` });
     });
   };
