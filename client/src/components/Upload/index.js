@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../Shared/Header';
+import Title from '../Shared/Title';
 
 class Upload extends Component {
   state = {
@@ -19,6 +20,7 @@ class Upload extends Component {
   render() {
     return (
       <React.Fragment>
+        <Title />
         <Header />
         <form>
           <input label="upload file" type="file" onChange={this.handleUploadFile} />
