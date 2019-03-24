@@ -5,14 +5,20 @@ display:flex;
 justify-content: center;
 flex-direction:column;
 `;
-
-export const StyledImg = styled.img`
+export const StyledImgCon = styled.div`
 display:flex;
-background-color: #909090;
+width: 180px;
+height:180px;
+background-color: #FBFBFB;
 border-radius:50%;
 margin:auto;
-width: 40%;
-height:30%;
+justify-content: center;
+align-items: center;
+overflow:hidden;
+`;
+
+export const StyledImg = styled.img`
+height: 200px;
 `;
 
 export const StyledInformation = styled.h2`
@@ -39,12 +45,12 @@ text-align:left;
 export const StyledLabel = styled.label`
 font-size: 20px;
 font-family:'Assistant';
-text-align: center;
 margin-bottom:16px;
 @media (max-width: 650px) {
   font-size: 16px;
 }
 `;
+
 
 export const StyledDiv = styled.div`
 display:flex;
@@ -56,7 +62,6 @@ export const StyledItem = styled.div`
 display:flex;
 justify-content: space-around;
 flex-direction:column;
-
 `;
 export const StyledLabels = styled.div`
 display:flex;
@@ -79,7 +84,7 @@ padding:7px 14px;
 `;
 
 export const StyledOption = styled.option`
-
+color:#4C5268;
 `;
 
 export const StyledInput = styled.input`
@@ -99,8 +104,11 @@ padding:7px 14px;
 export const StyledTextarea = styled.textarea`
 font-size: 20px;
 width:200px
+padding:0 30px;
+background-color:#FBFBFB;
+border:1px solid  #F2F2F2;
 height:80px;
-margin:auto;
+margin:20px auto;
 display:flex;
 font-family:'Assistant';
 text-align:left;

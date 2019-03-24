@@ -5,7 +5,7 @@ import GetDetails from './components/GetDetails';
 function App() {
   return (
     <Router>
-      <Route path="/GetDetails" component={GetDetails} />
+      <Route path="/get-details" component={GetDetails} />
     </Router>
   );
 }

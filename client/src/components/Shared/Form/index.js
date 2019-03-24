@@ -1,5 +1,5 @@
 import React from 'react';
-import img from './img.png';
+import img from './cat.jpeg';
 
 import {
   StyledForm,
@@ -14,13 +14,16 @@ import {
   StyledLabels,
   StyledInput,
   StyledTextarea,
-
+  StyledImgCon,
 }
   from './form.style';
 
 const Form = () => (
   <StyledForm>
-    <StyledImg src={img} />
+    <StyledImgCon>
+      <StyledImg src={img} />
+    </StyledImgCon>
+
     <StyledInformation>PIECE INFORMATION</StyledInformation>
     <StyledNotic>Please verify the items marked * </StyledNotic>
 
@@ -32,6 +35,7 @@ const Form = () => (
         <StyledLabel> Item Type * </StyledLabel>
         <StyledLabel> Color * </StyledLabel>
         <StyledLabel> Brand </StyledLabel>
+        <StyledLabel> Other </StyledLabel>
         <StyledLabel> Condition </StyledLabel>
         <StyledLabel> Label size </StyledLabel>
         <StyledLabel> Age </StyledLabel>
@@ -53,9 +57,7 @@ const Form = () => (
           <StyledOption value="Nike">Nike</StyledOption>
         </StyledSelect>
 
-        <StyledSelect>
-          <StyledOption value="Nike">Nike</StyledOption>
-        </StyledSelect>
+        <StyledInput type="text" name="brand" placeholder="brand" />
 
         <StyledSelect>
           <StyledOption value="Nike">Nike</StyledOption>
@@ -65,7 +67,11 @@ const Form = () => (
           <StyledOption value="Nike">Nike</StyledOption>
         </StyledSelect>
 
-        <StyledInput type="text" name="price" />
+        <StyledSelect>
+          <StyledOption value="Nike">Nike</StyledOption>
+        </StyledSelect>
+
+        <StyledInput type="text" name="price" placeholder="price" />
 
       </StyledItem>
 

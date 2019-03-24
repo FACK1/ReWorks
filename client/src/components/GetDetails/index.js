@@ -4,6 +4,7 @@ import Header from '../Shared/Header';
 import Form from '../Shared/Form';
 import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
+import Footer from '../Shared/Footer';
 
 function GetDetails() {
   return (
@@ -13,6 +14,7 @@ function GetDetails() {
       <Form />
       <Button />
       <GButton />
+      <Footer />
     </React.Fragment>
   );
 }
