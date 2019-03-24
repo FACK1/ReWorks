@@ -14,7 +14,7 @@ AWS.config.update({
 });
 
 // configure AWS to work with promises
-AWS.config.setPromisesDependency(bluebird);
+// AWS.config.setPromisesDependency(bluebird);
 
 // create S3 instance
 const s3 = new AWS.S3();
@@ -32,21 +32,17 @@ const uploadFile = (buffer, name, type) => {
 };
 
 module.exports = uploadPhoto = (req, res) => {
-  console.log(req);
   const form = new multiparty.Form();
-  form.parse(req, async (error, fields, files) => {
-    if (error) throw new Error(error);
-    try {
-      const { path } = files.file[0];
-      const buffer = fs.readFileSync(path);
-      const type = fileType(buffer);
-      const timestamp = Date.now().toString();
-      const fileName = `bucketFolder/${timestamp}-lg`;
-      const data = await uploadFile(buffer, fileName, type);
-      console.log(res);
-      return res.status(200).send(data);
-    } catch (error) {
-      return res.status(400).send(error);
-    }
+  form.parse(req, (error, fields, files) => {
+    if (error) return res.json({ error: 'something went wrong with parsing files' });
+
+    const { path } = files.file[0];
+    const buffer = fs.readFileSync(path);
+    const type = fileType(buffer);
+    const timestamp = Date.now().toString();
+    const fileName = `bucketFolder/${timestamp}-lg`;
+    uploadFile(buffer, fileName, type)
+      .then(data => res.status(200).send(data))
+      .catch(error => res.status(400).send(error));
   });
 };
