@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Route path="/GetDetails" component={GetDetails} />
+        <Route path="/get-details" component={GetDetails} />
         <Route path="/upload-photo" component={Upload} />
       </div>
     </Router>
