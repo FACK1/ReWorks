@@ -100,6 +100,8 @@ export const StyledTextarea = styled.textarea`
 font-size: 20px;
 width:200px
 height:80px;
+margin:auto;
+display:flex;
 font-family:'Assistant';
 text-align:left;
 @media (max-width: 650px) {
