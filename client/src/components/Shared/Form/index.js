@@ -25,21 +25,21 @@ const Form = () => (
     </StyledImgCon>
 
     <StyledInformation>PIECE INFORMATION</StyledInformation>
-    <StyledNotic>Please verify the items marked * </StyledNotic>
+    <StyledNotic>Please verify the items marked* </StyledNotic>
 
 
     <StyledDiv>
 
       <StyledLabels>
 
-        <StyledLabel> Item Type * </StyledLabel>
-        <StyledLabel> Color * </StyledLabel>
+        <StyledLabel> Item Type* </StyledLabel>
+        <StyledLabel> Color* </StyledLabel>
         <StyledLabel> Brand </StyledLabel>
         <StyledLabel> Other </StyledLabel>
         <StyledLabel> Condition </StyledLabel>
         <StyledLabel> Label size </StyledLabel>
         <StyledLabel> Age </StyledLabel>
-        <StyledLabel> Purches price </StyledLabel>
+        <StyledLabel> purchase price </StyledLabel>
 
       </StyledLabels>
 

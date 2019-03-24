@@ -44,6 +44,7 @@ text-align:left;
 
 export const StyledLabel = styled.label`
 font-size: 20px;
+font-weight:bold;
 font-family:'Assistant';
 margin-bottom:16px;
 @media (max-width: 650px) {
