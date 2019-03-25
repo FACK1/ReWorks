@@ -13,7 +13,7 @@ function GetDetails() {
       <Header />
       <Form />
       <Button />
-      <GButton />
+      <GButton action="CONTINUE" />
       <Footer />
     </React.Fragment>
   );
