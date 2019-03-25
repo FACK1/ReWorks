@@ -19,7 +19,7 @@ exports.login = (req, res) => {
           return res.json({ error: 'something went wrong!' });
         }
         if (result) {
-          const userAirtableId = result.userairtableid;
+          const userAirtableId = user.userairtableid;
           const token = jwt.sign({ username, userAirtableId }, SECRET);
           return res
             .cookie('logged_in', token, { maxAge: 999999999 })
