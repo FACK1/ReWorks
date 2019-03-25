@@ -1,9 +1,9 @@
 import React from 'react';
 import StyledHeader from './header.style';
 
-const Header = () => (
+const Header = props => (
   <StyledHeader>
-      Get your details
+    {props.title}
   </StyledHeader>
 );
 export default Header;
