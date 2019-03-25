@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import Header from '../Shared/Header';
 import Title from '../Shared/Title';
 
 class Upload extends Component {
   state = {
-    loc: null,
+    details: null,
   };
-  handleUploadFile = event => {
-    const data = new FormData();
-    data.append('file', event.target.files[0]);
-    axios.post('/add-to-amazon', data).then(response => {
-      this.setState({ loc: `${response.data.Location}` });
-    });
+
+  handleUploadFile = (event) => {
+    const img = new FormData();
+    img.append('file', event.target.files[0]);
+    axios.post('/add-to-amazon', img)
+      .then(({ data }) => {
+        this.setState({ details: data });
+        this.props.history.push({ pathname: '/get-details', details: this.state.details });
+      });
   };
 
   render() {
@@ -23,7 +27,7 @@ class Upload extends Component {
         <form>
           <input label="upload file" type="file" onChange={this.handleUploadFile} />
           <br />
-          <img id="logo" src={this.state.loc} alt="uploaded photo" height="300" width="300" />
+          <image id="logo" src={this.state.loc} alt="uploaded photo" height="300" width="300" />
         </form>
       </React.Fragment>
     );
