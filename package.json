@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/FACK1/ReWorks#readme",
   "dependencies": {
+    "airtable": "^0.5.9",
     "aws-sdk": "^2.425.0",
     "bcryptjs": "^2.4.3",
     "cookie": "^0.3.1",
