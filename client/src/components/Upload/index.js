@@ -6,16 +6,16 @@ import Title from '../Shared/Title';
 
 class Upload extends Component {
   state = {
-    loc: null,
+    details: null,
   };
 
   handleUploadFile = (event) => {
-    const data = new FormData();
-    data.append('file', event.target.files[0]);
-    axios.post('/add-to-amazon', data)
-      .then((response) => {
-        this.setState({ loc: `${response.data.Location}` });
-        this.props.history.push({ pathname: '/get-details', img: this.state.loc });
+    const img = new FormData();
+    img.append('file', event.target.files[0]);
+    axios.post('/add-to-amazon', img)
+      .then(({ data }) => {
+        this.setState({ details: data });
+        this.props.history.push({ pathname: '/get-details', details: this.state.details });
       });
   };
 

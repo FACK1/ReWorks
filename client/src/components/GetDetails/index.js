@@ -12,12 +12,12 @@ class GetDetails extends Component {
   }
 
   render() {
-    const image = this.props.location.img;
+    const { image_url } = this.props.location.details;
     return (
       <React.Fragment>
         <Title />
         <Header title="Get your details" />
-        <Form image={image} />
+        <Form image={image_url} />
         <Button />
         <GButton />
         <Footer />
