@@ -1,9 +1,12 @@
 import React from 'react';
 import Title from '../Shared/Title';
-import GButton from '../Shared/GreenButton';
-import { AppDescription, FatherContainer,BContainer, Span } from './splashpage.style';
+import { AppDescription, FatherContainer,BContainer, Span, GButton } from './splashpage.style';
 
-const Splash = () => (
+const clickedStart = (history) => {
+  history.push("/upload-photo")
+}
+const Splash = (props) => (
+
 <React.Fragment>
   <FatherContainer>
     <Title />
@@ -13,9 +16,9 @@ const Splash = () => (
 
 <Span>Start by uploading a photo of your item</Span>
 </AppDescription>
-      <BContainer>
-        <GButton action="START"/>
-      </BContainer>
+        <GButton action="START" onClick={clickedStart.bind(null, props.history)}>
+          START
+        </GButton>
   </FatherContainer>
 </React.Fragment>
 );
