@@ -27,7 +27,7 @@ export const TakeGoodPhoto = styled.p`
   font-family: 'Assistant';
   text-align: center;
   font-size: 24px;
-  padding: 10px;
+  padding: 0px 40px 10px 40px;
   @media (max-width: 650px) {
     font-size: 20px;
   }
