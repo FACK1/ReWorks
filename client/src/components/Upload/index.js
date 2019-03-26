@@ -3,6 +3,11 @@ import axios from 'axios';
 import Header from '../Shared/Header';
 import Title from '../Shared/Title';
 import uploadIcon from './uploadIcon.png';
+import { ImgIcon } from './upload.style';
+import { Container } from './upload.style';
+import { TakeGoodPhoto } from './upload.style';
+import { Instructions } from './upload.style';
+import Footer from '../Shared/Footer';
 
 class Upload extends Component {
   state = {
@@ -21,7 +26,16 @@ class Upload extends Component {
       <React.Fragment>
         <Title />
         <Header />
-        <form>
+        <Instructions>
+          <TakeGoodPhoto>
+            After you add your photo e-commit's software will determine some key item
+            characteristics for you to verify.
+          </TakeGoodPhoto>
+          <TakeGoodPhoto>
+            Please take your image front on with as much natural light & limited shadows.
+          </TakeGoodPhoto>
+        </Instructions>
+        <Container>
           <input
             id="input-img"
             label="upload file"
@@ -30,11 +44,10 @@ class Upload extends Component {
             hidden
           />
           <label for="input-img">
-            <img src={uploadIcon} />
+            <ImgIcon src={uploadIcon} />
           </label>
-          <br />
-          <img id="logo" src={this.state.loc} alt="uploaded photo" height="300" width="300" />
-        </form>
+        </Container>
+        <Footer />
       </React.Fragment>
     );
   }
