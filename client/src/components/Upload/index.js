@@ -27,7 +27,7 @@ class Upload extends Component {
     return (
       <React.Fragment>
         <Title />
-        <Header />
+        <Header title="Upload your photo"/>
         <Instructions>
           <TakeGoodPhoto>
             After you add your photo e-commit's software will determine some key item
