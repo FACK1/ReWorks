@@ -26,21 +26,23 @@ class Login extends Component {
     return (
       <React.Fragment>
         <Title />
+
         <Header title="Login to save your data!" />
+
         <StyledForm>
 
           <StyledLabel> Username* </StyledLabel>
-
           <StyledInput type="text" name="username" placeholder="username" />
-
           <StyledLabel> Password* </StyledLabel>
-
           <StyledInput type="password" name="password" placeholder="password" />
+
           <StyledP>
-            <StyledText>first time around here? </StyledText>
+            <StyledText>First time around here? </StyledText>
             <StyledSignUp> Sign up</StyledSignUp>
           </StyledP>
+
         </StyledForm>
+
         <StyledBottom>
           <Button />
           <GButton />
