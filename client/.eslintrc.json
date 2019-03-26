@@ -1,6 +1,5 @@
 {
     "env": {
-        "browser": true,
         "es6": true
     },
     "extends": "airbnb",
@@ -9,16 +8,20 @@
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "plugins": [
         "react"
     ],
+    "parser": "babel-eslint",
     "rules": {
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "react/prefer-stateless-function": "off",
+      "no-useless-constructor": 0,
+      "react/destructuring-assignment": [0, "never"],
+      "react/no-unused-prop-types": [0, { "customValidators": "false", "skipShapeProps": "ture" }],
+      "react/prop-types": [0, { "ignore": "ture", "customValidators": "flase" }]
+
     }
 }
