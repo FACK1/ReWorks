@@ -10,7 +10,7 @@ function App() {
       <div className="App">
         <Route path="/get-details" component={GetDetails} />
         <Route path="/upload-photo" component={Upload} />
-        <Route path="/login" component={Login} />
+        <Route path="/login-form" component={Login} />
       </div>
     </Router>
   );
