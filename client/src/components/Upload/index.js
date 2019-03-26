@@ -3,10 +3,7 @@ import axios from 'axios';
 import Header from '../Shared/Header';
 import Title from '../Shared/Title';
 import uploadIcon from './uploadIcon.png';
-import { ImgIcon } from './upload.style';
-import { Container } from './upload.style';
-import { TakeGoodPhoto } from './upload.style';
-import { Instructions } from './upload.style';
+import { ImgIcon, Container, TakeGoodPhoto, Instructions } from './upload.style';
 import Footer from '../Shared/Footer';
 
 class Upload extends Component {
