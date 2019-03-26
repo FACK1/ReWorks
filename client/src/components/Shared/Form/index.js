@@ -1,5 +1,4 @@
-import React from 'react';
-import img from './cat.jpeg';
+import React, { Component } from 'react';
 
 import {
   StyledForm,
@@ -18,68 +17,77 @@ import {
 }
   from './form.style';
 
-const Form = () => (
-  <StyledForm>
-    <StyledImgCon>
-      <StyledImg src={img} />
-    </StyledImgCon>
+class Form extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-    <StyledInformation>PIECE INFORMATION</StyledInformation>
-    <StyledNotic>Please verify the items marked* </StyledNotic>
+  render() {
+    const { image } = this.props;
+    return (
+      <StyledForm>
+        <StyledImgCon>
+          <StyledImg src={image} />
+        </StyledImgCon>
+
+        <StyledInformation>PIECE INFORMATION</StyledInformation>
+        <StyledNotic>Please verify the items marked* </StyledNotic>
 
 
-    <StyledDiv>
+        <StyledDiv>
 
-      <StyledLabels>
+          <StyledLabels>
 
-        <StyledLabel> Item Type* </StyledLabel>
-        <StyledLabel> Color* </StyledLabel>
-        <StyledLabel> Brand </StyledLabel>
-        <StyledLabel> Other </StyledLabel>
-        <StyledLabel> Condition </StyledLabel>
-        <StyledLabel> Label size </StyledLabel>
-        <StyledLabel> Age </StyledLabel>
-        <StyledLabel> purchase price </StyledLabel>
+            <StyledLabel> Item Type* </StyledLabel>
+            <StyledLabel> Color* </StyledLabel>
+            <StyledLabel> Brand </StyledLabel>
+            <StyledLabel> Other </StyledLabel>
+            <StyledLabel> Condition </StyledLabel>
+            <StyledLabel> Label size </StyledLabel>
+            <StyledLabel> Age </StyledLabel>
+            <StyledLabel> purchase price </StyledLabel>
 
-      </StyledLabels>
+          </StyledLabels>
 
-      <StyledItem>
+          <StyledItem>
 
-        <StyledSelect>
-          <StyledOption value="T-shirt">T-shirt</StyledOption>
-        </StyledSelect>
+            <StyledSelect>
+              <StyledOption value="T-shirt">T-shirt</StyledOption>
+            </StyledSelect>
 
-        <StyledSelect>
-          <StyledOption value="white">white</StyledOption>
-        </StyledSelect>
+            <StyledSelect>
+              <StyledOption value="white">white</StyledOption>
+            </StyledSelect>
 
-        <StyledSelect>
-          <StyledOption value="Nike">Nike</StyledOption>
-        </StyledSelect>
+            <StyledSelect>
+              <StyledOption value="Nike">Nike</StyledOption>
+            </StyledSelect>
 
-        <StyledInput type="text" name="brand" placeholder="brand" />
+            <StyledInput type="text" name="brand" placeholder="brand" />
 
-        <StyledSelect>
-          <StyledOption value="Nike">Nike</StyledOption>
-        </StyledSelect>
+            <StyledSelect>
+              <StyledOption value="Nike">Nike</StyledOption>
+            </StyledSelect>
 
-        <StyledSelect>
-          <StyledOption value="Nike">Nike</StyledOption>
-        </StyledSelect>
+            <StyledSelect>
+              <StyledOption value="Nike">Nike</StyledOption>
+            </StyledSelect>
 
-        <StyledSelect>
-          <StyledOption value="Nike">Nike</StyledOption>
-        </StyledSelect>
+            <StyledSelect>
+              <StyledOption value="Nike">Nike</StyledOption>
+            </StyledSelect>
 
-        <StyledInput type="text" name="price" placeholder="price" />
+            <StyledInput type="text" name="price" placeholder="price" />
 
-      </StyledItem>
+          </StyledItem>
 
-    </StyledDiv>
+        </StyledDiv>
 
-    <StyledTextarea name="extra" placeholder="More  . e.g. What do you love about it?" />
+        <StyledTextarea name="extra" placeholder="More  . e.g. What do you love about it?" />
 
-  </StyledForm>
-);
+      </StyledForm>
+    );
+  }
+}
 
 export default Form;

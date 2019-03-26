@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import Header from '../Shared/Header';
 import Title from '../Shared/Title';
 import uploadIcon from './uploadIcon.png';
-import { ImgIcon, Container, TakeGoodPhoto, Instructions } from './upload.style';
+import {
+  ImgIcon, Container, TakeGoodPhoto, Instructions,
+} from './upload.style';
 import Footer from '../Shared/Footer';
 
 class Upload extends Component {
   state = {
-    loc: null,
+    details: null,
   };
-  handleUploadFile = event => {
-    const data = new FormData();
-    data.append('file', event.target.files[0]);
-    axios.post('/add-to-amazon', data).then(response => {
-      this.setState({ loc: `${response.data.Location}` });
+
+  handleUploadFile = (event) => {
+    const img = new FormData();
+    img.append('file', event.target.files[0]);
+    axios.post('/add-to-amazon', img).then(({ data }) => {
+      this.setState({ details: data });
+      this.props.history.push({ pathname: '/get-details', details: this.state.details });
     });
   };
 
@@ -40,7 +45,7 @@ class Upload extends Component {
             onChange={this.handleUploadFile}
             hidden
           />
-          <label for="input-img">
+          <label htmlFor="input-img">
             <ImgIcon src={uploadIcon} />
           </label>
         </Container>
