@@ -13,6 +13,6 @@ router.post('/add-to-amazon', uploadPhoto, clarifaiAPIs);
 router.post('/login', login);
 router.get('/logout', logout);
 router.post('/add-item', auth, addItem);
-router.get('/delete-item/:id', deleteItem);
+router.get('/delete-item/:id', auth, deleteItem);
 
 module.exports = router;
