@@ -24,10 +24,20 @@ font-size:24px;
 `;
 
 
-export const BContainer = styled.div`
-margin: auto;
-width:100%;
-height:30%;
+export const GButton = styled.button`
+font-size: 18px;
+font-family:'Assistant';
+background-color:#1ED390;
+padding: 20px 0px;
+margin:auto;
+color:white;
+border:none;
+font-weight: bold;
+width:45%;
+text-align:center;
+@media (max-width: 650px) {
+  font-size: 14px;
+}
 `;
 
 
