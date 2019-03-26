@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Title from '../Shared/Title';
 import Header from '../Shared/Header';
 import GButton from '../Shared/GreenButton';
@@ -19,41 +20,50 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: '',
+      username: '',
+      password: '',
     };
   }
 
-  updateInputValue = (event) => {
-    this.setState({
-      inputValue: event.target.value,
+  login = () => {
+    const { history } = this.props;
+    const inputs = { username: this.state.username, password: this.state.password };
+    axios.post('/login', inputs).then(({ data }) => {
+      if (data.success) {
+        history.push('/items-page');
+      } else {
+        history.push('/error');
+      }
     });
-    console.log(this.state.inputValue);
   };
 
   render() {
-    console.log(this.state.inputValue);
     return (
       <React.Fragment>
         <Title />
-
         <Header title="Login to save your data!" />
-
         <StyledForm>
           <StyledLabel> Username* </StyledLabel>
           <StyledInput
             type="text"
             name="username"
             placeholder="username"
-            value={this.state.inputValue}
-            onChange={this.updateInputValue}
+            value={this.state.username}
+            onChange={e => this.setState({
+              username: e.target.value,
+            })
+            }
           />
           <StyledLabel> Password* </StyledLabel>
           <StyledInput
             type="password"
             name="password"
             placeholder="password"
-            value={this.state.inputValue}
-            onChange={this.updateInputValue}
+            value={this.state.password}
+            onChange={e => this.setState({
+              password: e.target.value,
+            })
+            }
           />
 
           <StyledP>
@@ -64,7 +74,7 @@ class Login extends Component {
 
         <StyledBottom>
           <Button />
-          <GButton title="Login" />
+          <GButton title="Login" onClick={this.login} />
           <Footer />
         </StyledBottom>
       </React.Fragment>
