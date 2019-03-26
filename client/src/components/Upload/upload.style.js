@@ -1,0 +1,34 @@
+import styled from 'styled-components';
+
+export const ImgIcon = styled.img`
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 30vh;
+`;
+export const Instructions = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 30vh;
+  @media (max-width: 650px) {
+    font-size: 20px;
+    height: 40vh;
+  }
+`;
+
+export const TakeGoodPhoto = styled.p`
+  font-family: 'Assistant';
+  text-align: center;
+  font-size: 24px;
+  padding: 10px;
+  @media (max-width: 650px) {
+    font-size: 20px;
+  }
+`;
