@@ -10,7 +10,7 @@ function App() {
       <div className="App">
         <Route exact path="/get-details" component={GetDetails} />
         <Route exact path="/upload-photo" component={Upload} />
-        <Route exact path="/" component={Splash} />
+        <Route exact path="/" render={props => <Splash {...props} />}/>
       </div>
     </Router>
   );
