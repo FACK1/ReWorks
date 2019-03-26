@@ -3,6 +3,11 @@ import axios from 'axios';
 
 import Header from '../Shared/Header';
 import Title from '../Shared/Title';
+import uploadIcon from './uploadIcon.png';
+import {
+  ImgIcon, Container, TakeGoodPhoto, Instructions,
+} from './upload.style';
+import Footer from '../Shared/Footer';
 
 class Upload extends Component {
   state = {
@@ -12,23 +17,39 @@ class Upload extends Component {
   handleUploadFile = (event) => {
     const img = new FormData();
     img.append('file', event.target.files[0]);
-    axios.post('/add-to-amazon', img)
-      .then(({ data }) => {
-        this.setState({ details: data });
-        this.props.history.push({ pathname: '/get-details', details: this.state.details });
-      });
+    axios.post('/add-to-amazon', img).then(({ data }) => {
+      this.setState({ details: data });
+      this.props.history.push({ pathname: '/get-details', details: this.state.details });
+    });
   };
 
   render() {
     return (
       <React.Fragment>
         <Title />
-        <Header />
-        <form>
-          <input label="upload file" type="file" onChange={this.handleUploadFile} />
-          <br />
-          <image id="logo" src={this.state.loc} alt="uploaded photo" height="300" width="300" />
-        </form>
+        <Header title="Upload your photo"/>
+        <Instructions>
+          <TakeGoodPhoto>
+            After you add your photo e-commit's software will determine some key item
+            characteristics for you to verify.
+          </TakeGoodPhoto>
+          <TakeGoodPhoto>
+            Please take your image front on with as much natural light & limited shadows.
+          </TakeGoodPhoto>
+        </Instructions>
+        <Container>
+          <input
+            id="input-img"
+            label="upload file"
+            type="file"
+            onChange={this.handleUploadFile}
+            hidden
+          />
+          <label htmlFor="input-img">
+            <ImgIcon src={uploadIcon} />
+          </label>
+        </Container>
+        <Footer />
       </React.Fragment>
     );
   }
