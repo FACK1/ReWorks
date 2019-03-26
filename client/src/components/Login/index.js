@@ -5,7 +5,6 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 
-
 import {
   StyledForm,
   StyledBottom,
@@ -14,8 +13,7 @@ import {
   StyledSignUp,
   StyledP,
   StyledText,
-}
-  from './login.style';
+} from './login.style';
 
 class Login extends Component {
   constructor(props) {
@@ -30,7 +28,6 @@ class Login extends Component {
         <Header title="Login to save your data!" />
 
         <StyledForm>
-
           <StyledLabel> Username* </StyledLabel>
           <StyledInput type="text" name="username" placeholder="username" />
           <StyledLabel> Password* </StyledLabel>
@@ -40,12 +37,11 @@ class Login extends Component {
             <StyledText>First time around here? </StyledText>
             <StyledSignUp> Sign up</StyledSignUp>
           </StyledP>
-
         </StyledForm>
 
         <StyledBottom>
           <Button />
-          <GButton />
+          <GButton title="Login" />
           <Footer />
         </StyledBottom>
       </React.Fragment>
