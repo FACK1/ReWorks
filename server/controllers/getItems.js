@@ -17,6 +17,13 @@ exports.getItems = (req, res) => {
           size: record.get('Size'),
           url: record.get('Image URL'),
           img: record.get('Image')[0].url,
+          name: record.get('Name'),
+          price: record.get('Price'),
+          color: record.get('Colors'),
+          brand: record.get('Brand Names'),
+          condition: record.get('Condition'),
+          age: record.get('Age'),
+          details: record.get('Details'),
         });
       }
     });
