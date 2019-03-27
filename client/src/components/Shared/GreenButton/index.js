@@ -1,6 +1,6 @@
 import React from 'react';
 import StyledButton from './greenbutton.style';
 
-const GButton = () => (<StyledButton type="button">CONTINUE</StyledButton>
-);
+const GButton = ({ action }) => <StyledButton type="button">{action}</StyledButton>;
+
 export default GButton;
