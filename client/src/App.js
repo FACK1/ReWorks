@@ -13,7 +13,7 @@ function App() {
         <Route exact path="/get-details" component={GetDetails} />
         <Route exact path="/upload-photo" component={Upload} />
         <Route exact path="/" render={props => <Splash {...props} />} />
-        <Route path="/login" component={Login} />
+        <Route path="/login-form" component={Login} />
         <Route path="/item-details" component={ItemDetails} />
       </div>
     </Router>
