@@ -4,7 +4,7 @@ const { Airtable_API_KEY } = process.env;
 const base = new Airtable({ apiKey: Airtable_API_KEY }).base('appAZnpLnWP0wjAc6');
 
 exports.getItems = (req, res) => {
-  const { id } = req.params;
+  const { id } = req;
   const data = [];
 
   base('Items').select({

@@ -15,6 +15,6 @@ router.post('/login', login);
 router.get('/logout', logout);
 router.post('/add-item', auth, addItem);
 router.get('/delete-item/:id', auth, deleteItem);
-router.get('/:id/items', auth, getItems);
+router.get('/items', auth, getItems);
 
 module.exports = router;
