@@ -16,7 +16,7 @@ import {
   StyledText,
 } from './signup.style';
 
-class Login extends Component {
+class signUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -97,4 +97,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default signUp;
