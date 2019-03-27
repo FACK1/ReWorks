@@ -28,7 +28,7 @@ exports.signUp = (req, res) => {
               password: hashedPassword,
               userairtableid: record.getId(),
             })).then((addUser) => {
-              addUser.save((err2, result) => {
+              addUser.save((err, result) => {
                 if (err) return res.json({ error: err });
                 return res.json({ result, success: 'true', message: 'added to database & airtable' });
               });
