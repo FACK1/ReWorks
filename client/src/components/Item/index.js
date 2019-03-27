@@ -21,31 +21,29 @@ class GetDetails extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <ItemDiv>
-          <ItemContainer>
-            <Line />
-            <Column>
-              <ItemMainData>
-                <ItemTitle>Item:</ItemTitle>
-                <ItemText>Blue shorts</ItemText>
-              </ItemMainData>
-              <ItemTags>
-                <ItemTag>
-                  <ItemSubtitle>Adidas</ItemSubtitle>
-                </ItemTag>
-                <ItemTag>
-                  <ItemSubtitle>M</ItemSubtitle>
-                </ItemTag>
-              </ItemTags>
-            </Column>
-            <ItemImage
-              src="https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201711/15/00100564901726____1__516x640.jpg"
-              alt="your item"
-            />
-          </ItemContainer>
-        </ItemDiv>
-      </React.Fragment>
+      <ItemDiv>
+        <ItemContainer>
+          <Line />
+          <Column>
+            <ItemMainData>
+              <ItemTitle>Item:</ItemTitle>
+              <ItemText>Blue shorts</ItemText>
+            </ItemMainData>
+            <ItemTags>
+              <ItemTag>
+                <ItemSubtitle>Adidas</ItemSubtitle>
+              </ItemTag>
+              <ItemTag>
+                <ItemSubtitle>M</ItemSubtitle>
+              </ItemTag>
+            </ItemTags>
+          </Column>
+          <ItemImage
+            src="https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201711/15/00100564901726____1__516x640.jpg"
+            alt="your item"
+          />
+        </ItemContainer>
+      </ItemDiv>
     );
   }
 }
