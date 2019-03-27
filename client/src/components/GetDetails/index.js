@@ -19,7 +19,7 @@ class GetDetails extends Component {
         <Header title="Get your details" />
         <Form image={image_url} />
         <Button />
-        <GButton />
+        <GButton action="CONTINUE" />
         <Footer />
       </React.Fragment>
     );
