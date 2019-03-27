@@ -31,7 +31,8 @@ exports.signUp = (req, res) => {
             })).then((addUser) => {
               addUser.save((err2, result) => {
                 if (err) return res.json({ error: err2 });
-                return res.json({ result, message: 'added to database & airtable' });
+                return res.json({ result, success: 'true', message: 'added to database & airtable' });
+                console.log('ass');
               // res.redirect('/login');
               });
             }).catch((err3) => { res.json({ error: err3 }); });
