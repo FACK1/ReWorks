@@ -27,20 +27,13 @@ export const Line = styled.div`
 `;
 
 export const ItemTitle = styled.p`
-  font-family: Assistant;
-  font-style: normal;
   font-weight: 600;
   font-size: 14px;
-  line-height: normal;
   color: #000000;
 `;
 export const ItemText = styled.p`
   margin-left: 3px;
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
   font-size: 14px;
-  line-height: normal;
   color: #4c5268;
 `;
 
@@ -50,11 +43,7 @@ export const ItemMainData = styled.div`
 `;
 
 export const ItemSubtitle = styled.p`
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
   font-size: 12px;
-  line-height: normal;
   color: #000000;
 `;
 
