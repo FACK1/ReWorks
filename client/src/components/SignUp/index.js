@@ -82,14 +82,14 @@ class signUp extends Component {
             }
           />
           <StyledP>
-            <StyledText>Been here before?</StyledText>
+            <StyledText>Been here before? </StyledText>
             <StyledSignUp> Login</StyledSignUp>
           </StyledP>
         </StyledForm>
 
         <StyledBottom>
           <Button />
-          <GButton title="Sign up" onClick={this.signup} />
+          <GButton title="SIGN UP" onClick={this.signup} />
           <Footer />
         </StyledBottom>
       </React.Fragment>

@@ -47,6 +47,8 @@ export const StyledP = styled.div`
 
 export const StyledText = styled.div`
   font-size: 16px;
+  margin-right:5px;
+
   @media (max-width: 650px) {
     font-size: 12px;
   }
@@ -59,5 +61,8 @@ export const StyledInput = styled.input`
   padding:7px 0px;
   @media (max-width: 650px) {
     font-size: 16px;
+  }
+  ::placeholder{
+    font-family:'Assistant';
   }
 `;

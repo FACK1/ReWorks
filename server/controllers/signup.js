@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const Airtable = require('airtable');
-const jwt = require('jsonwebtoken');
 
 const { Airtable_API_KEY } = process.env;
 const base = new Airtable({ apiKey: Airtable_API_KEY }).base('appAZnpLnWP0wjAc6');
@@ -30,10 +29,10 @@ exports.signUp = (req, res) => {
               userairtableid: record.getId(),
             })).then((addUser) => {
               addUser.save((err2, result) => {
-                if (err) return res.json({ error: err2 });
+                if (err) return res.json({ error: err });
                 return res.json({ result, success: 'true', message: 'added to database & airtable' });
               });
-            }).catch((err3) => { res.json({ error: err3 }); });
+            }).catch((err) => { res.json({ error: err }); });
         });
       } else {
         return res.json({ error: 'the password and confirm password not match' });
