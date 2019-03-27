@@ -5,6 +5,7 @@ import Upload from './components/Upload';
 import Splash from './components/SplashPage';
 import Login from './components/Login';
 import ItemDetails from './components/ItemDetails';
+import Item from './components/Item';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/" render={props => <Splash {...props} />} />
         <Route path="/login-form" component={Login} />
         <Route path="/item-details" component={ItemDetails} />
+        <Route path="/item" component={Item} />
       </div>
     </Router>
   );
