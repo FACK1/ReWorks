@@ -15,12 +15,11 @@ function App() {
       <div className="App">
         <Route exact path="/get-details" component={GetDetails} />
         <Route exact path="/upload-photo" component={Upload} />
-        <Route exact path="/item-list" component={ItemList} />
         <Route exact path="/" render={props => <Splash {...props} />} />
         <Route path="/login-form" component={Login} />
         <Route path="/signup-form" component={SignUp} />
         <Route path="/item-details" component={ItemDetails} />
-        <Route path="/item" component={ItemList} />
+        <Route path="/item-list" component={ItemList} />
       </div>
     </Router>
   );
