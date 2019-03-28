@@ -79,7 +79,7 @@ render() {
 
       <StyledBottom>
         <Button />
-        <GButton title="Login" onClick={this.login} />
+        <GButton title="LOGIN" onClick={this.login} />
         <Footer />
       </StyledBottom>
     </React.Fragment>
