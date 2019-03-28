@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Header from '../Shared/Header/header.style';
 
 export const List = styled.div`
   display: flex;
@@ -9,8 +8,16 @@ export const List = styled.div`
   align-content: space-between;
 `;
 
-export const StyledHeader = styled(Header)`
-  text-align: left;
+export const StyledHeader = styled.h1`
+font-size: 20px;
+font-family:'Assistant';
+background-color:#FAFAFA;
+padding: 22px 0px;
+text-align:left;
+Margin-left:20px;
+@media (max-width: 650px) {
+  font-size: 16px;
+}
 `;
 
 export const StyledBottom = styled.form`
@@ -27,3 +34,8 @@ export const StyledLink = styled(Link)`
   margin-left: 15px;
   text-decoration: none;
 `;
+
+export const GButtonContainer = styled.div`
+  display:flex;
+  justify-content:center;
+`
