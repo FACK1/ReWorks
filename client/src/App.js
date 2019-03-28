@@ -4,6 +4,7 @@ import GetDetails from './components/GetDetails';
 import Upload from './components/Upload';
 import Splash from './components/SplashPage';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 import ItemDetails from './components/ItemDetails';
 import Item from './components/Item';
 import ItemList from "./components/ItemList";
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/item-list" component={ItemList} />
         <Route exact path="/" render={props => <Splash {...props} />} />
         <Route path="/login-form" component={Login} />
+        <Route path="/signup-form" component={SignUp} />
         <Route path="/item-details" component={ItemDetails} />
         <Route path="/item" component={Item} />
       </div>
