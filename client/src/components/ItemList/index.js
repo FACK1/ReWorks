@@ -4,8 +4,7 @@ import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
 import Footer from '../Shared/Footer';
 import Item from '../Item';
-import { List, StyledHeader, StyledBottom, StyledLink } from './itemlist.style';
-
+import { List, StyledHeader, StyledBottom, StyledLink, GButtonContainer } from './itemlist.style';
 class ItemList extends Component {
   state = {
     itemlist: [],
@@ -21,13 +20,13 @@ class ItemList extends Component {
     return (
       <React.Fragment>
         <Title />
+        <StyledHeader>Your Items</StyledHeader>
         <List>
-          <StyledHeader title="Your Item" />
           <StyledLink to="/upload-photo">+ ADD NEW ITEM</StyledLink>
           {this.state.itemlist.map(item => <Item key={item.id} />)}
         </List>
         <StyledBottom>
-          <GButton title="EXPORT AS CSV" />
+          <GButtonContainer><GButton title="EXPORT AS CSV" /></GButtonContainer>
           <Footer />
         </StyledBottom>
       </React.Fragment>
