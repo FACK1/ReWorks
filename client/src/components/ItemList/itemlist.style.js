@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import Header from '../Shared/Header/header.style';
 
 export const List = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: space-between;
 `;
 
 export const StyledHeader = styled(Header)`
