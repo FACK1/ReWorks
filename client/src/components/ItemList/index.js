@@ -1,41 +1,38 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
 import Footer from '../Shared/Footer';
-import Header from '../Shared/Header';
-import axios from 'axios';
-import {Link} from 'react-router-dom';
 import Item from '../Item';
-import {List, StyledHeader} from './itemlist.style.js';
-
+import { List, StyledHeader, StyledBottom, StyledLink } from './itemlist.style';
 
 class ItemList extends Component {
   state = {
-    items: [],
+    itemlist: [],
   };
 
-  copmonentDidMount(){
-    axios.get(`/item`).then(res => {
-      this.setState({items: res.data});
-    })
+  componentDidMount() {
+    axios.get('/items')
+      .then(res => this.setState({itemlist: res.data.data}))
+      .catch(err => console.log(err))
   }
 
+  render() {
+    return (
+      <React.Fragment>
+        <Title />
+        <List>
+          <StyledHeader title="Your Item" />
+          <StyledLink to="/upload-photo">+ ADD NEW ITEM</StyledLink>
+          {this.state.itemlist.map(item => <Item key={item.id} />)}
+        </List>
+        <StyledBottom>
+          <GButton title="EXPORT AS CSV" />
+          <Footer />
+        </StyledBottom>
+      </React.Fragment>
+    );
+  }
+}
 
-    render(){
-      return (
-    <React.Fragment>
-    <Title />
-    <List>
-      <StyledHeader title="Your Item"/>
-      <Link to="/upload-photo">+ ADD NEW ITEM</Link>
-      <Item/>
-      <Item/>
-      <Item/>
-    </List>
-    <GButton action="EXPORT AS CSV"></GButton>
-        <Footer/>
-    </React.Fragment>
-  );
-}
-}
-    export default ItemList;
+export default ItemList;
