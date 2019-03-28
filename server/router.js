@@ -9,6 +9,8 @@ const { addItem } = require('./controllers/addItem.js');
 const { auth } = require('./middlewares/auth.js');
 const { clarifaiAPIs } = require('./controllers/clarifaiAPIs');
 const { deleteItem } = require('./controllers/deleteItem.js');
+const { editItem } = require('./controllers/editItem.js');
+
 const { getItems } = require('./controllers/getItems.js');
 
 router.post('/add-to-amazon', uploadPhoto, clarifaiAPIs);
@@ -18,6 +20,8 @@ router.post('/signup', signUp);
 
 router.post('/add-item', auth, addItem);
 router.get('/delete-item/:id', auth, deleteItem);
+router.put('/edit-item/:id', auth, editItem);
+
 router.get('/items', auth, getItems);
 
 module.exports = router;
