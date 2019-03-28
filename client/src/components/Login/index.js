@@ -37,49 +37,54 @@ class Login extends Component {
     });
   };
 
-  render() {
-    return (
-      <React.Fragment>
-        <Title />
-        <Header title="Login to save your data!" />
-        <StyledForm>
-          <StyledLabel> Username* </StyledLabel>
-          <StyledInput
-            type="text"
-            name="username"
-            placeholder="username"
-            value={this.state.username}
-            onChange={e => this.setState({
-              username: e.target.value,
-            })
-            }
-          />
-          <StyledLabel> Password* </StyledLabel>
-          <StyledInput
-            type="password"
-            name="password"
-            placeholder="password"
-            value={this.state.password}
-            onChange={e => this.setState({
-              password: e.target.value,
-            })
-            }
-          />
+goSignUp = () => {
+  const { history } = this.props;
+  history.push('/signup-form');
+}
 
-          <StyledP>
-            <StyledText>First time around here? </StyledText>
-            <StyledSignUp> Sign up</StyledSignUp>
-          </StyledP>
-        </StyledForm>
+render() {
+  return (
+    <React.Fragment>
+      <Title />
+      <Header title="Login to save your data!" />
+      <StyledForm>
+        <StyledLabel> Username* </StyledLabel>
+        <StyledInput
+          type="text"
+          name="username"
+          placeholder="username"
+          value={this.state.username}
+          onChange={e => this.setState({
+            username: e.target.value,
+          })
+            }
+        />
+        <StyledLabel> Password* </StyledLabel>
+        <StyledInput
+          type="password"
+          name="password"
+          placeholder="password"
+          value={this.state.password}
+          onChange={e => this.setState({
+            password: e.target.value,
+          })
+            }
+        />
 
-        <StyledBottom>
-          <Button />
-          <GButton title="Login" onClick={this.login} />
-          <Footer />
-        </StyledBottom>
-      </React.Fragment>
-    );
-  }
+        <StyledP>
+          <StyledText>First time around here? </StyledText>
+          <StyledSignUp onClick={this.goSignUp}> Sign up</StyledSignUp>
+        </StyledP>
+      </StyledForm>
+
+      <StyledBottom>
+        <Button />
+        <GButton title="Login" onClick={this.login} />
+        <Footer />
+      </StyledBottom>
+    </React.Fragment>
+  );
+}
 }
 
 export default Login;
