@@ -23,6 +23,18 @@ class Feedback extends Component {
     loading: true,
   };
 
+  updateOptions = (feedbacks) => {
+    const { options } = this.state;
+    feedbacks.map((feedback) => {
+      options.map((option, i) => {
+        if (feedback === option.text) {
+          options[i].checked = true;
+        }
+      });
+    });
+    this.setState({ options });
+  };
+
   handleCheckboxChange = (event) => {
     const { options } = this.state;
     options.map((option, i) => {
