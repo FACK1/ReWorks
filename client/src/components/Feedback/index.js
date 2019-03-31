@@ -79,6 +79,16 @@ class Feedback extends Component {
     return false;
   };
 
+  updateCurrentFeedback = () => {
+    const { options, currentFeedback } = this.state;
+    options.map((option) => {
+      if (option.checked) {
+        currentFeedback.push(option.text);
+      }
+    });
+    this.setState({ currentFeedback });
+  };
+
   render() {
     const { options, loading } = this.state;
 
