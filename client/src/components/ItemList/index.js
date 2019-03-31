@@ -16,10 +16,7 @@ class ItemList extends Component {
   componentDidMount() {
     axios
       .get('/items')
-      .then(({ data }) => {
-        console.log(data.data);
-        this.setState({ itemlist: data.data });
-      })
+      .then(({ data }) => this.setState({ itemlist: data.data }))
       .catch(err => console.log(err));
   }
 
