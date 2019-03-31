@@ -61,6 +61,24 @@ class Feedback extends Component {
     });
   };
 
+  checkChange = (prev, current) => {
+    if (prev.length !== current.length) {
+      return true;
+    }
+    if (prev.length === 0 && current.length === 0) {
+      return false;
+    }
+
+    const sortedPrev = prev.sort();
+    const sortedCurrent = current.sort();
+    sortedPrev.map((prevObject, i) => {
+      if (prevObject !== sortedCurrent[i]) {
+        return true;
+      }
+    });
+    return false;
+  };
+
   render() {
     const { options, loading } = this.state;
 
