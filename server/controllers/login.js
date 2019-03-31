@@ -33,5 +33,6 @@ exports.login = (req, res) => {
 
 exports.logout = (req, res) => {
   res.clearCookie('logged_in');
+  res.json({ logout: true });
   res.end();
 };
