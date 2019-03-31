@@ -16,9 +16,18 @@ class ItemList extends Component {
   componentDidMount() {
     axios
       .get('/items')
-      .then(({ data }) => this.setState({ itemlist: data.data }))
+      .then(({ data }) => {
+        console.log(data.data);
+        this.setState({ itemlist: data.data });
+      })
       .catch(err => console.log(err));
   }
+
+  goItemDetails = (id, index) => {
+    const { history } = this.props;
+    const itemDetails = this.state.itemlist[index];
+    history.push({ pathname: `/item-details/${id}`, itemDetails });
+  };
 
   render() {
     return (
