@@ -5,7 +5,7 @@ import Header from '../Shared/Header';
 import Title from '../Shared/Title';
 import uploadIcon from './uploadIcon.png';
 import {
-  ImgIcon, Container, TakeGoodPhoto, Instructions,
+  ImgIcon, Container, TakeGoodPhoto, Instructions, FooterStyle,
 } from './upload.style';
 import Footer from '../Shared/Footer';
 
@@ -50,7 +50,9 @@ class Upload extends Component {
             <ImgIcon src={uploadIcon} />
           </label>
         </Container>
-        <Footer />
+        <FooterStyle>
+          <Footer />
+        </FooterStyle>
       </React.Fragment>
     );
   }
