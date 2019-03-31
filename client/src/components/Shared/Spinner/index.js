@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
-import LoaderStyle from './loader.style';
+import SpinnerStyle from './spinner.style';
 
-const Loader = () => (
-  <LoaderStyle>
+const Spinner = () => (
+  <SpinnerStyle>
     <ReactLoading type="bubbles" color="#1ed390" width="100px" />
-  </LoaderStyle>
+  </SpinnerStyle>
 );
 
-export default Loader;
+export default Spinner;
