@@ -23,6 +23,22 @@ class Feedback extends Component {
     loading: true,
   };
 
+  componentDidMount() {
+    axios
+      .get('/get-feedback')
+      .then(({ data }) => {
+        if (data.success) {
+          const { feedback } = data;
+          if (typeof feedback !== 'undefined') {
+            this.setState({ prevFeedback: feedback });
+            this.updateOptions(feedback);
+          }
+          this.setState({ loading: false });
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
   updateOptions = (feedbacks) => {
     const { options } = this.state;
     feedbacks.map((feedback) => {
