@@ -7,6 +7,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import ItemDetails from './components/ItemDetails';
 import Item from './components/Item';
+import ItemList from "./components/ItemList";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/login-form" component={Login} />
         <Route path="/signup-form" component={SignUp} />
         <Route path="/item-details" component={ItemDetails} />
-        <Route path="/item" component={Item} />
+        <Route path="/item-list" component={ItemList} />
       </div>
     </Router>
   );
