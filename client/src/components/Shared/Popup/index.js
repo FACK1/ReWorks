@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyledModal, Category, CloseBtn } from "./popup.style";
+import { StyledModal, Category, CloseBtn, DataContainer } from "./popup.style";
 
 class Popup extends Component {
   constructor(props) {
@@ -7,10 +7,19 @@ class Popup extends Component {
   }
 
   render() {
-    const { open, toggleClose, data } = this.props;
+    const { open, toggleClose, data, changeSelected, name } = this.props;
     const dataHere = data
-      ? data.map(ele => {
-          return <li>{ele}</li>;
+      ? data.slice(5).map(ele => {
+          return (
+            <CloseBtn
+              key={ele}
+              type="submit"
+              value={name + "." + ele}
+              onClick={changeSelected}
+            >
+              {ele}
+            </CloseBtn>
+          );
         })
       : null;
     return (
@@ -23,8 +32,13 @@ class Popup extends Component {
           <CloseBtn type="submit" onClick={toggleClose}>
             close
           </CloseBtn>
-          <Category>Item Type</Category>
-          <ul>{dataHere}</ul>
+          <Category>
+            {`${name}`
+              .split(/(?=[A-Z])/)
+              .join(" ")
+              .toUpperCase()}
+          </Category>
+          <DataContainer>{dataHere}</DataContainer>
         </StyledModal>
       </React.Fragment>
     );
