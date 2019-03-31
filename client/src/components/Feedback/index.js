@@ -21,6 +21,7 @@ class Feedback extends Component {
     prevFeedback: [],
     currentFeedback: [],
     loading: true,
+    feedbackFlag: false,
   };
 
   componentDidMount() {
@@ -32,6 +33,7 @@ class Feedback extends Component {
           if (typeof feedback !== 'undefined') {
             this.setState({ prevFeedback: feedback });
             this.updateOptions(feedback);
+            this.setState({ feedbackFlag: true });
           }
           this.setState({ loading: false });
         }
@@ -53,12 +55,24 @@ class Feedback extends Component {
 
   handleCheckboxChange = (event) => {
     const { options } = this.state;
+    let counter = 0;
     options.map((option, i) => {
       if (option.text === event.target.name) {
         options[i] = { text: event.target.name, checked: event.target.checked };
         this.setState({ options });
       }
     });
+
+    options.map((option) => {
+      if (option.checked) {
+        this.setState({ feedbackFlag: true });
+        counter += 1;
+      }
+    });
+
+    if (counter === 0) {
+      this.setState({ feedbackFlag: false });
+    }
   };
 
   checkChange = (prev, current) => {
@@ -109,7 +123,7 @@ class Feedback extends Component {
   };
 
   render() {
-    const { options, loading } = this.state;
+    const { options, loading, feedbackFlag } = this.state;
 
     return (
       <React.Fragment>
@@ -129,10 +143,12 @@ class Feedback extends Component {
         )}
         {loading && <Spinner />}
         <BottomContainer>
-          <ThanksText>
-            Thanks for your commitment to a more sustainable world!
-            <span role="img"> 🎉</span>
-          </ThanksText>
+          {feedbackFlag && (
+            <ThanksText>
+              Thanks for your commitment to a more sustainable world!
+              <span role="img"> 🎉</span>
+            </ThanksText>
+          )}
           <Button />
           <GButton title="CONTINUE" onClick={this.updateAirtaleFeedback} />
           <Footer />
