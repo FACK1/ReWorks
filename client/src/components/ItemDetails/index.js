@@ -8,7 +8,7 @@ import deleteIcon from './garbage.png';
 
 import { ImgDiv } from './itemdetails.style';
 
-class GetDetails extends Component {
+class ItemDetails extends Component {
   state = { itemDetails: this.props.location.itemDetails };
 
   goBack = () => {
@@ -34,4 +34,4 @@ class GetDetails extends Component {
   }
 }
 
-export default GetDetails;
+export default ItemDetails;
