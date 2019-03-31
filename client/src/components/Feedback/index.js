@@ -89,6 +89,25 @@ class Feedback extends Component {
     this.setState({ currentFeedback });
   };
 
+  updateAirtaleFeedback = () => {
+    this.updateCurrentFeedback();
+    const { prevFeedback, currentFeedback } = this.state;
+    const changed = this.checkChange(prevFeedback, currentFeedback);
+    const { history } = this.props;
+
+    if (changed) {
+      axios
+        .put('/add-feedback', { feedback: currentFeedback })
+        .then(({ data }) => {
+          if (data.success) {
+            history.push('/item-list');
+          }
+        })
+        .catch(() => history.push('/error'));
+    }
+    history.push('/item-list');
+  };
+
   render() {
     const { options, loading } = this.state;
 
