@@ -32,3 +32,10 @@ export const TakeGoodPhoto = styled.p`
     font-size: 20px;
   }
 `;
+
+export const FooterStyle = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`;
