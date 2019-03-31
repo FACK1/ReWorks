@@ -9,13 +9,15 @@ import deleteIcon from './garbage.png';
 import { ImgDiv } from './itemdetails.style';
 
 class GetDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { itemDetails: this.props.location.itemDetails };
-  }
+  state = { itemDetails: this.props.location.itemDetails };
+
+  goBack = () => {
+    const { history } = this.props;
+    history.push('/item-list');
+  };
 
   render() {
-    const { image_url } = this.state.itemDetails;
+    const { url } = this.state.itemDetails;
 
     return (
       <React.Fragment>
@@ -23,8 +25,8 @@ class GetDetails extends Component {
         <ImgDiv>
           <img src={deleteIcon} alt="delete icon" />
         </ImgDiv>
-        <Form image={image_url} />
-        <Button />
+        <Form image={url} />
+        <Button onClick={this.goBack} />
         <GButton title="Save" />
         <Footer />
       </React.Fragment>
