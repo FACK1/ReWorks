@@ -1,5 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import StyledButton from './button.style';
 
-const Button = () => <StyledButton type="button">BACK</StyledButton>;
-export default Button;
+
+class Button extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <StyledButton
+        type="button"
+        onClick={this.props.history.goBack}
+      >
+      BACK
+      </StyledButton>
+    );
+  }
+}
+export default withRouter(Button);
