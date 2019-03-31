@@ -9,17 +9,11 @@ import {
 } from './itemlist.style';
 
 class ItemList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     itemlist: [],
-    logged: '',
   };
 
   componentDidMount() {
-    this.setState({ logged: this.props.location.logged });
     axios.get('/items')
       .then(res => this.setState({ itemlist: res.data.data }))
       .catch(err => console.log(err));
@@ -27,7 +21,7 @@ class ItemList extends Component {
 
   uploadPhoto = () => {
     const { history } = this.props;
-    history.push({ pathname: '/upload-photo', logged1: this.state.logged });
+    history.push('/upload-photo');
   };
 
   render() {
