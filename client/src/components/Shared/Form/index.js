@@ -101,7 +101,6 @@ class Form extends Component {
   changeSelected = e => {
     e.preventDefault();
     const selected = "selected_" + this.state.selectedCat;
-    console.log(this.state.selectedCat);
     this.setState({ [selected]: e.target.value.split(".")[1], isOpen: false });
   };
 
