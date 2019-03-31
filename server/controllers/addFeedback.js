@@ -12,9 +12,9 @@ exports.addFeedback = (req, res) => {
     {
       Feedback: feedback,
     },
-    (error) => {
-      if (error) {
-        return res.status(500).json({ error });
+    (err) => {
+      if (err) {
+        return res.status(500).json({ err });
       }
       return res.status(200).json({ success: true, msg: 'Feedback updated' });
     },
