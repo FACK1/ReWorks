@@ -14,6 +14,7 @@ class Upload extends Component {
     details: null,
   };
 
+
   handleUploadFile = (event) => {
     const img = new FormData();
     img.append('file', event.target.files[0]);
