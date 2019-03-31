@@ -9,7 +9,6 @@ export const StyledModal = Modal.styled`
   @media (max-width: 650px) {
     overflow-y: scroll;
   }
-
 `;
 
 export const Category = styled.h1`
@@ -37,4 +36,10 @@ export const CloseBtn = styled.button`
   @media (max-width: 650px) {
     font-size: 16px;
   }
+`;
+
+export const DataContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
 `;
