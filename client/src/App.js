@@ -6,8 +6,8 @@ import Splash from './components/SplashPage';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import ItemDetails from './components/ItemDetails';
-import Item from './components/Item';
-import ItemList from "./components/ItemList";
+import ItemList from './components/ItemList';
+import Feedback from './components/Feedback';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
         <Route path="/signup-form" component={SignUp} />
         <Route path="/item-details" component={ItemDetails} />
         <Route path="/item-list" component={ItemList} />
+        <Route path="/feedback" component={Feedback} />
       </div>
     </Router>
   );
