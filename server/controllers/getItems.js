@@ -16,6 +16,7 @@ exports.getItems = (req, res) => {
         records.forEach((record) => {
           if (record.get('Users')[0] === userAirtableId) {
             data.push({
+              itemId: record.id,
               type: record.get('Type'),
               size: record.get('Size'),
               url: record.get('Image URL'),
