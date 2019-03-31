@@ -14,6 +14,7 @@ class Upload extends Component {
     details: null,
   };
 
+
   handleUploadFile = (event) => {
     const img = new FormData();
     img.append('file', event.target.files[0]);
@@ -27,7 +28,7 @@ class Upload extends Component {
     return (
       <React.Fragment>
         <Title />
-        <Header title="Upload your photo"/>
+        <Header title="Upload your photo" />
         <Instructions>
           <TakeGoodPhoto>
             After you add your photo e-commit's software will determine some key item

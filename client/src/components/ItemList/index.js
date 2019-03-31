@@ -4,17 +4,31 @@ import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
 import Footer from '../Shared/Footer';
 import Item from '../Item';
-import { List, StyledHeader, StyledBottom, StyledLink, GButtonContainer } from './itemlist.style';
+import {
+  List, StyledHeader, StyledBottom, StyledLink, GButtonContainer,
+} from './itemlist.style';
+
 class ItemList extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     itemlist: [],
+    logged: '',
   };
 
   componentDidMount() {
+    this.setState({ logged: this.props.location.logged });
     axios.get('/items')
-      .then(res => this.setState({itemlist: res.data.data}))
-      .catch(err => console.log(err))
+      .then(res => this.setState({ itemlist: res.data.data }))
+      .catch(err => console.log(err));
   }
+
+  uploadPhoto = () => {
+    const { history } = this.props;
+    history.push({ pathname: '/upload-photo', logged1: this.state.logged });
+  };
 
   render() {
     return (
@@ -22,7 +36,7 @@ class ItemList extends Component {
         <Title />
         <StyledHeader>Your Items</StyledHeader>
         <List>
-          <StyledLink to="/upload-photo">+ ADD NEW ITEM</StyledLink>
+          <StyledLink type="button" onClick={this.uploadPhoto}>+ ADD NEW ITEM</StyledLink>
           {this.state.itemlist.map(item => <Item key={item.id} />)}
         </List>
         <StyledBottom>

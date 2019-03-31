@@ -30,7 +30,7 @@ class Login extends Component {
     const inputs = { username: this.state.username, password: this.state.password };
     axios.post('/login', inputs).then(({ data }) => {
       if (data.success) {
-        history.push('/items-page');
+        history.push('/item-list');
       } else {
         history.push('/error');
       }
