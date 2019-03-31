@@ -23,6 +23,16 @@ class Feedback extends Component {
     loading: true,
   };
 
+  handleCheckboxChange = (event) => {
+    const { options } = this.state;
+    options.map((option, i) => {
+      if (option.text === event.target.name) {
+        options[i] = { text: event.target.name, checked: event.target.checked };
+        this.setState({ options });
+      }
+    });
+  };
+
   render() {
     const { options, loading } = this.state;
 
