@@ -28,7 +28,7 @@ class GetDetails extends Component {
     const { image_url } = this.props.location.details;
     return (
       <React.Fragment>
-        <Title />
+        <Title {...this.props} />
         <Header title="Get your details" />
         <Form image={image_url} />
         <Button />

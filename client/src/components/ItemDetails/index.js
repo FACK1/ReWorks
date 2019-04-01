@@ -21,7 +21,7 @@ class ItemDetails extends Component {
 
     return (
       <React.Fragment>
-        <Title />
+        <Title {...this.props} />
         <ImgDiv>
           <img src={deleteIcon} alt="delete icon" />
         </ImgDiv>
