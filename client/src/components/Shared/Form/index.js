@@ -93,6 +93,21 @@ class Form extends Component {
     this.setState({ [selected]: e.target.value.split('.')[1], isOpen: false });
   };
 
+  componentDidMount() {
+    const apparel = this.props.apparel.data.map(ele => {
+      return ele.tag_name;
+    });
+
+    const colors = this.props.colors.data.map(ele => {
+      return ele.name;
+    });
+
+    this.setState({
+      itemType: [...apparel, ...this.state.itemType],
+      colors: [...colors, ...this.state.colors]
+    });
+  }
+
   render() {
     const { image } = this.props;
     return (
