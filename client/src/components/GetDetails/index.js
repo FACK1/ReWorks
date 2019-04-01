@@ -1,24 +1,20 @@
-import React, { Component } from "react";
-import axios from "axios";
-import Title from "../Shared/Title";
-import Header from "../Shared/Header";
-import Form from "../Shared/Form";
-import GButton from "../Shared/GreenButton";
-import Button from "../Shared/Button";
-import Footer from "../Shared/Footer";
+import React, { Component } from 'react';
+import axios from 'axios';
+import Title from '../Shared/Title';
+import Header from '../Shared/Header';
+import Form from '../Shared/Form';
+import GButton from '../Shared/GreenButton';
+import Button from '../Shared/Button';
+import Footer from '../Shared/Footer';
 
 class GetDetails extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   continue = () => {
-    axios.get("/checkcookie").then(({ data: { cookie, logged } }) => {
+    axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
       const { history } = this.props;
       if (cookie) {
-        history.push({ pathname: "/item-list", logged });
+        history.push({ pathname: '/item-list', logged });
       } else {
-        history.push("/login-form");
+        history.push('/login-form');
       }
     });
   };
