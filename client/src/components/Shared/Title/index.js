@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { StyledTitle, Logout } from './title.style';
+import { StyledTitle, LogoutB } from './title.style';
 
 class Title extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   state={
     logged: '',
   }
@@ -14,20 +18,21 @@ class Title extends Component {
       });
   }
 
-    logout = () => {
+    clicklogout = () => {
       const { history } = this.props;
       axios.get('/logout')
         .then(() => {
-          console.log('dgsg');
           history.push('/login-form');
         });
     };
 
+
     render() {
       let LogoutButton;
       if (this.state.logged) {
-        LogoutButton = <Logout type="button" onClick={this.logout}>logout</Logout>;
+        LogoutButton = <LogoutB type="button" onClick={this.clicklogout}>logout</LogoutB>;
       }
+
       return (
         <div>
           <StyledTitle>eCommit </StyledTitle>
