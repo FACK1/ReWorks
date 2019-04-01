@@ -27,7 +27,7 @@ class Upload extends Component {
   render() {
     return (
       <React.Fragment>
-        <Title />
+        <Title {...this.props} />
         <Header title="Upload your photo" />
         <Instructions>
           <TakeGoodPhoto>
