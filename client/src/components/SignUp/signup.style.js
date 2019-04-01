@@ -32,7 +32,7 @@ export const StyledLabel = styled.label`
 `;
 
 
-export const StyledSignUp = styled.label`
+export const StyledLogin = styled.label`
   font-size: 16px;
   color:#1ED390;
   @media (max-width: 650px) {

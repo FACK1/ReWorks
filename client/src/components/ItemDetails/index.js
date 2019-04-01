@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Title from '../Shared/Title';
 import Form from '../Shared/Form';
 import GButton from '../Shared/GreenButton';
@@ -6,25 +7,43 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
 
-import { ImgDiv } from './itemdetails.style';
+import { ImgDiv, DeleteButton } from './itemdetails.style';
 
-class GetDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { itemDetails: this.props.location.itemDetails };
-  }
+class ItemDetails extends Component {
+  state = { itemDetails: this.props.location.itemDetails };
+
+  goBack = () => {
+    const { history } = this.props;
+    history.push('/item-list');
+  };
+
+  deleteItem = () => {
+    const { history } = this.props;
+    const id = this.state.itemDetails.itemId;
+
+    axios
+      .get(`/delete-item/${id}`)
+      .then(({ data }) => {
+        if (data.success) {
+          history.push('/item-list');
+        }
+      })
+      .catch(() => history.push('/error'));
+  };
 
   render() {
-    const { image_url } = this.state.itemDetails;
+    const { url } = this.state.itemDetails;
 
     return (
       <React.Fragment>
-        <Title />
+        <Title {...this.props} />
         <ImgDiv>
-          <img src={deleteIcon} alt="delete icon" />
+          <DeleteButton onClick={this.deleteItem}>
+            <img src={deleteIcon} alt="delete icon" />
+          </DeleteButton>
         </ImgDiv>
-        <Form image={image_url} />
-        <Button />
+        <Form image={url} />
+        <Button onClick={this.goBack} />
         <GButton title="Save" />
         <Footer />
       </React.Fragment>
@@ -32,4 +51,4 @@ class GetDetails extends Component {
   }
 }
 
-export default GetDetails;
+export default ItemDetails;

@@ -11,7 +11,7 @@ import {
   StyledBottom,
   StyledLabel,
   StyledInput,
-  StyledSignUp,
+  StyledLogin,
   StyledP,
   StyledText,
 } from './signup.style';
@@ -41,6 +41,11 @@ class signUp extends Component {
       }
     });
   };
+
+  goLogin = () => {
+    const { history } = this.props;
+    history.push('/login-form');
+  }
 
   render() {
     return (
@@ -83,7 +88,7 @@ class signUp extends Component {
           />
           <StyledP>
             <StyledText>Been here before? </StyledText>
-            <StyledSignUp> Login</StyledSignUp>
+            <StyledLogin onClick={this.goLogin}> Login</StyledLogin>
           </StyledP>
         </StyledForm>
 
