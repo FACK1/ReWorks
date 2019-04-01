@@ -4,6 +4,7 @@ import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
 import Footer from '../Shared/Footer';
 import Item from '../Item';
+import { CSVLink, CSVDownload } from "react-csv";
 import {
   List, StyledHeader, StyledBottom, StyledLink, GButtonContainer,
 } from './itemlist.style';
@@ -12,6 +13,7 @@ class ItemList extends Component {
   state = {
     itemlist: [],
   };
+
 
   componentDidMount() {
     axios
@@ -32,6 +34,16 @@ class ItemList extends Component {
   };
 
   render() {
+    const reducedData =
+    this.state.itemlist.reduce((acc, element) => {
+        acc.itemIds.push(element.itemId);
+        acc.sizes.push(element.size);
+        acc.urls.push(element.url);
+        acc.names.push(element.name);
+        acc.types.push(element.type);
+          return acc;
+    }, { itemIds: [], sizes: [], urls: [], names: [], types: [], });
+
     return (
       <React.Fragment>
         <Title />
@@ -60,7 +72,7 @@ class ItemList extends Component {
         </List>
         <StyledBottom>
           <GButtonContainer>
-            <GButton title="EXPORT AS CSV" />
+          <CSVLink data={this.state.itemlist}>EXPORT AS CSV</CSVLink>
           </GButtonContainer>
           <Footer />
         </StyledBottom>
