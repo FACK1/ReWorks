@@ -4,9 +4,8 @@ import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
 import Footer from '../Shared/Footer';
 import Item from '../Item';
-import { CSVLink, CSVDownload } from "react-csv";
 import {
-  List, StyledHeader, StyledBottom, StyledLink, GButtonContainer,
+  List, StyledHeader, StyledBottom, StyledLink, StyledCSVLink
 } from './itemlist.style';
 
 class ItemList extends Component {
@@ -42,7 +41,14 @@ class ItemList extends Component {
         acc.names.push(element.name);
         acc.types.push(element.type);
           return acc;
-    }, { itemIds: [], sizes: [], urls: [], names: [], types: [], });
+    }, { ItemIds: [], Sizes: [], Urls: [], Names: [], Types: [], });
+    const headers = [
+  { label: "ItemId", key: "itemId" },
+  { label: "Size", key: "size" },
+  { label: "Link", key: "url" },
+  { label: "Name", key: "name" },
+  { label: "Type", key: "type" }
+];
 
     return (
       <React.Fragment>
@@ -71,9 +77,7 @@ class ItemList extends Component {
           })}
         </List>
         <StyledBottom>
-          <GButtonContainer>
-          <CSVLink data={this.state.itemlist}>EXPORT AS CSV</CSVLink>
-          </GButtonContainer>
+          <StyledCSVLink data={this.state.itemlist} headers={headers} filename='item_data.csv' >EXPORT AS CSV</StyledCSVLink>
           <Footer />
         </StyledBottom>
       </React.Fragment>
