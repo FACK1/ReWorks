@@ -30,7 +30,7 @@ class Title extends Component {
     render() {
       let LogoutButton;
       if (this.state.logged) {
-        LogoutButton = <LogoutB type="button" onClick={this.clicklogout}>logout</LogoutB>;
+        LogoutButton = <LogoutB type="button" onClick={this.clicklogout}>Log out</LogoutB>;
       }
 
       return (
