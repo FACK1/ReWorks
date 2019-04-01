@@ -150,7 +150,7 @@ class Feedback extends Component {
             </ThanksText>
           )}
           <Button />
-          <GButton title="CONTINUE" onClick={this.updateAirtaleFeedback} />
+          <GButton title="SAVE" onClick={this.updateAirtaleFeedback} />
           <Footer />
         </BottomContainer>
       </React.Fragment>

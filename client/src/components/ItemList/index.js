@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
+import Button from '../Shared/Button';
+
 import Footer from '../Shared/Footer';
 import Item from '../Item';
 import {
@@ -29,6 +31,12 @@ class ItemList extends Component {
   addNewItem = () => {
     const { history } = this.props;
     history.push('/upload-photo');
+  };
+
+  feedback = () => {
+    console.log('here');
+    const { history } = this.props;
+    history.push('/feedback');
   };
 
   render() {
@@ -60,7 +68,8 @@ class ItemList extends Component {
         </List>
         <StyledBottom>
           <GButtonContainer>
-            <GButton title="EXPORT AS CSV" />
+            <Button title="EXPORT AS CSV" />
+            <GButton onClick={this.feedback} title="Give your feedback" />
           </GButtonContainer>
           <Footer />
         </StyledBottom>
