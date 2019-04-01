@@ -3,7 +3,6 @@ import axios from 'axios';
 import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
-
 import Footer from '../Shared/Footer';
 import Item from '../Item';
 import {
