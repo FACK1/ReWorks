@@ -4,6 +4,8 @@ import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
 import Footer from '../Shared/Footer';
 import Item from '../Item';
+import Spinner from '../Shared/Spinner';
+
 import {
   List, StyledHeader, StyledBottom, StyledLink, GButtonContainer,
 } from './itemlist.style';
@@ -11,12 +13,13 @@ import {
 class ItemList extends Component {
   state = {
     itemlist: [],
+    loading: true,
   };
 
   componentDidMount() {
     axios
       .get('/items')
-      .then(({ data }) => this.setState({ itemlist: data.data }))
+      .then(({ data }) => this.setState({ itemlist: data.data, loading: false }))
       .catch(err => console.log(err));
   }
 
@@ -40,6 +43,7 @@ class ItemList extends Component {
           <StyledLink type="button" onClick={this.addNewItem}>
             + ADD NEW ITEM
           </StyledLink>
+          {this.state.loading && <Spinner />}
           {this.state.itemlist.map((item, index) => {
             const {
               itemId, color, type, brand, size, url,
