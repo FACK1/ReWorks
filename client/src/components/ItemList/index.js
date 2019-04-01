@@ -43,7 +43,7 @@ class ItemList extends Component {
   render() {
     return (
       <React.Fragment>
-        <Title />
+        <Title {...this.props} />
         <StyledHeader>Your Items</StyledHeader>
         <List>
           <StyledLink type="button" onClick={this.addNewItem}>
