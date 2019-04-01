@@ -10,10 +10,6 @@ import Footer from "../Shared/Footer";
 class GetDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      image_url:
-        "https://www.childrensplace.com/wcsstore/GlobalSAS/images/tcp/department/US/021919/US-DP-TG-021919-SPRING-DEPT_06.jpg"
-    };
   }
 
   continue = () => {
@@ -28,12 +24,12 @@ class GetDetails extends Component {
   };
 
   render() {
-    const { image_url } = this.state;
+    const { image_url, apparel, colors } = this.props.location.details;
     return (
       <React.Fragment>
         <Title />
         <Header title="Get your details" />
-        <Form image={image_url} />
+        <Form image={image_url} apparel={apparel} colors={colors} />
         <Button />
         <GButton title="CONTINUE" onClick={this.continue} />
         <Footer />
