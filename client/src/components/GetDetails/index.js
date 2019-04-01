@@ -8,29 +8,24 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 
 class GetDetails extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   continue = () => {
-    axios.get('/checkcookie')
-      .then(({ data: { cookie, logged } }) => {
-        const { history } = this.props;
-        if (cookie) {
-          history.push({ pathname: '/item-list', logged });
-        } else {
-          history.push('/login-form');
-        }
-      });
+    axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
+      const { history } = this.props;
+      if (cookie) {
+        history.push({ pathname: '/item-list', logged });
+      } else {
+        history.push('/login-form');
+      }
+    });
   };
 
   render() {
-    const { image_url } = this.props.location.details;
+    const { image_url, apparel, colors } = this.props.location.details;
     return (
       <React.Fragment>
         <Title {...this.props} />
         <Header title="Get your details" />
-        <Form image={image_url} />
+        <Form image={image_url} apparel={apparel} colors={colors} />
         <Button />
         <GButton title="CONTINUE" onClick={this.continue} />
         <Footer />
