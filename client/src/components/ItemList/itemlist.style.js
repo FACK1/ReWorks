@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { CSVLink } from "react-csv";
 
 export const List = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const GButtonContainer = styled.div`
+export const StyledCSVLink = styled(CSVLink)`
   display:flex;
   justify-content:center;
   background-color:#1ED390;
@@ -45,4 +46,5 @@ export const GButtonContainer = styled.div`
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
+  color: white;
 `
