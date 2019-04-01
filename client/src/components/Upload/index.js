@@ -13,13 +13,13 @@ import Spinner from '../Shared/Spinner';
 class Upload extends Component {
   state = {
     details: null,
-    uploadingFlag: true,
+    uploadingFlag: false,
   };
 
   handleUploadFile = (event) => {
     const img = new FormData();
     img.append('file', event.target.files[0]);
-    this.setState({ uploadingFlag: false });
+    this.setState({ uploadingFlag: true });
     axios.post('/add-to-amazon', img).then(({ data }) => {
       this.setState({ details: data });
       this.props.history.push({ pathname: '/get-details', details: this.state.details });
@@ -40,7 +40,7 @@ class Upload extends Component {
             Please take your image front on with as much natural light & limited shadows.
           </TakeGoodPhoto>
         </Instructions>
-        {this.state.uploadingFlag && (
+        {!this.state.uploadingFlag && (
           <Container>
             <input
               id="input-img"
@@ -54,7 +54,7 @@ class Upload extends Component {
             </label>
           </Container>
         )}
-        {!this.state.uploadingFlag && <Spinner />}
+        {this.state.uploadingFlag && <Spinner />}
         <FooterStyle>
           <Footer />
         </FooterStyle>
