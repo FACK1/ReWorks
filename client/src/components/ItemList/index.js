@@ -34,7 +34,6 @@ class ItemList extends Component {
   };
 
   feedback = () => {
-    console.log('here');
     const { history } = this.props;
     history.push('/feedback');
   };
@@ -42,7 +41,7 @@ class ItemList extends Component {
   render() {
     return (
       <React.Fragment>
-        <Title {...this.props} />
+        <Title />
         <StyledHeader>Your Items</StyledHeader>
         <List>
           <StyledLink type="button" onClick={this.addNewItem}>
@@ -69,7 +68,7 @@ class ItemList extends Component {
         <StyledBottom>
           <GButtonContainer>
             <Button title="EXPORT AS CSV" />
-            <GButton onClick={this.feedback} title="Give your feedback" />
+            <GButton onClick={this.feedback} title="GIVE YOUR FEEDBACK" />
           </GButtonContainer>
           <Footer />
         </StyledBottom>
