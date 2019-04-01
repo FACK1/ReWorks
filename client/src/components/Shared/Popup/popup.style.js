@@ -1,9 +1,9 @@
-import Modal from "styled-react-modal";
-import styled from "styled-components";
+import Modal from 'styled-react-modal';
+import styled from 'styled-components';
 
 export const StyledModal = Modal.styled`
-  width: 85%;
   height: 85vh;
+  width: 85vw;
   background-color: #FFF;
   border-radius:5px;
   @media (max-width: 650px) {
@@ -12,13 +12,12 @@ export const StyledModal = Modal.styled`
 `;
 
 export const Category = styled.h1`
-  width: 90%;
+  width: 90vw;
   margin: auto;
   padding: 10px;
   border-bottom: 0.5px dashed;
   text-align: center;
   font-size: 24px;
-  font-family: "Assistant";
   @media (max-width: 650px) {
     font-size: 20px;
   }
@@ -32,14 +31,13 @@ export const CloseBtn = styled.button`
   }
   margin: 10px;
   font-size: 20px;
-  font-family: "Assistant";
   @media (max-width: 650px) {
     font-size: 16px;
   }
 `;
 
 export const DataContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-flow: row wrap;
 `;
