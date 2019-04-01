@@ -127,7 +127,7 @@ class Feedback extends Component {
 
     return (
       <React.Fragment>
-        <Title />
+        <Title {...this.props} />
         <Header title="What do you want to do with your items?" />
         {!loading && (
           <CheckboxContainer>
