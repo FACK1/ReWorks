@@ -9,15 +9,15 @@ export const List = styled.div`
 `;
 
 export const StyledHeader = styled.h1`
-font-size: 20px;
-font-family:'Assistant';
-background-color:#FAFAFA;
-padding: 22px 0px;
-text-align:left;
-Margin-left:20px;
-@media (max-width: 650px) {
-  font-size: 16px;
-}
+  font-size: 20px;
+  font-family: 'Assistant';
+  background-color: #fafafa;
+  padding: 22px 0px;
+  text-align: left;
+  text-indent: 20px;
+  @media (max-width: 650px) {
+    font-size: 16px;
+  }
 `;
 
 export const StyledBottom = styled.form`
@@ -30,12 +30,12 @@ export const StyledBottom = styled.form`
 export const StyledLink = styled(Link)`
   font-size: 16px;
   font-weight: bold;
-  color: #1ED390;
+  color: #1ed390;
   margin-left: 15px;
   text-decoration: none;
 `;
 
 export const GButtonContainer = styled.div`
-  display:flex;
-  justify-content:center;
-`
+  display: flex;
+  justify-content: center;
+`;
