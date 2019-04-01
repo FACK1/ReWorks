@@ -38,4 +38,11 @@ export const StyledLink = styled(Link)`
 export const GButtonContainer = styled.div`
   display:flex;
   justify-content:center;
+  background-color:#1ED390;
+  padding: 20px 0px;
+  width:45%;
+  margin-left:28%;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
 `
