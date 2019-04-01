@@ -10,7 +10,6 @@ export const List = styled.div`
 
 export const StyledHeader = styled.h1`
   font-size: 20px;
-  font-family: 'Assistant';
   background-color: #fafafa;
   padding: 22px 0px;
   text-align: left;
