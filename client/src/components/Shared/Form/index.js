@@ -72,6 +72,19 @@ class Form extends Component {
     age: ['one year', '6 months', '3 months', '1 months', '2 weeks', '4 weeks', '9 weeks'],
   };
 
+  componentDidMount() {
+    const apparel = this.props.apparel.data.map(ele => ele.tag_name);
+
+    const colors = this.props.colors.data.map(ele => ele.name);
+
+    this.setState({
+      selected_itemType: apparel[0],
+      selected_colors: colors[0],
+      itemType: [...apparel, ...this.state.itemType],
+      colors: [...colors, ...this.state.colors],
+    });
+  }
+
   toggleOpen = (e) => {
     const clicked = e.target.value.split('.');
     if (clicked[1] === 'more') {
@@ -93,18 +106,6 @@ class Form extends Component {
     this.setState({ [selected]: e.target.value.split('.')[1], isOpen: false });
   };
 
-  componentDidMount() {
-    const apparel = this.props.apparel.data.map(ele => ele.tag_name);
-
-    const colors = this.props.colors.data.map(ele => ele.name);
-
-    this.setState({
-      selected_itemType: apparel[0],
-      selected_colors: colors[0],
-      itemType: [...apparel, ...this.state.itemType],
-      colors: [...colors, ...this.state.colors],
-    });
-  }
 
   render() {
     const { image } = this.props;
