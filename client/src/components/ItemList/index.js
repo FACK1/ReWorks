@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
+import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import Item from '../Item';
+import Spinner from '../Shared/Spinner';
+
 import {
   List, StyledHeader, StyledBottom, StyledLink, GButtonContainer,
 } from './itemlist.style';
@@ -11,12 +14,13 @@ import {
 class ItemList extends Component {
   state = {
     itemlist: [],
+    loading: true,
   };
 
   componentDidMount() {
     axios
       .get('/items')
-      .then(({ data }) => this.setState({ itemlist: data.data }))
+      .then(({ data }) => this.setState({ itemlist: data.data, loading: false }))
       .catch(err => console.log(err));
   }
 
@@ -31,15 +35,21 @@ class ItemList extends Component {
     history.push('/upload-photo');
   };
 
+  feedback = () => {
+    const { history } = this.props;
+    history.push('/feedback');
+  };
+
   render() {
     return (
       <React.Fragment>
-        <Title {...this.props} />
+        <Title />
         <StyledHeader>Your Items</StyledHeader>
         <List>
           <StyledLink type="button" onClick={this.addNewItem}>
             + ADD NEW ITEM
           </StyledLink>
+          {this.state.loading && <Spinner />}
           {this.state.itemlist.map((item, index) => {
             const {
               itemId, color, type, brand, size, url,
@@ -60,7 +70,8 @@ class ItemList extends Component {
         </List>
         <StyledBottom>
           <GButtonContainer>
-            <GButton title="EXPORT AS CSV" />
+            <Button title="EXPORT AS CSV" />
+            <GButton onClick={this.feedback} title="GIVE YOUR FEEDBACK" />
           </GButtonContainer>
           <Footer />
         </StyledBottom>
