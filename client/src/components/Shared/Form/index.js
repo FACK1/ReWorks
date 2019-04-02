@@ -74,6 +74,7 @@ class Form extends Component {
       this.setState({
         itemType: [...outfit, ...this.state.itemType],
         colors: [...colours, ...this.state.colors],
+
       });
     }
   }

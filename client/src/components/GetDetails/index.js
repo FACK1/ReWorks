@@ -51,6 +51,16 @@ class GetDetails extends Component {
     this.setState({ [selected]: e.target.value.split('.')[1], isOpen: false });
   };
 
+  componentDidMount() {
+    const { apparel, colors } = this.props.location.details;
+    if (apparel && colors) {
+      this.setState({
+        selected_itemType: apparel.data[0].tag_name,
+        selected_colors: colors.data[0].tag_name,
+      });
+    }
+  }
+
   render() {
     const { image_url, apparel, colors } = this.props.location.details;
     return (
