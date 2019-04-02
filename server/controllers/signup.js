@@ -12,7 +12,7 @@ exports.signUp = (req, res) => {
   User.findOne({ username })
     .then((user) => {
       if (user) {
-        return res.json({ error: 'User exist , please use another one' });
+        return res.json({ success: false, error: 'User exist , please use another one' });
       }
       if (password === confirmPassword) {
         base('Users').create({
@@ -30,12 +30,12 @@ exports.signUp = (req, res) => {
             })).then((addUser) => {
               addUser.save((err, result) => {
                 if (err) return res.json({ error: err });
-                return res.json({ result, success: 'true', message: 'added to database & airtable' });
+                return res.json({ result, success: true, message: 'added to database & airtable' });
               });
             }).catch((err) => { res.json({ error: err }); });
         });
       } else {
-        return res.json({ error: 'the password and confirm password not match' });
+        return res.json({ success: false, error: 'the password and confirm password not match' });
       }
     }).catch(err => res.json({ error: err }));
 };
