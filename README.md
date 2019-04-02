@@ -94,15 +94,18 @@ _You will need to create an Airtable account --> create new project --> create w
   
    - _**Tables Details**_
      - Items
+     
      ```Name, Age: Single line text | Details: Long text | Image URL: URL | Image: Attachment | Users: Link to Users | Brand         : Link to Brands (Allow linking to multiple records) | Brand Names: Lookup (Brand : Name) | Type, Colors, Condition,         Size: Single select```
      
   
      
      - Users 
+     
      ```Name: Single line text| Feedback: Multiple select | Items: Link to Items (Allow linking to multiple records)```
   
      
      - Brands
+     
      ```ID: Formula (RECORD_ID()) | Name: Single line text```
    
 
