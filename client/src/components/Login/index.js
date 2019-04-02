@@ -14,6 +14,7 @@ import {
   StyledSignUp,
   StyledP,
   StyledText,
+  ErrorMessage,
 } from './login.style';
 
 class Login extends Component {
@@ -22,19 +23,54 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      usernameError: '',
+      passwordError: '',
+      isErrorUsername: false,
+      isErrorPassword: false,
     };
   }
 
-  login = () => {
-    const { history } = this.props;
-    const inputs = { username: this.state.username, password: this.state.password };
-    axios.post('/login', inputs).then(({ data }) => {
-      if (data.success) {
-        history.push('/item-list');
-      } else {
-        history.push('/error');
-      }
+  validate = () => {
+    let isError = false;
+    this.setState({ isErrorUsername: false, isErrorPassword: false });
+
+    const errors = {
+      usernameError: '',
+      passwordError: '',
+      isErrorUsername: false,
+      isErrorPassword: false,
+    };
+    if (this.state.username < 1) {
+      isError = true;
+      errors.isErrorUsername = true;
+      errors.usernameError = 'Please enter your username.';
+    }
+    if (this.state.password < 1) {
+      isError = true;
+      errors.isErrorPassword = true;
+      errors.passwordError = 'Please enter your password.';
+    }
+    this.setState({
+      ...this.state,
+      ...errors,
     });
+    return isError;
+  };
+
+
+  login = () => {
+    const err = this.validate();
+    if (!err) {
+      const { history } = this.props;
+      const inputs = { username: this.state.username, password: this.state.password };
+      axios.post('/login', inputs).then(({ data }) => {
+        if (data.success) {
+          history.push('/item-list');
+        } else {
+          this.setState({ passwordError: 'Username or password is incorrect.', isErrorUsername: true, isErrorPassword: true });
+        }
+      });
+    }
   };
 
 goSignUp = () => {
@@ -50,26 +86,35 @@ render() {
       <StyledForm>
         <StyledLabel> Username* </StyledLabel>
         <StyledInput
+          StyleError={this.state.isErrorUsername}
+          {...this.props}
           type="text"
           name="username"
           placeholder="username"
+          errorText={this.state.usernameError}
           value={this.state.username}
           onChange={e => this.setState({
             username: e.target.value,
           })
             }
         />
+        <ErrorMessage>{this.state.usernameError}</ErrorMessage>
+
         <StyledLabel> Password* </StyledLabel>
         <StyledInput
+          StyleError={this.state.isErrorPassword}
+          {...this.props}
           type="password"
           name="password"
           placeholder="password"
+          errorText={this.state.passwordError}
           value={this.state.password}
           onChange={e => this.setState({
             password: e.target.value,
           })
             }
         />
+        <ErrorMessage>{this.state.passwordError}</ErrorMessage>
 
         <StyledP>
           <StyledText>First time around here? </StyledText>
