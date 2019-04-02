@@ -8,7 +8,7 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 
 class GetDetails extends Component {
-  state={
+  state = {
     isOpen: false,
     selectedCat: null,
     selected_itemType: '',
@@ -17,7 +17,59 @@ class GetDetails extends Component {
     selected_condition: '',
     selected_labelSize: '',
     selected_age: '',
+    itemType: [
+      'shirt',
+      'trousers',
+      'leggings',
+      'yoga pants',
+      'button-down',
+      'hat',
+      'beanie',
+      'coat',
+    ],
+    colors: ['white', 'black', 'red', 'blue', 'green', 'limegreen', 'gray'],
+    brands: [
+      'cool',
+      'cooler',
+      'coolest',
+      'the coolest',
+      'THE coolest',
+      'THE COOLEST',
+      'THE ABSOLUTE COOLEST',
+    ],
+    condition: [
+      'new',
+      'worn once',
+      'worn less than five times',
+      'not worn at all',
+      'semi-new',
+      'not new at all',
+      'just no',
+      'totally nah',
+    ],
+    labelSize: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL', 'XXXXXL'],
+    age: ['one year', '6 months', '3 months', '1 months', '2 weeks', '4 weeks', '9 weeks'],
   }
+
+  componentDidMount() {
+    const { apparel, colors } = this.props.location.details;
+    if (apparel && colors) {
+      const outfit = apparel.data.map(ele => ele.tag_name);
+
+      const colours = colors.data.map(ele => ele.name);
+
+      this.setState({
+        itemType: [...outfit, ...this.state.itemType],
+        colors: [...colours, ...this.state.colors],
+        selected_itemType: apparel.data[0].tag_name,
+        selected_colors: colors.data[0].name,
+        selected_brands: this.state.brands[0],
+        selected_condition: this.state.condition[0],
+        selected_labelSize: this.state.labelSize[0],
+        selected_age: this.state.age[0],
+      })
+  }
+
 
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
@@ -51,26 +103,14 @@ class GetDetails extends Component {
     this.setState({ [selected]: e.target.value.split('.')[1], isOpen: false });
   };
 
-  componentDidMount() {
-    const { apparel, colors } = this.props.location.details;
-    if (apparel && colors) {
-      this.setState({
-        selected_itemType: apparel.data[0].tag_name,
-        selected_colors: colors.data[0].tag_name,
-      });
-    }
-  }
-
   render() {
-    const { image_url, apparel, colors } = this.props.location.details;
+    const { image_url } = this.props.location.details;
     return (
       <React.Fragment>
         <Title {...this.props} />
         <Header title="Get your details" />
         <Form
           image={image_url}
-          apparel={apparel}
-          colors={colors}
           {...this.state}
           toggleOpen={this.toggleOpen}
           toggleClose={this.toggleClose}
