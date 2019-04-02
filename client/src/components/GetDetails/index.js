@@ -88,7 +88,7 @@ class GetDetails extends Component {
       this.setState({ isOpen: true, selectedCat: clicked[0] });
     } else {
       const selected = `selected_${clicked[0]}`;
-      this.setState({ [selected]: e.target.value });
+      this.setState({ [selected]: clicked[1] });
     }
   };
 
