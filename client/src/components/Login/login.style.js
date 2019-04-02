@@ -59,10 +59,20 @@ export const StyledInput = styled.input`
   font-size: 20px;
   margin-bottom:16px;
   padding:7px 0px;
+  border-bottom: ${props => (props.StyleError ? '1px solid red' : '1px solid #7D7D7D')};
   @media (max-width: 650px) {
     font-size: 16px;
   }
   ::placeholder{
     font-family:'Assistant';
   }
+`;
+export const ErrorMessage = styled.h1`
+font-size: 16px;
+color:grey;
+margin-top:-10px;
+margin-bottom:20px;
+@media (max-width: 650px) {
+  font-size: 12px;
+}
 `;
