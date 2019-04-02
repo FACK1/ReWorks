@@ -20,14 +20,6 @@ import {
 
 class Form extends Component {
   state = {
-    isOpen: false,
-    selectedCat: null,
-    selected_itemType: '',
-    selected_colors: '',
-    selected_brands: '',
-    selected_condition: '',
-    selected_labelSize: '',
-    selected_age: '',
     categories: [
       'Item Type*',
       'Color*',
@@ -73,42 +65,29 @@ class Form extends Component {
   };
 
   componentDidMount() {
-    const apparel = this.props.apparel.data.map(ele => ele.tag_name);
+    if (this.props.apparel) {
+      const apparel = this.props.apparel.data.map(ele => ele.tag_name);
 
-    const colors = this.props.colors.data.map(ele => ele.name);
+      const colors = this.props.colors.data.map(ele => ele.name);
 
-    this.setState({
-      selected_itemType: apparel[0],
-      selected_colors: colors[0],
-      itemType: [...apparel, ...this.state.itemType],
-      colors: [...colors, ...this.state.colors],
-    });
+      this.setState({
+        // selected_itemType: apparel[0],
+        // selected_colors: colors[0],
+        itemType: [...apparel, ...this.state.itemType],
+        colors: [...colors, ...this.state.colors],
+      });
+    }
   }
 
-  toggleOpen = (e) => {
-    const clicked = e.target.value.split('.');
-    if (clicked[1] === 'more') {
-      this.setState({ isOpen: true, selectedCat: clicked[0] });
-    } else {
-      const selected = `selected_${clicked[0]}`;
-      this.setState({ [selected]: e.target.value });
-    }
-  };
-
-  toggleClose = (e) => {
-    e.preventDefault();
-    this.setState({ isOpen: false });
-  };
-
-  changeSelected = (e) => {
-    e.preventDefault();
-    const selected = `selected_${this.state.selectedCat}`;
-    this.setState({ [selected]: e.target.value.split('.')[1], isOpen: false });
-  };
-
-
   render() {
-    const { image } = this.props;
+    const {
+      image, toggleOpen, isOpen, selectedCat, toggleClose, changeSelected, selected_itemType,
+      selected_colors,
+      selected_brands,
+      selected_condition,
+      selected_labelSize,
+      selected_age,
+    } = this.props;
     return (
       <StyledForm>
         <StyledImgCon>
@@ -126,7 +105,7 @@ class Form extends Component {
           </StyledLabels>
 
           <StyledItem>
-            <StyledSelect onChange={this.toggleOpen} value={this.state.selected_itemType}>
+            <StyledSelect onChange={toggleOpen} value={selected_itemType}>
               {this.state.itemType.map(
                 item => (this.state.itemType.indexOf(item) >= 5 ? (
                   <StyledOption key={item} value={item} hidden>
@@ -141,7 +120,7 @@ class Form extends Component {
               <StyledOption value="itemType.more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={this.toggleOpen} value={this.state.selected_colors}>
+            <StyledSelect onChange={toggleOpen} value={selected_colors}>
               {this.state.colors.map(
                 color => (this.state.colors.indexOf(color) >= 5 ? (
                   <StyledOption key={color} value={color} hidden>
@@ -156,7 +135,7 @@ class Form extends Component {
               <StyledOption value="colors.more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={this.toggleOpen} value={this.state.selected_brands}>
+            <StyledSelect onChange={toggleOpen} value={selected_brands}>
               {this.state.brands.map(
                 brand => (this.state.brands.indexOf(brand) >= 5 ? (
                   <StyledOption key={brand} value={brand} hidden>
@@ -173,7 +152,7 @@ class Form extends Component {
 
             <StyledInput type="text" name="brand" placeholder="brand" />
 
-            <StyledSelect onChange={this.toggleOpen} value={this.state.selected_condition}>
+            <StyledSelect onChange={toggleOpen} value={selected_condition}>
               {this.state.condition.map(
                 cond => (this.state.condition.indexOf(cond) >= 5 ? (
                   <StyledOption key={cond} value={cond} hidden>
@@ -188,7 +167,7 @@ class Form extends Component {
               <StyledOption value="condition.more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={this.toggleOpen} value={this.state.selected_labelSize}>
+            <StyledSelect onChange={toggleOpen} value={selected_labelSize}>
               {this.state.labelSize.map(
                 size => (this.state.labelSize.indexOf(size) >= 5 ? (
                   <StyledOption key={size} value={size} hidden>
@@ -203,7 +182,7 @@ class Form extends Component {
               <StyledOption value="labelSize.more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={this.toggleOpen} value={this.state.selected_age}>
+            <StyledSelect onChange={toggleOpen} value={selected_age}>
               {this.state.age.map(
                 time => (this.state.age.indexOf(time) >= 5 ? (
                   <StyledOption key={time} value={time} hidden>
@@ -225,11 +204,11 @@ class Form extends Component {
         <StyledTextarea name="extra" placeholder="More .e.g. What do you love about it?" />
         <ModalProvider>
           <Popup
-            open={this.state.isOpen}
-            data={this.state[this.state.selectedCat]}
-            toggleClose={this.toggleClose}
-            changeSelected={this.changeSelected}
-            name={this.state.selectedCat}
+            open={isOpen}
+            data={this.state[selectedCat]}
+            toggleClose={toggleClose}
+            changeSelected={changeSelected}
+            name={[selectedCat]}
           />
         </ModalProvider>
       </StyledForm>
