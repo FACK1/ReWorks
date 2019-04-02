@@ -19,7 +19,7 @@ export const StyledInput = styled.input`
   font-size: 20px;
   margin-bottom:16px;
   padding:7px 0px;
-  border-bottom: ${props => (props.StyleError ? '1px solid red' : '1px solid #7D7D7D')};
+  border-bottom: ${props => (props.StyleError ? '1px solid #D33E1E' : '1px solid #7D7D7D')};
   @media (max-width: 650px) {
     font-size: 16px;
   }
@@ -66,11 +66,11 @@ export const StyledText = styled.div`
 `;
 
 export const ErrorMessage = styled.h1`
-font-size: 16px;
-color:grey;
-margin-top:-10px;
-margin-bottom:20px;
-@media (max-width: 650px) {
-  font-size: 12px;
-}
+  font-size: 16px;
+  color:grey;
+  margin-top:-10px;
+  margin-bottom:20px;
+  @media (max-width: 650px) {
+    font-size: 12px;
+  }
 `;
