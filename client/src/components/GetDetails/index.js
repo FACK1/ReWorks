@@ -53,23 +53,38 @@ class GetDetails extends Component {
 
   componentDidMount() {
     const { apparel, colors } = this.props.location.details;
-    if (apparel && colors) {
-      const outfit = apparel.data.map(ele => ele.tag_name);
+    this.setState({
+      selected_brands: this.state.brands[0],
+      selected_condition: this.state.condition[0],
+      selected_labelSize: this.state.labelSize[0],
+      selected_age: this.state.age[0],
+    });
 
+    if (apparel || colors) {
       const colours = colors.data.map(ele => ele.name);
-
       this.setState({
-        itemType: [...outfit, ...this.state.itemType],
         colors: [...colours, ...this.state.colors],
-        selected_itemType: apparel.data[0].tag_name,
         selected_colors: colors.data[0].name,
-        selected_brands: this.state.brands[0],
-        selected_condition: this.state.condition[0],
-        selected_labelSize: this.state.labelSize[0],
-        selected_age: this.state.age[0],
+      });
+
+      if (apparel.length > 0) {
+        const outfit = apparel.data.map(ele => ele.tag_name);
+        this.setState({
+          itemType: [...outfit, ...this.state.itemType],
+          selected_itemType: apparel.data[0].tag_name,
+        });
+      } else {
+        this.setState({
+          selected_itemType: this.state.itemType[0],
+        });
+      }
+    } else {
+      this.setState({
+        selected_colors: this.state.colors[0],
       });
     }
   }
+
 
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
