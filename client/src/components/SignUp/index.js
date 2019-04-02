@@ -14,32 +14,78 @@ import {
   StyledLogin,
   StyledP,
   StyledText,
+  ErrorMessage,
 } from './signup.style';
 
 class signUp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-      confirmPassword: '',
+  state = {
+    username: '',
+    password: '',
+    confirmPassword: '',
+    usernameError: '',
+    passwordError: '',
+    isErrorUsername: false,
+    isErrorPassword: false,
+  };
+
+
+  validate = () => {
+    let isError = false;
+    this.setState({ isErrorUsername: false, isErrorPassword: false });
+
+    const characters = ['+', '/', '*', '$', '#', '@', '!', '^', '&', '(', ')', '?', '>', '<', '.'];
+    const errors = {
+      usernameError: '',
+      passwordError: '',
+      isErrorUsername: false,
+      isErrorPassword: false,
     };
-  }
+    for (let i = 0; i < characters.length; i++) {
+      if (this.state.username.includes(characters[i])) {
+        isError = true;
+        errors.isErrorUsername = true;
+        errors.usernameError = 'Username could contains letter,number and \'-\',\'_\' just';
+      } else if (this.state.username < 1) {
+        isError = true;
+        errors.isErrorUsername = true;
+        errors.usernameError = 'Username is required';
+      }
+    }
+    if (this.state.password !== this.state.confirmPassword) {
+      isError = true;
+      errors.isErrorPassword = true;
+      errors.passwordError = 'The password and confirm password not match';
+    } else
+    if (this.state.password.length < 6) {
+      isError = true;
+      errors.isErrorPassword = true;
+      errors.passwordError = 'Password needs to be at least 6 characters';
+    }
+
+    this.setState({
+      ...this.state,
+      ...errors,
+    });
+    return isError;
+  };
 
   signup = () => {
-    const { history } = this.props;
-    const inputs = {
-      username: this.state.username,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
-    };
-    axios.post('/signup', inputs).then(({ data }) => {
-      if (data.success) {
-        history.push('/login-form');
-      } else {
-        history.push('/error');
-      }
-    });
+    const err = this.validate();
+    if (!err) {
+      const { history } = this.props;
+      const inputs = {
+        username: this.state.username,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword,
+      };
+      axios.post('/signup', inputs).then(({ data }) => {
+        if (data.success) {
+          history.push('/login-form');
+        } else {
+          this.setState({ usernameError: data.error, isErrorUsername: true });
+        }
+      });
+    }
   };
 
   goLogin = () => {
@@ -55,6 +101,8 @@ class signUp extends Component {
         <StyledForm>
           <StyledLabel> Username* </StyledLabel>
           <StyledInput
+            StyleError={this.state.isErrorUsername}
+            {...this.props}
             type="text"
             name="username"
             placeholder="username"
@@ -64,8 +112,11 @@ class signUp extends Component {
             })
             }
           />
+          <ErrorMessage>{this.state.usernameError}</ErrorMessage>
           <StyledLabel> Password* </StyledLabel>
           <StyledInput
+            StyleError={this.state.isErrorPassword}
+            {...this.props}
             type="password"
             name="password"
             placeholder="**************"
@@ -77,6 +128,8 @@ class signUp extends Component {
           />
           <StyledLabel> Confirm password* </StyledLabel>
           <StyledInput
+            StyleError={this.state.isErrorPassword}
+            {...this.props}
             type="password"
             name="confirmPassword"
             placeholder="**************"
@@ -86,6 +139,7 @@ class signUp extends Component {
             })
             }
           />
+          <ErrorMessage>{this.state.passwordError}</ErrorMessage>
           <StyledP>
             <StyledText>Been here before? </StyledText>
             <StyledLogin onClick={this.goLogin}> Login</StyledLogin>
