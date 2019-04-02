@@ -14,7 +14,7 @@ exports.signUp = (req, res) => {
   User.findOne({ username })
     .then((user) => {
       if (user) {
-        return res.json({ error: 'User exist , please use another one' });
+        return res.json({ success: false, error: 'User exist , please use another one' });
       }
       if (password === confirmPassword) {
         base('Users').create(
@@ -51,7 +51,7 @@ exports.signUp = (req, res) => {
           },
         );
       } else {
-        return res.json({ error: 'the password and confirm password not match' });
+        return res.json({ success: false, error: 'the password and confirm password not match' });
       }
     })
     .catch(err => res.json({ error: err }));
