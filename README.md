@@ -25,6 +25,10 @@ https://www.figma.com/proto/Z5SWa6KmOufBDFreUojx7mL0/ReWorks?node-id=409%3A503&s
  1. As a user, I want to suggest future features in the app. user story
  1. As a user, I want to contribute to environmental sustainability. user story
  1. As an admin, I want to see a spreadsheet of all users’ items.
+ 
+ ## DEMO
+ 
+ https://ecommit.herokuapp.com/
 
 ## Getting Started
 How to get a copy of the project up and running on your local machine.
