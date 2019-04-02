@@ -61,14 +61,7 @@ class GetDetails extends Component {
           image={image_url}
           apparel={apparel}
           colors={colors}
-          isOpen={this.state.isOpen}
-          selected_itemType={this.state.selected_itemType}
-          selected_colors={this.state.selected_colors}
-          selected_brands={this.state.selected_brands}
-          selected_condition={this.state.selected_condition}
-          selected_labelSize={this.state.selected_labelSize}
-          selected_age={this.state.selected_age}
-          selectedCat={this.state.selectedCat}
+          {...this.state}
           toggleOpen={this.toggleOpen}
           toggleClose={this.toggleClose}
           changeSelected={this.changeSelected}
