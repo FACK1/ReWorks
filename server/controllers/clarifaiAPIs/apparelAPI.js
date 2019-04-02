@@ -1,6 +1,11 @@
 const Clarifai = require('clarifai');
 
 const { Clarifai_API_KEY } = process.env;
+
+if (!process.env.Clarifai_API_KEY) {
+  throw new Error('Missing Clarifai API KEY env var');
+}
+
 const clarifai = new Clarifai.App({
   apiKey: Clarifai_API_KEY,
 });

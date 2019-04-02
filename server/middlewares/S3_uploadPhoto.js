@@ -3,6 +3,17 @@ const fs = require('fs');
 const fileType = require('file-type');
 const multiparty = require('multiparty');
 
+// check if all needed env variables are exist
+if (!process.env.AWS_ACCESS_KEY_ID) {
+  throw new Error('Missing S3 ACCESS key env var');
+}
+if (!process.env.AWS_SECRET_ACCESS_KEY) {
+  throw new Error('Missing S3 SECRET key env var');
+}
+if (!process.env.S3_BUCKET) {
+  throw new Error('Missing S3 BUCKET env var');
+}
+
 // configure the keys for accessing AWS
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,

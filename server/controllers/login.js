@@ -5,6 +5,10 @@ const User = require('../database/models/User');
 
 const { SECRET } = process.env;
 
+if (!process.env.SECRET) {
+  throw new Error('Missing SECRET env var');
+}
+
 exports.login = (req, res) => {
   const { username, password } = req.body;
 
