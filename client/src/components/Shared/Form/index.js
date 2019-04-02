@@ -65,16 +65,15 @@ class Form extends Component {
   };
 
   componentDidMount() {
-    if (this.props.apparel) {
-      const apparel = this.props.apparel.data.map(ele => ele.tag_name);
+    const { apparel, colors } = this.props;
+    if (apparel && colors) {
+      const outfit = apparel.data.map(ele => ele.tag_name);
 
-      const colors = this.props.colors.data.map(ele => ele.name);
+      const colours = colors.data.map(ele => ele.name);
 
       this.setState({
-        // selected_itemType: apparel[0],
-        // selected_colors: colors[0],
-        itemType: [...apparel, ...this.state.itemType],
-        colors: [...colors, ...this.state.colors],
+        itemType: [...outfit, ...this.state.itemType],
+        colors: [...colours, ...this.state.colors],
       });
     }
   }
