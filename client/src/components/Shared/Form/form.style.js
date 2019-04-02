@@ -12,6 +12,7 @@ export const StyledImgCon = styled.div`
   background-color: #FBFBFB;
   border-radius: 50%;
   margin: auto;
+  margin-bottom:20px;
   justify-content: center;
   align-items: center;
   overflow: hidden;
@@ -22,7 +23,7 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledInformation = styled.h2`
-  margin-left: 40px;
+  margin-left: 30px;
   font-size: 18px;
   color: #909090;
   text-align: left;
@@ -32,7 +33,7 @@ export const StyledInformation = styled.h2`
 `;
 
 export const StyledNotic = styled.h2`
-	margin-left: 40px;
+  margin-left: 30px;
 	font-size: 18px;
 	text-align: left;
 	@media (max-width: 650px) {
@@ -69,8 +70,8 @@ export const StyledLabels = styled.div`
 export const StyledSelect = styled.select`
 	background-color: #FBFBFB;
 	font-size: 20px;
-	max-width: 100px;
-	width: 100px;
+	max-width: 150px;
+	width: 150px;
 	margin-bottom: 16px;
 	border: 1px solid #F2F2F2;
 	padding: 7px 14px;
@@ -86,8 +87,8 @@ export const StyledOption = styled.option`
 export const StyledInput = styled.input`
 	background-color: #FBFBFB;
 	font-size: 20px;
-	max-width: 70px;
-	width: 70px;
+	max-width: 120px;
+	width: 120px;
 	margin-bottom: 16px;
 	border: 1px solid #F2F2F2;
 	padding: 7px 14px;
@@ -98,7 +99,7 @@ export const StyledInput = styled.input`
 
 export const StyledTextarea = styled.textarea`
 	font-size: 20px;
-	width:200px
+	width:242px
 	padding:0 30px;
 	background-color:#FBFBFB;
 	border:1px solid  #F2F2F2;
@@ -109,4 +110,7 @@ export const StyledTextarea = styled.textarea`
 	@media (max-width: 650px) {
 	  font-size: 16px;
 	}
+  ::placeholder{
+    font-family:'Assistant';
+  }
 `;

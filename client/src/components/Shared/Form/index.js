@@ -36,7 +36,7 @@ class Form extends Component {
       'Condition',
       'Label size',
       'Age',
-      'purchase price',
+      'Purchase price',
     ],
     itemType: [
       'shirt',
