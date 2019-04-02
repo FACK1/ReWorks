@@ -67,7 +67,7 @@ class GetDetails extends Component {
         selected_colors: colors.data[0].name,
       });
 
-      if (apparel.length > 0) {
+      if (apparel && apparel.length > 0) {
         const outfit = apparel.data.map(ele => ele.tag_name);
         this.setState({
           itemType: [...outfit, ...this.state.itemType],
@@ -81,6 +81,7 @@ class GetDetails extends Component {
     } else {
       this.setState({
         selected_colors: this.state.colors[0],
+        selected_itemType: this.state.itemType[0],
       });
     }
   }
