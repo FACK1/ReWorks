@@ -43,12 +43,12 @@ class Login extends Component {
     if (this.state.username < 1) {
       isError = true;
       errors.isErrorUsername = true;
-      errors.usernameError = 'please enter Username';
+      errors.usernameError = 'Please enter your username.';
     }
     if (this.state.password < 1) {
       isError = true;
       errors.isErrorPassword = true;
-      errors.passwordError = 'please enter Password';
+      errors.passwordError = 'Please enter your password.';
     }
     this.setState({
       ...this.state,
@@ -67,7 +67,7 @@ class Login extends Component {
         if (data.success) {
           history.push('/item-list');
         } else {
-          this.setState({ passwordError: 'the Username and Password not match', isErrorUsername: true, isErrorPassword: true });
+          this.setState({ passwordError: 'Username or password is incorrect.', isErrorUsername: true, isErrorPassword: true });
         }
       });
     }

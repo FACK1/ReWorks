@@ -44,22 +44,22 @@ class signUp extends Component {
       if (this.state.username.includes(characters[i])) {
         isError = true;
         errors.isErrorUsername = true;
-        errors.usernameError = 'Username could contains letter,number and \'-\',\'_\' just';
+        errors.usernameError = 'Username should only contain letters, numbers, underscores and dashes.';
       } else if (this.state.username < 1) {
         isError = true;
         errors.isErrorUsername = true;
-        errors.usernameError = 'Username is required';
+        errors.usernameError = 'Username is required.';
       }
     }
     if (this.state.password !== this.state.confirmPassword) {
       isError = true;
       errors.isErrorPassword = true;
-      errors.passwordError = 'The password and confirm password not match';
+      errors.passwordError = 'Passwords do not match.';
     } else
     if (this.state.password.length < 6) {
       isError = true;
       errors.isErrorPassword = true;
-      errors.passwordError = 'Password needs to be at least 6 characters';
+      errors.passwordError = 'Password needs to be at least 6 characters.';
     }
 
     this.setState({
@@ -82,7 +82,7 @@ class signUp extends Component {
         if (data.success) {
           history.push('/login-form');
         } else {
-          this.setState({ usernameError: data.error, isErrorUsername: true });
+          this.setState({ usernameError: 'This username already exists.', isErrorUsername: true });
         }
       });
     }
