@@ -31,11 +31,11 @@ https://www.figma.com/proto/Z5SWa6KmOufBDFreUojx7mL0/ReWorks?node-id=409%3A503&s
  https://ecommit.herokuapp.com/
 
 ## Getting Started
-How to get a copy of the project up and running on your local machine.
+How to get the project up and running on your local machine.
 
 _Please ensure you have this software **installed and running** on your local machine **before** you attempt to run this webapp._
 
-**Node** (via nvm recomended) see: https://github.com/creationix/nvm
+**Node** (via nvm) see: https://github.com/creationix/nvm
 
 **MongoDB** see: https://docs.mongodb.com/manual/installation/
 
@@ -45,36 +45,36 @@ _Please ensure you have this software **installed and running** on your local ma
 
 ```$ git clone https://github.com/FACK1/ReWorks.git```
 
-**2. Install Dependencies**
+**2. Install dependencies**
 
 ```
 $ cd ReWork
 $ npm i
 ```
 
-**3. Install Dependencies in the client folder**
+**3. Install dependencies in the client folder**
 ```
 $ cd client
 $ npm i
 ```
 
-**4. Add some more Environment Variables**
+**4. Add initial environment Variables**
 
-Create a config.env file in the root.
+Create a config.env file in the root directory.
 
-_Add thesepoint_down lines to the file, to make your local databases work, inserting your own username and password._
+_Add the following line to make your local database work, inserting your own username and password._
 
 ```DB_URL = mongodb://localhost:password/username```
 
-_Add a 'Secret' for password encryption._
+_Add a 'secret' for password encryption._
 
 ```SECRET = "[SOMETHING SECRET]"```
 
-**5. Add even more .env Variables (S3 Amazon, Clarifai API, Airtable API)**
+**5. Add additional more .env Variables (S3 Amazon, Clarifai API, Airtable API)**
 
 **For S3 Amazon** (via https://aws.amazon.com/)
 
-_You will need to create an aws.amazon account, and grab the credentials needed for the code to work_
+_You will need to create an aws.amazon account, and add your access key, secret, and bucket name._
 
 ```
 AWS_ACCESS_KEY_ID = "[YOUR_AWS_ACCESS_KEY_ID]"
@@ -85,14 +85,14 @@ S3_BUCKET = "[YOUR_S3_BUCKET]"
 
 **For Clarifai** (via www.clarifai.com)
 
-_You will need to create an Clarifai account --> create new project --> grab the credentials needed for the code to work_
+_You will need to create an Clarifai account --> create new project --> add your api key._
 
   ```Clarifai_API_KEY = "[YOUR_Clarifai_API_KEY]"```
   
   
 **For Airtable** (via www.airtable.com)
 
-_You will need to create an Airtable account --> create new project --> create work_space --> create tables --> grab the credentials needed for the code to work_
+_You will need to create an Airtable account --> create new project --> create work_space --> create tables --> add your api key_
 
   ```Airtable_API_KEY = "[YOUR_Airtable_API_KEY]"```
   
@@ -101,7 +101,7 @@ _You will need to create an Airtable account --> create new project --> create w
      
      ```Name, Age: Single line text | Details: Long text | Image URL: URL | Image: Attachment | Users: Link to Users | Brand         : Link to Brands (Allow linking to multiple records) | Brand Names: Lookup (Brand : Name) | Type, Colors, Condition,         Size: Single select```
      
-  
+
      
      - Users 
      
