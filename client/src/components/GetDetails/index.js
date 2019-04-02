@@ -67,9 +67,9 @@ class GetDetails extends Component {
         selected_condition: this.state.condition[0],
         selected_labelSize: this.state.labelSize[0],
         selected_age: this.state.age[0],
-      })
+      });
+    }
   }
-
 
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
