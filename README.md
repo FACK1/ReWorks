@@ -25,3 +25,87 @@ https://www.figma.com/proto/Z5SWa6KmOufBDFreUojx7mL0/ReWorks?node-id=409%3A503&s
  1. As a user, I want to suggest future features in the app. user story
  1. As a user, I want to contribute to environmental sustainability. user story
  1. As an admin, I want to see a spreadsheet of all users’ items.
+
+## Getting Started
+How to get a copy of the project up and running on your local machine.
+
+_Please ensure you have this software **installed and running** on your local machine **before** you attempt to run this webapp._
+
+**Node** (via nvm recomended) see: https://github.com/creationix/nvm
+
+**MongoDB** see: https://docs.mongodb.com/manual/installation/
+
+**Setup**
+
+**1. Clone the repo:**
+
+```$ git clone https://github.com/FACK1/ReWorks.git```
+
+**2. Install Dependencies**
+
+```
+$ cd ReWork
+$ npm i
+```
+
+**3. Install Dependencies in the client folder**
+```
+$ cd client
+$ npm i
+```
+
+**4. Add some more Environment Variables**
+
+Create a config.env file in the root.
+
+_Add thesepoint_down lines to the file, to make your local databases work, inserting your own username and password._
+
+```DB_URL = mongodb://localhost:password/username```
+
+_Add a 'Secret' for password encryption._
+
+```SECRET = "[SOMETHING SECRET]"```
+
+**5. Add even more .env Variables (S3 Amazon, Clarifai API, Airtable API)**
+
+**For S3 Amazon** (via https://aws.amazon.com/)
+
+_You will need to create an aws.amazon account, and grab the credentials needed for the code to work_
+
+```
+AWS_ACCESS_KEY_ID = "[YOUR_AWS_ACCESS_KEY_ID]"
+AWS_SECRET_ACCESS_KEY = "[YOUR_AWS_SECRET_ACCESS_KEY]"
+S3_BUCKET = "[YOUR_S3_BUCKET]"
+```
+
+
+**For Clarifai** (via www.clarifai.com)
+
+_You will need to create an Clarifai account --> create new project --> grab the credentials needed for the code to work_
+
+  ```Clarifai_API_KEY = "[YOUR_Clarifai_API_KEY]"```
+  
+  
+**For Airtable** (via www.airtable.com)
+
+_You will need to create an Airtable account --> create new project --> create work_space --> create tables --> grab the credentials needed for the code to work_
+
+  ```Airtable_API_KEY = "[YOUR_Airtable_API_KEY]"```
+  
+   - _**Tables Details**_
+     - Items
+     ```Name, Age: Single line text | Details: Long text | Image URL: URL | Image: Attachment | Users: Link to Users | Brand         : Link to Brands (Allow linking to multiple records) | Brand Names: Lookup (Brand : Name) | Type, Colors, Condition,         Size: Single select```
+     
+  
+     
+     - Users 
+     ```Name: Single line text| Feedback: Multiple select | Items: Link to Items (Allow linking to multiple records)```
+  
+     
+     - Brands
+     ```ID: Formula (RECORD_ID()) | Name: Single line text```
+   
+
+**6. Run the app**
+
+```$ npm run dev```
