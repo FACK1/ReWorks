@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Title from '../Shared/Title';
-import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import Item from '../Item';
 import Spinner from '../Shared/Spinner';
 
 import {
-  List, StyledHeader, StyledBottom, StyledLink, StyledCSVLink
+  List, StyledHeader, GButtonContainer, StyledBottom, StyledLink, StyledCSVLink
 } from './itemlist.style';
 
 class ItemList extends Component {
@@ -50,7 +49,7 @@ class ItemList extends Component {
         acc.names.push(element.name);
         acc.types.push(element.type);
           return acc;
-    }, { ItemIds: [], Sizes: [], Urls: [], Names: [], Types: [], });
+    }, { itemIds: [], sizes: [], urls: [], names: [], types: [], });
     const headers = [
   { label: "ItemId", key: "itemId" },
   { label: "Size", key: "size" },
@@ -87,7 +86,10 @@ class ItemList extends Component {
           })}
         </List>
         <StyledBottom>
-          <StyledCSVLink data={this.state.itemlist} headers={headers} filename='item_data.csv' >EXPORT AS CSV</StyledCSVLink>
+          <GButtonContainer>
+          <Button onclick={this.feedback} title="GIVE YOUR FEEDBACK" />
+            <StyledCSVLink data={this.state.itemlist} headers={headers} filename='item_data.csv' >EXPORT AS CSV</StyledCSVLink>
+          </GButtonContainer>
           <Footer />
         </StyledBottom>
       </React.Fragment>
