@@ -8,7 +8,7 @@ const Popup = ({
 }) => {
   {
     const dataHere = data
-      ? data.slice(5).map(ele => (
+      ? data.map(ele => (
         <CloseBtn key={ele} type="submit" value={`${name}.${ele}`} onClick={changeSelected}>
           {ele}
         </CloseBtn>
