@@ -47,7 +47,6 @@ class Form extends Component {
       labelSize,
       age,
     } = this.props;
-
     return (
       <StyledForm>
         <StyledImgCon>
@@ -68,7 +67,7 @@ class Form extends Component {
             <StyledSelect onChange={toggleOpen} value={`itemType.${selected_itemType}`}>
               {itemType.map(
                 item => (itemType.indexOf(item) >= 5 ? (
-                  <StyledOption key={item} value={item} hidden>
+                  <StyledOption key={item} value={`itemType.${item}`} hidden>
                     {item}
                   </StyledOption>
                 ) : (
@@ -83,7 +82,7 @@ class Form extends Component {
             <StyledSelect onChange={toggleOpen} value={`colors.${selected_colors}`}>
               {colors.map(
                 color => (colors.indexOf(color) >= 5 ? (
-                  <StyledOption key={color} value={color} hidden>
+                  <StyledOption key={color} value={`colors.${color}`} hidden>
                     {color}
                   </StyledOption>
                 ) : (
@@ -98,7 +97,7 @@ class Form extends Component {
             <StyledSelect onChange={toggleOpen} value={`brands.${selected_brands}`}>
               {brands.map(
                 brand => (brands.indexOf(brand) >= 5 ? (
-                  <StyledOption key={brand} value={brand} hidden>
+                  <StyledOption key={brand} value={`brands.${brand}`} hidden>
                     {brand}
                   </StyledOption>
                 ) : (
@@ -115,7 +114,7 @@ class Form extends Component {
             <StyledSelect onChange={toggleOpen} value={`condition.${selected_condition}`}>
               {condition.map(
                 cond => (condition.indexOf(cond) >= 5 ? (
-                  <StyledOption key={cond} value={cond} hidden>
+                  <StyledOption key={cond} value={`condition.${cond}`} hidden>
                     {cond}
                   </StyledOption>
                 ) : (
@@ -130,7 +129,7 @@ class Form extends Component {
             <StyledSelect onChange={toggleOpen} value={`labelSize.${selected_labelSize}`}>
               {labelSize.map(
                 size => (labelSize.indexOf(size) >= 5 ? (
-                  <StyledOption key={size} value={size} hidden>
+                  <StyledOption key={size} value={`labelSize.${size}`} hidden>
                     {size}
                   </StyledOption>
                 ) : (
@@ -145,7 +144,7 @@ class Form extends Component {
             <StyledSelect onChange={toggleOpen} value={`age.${selected_age}`}>
               {age.map(
                 time => (age.indexOf(time) >= 5 ? (
-                  <StyledOption key={time} value={time} hidden>
+                  <StyledOption key={time} value={`age.${time}`} hidden>
                     {time}
                   </StyledOption>
                 ) : (
@@ -168,6 +167,7 @@ class Form extends Component {
             toggleClose={toggleClose}
             changeSelected={changeSelected}
             name={[selectedCat]}
+            data={this.props[selectedCat]}
           />
         </ModalProvider>
       </StyledForm>
