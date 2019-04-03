@@ -103,7 +103,7 @@ class Feedback extends Component {
     this.setState({ currentFeedback });
   };
 
-  updateAirtaleFeedback = () => {
+  updateAirtableFeedback = () => {
     this.updateCurrentFeedback();
     const { prevFeedback, currentFeedback } = this.state;
     const changed = this.checkChange(prevFeedback, currentFeedback);
@@ -127,7 +127,7 @@ class Feedback extends Component {
 
     return (
       <React.Fragment>
-        <Title />
+        <Title {...this.props} />
         <Header title="What do you want to do with your items?" />
         {!loading && (
           <CheckboxContainer>
@@ -150,7 +150,7 @@ class Feedback extends Component {
             </ThanksText>
           )}
           <Button />
-          <GButton title="CONTINUE" onClick={this.updateAirtaleFeedback} />
+          <GButton title="SAVE" onClick={this.updateAirtableFeedback} />
           <Footer />
         </BottomContainer>
       </React.Fragment>

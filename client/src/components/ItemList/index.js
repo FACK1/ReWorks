@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Title from '../Shared/Title';
 import GButton from '../Shared/GreenButton';
+import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import Item from '../Item';
+import Spinner from '../Shared/Spinner';
+
 import {
   List, StyledHeader, StyledBottom, StyledLink, StyledCSVLink
 } from './itemlist.style';
@@ -11,13 +14,14 @@ import {
 class ItemList extends Component {
   state = {
     itemlist: [],
+    loading: true,
   };
 
 
   componentDidMount() {
     axios
       .get('/items')
-      .then(({ data }) => this.setState({ itemlist: data.data }))
+      .then(({ data }) => this.setState({ itemlist: data.data, loading: false }))
       .catch(err => console.log(err));
   }
 
@@ -30,6 +34,11 @@ class ItemList extends Component {
   addNewItem = () => {
     const { history } = this.props;
     history.push('/upload-photo');
+  };
+
+  feedback = () => {
+    const { history } = this.props;
+    history.push('/feedback');
   };
 
   render() {
@@ -52,12 +61,13 @@ class ItemList extends Component {
 
     return (
       <React.Fragment>
-        <Title />
+        <Title {...this.props} />
         <StyledHeader>Your Items</StyledHeader>
         <List>
           <StyledLink type="button" onClick={this.addNewItem}>
             + ADD NEW ITEM
           </StyledLink>
+          {this.state.loading && <Spinner />}
           {this.state.itemlist.map((item, index) => {
             const {
               itemId, color, type, brand, size, url,

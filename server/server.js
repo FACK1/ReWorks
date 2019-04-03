@@ -2,7 +2,7 @@ const db = require('./database/dbConfig/dbConnection.js');
 const app = require('./app');
 require('env2')('config.env');
 
-app.set('PORT', process.env.PORT);
+app.set('PORT', process.env.PORT || 3003);
 
 db.on('connected', () => {
   app.listen(app.get('PORT'), () => {
