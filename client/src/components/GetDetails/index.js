@@ -6,6 +6,7 @@ import Form from '../Shared/Form';
 import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
+import data from '../../data/data.json';
 
 class GetDetails extends Component {
   state = {
@@ -17,38 +18,12 @@ class GetDetails extends Component {
     selected_condition: '',
     selected_labelSize: '',
     selected_age: '',
-    itemType: [
-      'shirt',
-      'trousers',
-      'leggings',
-      'yoga pants',
-      'button-down',
-      'hat',
-      'beanie',
-      'coat',
-    ],
-    colors: ['white', 'black', 'red', 'blue', 'green', 'limegreen', 'gray'],
-    brands: [
-      'cool',
-      'cooler',
-      'coolest',
-      'the coolest',
-      'THE coolest',
-      'THE COOLEST',
-      'THE ABSOLUTE COOLEST',
-    ],
-    condition: [
-      'new',
-      'worn once',
-      'worn less than five times',
-      'not worn at all',
-      'semi-new',
-      'not new at all',
-      'just no',
-      'totally nah',
-    ],
-    labelSize: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL', 'XXXXXL'],
-    age: ['one year', '6 months', '3 months', '1 months', '2 weeks', '4 weeks', '9 weeks'],
+    itemType: data.itemType,
+    colors: data.colors,
+    brands: data.brands,
+    condition: data.condition,
+    labelSize: data.labelSize,
+    age: data.age,
   }
 
   componentDidMount() {
