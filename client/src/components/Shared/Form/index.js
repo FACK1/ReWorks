@@ -65,7 +65,7 @@ class Form extends Component {
           </StyledLabels>
 
           <StyledItem>
-            <StyledSelect onChange={toggleOpen} value={selected_itemType}>
+            <StyledSelect onChange={toggleOpen} value={`itemType.${selected_itemType}`}>
               {itemType.map(
                 item => (itemType.indexOf(item) >= 5 ? (
                   <StyledOption key={item} value={item} hidden>
@@ -80,7 +80,7 @@ class Form extends Component {
               <StyledOption value="itemType.more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={toggleOpen} value={selected_colors}>
+            <StyledSelect onChange={toggleOpen} value={`colors.${selected_colors}`}>
               {colors.map(
                 color => (colors.indexOf(color) >= 5 ? (
                   <StyledOption key={color} value={color} hidden>
@@ -95,7 +95,7 @@ class Form extends Component {
               <StyledOption value="colors.more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={toggleOpen} value={selected_brands}>
+            <StyledSelect onChange={toggleOpen} value={`brands.${selected_brands}`}>
               {brands.map(
                 brand => (brands.indexOf(brand) >= 5 ? (
                   <StyledOption key={brand} value={brand} hidden>
@@ -112,7 +112,7 @@ class Form extends Component {
 
             <StyledInput type="text" name="brand" placeholder="brand" />
 
-            <StyledSelect onChange={toggleOpen} value={selected_condition}>
+            <StyledSelect onChange={toggleOpen} value={`condition.${selected_condition}`}>
               {condition.map(
                 cond => (condition.indexOf(cond) >= 5 ? (
                   <StyledOption key={cond} value={cond} hidden>
@@ -127,7 +127,7 @@ class Form extends Component {
               <StyledOption value="condition.more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={toggleOpen} value={selected_labelSize}>
+            <StyledSelect onChange={toggleOpen} value={`labelSize.${selected_labelSize}`}>
               {labelSize.map(
                 size => (labelSize.indexOf(size) >= 5 ? (
                   <StyledOption key={size} value={size} hidden>
@@ -142,7 +142,7 @@ class Form extends Component {
               <StyledOption value="labelSize.more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={toggleOpen} value={selected_age}>
+            <StyledSelect onChange={toggleOpen} value={`age.${selected_age}`}>
               {age.map(
                 time => (age.indexOf(time) >= 5 ? (
                   <StyledOption key={time} value={time} hidden>
