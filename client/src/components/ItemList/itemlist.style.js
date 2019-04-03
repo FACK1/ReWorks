@@ -35,22 +35,23 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-<<<<<<< HEAD
 export const StyledCSVLink = styled(CSVLink)`
-  display:flex;
-  justify-content:center;
-  background-color:#1ED390;
-  padding: 20px 0px;
-  width:45%;
-  margin-left:28%;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
-`
-=======
+font-size: 18px;
+font-family:'Assistant';
+background-color:#1ED390;
+padding: 20px 0px;
+color:white;
+border:none;
+text-decoration: none;
+font-weight: bold;
+width:45%;
+text-align:center;
+@media (max-width: 650px) {
+  font-size: 14px;
+}
+`;
+
 export const GButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
->>>>>>> master
