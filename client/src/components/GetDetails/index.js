@@ -14,6 +14,7 @@ class GetDetails extends Component {
   state = {
     isOpen: false,
     selectedCat: null,
+    selected_brands: { id: brands[0].id, name: brands[0].name },
     itemType,
     colors,
     brands,
@@ -27,10 +28,9 @@ class GetDetails extends Component {
     const apiColors = this.props.location.details.colors;
 
     this.setState({
-      selected_brands: this.state.brands[0],
-      selected_condition: this.state.condition[0],
-      selected_labelSize: this.state.labelSize[0],
-      selected_age: this.state.age[0],
+      selected_condition: condition[0],
+      selected_labelSize: labelSize[0],
+      selected_age: age[0],
     });
 
     if (apparel || apiColors) {
