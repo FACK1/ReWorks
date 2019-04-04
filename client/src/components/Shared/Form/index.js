@@ -34,7 +34,13 @@ class Form extends Component {
 
   render() {
     const {
-      image, toggleOpen, isOpen, selectedCat, toggleClose, changeSelected, selected_itemType,
+      image,
+      toggleOpen,
+      isOpen,
+      selectedCat,
+      toggleClose,
+      changeSelected,
+      selected_itemType,
       selected_colors,
       selected_brands,
       selected_condition,
@@ -48,10 +54,7 @@ class Form extends Component {
       condition,
       labelSize,
       age,
-      inputPrice,
-      inputDetails,
     } = this.props;
-
     return (
       <StyledForm>
         <StyledImgCon>
@@ -69,113 +72,101 @@ class Form extends Component {
           </StyledLabels>
 
           <StyledItem>
-            <StyledSelect onChange={toggleOpen} value={`itemType.${selected_itemType}`}>
-              {itemType.map(
-                item => (itemType.indexOf(item) >= 5 ? (
-                  <StyledOption key={item} value={item} hidden>
-                    {item}
-                  </StyledOption>
-                ) : (
-                  <StyledOption key={item} value={`itemType.${item}`}>
-                    {item}
-                  </StyledOption>
-                )),
-              )}
-              <StyledOption value="itemType.more">More...</StyledOption>
+            <StyledSelect onChange={toggleOpen} name="itemType" value={selected_itemType}>
+              {itemType.map(item => (itemType.indexOf(item) >= 5 ? (
+                <StyledOption key={item} value={item} hidden>
+                  {item}
+                </StyledOption>
+              ) : (
+                <StyledOption key={item} value={item}>
+                  {item}
+                </StyledOption>
+              )))}
+              <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={toggleOpen} value={`colors.${selected_colors}`}>
-              {colors.map(
-                color => (colors.indexOf(color) >= 5 ? (
-                  <StyledOption key={color} value={color} hidden>
-                    {color}
-                  </StyledOption>
-                ) : (
-                  <StyledOption key={color} value={`colors.${color}`}>
-                    {color}
-                  </StyledOption>
-                )),
-              )}
-              <StyledOption value="colors.more">More...</StyledOption>
+            <StyledSelect onChange={toggleOpen} name="colors" value={selected_colors}>
+              {colors.map(color => (colors.indexOf(color) >= 5 ? (
+                <StyledOption key={color} value={color} hidden>
+                  {color}
+                </StyledOption>
+              ) : (
+                <StyledOption key={color} value={color}>
+                  {color}
+                </StyledOption>
+              )))}
+              <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={toggleOpen} value={`brands.${selected_brands}`}>
-              {brands.map(
-                brand => (brands.indexOf(brand) >= 5 ? (
-                  <StyledOption key={brand.brandID} id={brand.brandID} value={`brands.${brand.brandName}`} hidden>
-                    {brand.brandName}
-                  </StyledOption>
-                ) : (
-                  <StyledOption key={brand.brandID} value={`brands.${brand.brandName}`}>
-                    {brand.brandName}
-                  </StyledOption>
-                )),
-              )}
-              <StyledOption value="brands.more">More...</StyledOption>
+            <StyledSelect onChange={toggleOpen} name="brands" value={selected_brands.name}>
+              {brands.map(brand => (brands.indexOf(brand) >= 5 ? (
+                <StyledOption key={brand.name} id={brand.id} value={brand.name} hidden>
+                  {brand.name}
+                </StyledOption>
+              ) : (
+                <StyledOption key={brand.name} id={brand.id} value={brand.name}>
+                  {brand.name}
+                </StyledOption>
+              )))}
+              <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
             <StyledInput type="text" name="brand" placeholder="brand" />
 
-            <StyledSelect onChange={toggleOpen} value={`condition.${selected_condition}`}>
-              {condition.map(
-                cond => (condition.indexOf(cond) >= 5 ? (
-                  <StyledOption key={cond} value={cond} hidden>
-                    {cond}
-                  </StyledOption>
-                ) : (
-                  <StyledOption key={cond} value={`condition.${cond}`}>
-                    {cond}
-                  </StyledOption>
-                )),
-              )}
-              <StyledOption value="condition.more">More...</StyledOption>
+            <StyledSelect onChange={toggleOpen} name="condition" value={selected_condition}>
+              {condition.map(cond => (condition.indexOf(cond) >= 5 ? (
+                <StyledOption key={cond} value={cond} hidden>
+                  {cond}
+                </StyledOption>
+              ) : (
+                <StyledOption key={cond} value={cond}>
+                  {cond}
+                </StyledOption>
+              )))}
+              <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={toggleOpen} value={`labelSize.${selected_labelSize}`}>
-              {labelSize.map(
-                size => (labelSize.indexOf(size) >= 5 ? (
-                  <StyledOption key={size} value={size} hidden>
-                    {size}
-                  </StyledOption>
-                ) : (
-                  <StyledOption key={size} value={`labelSize.${size}`}>
-                    {size}
-                  </StyledOption>
-                )),
-              )}
-              <StyledOption value="labelSize.more">More...</StyledOption>
+            <StyledSelect onChange={toggleOpen} name="labelSize" value={selected_labelSize}>
+              {labelSize.map(size => (labelSize.indexOf(size) >= 5 ? (
+                <StyledOption key={size} value={size} hidden>
+                  {size}
+                </StyledOption>
+              ) : (
+                <StyledOption key={size} value={size}>
+                  {size}
+                </StyledOption>
+              )))}
+              <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={toggleOpen} value={`age.${selected_age}`}>
-              {age.map(
-                time => (age.indexOf(time) >= 5 ? (
-                  <StyledOption key={time} value={time} hidden>
-                    {time}
-                  </StyledOption>
-                ) : (
-                  <StyledOption key={time} value={`age.${time}`}>
-                    {time}
-                  </StyledOption>
-                )),
-              )}
-              <StyledOption value="age.more">More...</StyledOption>
+            <StyledSelect onChange={toggleOpen} name="age" value={selected_age}>
+              {age.map(time => (age.indexOf(time) >= 5 ? (
+                <StyledOption key={time} value={time} hidden>
+                  {time}
+                </StyledOption>
+              ) : (
+                <StyledOption key={time} value={time}>
+                  {time}
+                </StyledOption>
+              )))}
+              <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
             <StyledInput
+              onChange={toggleOpen}
               type="text"
               name="price"
-              placeholder="price"
               value={selected_price}
-              onChange={inputPrice}
+              placeholder="price"
             />
           </StyledItem>
         </StyledDiv>
 
         <StyledTextarea
-          name="extra"
-          placeholder="More .e.g. What do you love about it?"
+          onChange={toggleOpen}
+          name="details"
           value={selected_details}
-          onChange={inputDetails}
+          placeholder="More .e.g. What do you love about it?"
         />
         <ModalProvider>
           <Popup
@@ -183,6 +174,7 @@ class Form extends Component {
             toggleClose={toggleClose}
             changeSelected={changeSelected}
             name={[selectedCat]}
+            data={this.props[selectedCat]}
           />
         </ModalProvider>
       </StyledForm>
