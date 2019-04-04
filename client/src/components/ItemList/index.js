@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import axios from "axios";
-import Title from "../Shared/Title";
-import Button from "../Shared/Button";
-import Footer from "../Shared/Footer";
-import Item from "../Item";
-import Spinner from "../Shared/Spinner";
+import React, { Component } from 'react';
+import axios from 'axios';
+import Title from '../Shared/Title';
+import Button from '../Shared/Button';
+import Footer from '../Shared/Footer';
+import Item from '../Item';
+import Spinner from '../Shared/Spinner';
 
 import {
   List,
@@ -12,21 +12,19 @@ import {
   GButtonContainer,
   StyledBottom,
   StyledLink,
-  StyledCSVLink
-} from "./itemlist.style";
+  StyledCSVLink,
+} from './itemlist.style';
 
 class ItemList extends Component {
   state = {
     itemlist: [],
-    loading: true
+    loading: true,
   };
 
   componentDidMount() {
     axios
-      .get("/items")
-      .then(({ data }) =>
-        this.setState({ itemlist: data.data, loading: false })
-      )
+      .get('/items')
+      .then(({ data }) => this.setState({ itemlist: data.data, loading: false }))
       .catch(err => console.log(err));
   }
 
@@ -38,12 +36,12 @@ class ItemList extends Component {
 
   addNewItem = () => {
     const { history } = this.props;
-    history.push("/upload-photo");
+    history.push('/upload-photo');
   };
 
   feedback = () => {
     const { history } = this.props;
-    history.push("/feedback");
+    history.push('/feedback');
   };
 
   render() {
@@ -56,14 +54,16 @@ class ItemList extends Component {
         acc.types.push(element.type);
         return acc;
       },
-      { itemIds: [], sizes: [], urls: [], names: [], types: [] }
+      {
+        itemIds: [], sizes: [], urls: [], names: [], types: [],
+      },
     );
     const headers = [
-      { label: "ItemId", key: "itemId" },
-      { label: "Size", key: "size" },
-      { label: "Link", key: "url" },
-      { label: "Name", key: "name" },
-      { label: "Type", key: "type" }
+      { label: 'ItemId', key: 'itemId' },
+      { label: 'Size', key: 'size' },
+      { label: 'Link', key: 'url' },
+      { label: 'Name', key: 'name' },
+      { label: 'Type', key: 'type' },
     ];
 
     return (
@@ -76,7 +76,9 @@ class ItemList extends Component {
           </StyledLink>
           {this.state.loading && <Spinner />}
           {this.state.itemlist.map((item, index) => {
-            const { itemId, color, type, brand, size, url } = item;
+            const {
+              itemId, color, type, brand, size, url,
+            } = item;
             return (
               <Item
                 key={itemId}
