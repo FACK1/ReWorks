@@ -71,12 +71,13 @@ class GetDetails extends Component {
   };
 
   toggleOpen = (e) => {
-    const clicked = e.target.value.split('.');
-    if (clicked[1] === 'more') {
-      this.setState({ isOpen: true, selectedCat: clicked[0] });
+    const { value, name, id } = e.target;
+    if (value === 'more') {
+      this.setState({ isOpen: true, selectedCat: name });
+    } else if (name === 'brands') {
+      this.setState({ [`selected_${name}`]: { id, name: value } });
     } else {
-      const selected = `selected_${clicked[0]}`;
-      this.setState({ [selected]: clicked[1] });
+      this.setState({ [`selected_${name}`]: value });
     }
   };
 
@@ -87,8 +88,13 @@ class GetDetails extends Component {
 
   changeSelected = (e) => {
     e.preventDefault();
+    const { value, name, id } = e.target;
     const selected = `selected_${this.state.selectedCat}`;
-    this.setState({ [selected]: e.target.value.split('.')[1], isOpen: false });
+    if (name === 'brands') {
+      this.setState({ [selected]: { id, name: value }, isOpen: false });
+    } else {
+      this.setState({ [selected]: value, isOpen: false });
+    }
   };
 
   render() {
