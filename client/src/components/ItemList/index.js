@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Title from '../Shared/Title';
-import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import Item from '../Item';
 import Spinner from '../Shared/Spinner';
 
 import {
-  List, StyledHeader, StyledBottom, StyledLink, GButtonContainer,
+  List,
+  StyledHeader,
+  GButtonContainer,
+  StyledBottom,
+  StyledLink,
+  StyledCSVLink,
 } from './itemlist.style';
 
 class ItemList extends Component {
@@ -41,6 +45,27 @@ class ItemList extends Component {
   };
 
   render() {
+    const reducedData = this.state.itemlist.reduce(
+      (acc, element) => {
+        acc.itemIds.push(element.itemId);
+        acc.sizes.push(element.size);
+        acc.urls.push(element.url);
+        acc.names.push(element.name);
+        acc.types.push(element.type);
+        return acc;
+      },
+      {
+        itemIds: [], sizes: [], urls: [], names: [], types: [],
+      },
+    );
+    const headers = [
+      { label: 'ItemId', key: 'itemId' },
+      { label: 'Size', key: 'size' },
+      { label: 'Link', key: 'url' },
+      { label: 'Name', key: 'name' },
+      { label: 'Type', key: 'type' },
+    ];
+
     return (
       <React.Fragment>
         <Title {...this.props} />
@@ -70,8 +95,14 @@ class ItemList extends Component {
         </List>
         <StyledBottom>
           <GButtonContainer>
-            <Button title="EXPORT AS CSV" />
-            <GButton onClick={this.feedback} title="GIVE YOUR FEEDBACK" />
+            <Button onclick={this.feedback} title="GIVE YOUR FEEDBACK" />
+            <StyledCSVLink
+              data={this.state.itemlist}
+              headers={headers}
+              filename="item_data.csv"
+            >
+              EXPORT AS CSV
+            </StyledCSVLink>
           </GButtonContainer>
           <Footer />
         </StyledBottom>

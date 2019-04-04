@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 
-
 export const FatherContainer = styled.div`
 text-align: center;
 height:100vh;

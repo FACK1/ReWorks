@@ -4,10 +4,11 @@ import StyledButton from './button.style';
 
 
 const Button = (props) => {
-  if (props.title === 'EXPORT AS CSV') {
+  if (props.title === 'GIVE YOUR FEEDBACK') {
     return (
       <StyledButton
         type="button"
+        onClick={props.onclick}
       >
         {props.title}
       </StyledButton>
