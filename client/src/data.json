@@ -1,0 +1,51 @@
+{
+  "brands": [
+    { "id": "recqts81sMcIoFMMJ", "name": "Zara" },
+    { "id": "rec7TBErSXcEEDvIk", "name": "Nike" },
+    { "id": "recMr78NZa2akmLW0", "name": "Adidas" }
+  ],
+  "colors": ["white", "black", "red", "blue", "green", "limegreen", "gray"],
+  "itemType": [
+    "T-shirt",
+    "Shirt",
+    "Trousers",
+    "Leggings",
+    "Yoga pants",
+    "Button-down",
+    "Hat",
+    "Beanie",
+    "Coat",
+    "Shorts",
+    "Jumpsuit",
+    "Tracksuit"
+  ],
+  "condition": [
+    "I-II",
+    "I",
+    "II",
+    "III",
+    "Antique",
+    "Knackered",
+    "New",
+    "Unissued",
+    "Aged / Grade I",
+    "Supergrade",
+    "Scrap"
+  ],
+  "age": ["one year", "6 months", "3 months", "1 months", "2 weeks", "4 weeks", "9 weeks"],
+  "labelSize": [
+    "Small",
+    "Average",
+    "Waste",
+    "Big",
+    "Youths",
+    "Kids",
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+    "XXL",
+    "XXXL"
+  ]
+}
