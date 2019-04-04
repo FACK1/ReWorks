@@ -46,6 +46,8 @@ class Form extends Component {
       selected_condition,
       selected_labelSize,
       selected_age,
+      selected_price,
+      selected_details,
       itemType,
       colors,
       brands,
@@ -150,11 +152,22 @@ class Form extends Component {
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledInput type="text" name="price" placeholder="price" />
+            <StyledInput
+              onChange={toggleOpen}
+              type="text"
+              name="price"
+              value={selected_price}
+              placeholder="price"
+            />
           </StyledItem>
         </StyledDiv>
 
-        <StyledTextarea name="extra" placeholder="More .e.g. What do you love about it?" />
+        <StyledTextarea
+          onChange={toggleOpen}
+          name="details"
+          value={selected_details}
+          placeholder="More .e.g. What do you love about it?"
+        />
         <ModalProvider>
           <Popup
             open={isOpen}

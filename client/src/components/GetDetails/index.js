@@ -31,6 +31,8 @@ class GetDetails extends Component {
       selected_condition: condition[0],
       selected_labelSize: labelSize[0],
       selected_age: age[0],
+      selected_price: '',
+      selected_details: '',
     });
 
     if (apparel || apiColors) {
@@ -99,6 +101,7 @@ class GetDetails extends Component {
 
   render() {
     const { image_url } = this.props.location.details;
+
     return (
       <React.Fragment>
         <Title {...this.props} />
