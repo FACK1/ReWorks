@@ -38,14 +38,16 @@
     "nodemon": "^1.18.10",
     "react": "^16.8.6",
     "react-csv": "^1.1.1",
+    "react-dom": "^16.8.6",
     "react-loading": "^2.0.3",
-    "react-router-dom": "^5.0.0"
+    "react-router-dom": "^5.0.0",
+    "styled-components": "^4.2.0",
+    "styled-react-modal": "^1.2.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
