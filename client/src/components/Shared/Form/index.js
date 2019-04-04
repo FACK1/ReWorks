@@ -40,12 +40,16 @@ class Form extends Component {
       selected_condition,
       selected_labelSize,
       selected_age,
+      selected_price,
+      selected_details,
       itemType,
       colors,
       brands,
       condition,
       labelSize,
       age,
+      inputPrice,
+      inputDetails,
     } = this.props;
 
     return (
@@ -98,12 +102,12 @@ class Form extends Component {
             <StyledSelect onChange={toggleOpen} value={`brands.${selected_brands}`}>
               {brands.map(
                 brand => (brands.indexOf(brand) >= 5 ? (
-                  <StyledOption key={brand} value={brand} hidden>
-                    {brand}
+                  <StyledOption key={brand.brandID} id={brand.brandID} value={`brands.${brand.brandName}`} hidden>
+                    {brand.brandName}
                   </StyledOption>
                 ) : (
-                  <StyledOption key={brand} value={`brands.${brand}`}>
-                    {brand}
+                  <StyledOption key={brand.brandID} value={`brands.${brand.brandName}`}>
+                    {brand.brandName}
                   </StyledOption>
                 )),
               )}
@@ -157,11 +161,22 @@ class Form extends Component {
               <StyledOption value="age.more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledInput type="text" name="price" placeholder="price" />
+            <StyledInput
+              type="text"
+              name="price"
+              placeholder="price"
+              value={selected_price}
+              onChange={inputPrice}
+            />
           </StyledItem>
         </StyledDiv>
 
-        <StyledTextarea name="extra" placeholder="More .e.g. What do you love about it?" />
+        <StyledTextarea
+          name="extra"
+          placeholder="More .e.g. What do you love about it?"
+          value={selected_details}
+          onChange={inputDetails}
+        />
         <ModalProvider>
           <Popup
             open={isOpen}
