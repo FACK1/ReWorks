@@ -6,53 +6,26 @@ import Form from '../Shared/Form';
 import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
+import {
+  brands, colors, itemType, condition, labelSize, age,
+} from '../../data';
 
 class GetDetails extends Component {
   state = {
     isOpen: false,
     selectedCat: null,
-    selected_itemType: '',
-    selected_colors: '',
-    selected_brands: '',
-    selected_condition: '',
-    selected_labelSize: '',
-    selected_age: '',
-    itemType: [
-      'shirt',
-      'trousers',
-      'leggings',
-      'yoga pants',
-      'button-down',
-      'hat',
-      'beanie',
-      'coat',
-    ],
-    colors: ['white', 'black', 'red', 'blue', 'green', 'limegreen', 'gray'],
-    brands: [
-      'cool',
-      'cooler',
-      'coolest',
-      'the coolest',
-      'THE coolest',
-      'THE COOLEST',
-      'THE ABSOLUTE COOLEST',
-    ],
-    condition: [
-      'new',
-      'worn once',
-      'worn less than five times',
-      'not worn at all',
-      'semi-new',
-      'not new at all',
-      'just no',
-      'totally nah',
-    ],
-    labelSize: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL', 'XXXXXL'],
-    age: ['one year', '6 months', '3 months', '1 months', '2 weeks', '4 weeks', '9 weeks'],
-  }
+    itemType,
+    colors,
+    brands,
+    condition,
+    labelSize,
+    age,
+  };
 
   componentDidMount() {
-    const { apparel, colors } = this.props.location.details;
+    const { apparel } = this.props.location.details;
+    const apiColors = this.props.location.details.colors;
+
     this.setState({
       selected_brands: this.state.brands[0],
       selected_condition: this.state.condition[0],
@@ -60,32 +33,31 @@ class GetDetails extends Component {
       selected_age: this.state.age[0],
     });
 
-    if (apparel || colors) {
-      const colours = colors.data.map(ele => ele.name);
+    if (apparel || apiColors) {
+      const colours = apiColors.data.map(ele => ele.name);
       this.setState({
-        colors: [...colours, ...this.state.colors],
-        selected_colors: colors.data[0].name,
+        colors: [...colours, ...colors],
+        selected_colors: colours[0],
       });
 
       if (apparel && apparel.data.length > 0) {
         const outfit = apparel.data.map(ele => ele.tag_name);
         this.setState({
-          itemType: [...outfit, ...this.state.itemType],
-          selected_itemType: apparel.data[0].tag_name,
+          itemType: [...outfit, ...itemType],
+          selected_itemType: outfit[0],
         });
       } else {
         this.setState({
-          selected_itemType: this.state.itemType[0],
+          selected_itemType: itemType[0],
         });
       }
     } else {
       this.setState({
-        selected_colors: this.state.colors[0],
-        selected_itemType: this.state.itemType[0],
+        selected_colors: colors[0],
+        selected_itemType: itemType[0],
       });
     }
   }
-
 
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
