@@ -6,86 +6,60 @@ import Form from '../Shared/Form';
 import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
+import {
+  brands, colors, itemType, condition, labelSize, age,
+} from '../../data';
 
 class GetDetails extends Component {
   state = {
     isOpen: false,
     selectedCat: null,
-    selected_itemType: '',
-    selected_colors: '',
-    selected_brands: '',
-    selected_condition: '',
-    selected_labelSize: '',
-    selected_age: '',
-    itemType: [
-      'shirt',
-      'trousers',
-      'leggings',
-      'yoga pants',
-      'button-down',
-      'hat',
-      'beanie',
-      'coat',
-    ],
-    colors: ['white', 'black', 'red', 'blue', 'green', 'limegreen', 'gray'],
-    brands: [
-      'cool',
-      'cooler',
-      'coolest',
-      'the coolest',
-      'THE coolest',
-      'THE COOLEST',
-      'THE ABSOLUTE COOLEST',
-    ],
-    condition: [
-      'new',
-      'worn once',
-      'worn less than five times',
-      'not worn at all',
-      'semi-new',
-      'not new at all',
-      'just no',
-      'totally nah',
-    ],
-    labelSize: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL', 'XXXXXL'],
-    age: ['one year', '6 months', '3 months', '1 months', '2 weeks', '4 weeks', '9 weeks'],
-  }
+    selected_brands: { id: brands[0].id, name: brands[0].name },
+    itemType,
+    colors,
+    brands,
+    condition,
+    labelSize,
+    age,
+  };
 
   componentDidMount() {
-    const { apparel, colors } = this.props.location.details;
+    const { apparel } = this.props.location.details;
+    const apiColors = this.props.location.details.colors;
+
     this.setState({
-      selected_brands: this.state.brands[0],
-      selected_condition: this.state.condition[0],
-      selected_labelSize: this.state.labelSize[0],
-      selected_age: this.state.age[0],
+      selected_condition: condition[0],
+      selected_labelSize: labelSize[0],
+      selected_age: age[0],
+      selected_price: '',
+      selected_details: '',
     });
 
-    if (apparel || colors) {
-      const colours = colors.data.map(ele => ele.name);
+    if (apparel || apiColors) {
+      const colours = apiColors.data.map(ele => ele.name);
       this.setState({
-        colors: [...colours, ...this.state.colors],
-        selected_colors: colors.data[0].name,
+        colors: [...colours, ...colors],
+        selected_colors: colours[0],
       });
 
       if (apparel && apparel.data.length > 0) {
         const outfit = apparel.data.map(ele => ele.tag_name);
         this.setState({
-          itemType: [...outfit, ...this.state.itemType],
-          selected_itemType: apparel.data[0].tag_name,
+          itemType: [...outfit, ...itemType],
+          selected_itemType: outfit[0],
         });
       } else {
         this.setState({
-          selected_itemType: this.state.itemType[0],
+          selected_itemType: itemType[0],
         });
       }
     } else {
       this.setState({
-        selected_colors: this.state.colors[0],
-        selected_itemType: this.state.itemType[0],
+        selected_colors: colors[0],
+        selected_itemType: itemType[0],
       });
     }
   }
-
 
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
@@ -99,12 +73,13 @@ class GetDetails extends Component {
   };
 
   toggleOpen = (e) => {
-    const clicked = e.target.value.split('.');
-    if (clicked[1] === 'more') {
-      this.setState({ isOpen: true, selectedCat: clicked[0] });
+    const { value, name, id } = e.target;
+    if (value === 'more') {
+      this.setState({ isOpen: true, selectedCat: name });
+    } else if (name === 'brands') {
+      this.setState({ [`selected_${name}`]: { id, name: value } });
     } else {
-      const selected = `selected_${clicked[0]}`;
-      this.setState({ [selected]: clicked[1] });
+      this.setState({ [`selected_${name}`]: value });
     }
   };
 
@@ -115,12 +90,18 @@ class GetDetails extends Component {
 
   changeSelected = (e) => {
     e.preventDefault();
+    const { value, name, id } = e.target;
     const selected = `selected_${this.state.selectedCat}`;
-    this.setState({ [selected]: e.target.value.split('.')[1], isOpen: false });
+    if (name === 'brands') {
+      this.setState({ [selected]: { id, name: value }, isOpen: false });
+    } else {
+      this.setState({ [selected]: value, isOpen: false });
+    }
   };
 
   render() {
     const { image_url } = this.props.location.details;
+
     return (
       <React.Fragment>
         <Title {...this.props} />
