@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { CSVLink } from "react-csv";
 
 export const List = styled.div`
@@ -37,19 +37,19 @@ export const StyledLink = styled(Link)`
 
 export const StyledCSVLink = styled(CSVLink)`
   font-size: 18px;
-  font-family:'Assistant';
-  background-color:#1ED390;
+  font-family: "Assistant";
+  background-color: #1ed390;
   padding: 20px 0px;
-  color:white;
-  border:none;
+  color: white;
+  border: none;
   text-decoration: none;
   font-weight: bold;
-  width:45%;
-  text-align:center;
+  width: 45%;
+  text-align: center;
   @media (max-width: 650px) {
     font-size: 14px;
   }
-  `;
+`;
 
 export const GButtonContainer = styled.div`
   display: flex;
