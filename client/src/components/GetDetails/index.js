@@ -14,8 +14,11 @@ class GetDetails extends Component {
     selected_itemType: '',
     selected_colors: '',
     selected_brands: '',
+    selected_brandsID: '',
     selected_condition: '',
     selected_labelSize: '',
+    selected_price: '',
+    selected_details: '',
     selected_age: '',
     itemType: [
       'shirt',
@@ -84,16 +87,37 @@ class GetDetails extends Component {
         selected_itemType: this.state.itemType[0],
       });
     }
+    axios.get('/getbrands')
+      .then(({ data }) => {
+        if (data.success) {
+          this.setState({ brands: data.data });
+        }
+      });
   }
 
 
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
       const { history } = this.props;
+      const inputs = {
+        type: this.state.selected_itemType,
+        age: this.state.selected_age,
+        price: this.state.selected_price,
+        color: this.state.selected_colors,
+        condition: this.state.selected_condition,
+        size: this.state.selected_labelSize,
+        url: this.props.location.details.image_url,
+        details: this.state.selected_details,
+        brandId: this.state.selected_brandsID,
+      };
       if (cookie) {
-        history.push({ pathname: '/item-list', logged });
+        axios.post('/add-item', inputs).then(({ data }) => {
+          if (data.success) {
+            history.push({ pathname: '/item-list', logged });
+          }
+        });
       } else {
-        history.push('/login-form');
+        history.push({ pathname: '/login-form', data: inputs });
       }
     });
   };
@@ -105,8 +129,27 @@ class GetDetails extends Component {
     } else {
       const selected = `selected_${clicked[0]}`;
       this.setState({ [selected]: clicked[1] });
+      if (selected === 'selected_brands') {
+        this.state.brands.forEach((brand) => {
+          if (brand.brandName === clicked[1]) {
+            this.setState({ selected_brandsID: brand.brandID });
+          }
+        });
+      }
     }
   };
+
+  inputPrice=(e) => {
+    this.setState({
+      selected_price: e.target.value,
+    });
+  }
+
+  inputDetails=(e) => {
+    this.setState({
+      selected_details: e.target.value,
+    });
+  }
 
   toggleClose = (e) => {
     e.preventDefault();
@@ -121,6 +164,7 @@ class GetDetails extends Component {
 
   render() {
     const { image_url } = this.props.location.details;
+
     return (
       <React.Fragment>
         <Title {...this.props} />
@@ -131,6 +175,8 @@ class GetDetails extends Component {
           toggleOpen={this.toggleOpen}
           toggleClose={this.toggleClose}
           changeSelected={this.changeSelected}
+          inputPrice={this.inputPrice}
+          inputDetails={this.inputDetails}
         />
         <Button />
         <GButton title="CONTINUE" onClick={this.continue} />
