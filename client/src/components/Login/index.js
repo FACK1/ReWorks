@@ -57,15 +57,25 @@ class Login extends Component {
     return isError;
   };
 
-
   login = () => {
     const err = this.validate();
     if (!err) {
       const { history } = this.props;
       const inputs = { username: this.state.username, password: this.state.password };
+      const detailsInputs = this.props.location.data;
       axios.post('/login', inputs).then(({ data }) => {
         if (data.success) {
-          history.push('/item-list');
+          if (detailsInputs) {
+            axios.post('/add-item', detailsInputs).then((addData) => {
+              if (addData.data.success) {
+                history.push('/item-list');
+              } else {
+                history.push('/error');
+              }
+            });
+          } else {
+            history.push('/item-list');
+          }
         } else {
           this.setState({ passwordError: 'Username or password is incorrect.', isErrorUsername: true, isErrorPassword: true });
         }
@@ -75,7 +85,7 @@ class Login extends Component {
 
 goSignUp = () => {
   const { history } = this.props;
-  history.push('/signup-form');
+  history.push({ pathname: '/signup-form', data: this.props.location.data });
 }
 
 render() {
