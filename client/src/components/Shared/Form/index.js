@@ -100,11 +100,18 @@ class Form extends Component {
 
             <StyledSelect onChange={toggleOpen} name="brands" value={selected_brands.name}>
               {brands.map(brand => (brands.indexOf(brand) >= 5 ? (
-                <StyledOption key={brand.name} id={brand.id} value={brand.name} hidden>
+                <StyledOption
+                  key={brand.name}
+                  value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
+                  hidden
+                >
                   {brand.name}
                 </StyledOption>
               ) : (
-                <StyledOption key={brand.name} id={brand.id} value={brand.name}>
+                <StyledOption
+                  key={brand.name}
+                  value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
+                >
                   {brand.name}
                 </StyledOption>
               )))}
