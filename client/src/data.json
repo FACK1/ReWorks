@@ -1,8 +1,8 @@
 {
   "brands": [
-    { "id": "recqts81sMcIoFMMJ", "name": "Zara" },
-    { "id": "rec7TBErSXcEEDvIk", "name": "Nike" },
-    { "id": "recMr78NZa2akmLW0", "name": "Adidas" }
+    { "id": "recmsDfprpTSlY6Nz", "name": "Puma" },
+    { "id": "recMr78NZa2akmLW0", "name": "ASOS" },
+    { "id": "recqts81sMcIoFMMJ", "name": "Adidas" }
   ],
   "colors": ["white", "black", "red", "blue", "green", "limegreen", "gray"],
   "itemType": [
@@ -38,7 +38,7 @@
     "1 - 3 mos",
     "4 - 7 mos",
     "8 - 11 mos",
-  	"1 - 3 yrs",
+    "1 - 3 yrs",
     "3 - 6 yrs",
     "6 - 9 yrs",
     "10+ yrs"
