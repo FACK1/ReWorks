@@ -6,13 +6,13 @@ export const ThanksText = styled.p`
   text-align: center;
   margin-left: 30px;
   margin-right: 30px;
-  margin-top: 15px;
   margin-bottom: 20px;
 `;
 
 export const CheckboxContainer = styled.div`
   margin-top: 30px;
   display: flex;
+  margin-bottom: 38px;
   flex-flow: column wrap;
   font-size: 25px;
 `;
