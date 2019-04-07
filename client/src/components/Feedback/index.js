@@ -8,7 +8,7 @@ import Footer from '../Shared/Footer';
 import Checkbox from '../Shared/Checkbox';
 import Spinner from '../Shared/Spinner';
 
-import { ThanksText, CheckboxContainer, BottomContainer } from './feedback.style';
+import { ThanksText, CheckboxContainer, BottomContainer, Para} from './feedback.style';
 
 class Feedback extends Component {
   state = {
