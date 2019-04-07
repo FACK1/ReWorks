@@ -18,10 +18,6 @@ import {
 } from './signup.style';
 
 class signUp extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     username: '',
     password: '',
