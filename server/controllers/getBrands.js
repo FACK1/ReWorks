@@ -17,7 +17,7 @@ exports.getBrands = (req, res) => {
       records.forEach((record) => {
         data.push({
           brandName: record.get('Name'),
-          brandID: record.id,
+          id: record.id,
         });
       });
       fetchNextPage();
