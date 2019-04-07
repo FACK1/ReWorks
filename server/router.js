@@ -15,11 +15,15 @@ const { getItems } = require('./controllers/getItems.js');
 const { addFeedback } = require('./controllers/addFeedback.js');
 const { getFeedback } = require('./controllers/getFeedback.js');
 const { checkCookie } = require('./controllers/checkCookie.js');
+const { getTypes } = require('./controllers/getTypes.js');
+
 
 router.post('/add-to-amazon', uploadPhoto, clarifaiAPIs);
 router.post('/login', login);
 router.get('/logout', logout);
 router.post('/signup', signUp);
+router.get('/getTypes', getTypes);
+
 
 router.post('/add-item', auth, addItem);
 router.get('/delete-item/:id', auth, deleteItem);
