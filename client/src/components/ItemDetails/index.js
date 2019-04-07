@@ -68,6 +68,35 @@ class ItemDetails extends Component {
       .catch(() => history.push('/error'));
   };
 
+  toggleOpen = (e) => {
+    const { value, name } = e.target;
+    if (value === 'more') {
+      this.setState({ isOpen: true, selectedCat: name });
+    } else if (name === 'brands') {
+      const value1 = JSON.parse(value);
+      this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
+    } else {
+      this.setState({ [`selected_${name}`]: value });
+    }
+  };
+
+  toggleClose = (e) => {
+    e.preventDefault();
+    this.setState({ isOpen: false });
+  };
+
+  changeSelected = (e) => {
+    e.preventDefault();
+    const { value, name, id } = e.target;
+    const selected = `selected_${this.state.selectedCat}`;
+    if (name === 'brands') {
+      const value1 = JSON.parse(value);
+      this.setState({ [selected]: { id, brandName: value1.name, name: value }, isOpen: false });
+    } else {
+      this.setState({ [selected]: value, isOpen: false });
+    }
+  };
+
   render() {
     const { url } = this.state.itemDetails;
 
