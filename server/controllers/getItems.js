@@ -26,11 +26,11 @@ exports.getItems = (req, res) => {
               name: record.get('Name'),
               price: record.get('Price'),
               color: record.get('Color'),
-              brand: record.get('Brand Names'),
+              brand: record.get('Brand Names')[0],
               condition: record.get('Condition'),
               age: record.get('Age'),
               details: record.get('Details'),
-              brandId: record.get('Brand'),
+              brandId: record.get('Brand')[0],
               colors: record.get('Colors'),
             });
           }
