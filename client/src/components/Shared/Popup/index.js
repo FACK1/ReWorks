@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StyledModal, Category, CloseBtn, DataContainer,
+  StyledModal, Category, CloseBtn, DataContainer, ChoiceBtn,
 } from './popup.style';
 
 const Popup = ({
@@ -11,24 +11,24 @@ const Popup = ({
   if (name[0] === 'brands') {
     dataHere = data
       ? data.map(ele => (
-        <CloseBtn
+        <ChoiceBtn
           type="submit"
           key={ele.name}
           id={ele.id}
           name={name}
-          value={ele.name}
+          value={`{"id": "${ele.id}", "name": "${ele.name}"}`}
           onClick={changeSelected}
         >
           {ele.name}
-        </CloseBtn>
+        </ChoiceBtn>
       ))
       : null;
   } else {
     dataHere = data
       ? data.map(ele => (
-        <CloseBtn key={ele} type="submit" name={name} value={ele} onClick={changeSelected}>
+        <ChoiceBtn key={ele} type="submit" name={name} value={ele} onClick={changeSelected}>
           {ele}
-        </CloseBtn>
+        </ChoiceBtn>
       ))
       : null;
   }

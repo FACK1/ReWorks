@@ -18,6 +18,7 @@ exports.getBrands = (req, res) => {
         data.push({
           brandName: record.get('Name'),
           id: record.id,
+          name: record.get('Name'),
         });
       });
       fetchNextPage();

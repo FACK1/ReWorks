@@ -14,10 +14,10 @@ class GetDetails extends Component {
   state = {
     isOpen: false,
     selectedCat: null,
-    selected_brands: { id: '', name: '' },
+    selected_brands: { id: '1', brandName: '2', name: '2' },
     itemType,
     colors: [],
-    brands: [],
+    brands: [{ id: '1', brandName: '2', name: '2' }],
     condition,
     labelSize,
     age,
@@ -67,7 +67,7 @@ class GetDetails extends Component {
           const brands = data.data;
           this.setState({
             brands,
-            selected_brands: { id: brands[0].id, name: brands[0].brandName },
+            selected_brands: { id: brands[0].id, brandName: brands[0].brandName, name: brands[0].brandName },
           });
         }
       });
@@ -102,7 +102,7 @@ class GetDetails extends Component {
   };
 
   toggleOpen = (e) => {
-    const { value, name, id } = e.target;
+    const { value, name } = e.target;
     if (value === 'more') {
       this.setState({ isOpen: true, selectedCat: name });
     } else if (name === 'brands') {
@@ -113,41 +113,42 @@ class GetDetails extends Component {
     }
   };
 
-  toggleClose = (e) => {
-    e.preventDefault();
-    this.setState({ isOpen: false });
-  };
+   toggleClose = (e) => {
+     e.preventDefault();
+     this.setState({ isOpen: false });
+   };
 
-  changeSelected = (e) => {
-    e.preventDefault();
-    const { value, name, id } = e.target;
-    const selected = `selected_${this.state.selectedCat}`;
-    if (name === 'brands') {
-      this.setState({ [selected]: { id, name: value }, isOpen: false });
-    } else {
-      this.setState({ [selected]: value, isOpen: false });
-    }
-  };
+   changeSelected = (e) => {
+     e.preventDefault();
+     const { value, name, id } = e.target;
+     const selected = `selected_${this.state.selectedCat}`;
+     if (name === 'brands') {
+       const value1 = JSON.parse(value);
+       this.setState({ [selected]: { id, brandName: value1.name, name: value }, isOpen: false });
+     } else {
+       this.setState({ [selected]: value, isOpen: false });
+     }
+   };
 
-  render() {
-    const { image_url } = this.props.location.details;
-    return (
-      <React.Fragment>
-        <Title {...this.props} />
-        <Header title="Get your details" />
-        <Form
-          image={image_url}
-          {...this.state}
-          toggleOpen={this.toggleOpen}
-          toggleClose={this.toggleClose}
-          changeSelected={this.changeSelected}
-        />
-        <Button />
-        <GButton title="CONTINUE" onClick={this.continue} />
-        <Footer />
-      </React.Fragment>
-    );
-  }
+   render() {
+     const { image_url } = this.props.location.details;
+     return (
+       <React.Fragment>
+         <Title {...this.props} />
+         <Header title="Get your details" />
+         <Form
+           image={image_url}
+           {...this.state}
+           toggleOpen={this.toggleOpen}
+           toggleClose={this.toggleClose}
+           changeSelected={this.changeSelected}
+         />
+         <Button />
+         <GButton title="CONTINUE" onClick={this.continue} />
+         <Footer />
+       </React.Fragment>
+     );
+   }
 }
 
 export default GetDetails;

@@ -101,7 +101,6 @@ class Form extends Component {
               {brands.map(brand => (brands.indexOf(brand) >= 5 ? (
                 <StyledOption
                   key={brand.name}
-                  data-value={brand.id}
                   value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
                   hidden
                 >
@@ -110,7 +109,6 @@ class Form extends Component {
               ) : (
                 <StyledOption
                   key={brand.name}
-                  data-value={brand.id}
                   value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
                 >
                   {brand.name}
