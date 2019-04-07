@@ -13,6 +13,7 @@ import {
   StyledBottom,
   StyledLink,
   StyledCSVLink,
+  Container,
 } from './itemlist.style';
 
 class ItemList extends Component {
@@ -74,24 +75,26 @@ class ItemList extends Component {
           <StyledLink type="button" onClick={this.addNewItem}>
             + ADD NEW ITEM
           </StyledLink>
-          {this.state.loading && <Spinner />}
-          {this.state.itemlist.map((item, index) => {
-            const {
-              itemId, color, type, brand, size, url,
-            } = item;
-            return (
-              <Item
-                key={itemId}
-                data-name={itemId}
-                color={color}
-                type={type}
-                subtitle1={brand}
-                subtitle2={size}
-                imageUrl={url}
-                onClick={() => this.goItemDetails(itemId, index)}
-              />
-            );
-          })}
+          <Container>
+            {this.state.loading && <Spinner />}
+            {this.state.itemlist.map((item, index) => {
+              const {
+                itemId, color, type, brand, size, url,
+              } = item;
+              return (
+                <Item
+                  key={itemId}
+                  data-name={itemId}
+                  color={color}
+                  type={type}
+                  subtitle1={brand}
+                  subtitle2={size}
+                  imageUrl={url}
+                  onClick={() => this.goItemDetails(itemId, index)}
+                />
+              );
+            })}
+          </Container>
         </List>
         <StyledBottom>
           <GButtonContainer>

@@ -9,6 +9,14 @@ export const List = styled.div`
   align-content: space-between;
 `;
 
+export const Container = styled.div`
+  height:100vh;
+  @media (max-width: 650px) {
+    overflow-y: scroll;
+    height:55vh;
+  }
+`;
+
 export const StyledHeader = styled.h1`
   font-size: 20px;
   background-color: #fafafa;
@@ -20,7 +28,7 @@ export const StyledHeader = styled.h1`
   }
 `;
 
-export const StyledBottom = styled.form`
+export const StyledBottom = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
@@ -54,4 +62,5 @@ export const StyledCSVLink = styled(CSVLink)`
 export const GButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin-top:50px;
 `;
