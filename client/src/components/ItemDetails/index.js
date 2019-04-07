@@ -43,9 +43,7 @@ class ItemDetails extends Component {
       selected_itemType: itemDetails.type,
       selected_price: itemDetails.price,
       selected_details: itemDetails.details,
-      itemType: [itemDetails.type, ...itemType],
-      colors: [itemDetails.color, ...clarifaiColors],
-      brands: [{ id: itemDetails.brandId, name: itemDetails.brand }, ...brands],
+      colors: clarifaiColors,
     });
   }
 
