@@ -6,11 +6,48 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
+import {
+  brands, itemType, condition, labelSize, age,
+} from '../../data';
 
 import { ImgDiv, DeleteButton } from './itemdetails.style';
 
 class ItemDetails extends Component {
-  state = { itemDetails: this.props.location.itemDetails };
+  state = {
+    itemDetails: this.props.location.itemDetails,
+    isOpen: false,
+    selectedCat: null,
+    selected_brands: { id: '', brandName: '', name: '' },
+    itemType,
+    colors: ['Black'],
+    brands,
+    condition,
+    labelSize,
+    age,
+  };
+
+  componentDidMount() {
+    const { itemDetails } = this.state;
+    const clarifaiColors = itemDetails.colors.split(',');
+
+    this.setState({
+      selected_brands: {
+        id: itemDetails.brandId,
+        brandName: itemDetails.brand,
+        name: itemDetails.brand,
+      },
+      selected_condition: itemDetails.condition,
+      selected_labelSize: itemDetails.size,
+      selected_age: itemDetails.age,
+      selected_colors: itemDetails.color,
+      selected_itemType: itemDetails.type,
+      selected_price: itemDetails.price,
+      selected_details: itemDetails.details,
+      itemType: [itemDetails.type, ...itemType],
+      colors: [itemDetails.color, ...clarifaiColors],
+      brands: [{ id: itemDetails.brandId, name: itemDetails.brand }, ...brands],
+    });
+  }
 
   goBack = () => {
     const { history } = this.props;
@@ -42,7 +79,13 @@ class ItemDetails extends Component {
             <img src={deleteIcon} alt="delete icon" />
           </DeleteButton>
         </ImgDiv>
-        <Form image={url} />
+        <Form
+          image={url}
+          {...this.state}
+          toggleOpen={this.toggleOpen}
+          toggleClose={this.toggleClose}
+          changeSelected={this.changeSelected}
+        />
         <Button onClick={this.goBack} />
         <GButton title="Save" />
         <Footer />
