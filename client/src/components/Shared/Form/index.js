@@ -61,7 +61,7 @@ class Form extends Component {
           <StyledImg src={image} />
         </StyledImgCon>
 
-        <StyledInformation>PIECE INFORMATION</StyledInformation>
+        <StyledInformation>ITEM INFORMATION</StyledInformation>
         <StyledNotic>Please verify the items marked* </StyledNotic>
 
         <StyledDiv>

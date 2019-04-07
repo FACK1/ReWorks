@@ -103,6 +103,8 @@ class ItemList extends Component {
             >
               EXPORT AS CSV
             </StyledCSVLink>
+          <GButtonContainer>
+            <Button onClick={this.feedback} title="GIVE YOUR FEEDBACK" />
           </GButtonContainer>
           <Footer />
         </StyledBottom>

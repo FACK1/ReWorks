@@ -5,7 +5,6 @@ import Title from '../Shared/Title';
 import {
   AppDescription,
   FatherContainer,
-  Span,
   GButton,
 } from './splashpage.style';
 
