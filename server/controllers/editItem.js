@@ -9,20 +9,24 @@ exports.editItem = (req, res) => {
   const {
     size, type, price, brandId, condition, details, color, age,
   } = req.body;
-  base('Items').update(id, {
-    Size: size,
-    Age: age,
-    Colors: color,
-    Brand: [brandId],
-    Type: type,
-    Price: price,
-    Condition: condition,
-    Name: type,
-    Details: details,
-  }, (err) => {
-    if (err) {
-      return res.json({ success: 'false' });
-    }
-    return res.json({ success: 'true' });
-  });
+  base('Items').update(
+    id,
+    {
+      Size: size,
+      Age: age,
+      Color: color,
+      Brand: [brandId],
+      Type: type,
+      Price: price,
+      Condition: condition,
+      Name: type,
+      Details: details,
+    },
+    (err) => {
+      if (err) {
+        return res.json({ success: 'false' });
+      }
+      return res.json({ success: 'true' });
+    },
+  );
 };

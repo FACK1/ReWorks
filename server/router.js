@@ -15,6 +15,7 @@ const { getItems } = require('./controllers/getItems.js');
 const { addFeedback } = require('./controllers/addFeedback.js');
 const { getFeedback } = require('./controllers/getFeedback.js');
 const { checkCookie } = require('./controllers/checkCookie.js');
+const { getBrands } = require('./controllers/getBrands.js');
 
 router.post('/add-to-amazon', uploadPhoto, clarifaiAPIs);
 router.post('/login', login);
@@ -30,5 +31,6 @@ router.put('/add-feedback', auth, addFeedback);
 router.get('/get-feedback', auth, getFeedback);
 
 router.get('/checkcookie', checkCookie);
+router.get('/getbrands', getBrands);
 
 module.exports = router;

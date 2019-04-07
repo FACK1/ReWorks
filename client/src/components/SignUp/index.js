@@ -80,7 +80,7 @@ class signUp extends Component {
       };
       axios.post('/signup', inputs).then(({ data }) => {
         if (data.success) {
-          history.push('/login-form');
+          history.push({ pathname: '/login-form', data: this.props.location.data });
         } else {
           this.setState({ usernameError: 'This username already exists.', isErrorUsername: true });
         }
