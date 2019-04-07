@@ -8,15 +8,17 @@ import Footer from '../Shared/Footer';
 import Checkbox from '../Shared/Checkbox';
 import Spinner from '../Shared/Spinner';
 
-import { ThanksText, CheckboxContainer, BottomContainer } from './feedback.style';
+import { ThanksText, Para, CheckboxContainer, BottomContainer } from './feedback.style';
 
 class Feedback extends Component {
   state = {
     options: [
-      { text: 'Donate to Charity', checked: false },
+      { text: 'Donate to charity', checked: false },
       { text: 'Sell on eBay', checked: false },
-      { text: 'Swap', checked: false },
-      { text: 'Repair', checked: false },
+      { text: 'Sell on another marketplace', checked: false },
+      { text: 'Swap for something else', checked: false },
+      { text: 'Repair / Refurbish / Upcycle ', checked: false },
+      { text: 'Upload to instagram', checked: false },
     ],
     prevFeedback: [],
     currentFeedback: [],
@@ -129,6 +131,7 @@ class Feedback extends Component {
       <React.Fragment>
         <Title {...this.props} />
         <Header title="What do you want to do with your items?" />
+        <Para>Future releases of the app will add new features. We welcome your feedback.</Para>
         {!loading && (
           <CheckboxContainer>
             {options.map((option, i) => (
