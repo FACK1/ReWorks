@@ -7,7 +7,7 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  brands, colors, itemType, condition, labelSize, age,
+  itemType, condition, labelSize, age,
 } from '../../data';
 
 class GetDetails extends Component {
@@ -16,11 +16,12 @@ class GetDetails extends Component {
     selectedCat: null,
     selected_brands: { id: '', name: '' },
     itemType,
-    colors,
-    brands,
+    colors: [],
+    brands: [],
     condition,
     labelSize,
     age,
+    clarifaiColors: '',
   };
 
   componentDidMount() {
@@ -37,8 +38,10 @@ class GetDetails extends Component {
 
     if (apparel || apiColors) {
       const colours = apiColors.data.map(ele => ele.name);
+      const clarifaiColors = colours.join(',');
+      this.setState({ clarifaiColors });
       this.setState({
-        colors: [...colours, ...colors],
+        colors: colours,
         selected_colors: colours[0],
       });
 
@@ -55,7 +58,6 @@ class GetDetails extends Component {
       }
     } else {
       this.setState({
-        selected_colors: colors[0],
         selected_itemType: itemType[0],
       });
     }
@@ -63,8 +65,10 @@ class GetDetails extends Component {
       .then(({ data }) => {
         if (data.success) {
           const brands = data.data;
-          this.setState({ brands },
-            { selected_brands: { id: brands[0].brandId, name: brands[0].brandName } });
+          this.setState({
+            brands,
+            selected_brands: { id: brands[0].id, name: brands[0].brandName },
+          });
         }
       });
   }
@@ -72,11 +76,13 @@ class GetDetails extends Component {
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
       const { history } = this.props;
+
       const inputs = {
         type: this.state.selected_itemType,
         age: this.state.selected_age,
         price: this.state.selected_price,
         color: this.state.selected_colors,
+        colors: this.state.clarifaiColors,
         condition: this.state.selected_condition,
         size: this.state.selected_labelSize,
         url: this.props.location.details.image_url,
@@ -100,7 +106,8 @@ class GetDetails extends Component {
     if (value === 'more') {
       this.setState({ isOpen: true, selectedCat: name });
     } else if (name === 'brands') {
-      this.setState({ [`selected_${name}`]: { id, name: value } });
+      const value1 = JSON.parse(value);
+      this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
     } else {
       this.setState({ [`selected_${name}`]: value });
     }
@@ -124,7 +131,6 @@ class GetDetails extends Component {
 
   render() {
     const { image_url } = this.props.location.details;
-
     return (
       <React.Fragment>
         <Title {...this.props} />
