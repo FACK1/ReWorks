@@ -39,7 +39,7 @@ class ItemDetails extends Component {
       selected_condition: itemDetails.condition,
       selected_labelSize: itemDetails.size,
       selected_age: itemDetails.age,
-      selected_color: itemDetails.color,
+      selected_colors: itemDetails.color,
       selected_itemType: itemDetails.type,
       selected_price: itemDetails.price,
       selected_details: itemDetails.details,
@@ -103,7 +103,7 @@ class ItemDetails extends Component {
       selected_condition,
       selected_labelSize,
       selected_age,
-      selected_color,
+      selected_colors,
       selected_itemType,
       selected_price,
       selected_details,
@@ -126,7 +126,7 @@ class ItemDetails extends Component {
       itemDetails.url,
       itemDetails.name,
       selected_price,
-      selected_color,
+      selected_colors,
       selected_brands.brandName,
       selected_condition,
       selected_age,
@@ -143,6 +143,46 @@ class ItemDetails extends Component {
     });
 
     return flag;
+  };
+
+  updateItem = () => {
+    const updatedFlag = this.checkForChanges();
+    const { history } = this.props;
+    const id = this.state.itemDetails.itemId;
+    const {
+      selected_brands,
+      selected_condition,
+      selected_labelSize,
+      selected_age,
+      selected_colors,
+      selected_itemType,
+      selected_price,
+      selected_details,
+      itemDetails,
+    } = this.state;
+
+    const newUpdates = {
+      size: selected_labelSize,
+      type: selected_itemType,
+      price: selected_price,
+      brandId: selected_brands.id,
+      condition: selected_condition,
+      details: selected_details,
+      color: selected_colors,
+      age: selected_age,
+    };
+
+    if (updatedFlag) {
+      axios
+        .put(`/edit-item/${id}`, newUpdates)
+        .then(({ data }) => {
+          if (data.success) {
+            history.push('/item-list');
+          }
+        })
+        .catch(() => history.push('/error'));
+    }
+    history.push('/item-list');
   };
 
   render() {
@@ -164,7 +204,7 @@ class ItemDetails extends Component {
           changeSelected={this.changeSelected}
         />
         <Button onClick={this.goBack} />
-        <GButton title="Save" />
+        <GButton title="Save" onClick={this.updateItem} />
         <Footer />
       </React.Fragment>
     );
