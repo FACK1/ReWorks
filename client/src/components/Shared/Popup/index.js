@@ -16,7 +16,7 @@ const Popup = ({
           key={ele.name}
           id={ele.id}
           name={name}
-          value={ele.name}
+          value={`{"id": "${ele.id}", "name": "${ele.name}"}`}
           onClick={changeSelected}
         >
           {ele.name}

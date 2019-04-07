@@ -14,7 +14,7 @@ class GetDetails extends Component {
   state = {
     isOpen: false,
     selectedCat: null,
-    selected_brands: { id: brands[0].id, name: brands[0].name },
+    selected_brands: { id: brands[0].id, brandName: brands[0].name, name: brands[0].name },
     itemType,
     colors,
     brands,
@@ -73,11 +73,12 @@ class GetDetails extends Component {
   };
 
   toggleOpen = (e) => {
-    const { value, name, id } = e.target;
+    const { value, name } = e.target;
     if (value === 'more') {
       this.setState({ isOpen: true, selectedCat: name });
     } else if (name === 'brands') {
-      this.setState({ [`selected_${name}`]: { id, name: value } });
+      const value1 = JSON.parse(value);
+      this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
     } else {
       this.setState({ [`selected_${name}`]: value });
     }
@@ -93,7 +94,8 @@ class GetDetails extends Component {
     const { value, name, id } = e.target;
     const selected = `selected_${this.state.selectedCat}`;
     if (name === 'brands') {
-      this.setState({ [selected]: { id, name: value }, isOpen: false });
+      const value1 = JSON.parse(value);
+      this.setState({ [selected]: { id, brandName: value1.name, name: value }, isOpen: false });
     } else {
       this.setState({ [selected]: value, isOpen: false });
     }
