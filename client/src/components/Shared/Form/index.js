@@ -24,7 +24,6 @@ class Form extends Component {
       'Item Type*',
       'Color*',
       'Brand',
-      'Other',
       'Condition',
       'Label size',
       'Age',
@@ -118,7 +117,6 @@ class Form extends Component {
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledInput type="text" name="brand" placeholder="brand" />
 
             <StyledSelect onChange={toggleOpen} name="condition" value={selected_condition}>
               {condition.map(cond => (condition.indexOf(cond) >= 5 ? (
