@@ -72,7 +72,7 @@ class ItemList extends Component {
         <StyledHeader>Your Items</StyledHeader>
         <List>
           <StyledLink type="button" onClick={this.addNewItem}>
-            + ADD NEW ITEM
+            + ADD ANOTHER ITEM
           </StyledLink>
           {this.state.loading && <Spinner />}
           {this.state.itemlist.map((item, index) => {
@@ -103,8 +103,6 @@ class ItemList extends Component {
             >
               EXPORT AS CSV
             </StyledCSVLink>
-          <GButtonContainer>
-            <Button onClick={this.feedback} title="GIVE YOUR FEEDBACK" />
           </GButtonContainer>
           <Footer />
         </StyledBottom>
