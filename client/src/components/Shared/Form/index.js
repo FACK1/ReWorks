@@ -24,7 +24,6 @@ class Form extends Component {
       'Item Type*',
       'Color*',
       'Brand',
-      'Other',
       'Condition',
       'Label size',
       'Age',
@@ -100,18 +99,24 @@ class Form extends Component {
 
             <StyledSelect onChange={toggleOpen} name="brands" value={selected_brands.name}>
               {brands.map(brand => (brands.indexOf(brand) >= 5 ? (
-                <StyledOption key={brand.name} id={brand.id} value={brand.name} hidden>
+                <StyledOption
+                  key={brand.name}
+                  value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
+                  hidden
+                >
                   {brand.name}
                 </StyledOption>
               ) : (
-                <StyledOption key={brand.name} id={brand.id} value={brand.name}>
+                <StyledOption
+                  key={brand.name}
+                  value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
+                >
                   {brand.name}
                 </StyledOption>
               )))}
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledInput type="text" name="brand" placeholder="brand" />
 
             <StyledSelect onChange={toggleOpen} name="condition" value={selected_condition}>
               {condition.map(cond => (condition.indexOf(cond) >= 5 ? (
