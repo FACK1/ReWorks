@@ -67,7 +67,7 @@ class GetDetails extends Component {
           const brands = data.data;
           this.setState({
             brands,
-            selected_brands: { id: brands[0].id, brandName: brands[0].brandName, name: brands[0].brandName },
+            selected_brands: brands[0],
           });
         }
       });
