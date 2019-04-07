@@ -39,7 +39,7 @@ class ItemDetails extends Component {
       selected_condition: itemDetails.condition,
       selected_labelSize: itemDetails.size,
       selected_age: itemDetails.age,
-      selected_colors: itemDetails.color,
+      selected_color: itemDetails.color,
       selected_itemType: itemDetails.type,
       selected_price: itemDetails.price,
       selected_details: itemDetails.details,
@@ -95,6 +95,54 @@ class ItemDetails extends Component {
     } else {
       this.setState({ [selected]: value, isOpen: false });
     }
+  };
+
+  checkForChanges = () => {
+    const {
+      selected_brands,
+      selected_condition,
+      selected_labelSize,
+      selected_age,
+      selected_color,
+      selected_itemType,
+      selected_price,
+      selected_details,
+      itemDetails,
+    } = this.state;
+
+    const itemDetailsArray = [];
+    const updateItemDetails = [];
+
+    const keys = Object.keys(itemDetails);
+
+    keys.map((key) => {
+      itemDetailsArray.push(itemDetails[key]);
+    });
+
+    updateItemDetails.push(
+      itemDetails.itemId,
+      selected_itemType,
+      selected_labelSize,
+      itemDetails.url,
+      itemDetails.name,
+      selected_price,
+      selected_color,
+      selected_brands.brandName,
+      selected_condition,
+      selected_age,
+      selected_details,
+      selected_brands.id,
+      itemDetails.colors,
+    );
+
+    let flag = false;
+    itemDetailsArray.map((object, i) => {
+      if (object !== updateItemDetails[i]) {
+        flag = true;
+      }
+    });
+
+    return flag;
   };
 
   render() {
