@@ -24,6 +24,7 @@ class ItemDetails extends Component {
     condition,
     labelSize,
     age,
+    showDefaultOption: false,
   };
 
   componentDidMount() {
