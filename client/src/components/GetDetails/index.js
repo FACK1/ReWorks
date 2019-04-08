@@ -25,6 +25,10 @@ class GetDetails extends Component {
   };
 
   componentDidMount() {
+    axios.get('/get-types').then((response) => {
+      const type = response.data.itemType;
+      this.setState({ itemType: type });
+    });
     const { apparel } = this.props.location.details;
     const apiColors = this.props.location.details.colors;
 
