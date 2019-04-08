@@ -13,7 +13,7 @@ export const Container = styled.div`
   height:100vh;
   @media (max-width: 650px) {
     overflow-y: scroll;
-    height:55vh;
+    height:50vh;
   }
 `;
 
@@ -41,6 +41,8 @@ export const StyledLink = styled(Link)`
   color: #1ed390;
   margin-left: 15px;
   text-decoration: none;
+  margin-bottom:14px;
+
 `;
 
 export const StyledCSVLink = styled(CSVLink)`
