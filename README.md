@@ -48,7 +48,7 @@ _Please ensure you have this software **installed and running** on your local ma
 **2. Install dependencies**
 
 ```
-$ cd ReWork
+$ cd ReWorks
 $ npm i
 ```
 
@@ -64,7 +64,8 @@ Create a config.env file in the root directory.
 
 _Add the following line to make your local database work, inserting your own username and password._
 
-```DB_URL = mongodb://localhost:password/username```
+```DB_URL = mongodb://[username:password@][host]:[port]/[databasename]```
+
 
 _Add a 'secret' for password encryption._
 
