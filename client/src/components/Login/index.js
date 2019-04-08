@@ -73,6 +73,8 @@ class Login extends Component {
                 history.push('/error');
               }
             });
+          } else {
+            history.push('/item-list');
           }
         } else {
           this.setState({ passwordError: 'Username or password is incorrect.', isErrorUsername: true, isErrorPassword: true });
