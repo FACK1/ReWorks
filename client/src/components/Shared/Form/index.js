@@ -73,12 +73,12 @@ class Form extends Component {
           <StyledItem>
             <StyledSelect onChange={toggleOpen} name="itemType" value={selected_itemType}>
               {itemType.map(item => (itemType.indexOf(item) >= 5 ? (
-                <StyledOption key={item} value={item} hidden>
-                  {item}
+                <StyledOption key={item.id} value={item.itemType} hidden>
+                  {item.itemType}
                 </StyledOption>
               ) : (
-                <StyledOption key={item} value={item}>
-                  {item}
+                <StyledOption key={item.id} value={item.itemType}>
+                  {item.itemType}
                 </StyledOption>
               )))}
               <StyledOption value="more">More...</StyledOption>
