@@ -53,14 +53,15 @@ class ItemList extends Component {
         acc.urls.push(element.url);
         acc.names.push(element.name);
         acc.types.push(element.type);
+        acc.prices.push(element.price);
+        acc.brandNames.push(element.brand);
+        acc.conditions.push(element.condition);
+        acc.ages.push(element.age);
+        acc.colors.push(element.color);
         return acc;
       },
       {
-        itemIds: [],
-        sizes: [],
-        urls: [],
-        names: [],
-        types: [],
+        itemIds: [], sizes: [], urls: [], names: [], types: [], prices: [], brandNames: [], conditions: [], ages: [], colors: [],
       },
     );
     const headers = [
@@ -69,6 +70,11 @@ class ItemList extends Component {
       { label: 'Link', key: 'url' },
       { label: 'Name', key: 'name' },
       { label: 'Type', key: 'type' },
+      { label: 'Price', key: 'price' },
+      { label: 'BrandName', key: 'brand' },
+      { label: 'Condition', key: 'condition' },
+      { label: 'Age', key: 'age' },
+      { label: 'Color', key: 'color' },
     ];
 
     return (
@@ -80,25 +86,25 @@ class ItemList extends Component {
             + ADD ANOTHER ITEM
           </StyledLink>
           <Container>
-            {this.state.loading && <Spinner />}
-            {this.state.itemlist.map((item, index) => {
-              const {
-                itemId, color, type, brand, size, url,
-              } = item;
-              return (
-                <Item
-                  key={itemId}
-                  data-name={itemId}
-                  color={color}
-                  type={type}
-                  subtitle1={brand}
-                  subtitle2={size}
-                  imageUrl={url}
-                  onClick={() => this.goItemDetails(itemId, index)}
-                />
-              );
-            })}
-          </Container>
+          {this.state.loading && <Spinner />}
+          {this.state.itemlist.map((item, index) => {
+            const {
+              itemId, color, type, brand, size, url, price, condition, age
+            } = item;
+            return (
+              <Item
+                key={itemId}
+                data-name={itemId}
+                color={color}
+                type={type}
+                subtitle1={brand}
+                subtitle2={size}
+                imageUrl={url}
+                onClick={() => this.goItemDetails(itemId, index)}
+              />
+            );
+          })}
+        </Container>
         </List>
         <StyledBottom>
           <GButtonContainer>
