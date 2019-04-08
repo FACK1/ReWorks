@@ -23,7 +23,7 @@ router.post('/add-to-amazon', uploadPhoto, clarifaiAPIs);
 router.post('/login', login);
 router.get('/logout', logout);
 router.post('/signup', signUp);
-router.get('/getTypes', getTypes);
+router.get('/get-types', getTypes);
 
 
 router.post('/add-item', auth, addItem);
