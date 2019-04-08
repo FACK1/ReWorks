@@ -5,7 +5,7 @@ if (!process.env.Airtable_API_KEY) {
   throw new Error('Missing Airtable API KEY env var');
 }
 
-const base = new Airtable({ apiKey: 'keyxrF4iyiMUf7pCB' }).base('appAZnpLnWP0wjAc6');
+const base = new Airtable({ apiKey: Airtable_API_KEY }).base('appAZnpLnWP0wjAc6');
 exports.getTypes = (req, res) => {
   const itemType = [];
   base('Type').select({
