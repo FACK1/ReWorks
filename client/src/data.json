@@ -5,6 +5,7 @@
     { "id": "recqts81sMcIoFMMJ", "name": "Adidas" }
   ],
   "colors": ["white", "black", "red", "blue", "green", "limegreen", "gray"],
+  "patterns":["TOSS OR RANDOM PATTERN", "DOT PATTERN", "COMPLEX STRIPE PATTERN", "BLOCK PATTERN", "DIAMOND PATTERN"],
   "itemType": [
     "T-shirt",
     "Shirt",
