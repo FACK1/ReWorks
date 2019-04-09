@@ -13,13 +13,19 @@ export const Container = styled.div`
   height: 30vh;
 `;
 export const Instructions = styled.div`
-  width: 100%;
+  width:40%;
   display: flex;
   flex-direction: column;
   height: 30vh;
+  margin-left:30%;
+  margin-bottom:5%;
+  margin-top: 3%;
   @media (max-width: 650px) {
+    width:90%
     font-size: 20px;
-    height: 40vh;
+    margin-bottom: 8%;
+    margin-top: 7%;
+    margin-left: 7%
   }
 `;
 
