@@ -7,7 +7,7 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  itemType, condition, labelSize, age,
+  itemType, condition, labelSize, age, patterns,
 } from '../../data';
 
 class GetDetails extends Component {
@@ -21,12 +21,14 @@ class GetDetails extends Component {
     condition,
     labelSize,
     age,
+    patterns,
     clarifaiColors: '',
     selected_condition: '',
     selected_labelSize: '',
     selected_age: '',
     selected_price: '',
     selected_details: '',
+    selected_patterns: '',
     showDefaultOption: true,
   };
 
