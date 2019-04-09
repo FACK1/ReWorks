@@ -14,10 +14,18 @@ background:  linear-gradient(#3CBA92, #1F604B)
 export const AppDescription = styled.p`
 font-family: Assistant;
 padding: 0px 40px 0 40px;
-line-height: 2;
-font-size:20px;
+line-height: 2.5;
+font-size:25px;
+justify-content:center;
+align-content: space-between;
+width:40%;
 @media (max-width: 650px) {
-  font-size: 20px;
+  line-height: 2;
+  font-size: 19px;
+  display: flex;
+  flex-direction: column;
+  width:60%;
+
 }
 
 `;
