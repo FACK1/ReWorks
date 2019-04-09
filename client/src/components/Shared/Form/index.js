@@ -23,6 +23,7 @@ class Form extends Component {
     categories: [
       'Item Type*',
       'Color*',
+      'Pattern',
       'Brand',
       'Condition',
       'Label size',
@@ -47,12 +48,14 @@ class Form extends Component {
       selected_age,
       selected_price,
       selected_details,
+      selected_patterns,
       itemType,
       colors,
       brands,
       condition,
       labelSize,
       age,
+      patterns,
       showDefaultOption,
     } = this.props;
 
@@ -94,6 +97,24 @@ class Form extends Component {
               ) : (
                 <StyledOption key={color} value={color}>
                   {color}
+                </StyledOption>
+              )))}
+              <StyledOption value="more">More...</StyledOption>
+            </StyledSelect>
+
+            <StyledSelect onChange={toggleOpen} name="patterns" value={selected_patterns}>
+              {showDefaultOption && (
+                <option default hidden>
+                  Select...
+                </option>
+              )}
+              {patterns.map(pattern => (patterns.indexOf(pattern) >= 5 ? (
+                <StyledOption key={pattern} value={pattern} hidden>
+                  {pattern}
+                </StyledOption>
+              ) : (
+                <StyledOption key={pattern} value={pattern}>
+                  {pattern}
                 </StyledOption>
               )))}
               <StyledOption value="more">More...</StyledOption>
