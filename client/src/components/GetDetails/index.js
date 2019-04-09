@@ -6,7 +6,6 @@ import Form from '../Shared/Form';
 import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
-import pic from './pic.jpeg';
 import {
   itemType, condition, labelSize, age,
 } from '../../data';
