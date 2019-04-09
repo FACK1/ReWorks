@@ -6,6 +6,7 @@ import Form from '../Shared/Form';
 import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
+import pic from './pic.jpeg';
 import {
   itemType, condition, labelSize, age,
 } from '../../data';
@@ -31,42 +32,47 @@ class GetDetails extends Component {
   };
 
   componentDidMount() {
-    const { apparel } = this.props.location.details;
-    const apiColors = this.props.location.details.colors;
+    if (this.props.location.details) {
+      const { apparel } = this.props.location.details;
+      const apiColors = this.props.location.details.colors;
 
-    if (apparel || apiColors) {
-      const colours = apiColors.data.map(ele => ele.name);
-      const clarifaiColors = colours.join(',');
-      this.setState({ clarifaiColors });
-      this.setState({
-        colors: colours,
-        selected_colors: colours[0],
-      });
-
-      if (apparel && apparel.data.length > 0) {
-        const outfit = apparel.data.map(ele => ele.tag_name);
+      if (apparel || apiColors) {
+        const colours = apiColors.data.map(ele => ele.name);
+        const clarifaiColors = colours.join(',');
+        this.setState({ clarifaiColors });
         this.setState({
-          itemType: [...outfit, ...itemType],
-          selected_itemType: outfit[0],
+          colors: colours,
+          selected_colors: colours[0],
         });
+
+        if (apparel && apparel.data.length > 0) {
+          const outfit = apparel.data.map(ele => ele.tag_name);
+          this.setState({
+            itemType: [...outfit, ...itemType],
+            selected_itemType: outfit[0],
+          });
+        } else {
+          this.setState({
+            selected_itemType: itemType[0],
+          });
+        }
       } else {
         this.setState({
           selected_itemType: itemType[0],
         });
       }
-    } else {
-      this.setState({
-        selected_itemType: itemType[0],
+      axios.get('/getbrands').then(({ data }) => {
+        if (data.success) {
+          const brands = data.data;
+          this.setState({
+            brands,
+          });
+        }
       });
+    } else {
+      const { history } = this.props;
+      history.push('/upload-photo');
     }
-    axios.get('/getbrands').then(({ data }) => {
-      if (data.success) {
-        const brands = data.data;
-        this.setState({
-          brands,
-        });
-      }
-    });
   }
 
   continue = () => {
@@ -132,13 +138,16 @@ class GetDetails extends Component {
   };
 
   render() {
-    const { image_url } = this.props.location.details;
+    let imageUrl;
+    if (this.props.location.details) {
+      imageUrl = this.props.location.details.image_url;
+    }
     return (
       <React.Fragment>
         <Title {...this.props} />
         <Header title="Get your details" />
         <Form
-          image={image_url}
+          image={imageUrl}
           {...this.state}
           toggleOpen={this.toggleOpen}
           toggleClose={this.toggleClose}
