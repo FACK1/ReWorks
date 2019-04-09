@@ -14,14 +14,20 @@ class GetDetails extends Component {
   state = {
     isOpen: false,
     selectedCat: null,
-    selected_brands: { id: '1', brandName: '2', name: '2' },
+    selected_brands: { id: '', brandName: '', name: '' },
     itemType,
     colors: [],
-    brands: [{ id: '1', brandName: '2', name: '2' }],
+    brands: [],
     condition,
     labelSize,
     age,
     clarifaiColors: '',
+    selected_condition: '',
+    selected_labelSize: '',
+    selected_age: '',
+    selected_price: '',
+    selected_details: '',
+    showDefaultOption: true,
   };
 
   componentDidMount() {
@@ -29,52 +35,48 @@ class GetDetails extends Component {
       const type = response.data.itemType;
       this.setState({ itemType: type });
     });
-    const { apparel } = this.props.location.details;
-    const apiColors = this.props.location.details.colors;
 
-    this.setState({
-      selected_condition: condition[0],
-      selected_labelSize: labelSize[0],
-      selected_age: age[0],
-      selected_price: '',
-      selected_details: '',
-    });
+    if (this.props.location.details) {
+      const { apparel } = this.props.location.details;
+      const apiColors = this.props.location.details.colors;
 
-    if (apparel || apiColors) {
-      const colours = apiColors.data.map(ele => ele.name);
-      const clarifaiColors = colours.join(',');
-      this.setState({ clarifaiColors });
-      this.setState({
-        colors: colours,
-        selected_colors: colours[0],
-      });
-
-      if (apparel && apparel.data.length > 0) {
-        const outfit = apparel.data.map(ele => ele.tag_name);
+      if (apparel || apiColors) {
+        const colours = apiColors.data.map(ele => ele.name);
+        const clarifaiColors = colours.join(',');
+        this.setState({ clarifaiColors });
         this.setState({
-          itemType: [...outfit, ...itemType],
-          selected_itemType: outfit[0],
+          colors: colours,
+          selected_colors: colours[0],
         });
+
+        if (apparel && apparel.data.length > 0) {
+          const outfit = apparel.data.map(ele => ele.tag_name);
+          this.setState({
+            itemType: [...outfit, ...itemType],
+            selected_itemType: outfit[0],
+          });
+        } else {
+          this.setState({
+            selected_itemType: itemType[0],
+          });
+        }
       } else {
         this.setState({
           selected_itemType: itemType[0],
         });
       }
-    } else {
-      this.setState({
-        selected_itemType: itemType[0],
-      });
-    }
-    axios.get('/getbrands')
-      .then(({ data }) => {
+      axios.get('/getbrands').then(({ data }) => {
         if (data.success) {
           const brands = data.data;
           this.setState({
             brands,
-            selected_brands: brands[0],
           });
         }
       });
+    } else {
+      const { history } = this.props;
+      history.push('/upload-photo');
+    }
   }
 
   continue = () => {
@@ -111,48 +113,56 @@ class GetDetails extends Component {
       this.setState({ isOpen: true, selectedCat: name });
     } else if (name === 'brands') {
       const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
+      this.setState({
+        [`selected_${name}`]: { id: value1.id, brandName: value1.name },
+      });
     } else {
       this.setState({ [`selected_${name}`]: value });
     }
   };
 
-   toggleClose = (e) => {
-     e.preventDefault();
-     this.setState({ isOpen: false });
-   };
+  toggleClose = (e) => {
+    e.preventDefault();
+    this.setState({ isOpen: false });
+  };
 
-   changeSelected = (e) => {
-     e.preventDefault();
-     const { value, name, id } = e.target;
-     const selected = `selected_${this.state.selectedCat}`;
-     if (name === 'brands') {
-       const value1 = JSON.parse(value);
-       this.setState({ [selected]: { id, brandName: value1.name, name: value }, isOpen: false });
-     } else {
-       this.setState({ [selected]: value, isOpen: false });
-     }
-   };
+  changeSelected = (e) => {
+    e.preventDefault();
+    const { value, name, id } = e.target;
+    const selected = `selected_${this.state.selectedCat}`;
+    if (name === 'brands') {
+      const value1 = JSON.parse(value);
+      this.setState({
+        [selected]: { id, brandName: value1.name, name: value },
+        isOpen: false,
+      });
+    } else {
+      this.setState({ [selected]: value, isOpen: false });
+    }
+  };
 
-   render() {
-     const { image_url } = this.props.location.details;
-     return (
-       <React.Fragment>
-         <Title {...this.props} />
-         <Header title="Get your details" />
-         <Form
-           image={image_url}
-           {...this.state}
-           toggleOpen={this.toggleOpen}
-           toggleClose={this.toggleClose}
-           changeSelected={this.changeSelected}
-         />
-         <Button />
-         <GButton title="CONTINUE" onClick={this.continue} />
-         <Footer />
-       </React.Fragment>
-     );
-   }
+  render() {
+    let imageUrl;
+    if (this.props.location.details) {
+      imageUrl = this.props.location.details.image_url;
+    }
+    return (
+      <React.Fragment>
+        <Title {...this.props} />
+        <Header title="Get your details" />
+        <Form
+          image={imageUrl}
+          {...this.state}
+          toggleOpen={this.toggleOpen}
+          toggleClose={this.toggleClose}
+          changeSelected={this.changeSelected}
+        />
+        <Button />
+        <GButton title="CONTINUE" onClick={this.continue} />
+        <Footer />
+      </React.Fragment>
+    );
+  }
 }
 
 export default GetDetails;

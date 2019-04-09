@@ -1,12 +1,20 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { CSVLink } from 'react-csv';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { CSVLink } from "react-csv";
 
 export const List = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-content: space-between;
+`;
+
+export const Container = styled.div`
+  height:100vh;
+  @media (max-width: 650px) {
+    overflow-y: scroll;
+    height:50vh;
+  }
 `;
 
 export const StyledHeader = styled.h1`
@@ -20,7 +28,7 @@ export const StyledHeader = styled.h1`
   }
 `;
 
-export const StyledBottom = styled.form`
+export const StyledBottom = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
@@ -33,6 +41,8 @@ export const StyledLink = styled(Link)`
   color: #1ed390;
   margin-left: 15px;
   text-decoration: none;
+  margin-bottom:14px;
+
 `;
 
 export const StyledCSVLink = styled(CSVLink)`
@@ -54,4 +64,5 @@ export const StyledCSVLink = styled(CSVLink)`
 export const GButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin-top:50px;
 `;

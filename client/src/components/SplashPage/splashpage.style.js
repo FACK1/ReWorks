@@ -15,7 +15,7 @@ export const AppDescription = styled.p`
 font-family: Assistant;
 padding: 0px 40px 0 40px;
 line-height: 2;
-font-size:24px;
+font-size:20px;
 @media (max-width: 650px) {
   font-size: 20px;
 }
@@ -28,7 +28,7 @@ font-size: 18px;
 font-family:'Assistant';
 background-color:#1ED390;
 padding: 20px 0px;
-margin:auto;
+margin-bottom: 20px;
 color:white;
 border:none;
 font-weight: bold;
@@ -37,10 +37,4 @@ text-align:center;
 @media (max-width: 650px) {
   font-size: 14px;
 }
-`;
-
-
-export const Span = styled.span`
-margin:20px 0px 0px 20px;
-display:block;
 `;

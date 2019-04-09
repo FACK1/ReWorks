@@ -53,14 +53,16 @@ class Form extends Component {
       condition,
       labelSize,
       age,
+      showDefaultOption,
     } = this.props;
+
     return (
       <StyledForm>
         <StyledImgCon>
           <StyledImg src={image} />
         </StyledImgCon>
 
-        <StyledInformation>PIECE INFORMATION</StyledInformation>
+        <StyledInformation>ITEM INFORMATION</StyledInformation>
         <StyledNotic>Please verify the items marked* </StyledNotic>
 
         <StyledDiv>
@@ -98,6 +100,11 @@ class Form extends Component {
             </StyledSelect>
 
             <StyledSelect onChange={toggleOpen} name="brands" value={selected_brands.name}>
+              {showDefaultOption && (
+                <option default hidden>
+                  Select...
+                </option>
+              )}
               {brands.map(brand => (brands.indexOf(brand) >= 5 ? (
                 <StyledOption
                   key={brand.name}
@@ -117,8 +124,12 @@ class Form extends Component {
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-
             <StyledSelect onChange={toggleOpen} name="condition" value={selected_condition}>
+              {showDefaultOption && (
+                <option default hidden>
+                  Select...
+                </option>
+              )}
               {condition.map(cond => (condition.indexOf(cond) >= 5 ? (
                 <StyledOption key={cond} value={cond} hidden>
                   {cond}
@@ -132,6 +143,11 @@ class Form extends Component {
             </StyledSelect>
 
             <StyledSelect onChange={toggleOpen} name="labelSize" value={selected_labelSize}>
+              {showDefaultOption && (
+                <option default hidden>
+                  Select...
+                </option>
+              )}
               {labelSize.map(size => (labelSize.indexOf(size) >= 5 ? (
                 <StyledOption key={size} value={size} hidden>
                   {size}
@@ -145,6 +161,11 @@ class Form extends Component {
             </StyledSelect>
 
             <StyledSelect onChange={toggleOpen} name="age" value={selected_age}>
+              {showDefaultOption && (
+                <option default hidden>
+                  Select...
+                </option>
+              )}
               {age.map(time => (age.indexOf(time) >= 5 ? (
                 <StyledOption key={time} value={time} hidden>
                   {time}

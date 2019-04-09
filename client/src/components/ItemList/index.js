@@ -13,6 +13,7 @@ import {
   StyledBottom,
   StyledLink,
   StyledCSVLink,
+  Container,
 } from './itemlist.style';
 
 class ItemList extends Component {
@@ -52,10 +53,15 @@ class ItemList extends Component {
         acc.urls.push(element.url);
         acc.names.push(element.name);
         acc.types.push(element.type);
+        acc.prices.push(element.price);
+        acc.brandNames.push(element.brand);
+        acc.conditions.push(element.condition);
+        acc.ages.push(element.age);
+        acc.colors.push(element.color);
         return acc;
       },
       {
-        itemIds: [], sizes: [], urls: [], names: [], types: [],
+        itemIds: [], sizes: [], urls: [], names: [], types: [], prices: [], brandNames: [], conditions: [], ages: [], colors: [],
       },
     );
     const headers = [
@@ -64,6 +70,11 @@ class ItemList extends Component {
       { label: 'Link', key: 'url' },
       { label: 'Name', key: 'name' },
       { label: 'Type', key: 'type' },
+      { label: 'Price', key: 'price' },
+      { label: 'BrandName', key: 'brand' },
+      { label: 'Condition', key: 'condition' },
+      { label: 'Age', key: 'age' },
+      { label: 'Color', key: 'color' },
     ];
 
     return (
@@ -72,12 +83,13 @@ class ItemList extends Component {
         <StyledHeader>Your Items</StyledHeader>
         <List>
           <StyledLink type="button" onClick={this.addNewItem}>
-            + ADD NEW ITEM
+            + ADD ANOTHER ITEM
           </StyledLink>
+          <Container>
           {this.state.loading && <Spinner />}
           {this.state.itemlist.map((item, index) => {
             const {
-              itemId, color, type, brand, size, url,
+              itemId, color, type, brand, size, url, price, condition, age
             } = item;
             return (
               <Item
@@ -92,6 +104,7 @@ class ItemList extends Component {
               />
             );
           })}
+        </Container>
         </List>
         <StyledBottom>
           <GButtonContainer>

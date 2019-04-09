@@ -7,7 +7,7 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
 import {
-  brands, itemType, condition, labelSize, age,
+  itemType, condition, labelSize, age,
 } from '../../data';
 
 import { ImgDiv, DeleteButton } from './itemdetails.style';
@@ -19,11 +19,12 @@ class ItemDetails extends Component {
     selectedCat: null,
     selected_brands: { id: '', brandName: '', name: '' },
     itemType,
-    colors: ['Black'],
-    brands,
+    colors: [],
+    brands: [],
     condition,
     labelSize,
     age,
+    showDefaultOption: false,
   };
 
   componentDidMount() {
@@ -44,6 +45,13 @@ class ItemDetails extends Component {
       selected_price: itemDetails.price,
       selected_details: itemDetails.details,
       colors: clarifaiColors,
+    });
+
+    axios.get('/getbrands').then(({ data }) => {
+      if (data.success) {
+        const brands = data.data;
+        this.setState({ brands });
+      }
     });
   }
 
