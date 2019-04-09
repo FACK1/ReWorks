@@ -7,7 +7,6 @@ const Popup = ({
   open, toggleClose, data, changeSelected, name,
 }) => {
   let dataHere;
-
   if (name[0] === 'brands') {
     dataHere = data
       ? data.map(ele => (
@@ -20,6 +19,15 @@ const Popup = ({
           onClick={changeSelected}
         >
           {ele.name}
+        </ChoiceBtn>
+      ))
+      : null;
+  } else if (name[0] === 'itemType') {
+    console.log(data);
+    dataHere = data
+      ? data.map(ele => (
+        <ChoiceBtn key={ele.id} type="submit" name={name} value={ele.itemType} onClick={changeSelected}>
+          {ele.itemType}
         </ChoiceBtn>
       ))
       : null;
