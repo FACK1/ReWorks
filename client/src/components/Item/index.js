@@ -17,14 +17,9 @@ import {
 const Item = ({
   color, type, imageUrl, subtitle1, subtitle2, onClick,
 }) => {
-  console.log('aas');
-
-  if (color.length + type.length > 24) {
-    const l = 23 - color.length;
+  if (color.length + type.length > 27) {
+    const l = 26 - color.length;
     type = type.slice(0, l).concat('...');
-    console.log('aa');
-  } else {
-    console.log('a');
   }
   return (
     <ItemDiv>
