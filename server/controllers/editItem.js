@@ -14,7 +14,7 @@ exports.editItem = (req, res) => {
     {
       Size: size,
       Age: age,
-      Color: color,
+      Colour: color,
       Brand: [brandId],
       Type: type,
       Price: price,
