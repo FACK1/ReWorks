@@ -15,6 +15,11 @@ export const CheckboxContainer = styled.div`
   margin-bottom: 38px;
   flex-flow: column wrap;
   font-size: 25px;
+  @media (min-width: 650px) {
+    font-size: 50px;
+    width: 35%;
+    margin-left: 32%;
+  }
 `;
 
 export const BottomContainer = styled.div`
