@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ItemContainer = styled.div`
-  width: 80%;
+  width: 90%;
   height: 100px;
   box-shadow: 1px 2px 2px rgba(195, 184, 184, 0.25);
   display: flex;

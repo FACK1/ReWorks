@@ -20,29 +20,15 @@
     "Tracksuit"
   ],
   "condition": [
-    "I-II",
-    "I",
-    "II",
-    "III",
-    "Antique",
-    "Knackered",
-    "New",
-    "Unissued",
-    "Aged / Grade I",
-    "Supergrade",
-    "Scrap"
+    "New (with tags)",
+    "New (without tags)",
+    "Supergrade (worn lightly)",
+    "Used (good condition)",
+    "Used (some imperfections)",
+    "Vintage"
   ],
-  "age": [
-    "1 wk or less",
-    "1 - 3 wks",
-    "1 - 3 mos",
-    "4 - 7 mos",
-    "8 - 11 mos",
-    "1 - 3 yrs",
-    "3 - 6 yrs",
-    "6 - 9 yrs",
-    "10+ yrs"
-  ],
+  "age": ["0-6 Mths", "6-12 Mths", "1-5 Years", "5-10 Years", "10 Years", "10+ Years", "25+ Years"],
+  "gender": ["Mens", "Womens", "Unisex", "Youth", "Kids", "Infant"],
   "labelSize": [
     "Small",
     "Average",
