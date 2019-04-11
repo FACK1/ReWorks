@@ -22,11 +22,19 @@ class Form extends Component {
   state = {
     categories: [
       'Item Type*',
+<<<<<<< HEAD
       'Color*',
       'Brand*',
       'Condition*',
       'Label size*',
       'Age*',
+=======
+      'Colour*',
+      'Brand',
+      'Condition',
+      'Label size',
+      'Age',
+>>>>>>> 139844cd9be7822184438ce229941405d84d32fc
       'Purchase price',
     ],
   };
