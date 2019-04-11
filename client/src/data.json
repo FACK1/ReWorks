@@ -4,7 +4,21 @@
     { "id": "recMr78NZa2akmLW0", "name": "ASOS" },
     { "id": "recqts81sMcIoFMMJ", "name": "Adidas" }
   ],
-  "colors": ["white", "black", "red", "blue", "green", "limegreen", "gray"],
+  "colors": [
+    {"name":"White","hex":"#FFFFFF"},
+    {"name":"Black","hex":"#000000"},
+    {"name":"Red","hex":"#FF0000"},
+    {"name":"Blue","hex":"#0000FF"},
+    {"name":"Green","hex":"#008000"},
+    {"name":"Yellow","hex":"#FFFF00"},
+    {"name":"Magenta","hex":"#FF00FF"},
+    {"name":"Cyan","hex":"#00FFFF"},
+    {"name":"Violet","hex":"#800080"},
+    {"name":"Orange","hex":"#FFA500"},
+    {"name":"Brown","hex":"#8B4513"},
+    {"name":"Gray","hex":"#808080"},
+    {"name":"Multi-coloured","hex":"#000000"}],
+
   "itemType": [
     "T-shirt",
     "Shirt",
