@@ -22,13 +22,6 @@ export const StyledImg = styled.img`
   height: 200px;
 `;
 
-export const CircleColor = styled.div`
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  background:red;
-}
-`;
 export const StyledInformation = styled.h2`
   margin-left: 30px;
   font-size: 18px;
