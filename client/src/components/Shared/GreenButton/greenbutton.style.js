@@ -10,7 +10,9 @@ border:none;
 font-weight: bold;
 width:45%;
 text-align:center;
-@media (max-width: 650px) {
+font-size: 14px;
+@media (min-width: 650px) {
   font-size: 14px;
+  width: 13%;
 }
 `;
