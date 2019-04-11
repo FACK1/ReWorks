@@ -95,7 +95,7 @@ class GetDetails extends Component {
         colorsHex: '',
         sizeCategory: this.state.selected_sizeCategory,
       };
-      console.log(inputs);
+
       if (cookie) {
         axios.post('/add-item', inputs).then(({ data }) => {
           if (data.success) {
@@ -111,7 +111,6 @@ class GetDetails extends Component {
   toggleOpen = (e) => {
     const { value, name } = e.target;
     if (value === 'more') {
-      console.log('asas', name);
       this.setState({ isOpen: true, selectedCat: name });
     } else if (name === 'brands') {
       const value1 = JSON.parse(value);
