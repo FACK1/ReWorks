@@ -12,13 +12,15 @@ export const StyledTitle = styled.h1`
 `;
 
 export const LogoutB = styled.h1`
-  font-size: 16px;
   position:absolute;
   top:30px;
   right:30px;
   font-weight: normal;
+  font-size: 12px;
 
-  @media (max-width: 650px) {
-    font-size: 12px;
+  @media (min-width: 650px) {
+    font-size: 16px;
+    margin-right: 34%; 
+
   }
 `;
