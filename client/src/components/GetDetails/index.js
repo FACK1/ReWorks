@@ -7,7 +7,7 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  itemType, condition, labelSize, age,
+  itemType, condition, labelSize, age, colors,
 } from '../../data';
 
 class GetDetails extends Component {
@@ -16,7 +16,7 @@ class GetDetails extends Component {
     selectedCat: null,
     selected_brands: { id: '', brandName: '', name: '' },
     itemType,
-    colors: [],
+    colors,
     brands: [],
     condition,
     labelSize,
@@ -28,6 +28,7 @@ class GetDetails extends Component {
     selected_price: '',
     selected_details: '',
     showDefaultOption: true,
+    title: '',
   };
 
   componentDidMount() {
@@ -36,12 +37,22 @@ class GetDetails extends Component {
       const apiColors = this.props.location.details.colors;
 
       if (apparel || apiColors) {
-        const colours = apiColors.data.map(ele => ele.name);
-        const clarifaiColors = colours.join(',');
-        this.setState({ clarifaiColors });
+        const colours = apiColors.data.map(ele => ({ name: ele.name, hex: ele.hex }));
+
+        colours.filter((color) => {
+          colors.map((color2, i) => {
+            if (color.name === color2.name) {
+              colors.splice(i, 1);
+            }
+          });
+        });
+
+        const clarifaiColours = apiColors.data.map(ele => (ele.name));
+        const clarifaiColors = clarifaiColours.join(',');
         this.setState({
-          colors: colours,
-          selected_colors: colours[0],
+          colors: [...colours, ...colors],
+          selected_colors: colours[0].name,
+          clarifaiColors,
         });
 
         if (apparel && apparel.data.length > 0) {
@@ -66,6 +77,14 @@ class GetDetails extends Component {
           this.setState({
             brands,
           });
+        }
+      });
+
+      axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
+        if (cookie) {
+          this.setState({ title: 'SAVE YOUR ITEM' });
+        } else {
+          this.setState({ title: 'LOGIN TO SAVE YOUR ITEM' });
         }
       });
     } else {
@@ -153,7 +172,7 @@ class GetDetails extends Component {
           changeSelected={this.changeSelected}
         />
         <Button />
-        <GButton title="CONTINUE" onClick={this.continue} />
+        <GButton title={this.state.title} onClick={this.continue} />
         <Footer />
       </React.Fragment>
     );

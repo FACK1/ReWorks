@@ -38,15 +38,16 @@ export const CloseBtn = styled.button`
 
 export const ChoiceBtn = styled.button`
   width:200px;
-  border: none;
+  border: 1px solid #1ED390;
+  background:white;
   border-radius: 20px;
-  background: #1ED390;
   :hover {
     cursor: pointer;
   }
   padding:10px;
   margin: 7px;
   font-size: 20px;
+  color: ${props => (props.nameColor === 'White' ? 'Black' : props.hexColor)};
   @media (max-width: 650px) {
     font-size: 16px;
   }
