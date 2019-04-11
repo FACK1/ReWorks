@@ -11,7 +11,9 @@ font-weight: bold;
 width:45%;
 text-align:center;
 text-decoration:none
-@media (max-width: 650px) {
+@media (min-width: 650px) {
   font-size: 14px;
+  width: 15%;
+  margin-left:36%;
 }
 `;
