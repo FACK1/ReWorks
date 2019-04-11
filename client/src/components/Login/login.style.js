@@ -20,6 +20,8 @@ export const StyledForm = styled.form`
     justify-content: space-around;
     flex-direction:column;
     margin:20px;
+    width: 28%;
+    margin-left:35%;
 `;
 export const StyledLabel = styled.label`
     font-size: 20px;
