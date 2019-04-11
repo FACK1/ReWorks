@@ -27,6 +27,7 @@ class GetDetails extends Component {
     selected_age: '',
     selected_price: '',
     selected_details: '',
+    selected_currency: '$',
     showDefaultOption: true,
   };
 
@@ -77,11 +78,11 @@ class GetDetails extends Component {
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
       const { history } = this.props;
-
+      const price = this.state.selected_price.concat(this.state.selected_currency);
       const inputs = {
         type: this.state.selected_itemType,
         age: this.state.selected_age,
-        price: this.state.selected_price,
+        price,
         color: this.state.selected_colors,
         colors: this.state.clarifaiColors,
         condition: this.state.selected_condition,

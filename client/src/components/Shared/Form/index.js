@@ -16,6 +16,8 @@ import {
   StyledInput,
   StyledTextarea,
   StyledImgCon,
+  StyledSelectCurrency,
+  StyledPriceConatiner,
 } from './form.style';
 
 class Form extends Component {
@@ -47,6 +49,7 @@ class Form extends Component {
       selected_age,
       selected_price,
       selected_details,
+      selected_currency,
       itemType,
       colors,
       brands,
@@ -178,13 +181,26 @@ class Form extends Component {
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledInput
-              onChange={toggleOpen}
-              type="text"
-              name="price"
-              value={selected_price}
-              placeholder="price"
-            />
+            <StyledPriceConatiner>
+              <StyledInput
+                onChange={toggleOpen}
+                type="text"
+                name="price"
+                value={selected_price}
+                placeholder="price"
+              />
+
+              <StyledSelectCurrency onChange={toggleOpen} name="currency" value={selected_currency}>
+                {showDefaultOption && (
+                <option default hidden>
+                $
+                </option>
+                )}
+                <StyledOption value="$">$</StyledOption>
+                <StyledOption value="£">£</StyledOption>
+                <StyledOption value="€">€</StyledOption>
+              </StyledSelectCurrency>
+            </StyledPriceConatiner>
           </StyledItem>
         </StyledDiv>
 
