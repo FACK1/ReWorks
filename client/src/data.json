@@ -28,7 +28,7 @@
     "Vintage"
   ],
   "age": ["0-6 Mths", "6-12 Mths", "1-5 Years", "5-10 Years", "10 Years", "10+ Years", "25+ Years"],
-  "gender": ["Mens", "Womens", "Unisex", "Youth", "Kids", "Infant"],
+  "sizeCategory": ["Mens", "Womens", "Unisex", "Youth", "Kids", "Infant"],
   "labelSize": [
     "Small",
     "Average",
