@@ -23,21 +23,23 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledInformation = styled.h2`
-  margin-left: 30px;
+  margin-left: 36%;
   font-size: 18px;
   color: #909090;
   text-align: left;
   @media (max-width: 650px) {
      font-size: 12px;
+     margin-left: 10%;
   }
 `;
 
 export const StyledNotic = styled.h2`
-  margin-left: 30px;
+  margin-left: 36%;
 	font-size: 18px;
 	text-align: left;
 	@media (max-width: 650px) {
 		font-size: 12px;
+    margin-left: 10%;
 	}
 `;
 
@@ -54,6 +56,10 @@ export const StyledDiv = styled.div`
 	display: flex;
 	justify-content: space-around;
 	flex-direction: row;
+  @media (min-width: 650px) {
+    width:40%;
+    margin-left: 30%;
+  }
 `;
 
 export const StyledItem = styled.div`
@@ -99,18 +105,22 @@ export const StyledInput = styled.input`
 
 export const StyledTextarea = styled.textarea`
 	font-size: 20px;
-	width:242px
-	padding:0 30px;
+	width:80%;
 	background-color:#FBFBFB;
 	border:1px solid  #F2F2F2;
 	height:80px;
 	margin:20px auto;
 	display:flex;
 	text-align:left;
-	@media (max-width: 650px) {
-	  font-size: 16px;
-	}
+  font-size: 16px;
   ::placeholder{
-    font-family:'Assistant';
+  font-family:'Assistant';
+  padding-left: 2%;
+  padding-top: 2%;
+
+}
+    @media (min-width: 650px) {
+      width: 28%;
+      margin-left: 36%;
   }
 `;
