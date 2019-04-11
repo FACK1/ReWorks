@@ -22,7 +22,7 @@ class Form extends Component {
   state = {
     categories: [
       'Item Type*',
-      'Color*',
+      'Colour*',
       'Brand',
       'Condition',
       'Label size',
