@@ -32,8 +32,8 @@ exports.getItems = (req, res) => {
               details: record.get('Details'),
               brandId: record.get('Brand')[0],
               colors: record.get('Colours'),
-              colorHex: record.get('Colour Hex Code'),
-              colorsHex: record.get('Colours Hex Code'),
+              hex: record.get('Colour Hex Code'),
+              colorshex: record.get('Colours Hex Codes'),
               sizeCategory: record.get('Size Category'),
             });
           }

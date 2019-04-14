@@ -7,7 +7,6 @@ const Popup = ({
   open, toggleClose, data, changeSelected, name,
 }) => {
   let dataHere;
-
   if (name[0] === 'brands') {
     dataHere = data
       ? data.map(ele => (
@@ -18,6 +17,22 @@ const Popup = ({
           name={name}
           value={`{"id": "${ele.id}", "name": "${ele.name}"}`}
           onClick={changeSelected}
+        >
+          {ele.name}
+        </ChoiceBtn>
+      ))
+      : null;
+  } else if (name[0] === 'colors') {
+    dataHere = data
+      ? data.map(ele => (
+        <ChoiceBtn
+          type="submit"
+          key={ele.name}
+          name={ele.name}
+          value={ele.name}
+          onClick={changeSelected}
+          hexColor={ele.hex}
+          nameColor={ele.name}
         >
           {ele.name}
         </ChoiceBtn>

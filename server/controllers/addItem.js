@@ -19,8 +19,8 @@ exports.addItem = (req, res) => {
     details,
     condition,
     colors,
-    colorHex,
-    colorsHex,
+    hex,
+    colorshex,
     sizeCategory,
   } = req.body;
   base('Items').create(
@@ -42,8 +42,8 @@ exports.addItem = (req, res) => {
       Users: [userAirtableId],
       'Image URL': url,
       Details: details,
-      'Colour Hex Code': colorHex,
-      'Colours Hex Codes': colorsHex,
+      'Colour Hex Code': hex,
+      'Colours Hex Codes': colorshex,
       'Size Category': sizeCategory,
     },
     (err) => {

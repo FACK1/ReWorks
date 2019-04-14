@@ -76,7 +76,6 @@ class ItemList extends Component {
       { label: 'Age', key: 'age' },
       { label: 'Color', key: 'color' },
     ];
-
     return (
       <React.Fragment>
         <Title {...this.props} />
@@ -86,25 +85,25 @@ class ItemList extends Component {
             + ADD ANOTHER ITEM
           </StyledLink>
           <Container>
-          {this.state.loading && <Spinner />}
-          {this.state.itemlist.map((item, index) => {
-            const {
-              itemId, color, type, brand, size, url, price, condition, age
-            } = item;
-            return (
-              <Item
-                key={itemId}
-                data-name={itemId}
-                color={color}
-                type={type}
-                subtitle1={brand}
-                subtitle2={size}
-                imageUrl={url}
-                onClick={() => this.goItemDetails(itemId, index)}
-              />
-            );
-          })}
-        </Container>
+            {this.state.loading && <Spinner />}
+            {this.state.itemlist.map((item, index) => {
+              const {
+                itemId, color, type, brand, size, url, price, condition, age,
+              } = item;
+              return (
+                <Item
+                  key={itemId}
+                  data-name={itemId}
+                  color={color}
+                  type={type}
+                  subtitle1={brand}
+                  subtitle2={size}
+                  imageUrl={url}
+                  onClick={() => this.goItemDetails(itemId, index)}
+                />
+              );
+            })}
+          </Container>
         </List>
         <StyledBottom>
           <GButtonContainer>

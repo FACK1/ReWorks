@@ -7,7 +7,7 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  itemType, condition, labelSize, age, sizeCategory, patterns,
+  itemType, condition, labelSize, age, sizeCategory, patterns, colors,
 } from '../../data';
 
 class GetDetails extends Component {
@@ -16,7 +16,7 @@ class GetDetails extends Component {
     selectedCat: null,
     selected_brands: { id: '', brandName: '', name: '' },
     itemType,
-    colors: [],
+    colors,
     brands: [],
     condition,
     labelSize,
@@ -24,14 +24,18 @@ class GetDetails extends Component {
     sizeCategory,
     patterns,
     clarifaiColors: '',
+    clarifaiHex: '',
     selected_condition: '',
     selected_labelSize: '',
     selected_age: '',
     selected_price: '',
     selected_details: '',
     selected_sizeCategory: '',
+    selected_hex: '',
     selected_patterns: '',
+    selected_currency: '£',
     showDefaultOption: true,
+    title: '',
   };
 
   componentDidMount() {
@@ -40,12 +44,28 @@ class GetDetails extends Component {
       const apiColors = this.props.location.details.colors;
 
       if (apparel || apiColors) {
-        const colours = apiColors.data.map(ele => ele.name);
-        const clarifaiColors = colours.join(',');
-        this.setState({ clarifaiColors });
+        const colours = apiColors.data.map(ele => ({ name: ele.name, hex: ele.hex }));
+
+        colours.filter((color) => {
+          colors.map((color2, i) => {
+            if (color.name === color2.name) {
+              colors.splice(i, 1);
+            }
+          });
+        });
+
+        const clarifaiColours = apiColors.data.map(ele => (ele.name));
+        const clarifaiColoursHex = apiColors.data.map(ele => (ele.hex));
+
+        const clarifaiColors = clarifaiColours.join(',');
+
+        const clarifaiHex = clarifaiColoursHex.join(',');
         this.setState({
-          colors: colours,
-          selected_colors: colours[0],
+          colors: [...colours, ...colors],
+          selected_colors: colours[0].name,
+          selected_hex: colours[0].hex,
+          clarifaiColors,
+          clarifaiHex,
         });
 
         if (apparel && apparel.data.length > 0) {
@@ -72,6 +92,14 @@ class GetDetails extends Component {
           });
         }
       });
+
+      axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
+        if (cookie) {
+          this.setState({ title: 'SAVE YOUR ITEM' });
+        } else {
+          this.setState({ title: 'LOGIN TO SAVE YOUR ITEM' });
+        }
+      });
     } else {
       const { history } = this.props;
       history.push('/upload-photo');
@@ -81,13 +109,15 @@ class GetDetails extends Component {
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
       const { history } = this.props;
-
+      const price = this.state.selected_price.concat(this.state.selected_currency);
       const inputs = {
         type: this.state.selected_itemType,
         age: this.state.selected_age,
-        price: this.state.selected_price,
+        price,
         color: this.state.selected_colors,
         colors: this.state.clarifaiColors,
+        colorshex: this.state.clarifaiHex,
+        hex: this.state.selected_hex,
         condition: this.state.selected_condition,
         size: this.state.selected_labelSize,
         url: this.props.location.details.image_url,
@@ -119,6 +149,10 @@ class GetDetails extends Component {
       this.setState({
         [`selected_${name}`]: { id: value1.id, brandName: value1.name },
       });
+    } else if (name === 'colors') {
+      const { colors } = this.state;
+      const color = colors.filter(x => (x.name === value ? x : null));
+      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name });
     } else {
       this.setState({ [`selected_${name}`]: value });
     }
@@ -139,6 +173,10 @@ class GetDetails extends Component {
         [selected]: { id, brandName: value1.name, name: value },
         isOpen: false,
       });
+    } else if (name === 'colors') {
+      const { colors } = this.state;
+      const color = colors.filter(x => (x.name === value ? x.hex : null));
+      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
     } else {
       this.setState({ [selected]: value, isOpen: false });
     }
@@ -161,7 +199,7 @@ class GetDetails extends Component {
           changeSelected={this.changeSelected}
         />
         <Button />
-        <GButton title="CONTINUE" onClick={this.continue} />
+        <GButton title={this.state.title} onClick={this.continue} />
         <Footer />
       </React.Fragment>
     );
