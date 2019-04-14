@@ -7,7 +7,7 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  condition, labelSize, age,
+  condition, labelSize, age, sizeCategory,
 } from '../../data';
 
 class GetDetails extends Component {
