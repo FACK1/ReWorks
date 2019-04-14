@@ -22,11 +22,12 @@ class Form extends Component {
   state = {
     categories: [
       'Item Type*',
-      'Color*',
+      'Colour*',
       'Pattern',
       'Brand',
       'Condition',
       'Label size',
+      'Size Category',
       'Age',
       'Purchase price',
     ],
@@ -57,6 +58,8 @@ class Form extends Component {
       age,
       patterns,
       showDefaultOption,
+      selected_sizeCategory,
+      sizeCategory,
     } = this.props;
 
     return (
@@ -170,6 +173,24 @@ class Form extends Component {
                 </option>
               )}
               {labelSize.map(size => (labelSize.indexOf(size) >= 5 ? (
+                <StyledOption key={size} value={size} hidden>
+                  {size}
+                </StyledOption>
+              ) : (
+                <StyledOption key={size} value={size}>
+                  {size}
+                </StyledOption>
+              )))}
+              <StyledOption value="more">More...</StyledOption>
+            </StyledSelect>
+
+            <StyledSelect onChange={toggleOpen} name="sizeCategory" value={selected_sizeCategory}>
+              {showDefaultOption && (
+                <option default hidden>
+                  Select...
+                </option>
+              )}
+              {sizeCategory.map(size => (sizeCategory.indexOf(size) >= 5 ? (
                 <StyledOption key={size} value={size} hidden>
                   {size}
                 </StyledOption>
