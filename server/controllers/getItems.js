@@ -25,13 +25,16 @@ exports.getItems = (req, res) => {
               url: record.get('Image URL'),
               name: record.get('Name'),
               price: record.get('Price'),
-              color: record.get('Color'),
+              color: record.get('Colour'),
               brand: record.get('Brand Names')[0],
               condition: record.get('Condition'),
               age: record.get('Age'),
               details: record.get('Details'),
               brandId: record.get('Brand')[0],
-              colors: record.get('Colors'),
+              colors: record.get('Colours'),
+              colorHex: record.get('Colour Hex Code'),
+              colorsHex: record.get('Colours Hex Code'),
+              sizeCategory: record.get('Size Category'),
             });
           }
         });
