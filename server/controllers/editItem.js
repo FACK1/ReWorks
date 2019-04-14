@@ -17,6 +17,7 @@ exports.editItem = (req, res) => {
     age,
     hex,
     sizeCategory,
+    pattern,
   } = req.body;
   base('Items').update(
     id,
@@ -32,6 +33,7 @@ exports.editItem = (req, res) => {
       Details: details,
       'Colour Hex Code': hex,
       'Size Category': sizeCategory,
+      Pattern: pattern,
     },
     (err) => {
       if (err) {

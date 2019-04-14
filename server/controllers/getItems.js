@@ -35,6 +35,7 @@ exports.getItems = (req, res) => {
               hex: record.get('Colour Hex Code'),
               colorshex: record.get('Colours Hex Codes'),
               sizeCategory: record.get('Size Category'),
+              pattern: record.get('Pattern'),
             });
           }
         });
