@@ -55,6 +55,7 @@ class Form extends Component {
       age,
       showDefaultOption,
     } = this.props;
+    console.log(itemType);
 
     return (
       <StyledForm>
@@ -73,13 +74,20 @@ class Form extends Component {
           </StyledLabels>
 
           <StyledItem>
-            <StyledSelect onChange={toggleOpen} name="itemType" value={selected_itemType}>
+            <StyledSelect onChange={toggleOpen} name="itemType" value={selected_itemType.name}>
               {itemType.map(item => (itemType.indexOf(item) >= 5 ? (
-                <StyledOption key={item.id} value={item.itemType} hidden>
+                <StyledOption
+                  key={item.id}
+                  value={`{"id": "${item.id}", "name": "${item.name}"}`}
+                  hidden
+                >
                   {item.itemType}
                 </StyledOption>
               ) : (
-                <StyledOption key={item.id} value={item.itemType}>
+                <StyledOption
+                  key={item.id}
+                  value={`{"id": "${item.id}", "name": "${item.name}"}`}
+                >
                   {item.itemType}
                 </StyledOption>
               )))}
