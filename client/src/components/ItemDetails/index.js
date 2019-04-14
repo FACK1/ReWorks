@@ -7,7 +7,7 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
 import {
-  itemType, condition, labelSize, age, colors,
+  itemType, condition, labelSize, age, sizeCategory, colors,
 } from '../../data';
 
 import { ImgDiv, DeleteButton } from './itemdetails.style';
@@ -24,6 +24,7 @@ class ItemDetails extends Component {
     condition,
     labelSize,
     age,
+    sizeCategory,
     showDefaultOption: false,
   };
 
@@ -62,6 +63,8 @@ class ItemDetails extends Component {
       colors: [...allColors, ...colors],
       clarifaiColors,
       clarifaiHex,
+      selected_sizeCategory: itemDetails.sizeCategory,
+
     });
 
     axios.get('/getbrands').then(({ data }) => {
@@ -138,6 +141,7 @@ class ItemDetails extends Component {
       selected_itemType,
       selected_price,
       selected_details,
+      selected_sizeCategory,
       itemDetails,
     } = this.state;
 
@@ -164,6 +168,7 @@ class ItemDetails extends Component {
       selected_details,
       selected_brands.id,
       itemDetails.colors,
+      selected_sizeCategory,
     );
 
     let flag = false;
@@ -191,6 +196,7 @@ class ItemDetails extends Component {
       selected_price,
       selected_details,
       itemDetails,
+      selected_sizeCategory,
     } = this.state;
 
     const newUpdates = {
@@ -203,6 +209,7 @@ class ItemDetails extends Component {
       color: selected_colors,
       hex: selected_hex,
       age: selected_age,
+      sizeCategory: selected_sizeCategory,
     };
 
     if (updatedFlag) {
