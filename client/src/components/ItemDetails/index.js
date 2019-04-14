@@ -7,7 +7,7 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
 import {
-  itemType, condition, labelSize, age, sizeCategory, colors,
+  itemType, condition, labelSize, age, sizeCategory, colors, patterns,
 } from '../../data';
 
 import { ImgDiv, DeleteButton } from './itemdetails.style';
@@ -25,6 +25,7 @@ class ItemDetails extends Component {
     labelSize,
     age,
     sizeCategory,
+    patterns,
     showDefaultOption: false,
   };
 
@@ -39,7 +40,6 @@ class ItemDetails extends Component {
     clarifaiColors.map((color, i) => {
       allColors.push({ name: color, hex: clarifaiHex[i] });
     });
-
 
     allColors.filter((color) => {
       colors.map((color2, i) => {
@@ -67,7 +67,7 @@ class ItemDetails extends Component {
       clarifaiColors,
       clarifaiHex,
       selected_sizeCategory: itemDetails.sizeCategory,
-
+      selected_patterns: itemDetails.pattern,
     });
 
     axios.get('/getbrands').then(({ data }) => {
@@ -146,6 +146,7 @@ class ItemDetails extends Component {
       selected_currency,
       selected_details,
       selected_sizeCategory,
+      selected_patterns,
       itemDetails,
     } = this.state;
 
@@ -173,6 +174,7 @@ class ItemDetails extends Component {
       selected_brands.id,
       itemDetails.colors,
       selected_sizeCategory,
+      selected_patterns,
     );
 
     let flag = false;
@@ -202,6 +204,7 @@ class ItemDetails extends Component {
       selected_details,
       itemDetails,
       selected_sizeCategory,
+      selected_patterns,
     } = this.state;
 
     const newUpdates = {
@@ -215,6 +218,7 @@ class ItemDetails extends Component {
       hex: selected_hex,
       age: selected_age,
       sizeCategory: selected_sizeCategory,
+      pattern: selected_patterns,
     };
 
     if (updatedFlag) {
