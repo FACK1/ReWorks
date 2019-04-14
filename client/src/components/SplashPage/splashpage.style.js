@@ -24,7 +24,7 @@ width:40%;
   font-size: 19px;
   display: flex;
   flex-direction: column;
-  width:60%;
+  width:50%;
 
 }
 
