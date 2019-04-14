@@ -4,6 +4,8 @@
     { "id": "recMr78NZa2akmLW0", "name": "ASOS" },
     { "id": "recqts81sMcIoFMMJ", "name": "Adidas" }
   ],
+  "patterns":["TOSS OR RANDOM PATTERN", "DOT PATTERN", "COMPLEX STRIPE PATTERN", "BLOCK PATTERN", "DIAMOND PATTERN"],
+
   "colors": [
     {"name":"Aquamarine","hex":"#7FFFD4"},
     {"name":"Beige","hex":"#F5DEB3"},
