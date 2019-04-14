@@ -15,7 +15,7 @@ exports.editItem = (req, res) => {
     details,
     color,
     age,
-    colorHex,
+    hex,
     sizeCategory,
   } = req.body;
   base('Items').update(
@@ -30,7 +30,7 @@ exports.editItem = (req, res) => {
       Condition: condition,
       Name: type,
       Details: details,
-      'Colour Hex Code': colorHex,
+      'Colour Hex Code': hex,
       'Size Category': sizeCategory,
     },
     (err) => {

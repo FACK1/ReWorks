@@ -81,7 +81,8 @@ export const StyledSelect = styled.select`
 `;
 
 export const StyledOption = styled.option`
-	color: #4C5268;
+  color: ${props => (props.nameColor === 'White' ? 'Black' : props.hexColor)};
+
 `;
 
 export const StyledInput = styled.input`
