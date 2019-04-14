@@ -83,14 +83,14 @@ export const StyledSelect = styled.select`
 export const StyledSelectCurrency = styled.select`
   width:60px;
   max-width:60px;
-	background-color: #FBFBFB;
-	font-size: 20px;
-	margin-bottom: 16px;
-	border: 1px solid #F2F2F2;
-	padding: 7px 14px;
-	@media (max-width: 650px) {
-		font-size: 16px;
-	}
+  background-color: #FBFBFB;
+  font-size: 20px;
+  margin-bottom: 16px;
+  border: 1px solid #F2F2F2;
+  padding: 7px 14px;
+  @media (max-width: 650px) {
+    font-size: 16px;
+   }
 `;
 
 
@@ -98,10 +98,10 @@ export const StyledOption = styled.option`
 	color: #4C5268;
 `;
 
-export const StyledPriceConatiner = styled.div`
-display: flex;
-justify-content: space-around;
-flex-direction: row;
+export const StyledPriceContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
 `;
 export const StyledInput = styled.input`
 	background-color: #FBFBFB;

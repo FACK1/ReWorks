@@ -17,7 +17,7 @@ import {
   StyledTextarea,
   StyledImgCon,
   StyledSelectCurrency,
-  StyledPriceConatiner,
+  StyledPriceContainer,
 } from './form.style';
 
 class Form extends Component {
@@ -202,7 +202,7 @@ class Form extends Component {
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledPriceConatiner>
+            <StyledPriceContainer>
               <StyledInput
                 onChange={toggleOpen}
                 type="text"
@@ -221,7 +221,7 @@ class Form extends Component {
                 <StyledOption value="£">£</StyledOption>
                 <StyledOption value="€">€</StyledOption>
               </StyledSelectCurrency>
-            </StyledPriceConatiner>
+            </StyledPriceContainer>
           </StyledItem>
         </StyledDiv>
 

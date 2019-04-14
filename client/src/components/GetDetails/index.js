@@ -29,7 +29,7 @@ class GetDetails extends Component {
     selected_price: '',
     selected_details: '',
     selected_sizeCategory: '',
-    selected_currency: '$',
+    selected_currency: '£',
     showDefaultOption: true,
   };
 
