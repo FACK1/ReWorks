@@ -28,6 +28,15 @@ class signUp extends Component {
     isErrorPassword: false,
   };
 
+  componentDidMount() {
+    axios.get('/checkcookie')
+      .then(({ data: { cookie } }) => {
+        if (cookie) {
+          const { history } = this.props;
+          history.push('/item-list');
+        }
+      });
+  }
 
   validate = () => {
     let isError = false;

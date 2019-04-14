@@ -30,6 +30,16 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    axios.get('/checkcookie')
+      .then(({ data: { cookie } }) => {
+        if (cookie) {
+          const { history } = this.props;
+          history.push('/item-list');
+        }
+      });
+  }
+
   validate = () => {
     let isError = false;
     this.setState({ isErrorUsername: false, isErrorPassword: false });
@@ -83,63 +93,63 @@ class Login extends Component {
     }
   };
 
-goSignUp = () => {
-  const { history } = this.props;
-  history.push({ pathname: '/signup-form', data: this.props.location.data });
-}
+  goSignUp = () => {
+    const { history } = this.props;
+    history.push({ pathname: '/signup-form', data: this.props.location.data });
+  }
 
-render() {
-  return (
-    <React.Fragment>
-      <Title />
-      <Header title="Login to save your data!" />
-      <StyledForm>
-        <StyledLabel> Username* </StyledLabel>
-        <StyledInput
-          StyleError={this.state.isErrorUsername}
-          {...this.props}
-          type="text"
-          name="username"
-          placeholder="username"
-          errorText={this.state.usernameError}
-          value={this.state.username}
-          onChange={e => this.setState({
-            username: e.target.value,
-          })
+  render() {
+    return (
+      <React.Fragment>
+        <Title />
+        <Header title="Login to save your data!" />
+        <StyledForm>
+          <StyledLabel> Username* </StyledLabel>
+          <StyledInput
+            StyleError={this.state.isErrorUsername}
+            {...this.props}
+            type="text"
+            name="username"
+            placeholder="username"
+            errorText={this.state.usernameError}
+            value={this.state.username}
+            onChange={e => this.setState({
+              username: e.target.value,
+            })
             }
-        />
-        <ErrorMessage>{this.state.usernameError}</ErrorMessage>
+          />
+          <ErrorMessage>{this.state.usernameError}</ErrorMessage>
 
-        <StyledLabel> Password* </StyledLabel>
-        <StyledInput
-          StyleError={this.state.isErrorPassword}
-          {...this.props}
-          type="password"
-          name="password"
-          placeholder="password"
-          errorText={this.state.passwordError}
-          value={this.state.password}
-          onChange={e => this.setState({
-            password: e.target.value,
-          })
+          <StyledLabel> Password* </StyledLabel>
+          <StyledInput
+            StyleError={this.state.isErrorPassword}
+            {...this.props}
+            type="password"
+            name="password"
+            placeholder="password"
+            errorText={this.state.passwordError}
+            value={this.state.password}
+            onChange={e => this.setState({
+              password: e.target.value,
+            })
             }
-        />
-        <ErrorMessage>{this.state.passwordError}</ErrorMessage>
+          />
+          <ErrorMessage>{this.state.passwordError}</ErrorMessage>
 
-        <StyledP>
-          <StyledText>First time around here? </StyledText>
-          <StyledSignUp onClick={this.goSignUp}> Sign up</StyledSignUp>
-        </StyledP>
-      </StyledForm>
+          <StyledP>
+            <StyledText>First time around here? </StyledText>
+            <StyledSignUp onClick={this.goSignUp}> Sign up</StyledSignUp>
+          </StyledP>
+        </StyledForm>
 
-      <StyledBottom>
-        <Button />
-        <GButton title="LOGIN" onClick={this.login} />
-        <Footer />
-      </StyledBottom>
-    </React.Fragment>
-  );
-}
+        <StyledBottom>
+          <Button />
+          <GButton title="LOGIN" onClick={this.login} />
+          <Footer />
+        </StyledBottom>
+      </React.Fragment>
+    );
+  }
 }
 
 export default Login;
