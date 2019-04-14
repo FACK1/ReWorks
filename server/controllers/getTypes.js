@@ -13,7 +13,7 @@ exports.getTypes = (req, res) => {
   }).eachPage((records, fetchNextPage) => {
     // This function (`page`) will get called for each page of records.
     records.forEach((record) => {
-      itemType.push({ itemType: record._rawJson.fields.Name, id: record._rawJson.fields.Id });
+      itemType.push({ itemType: record._rawJson.fields.Name, name: record._rawJson.fields.Name, id: record._rawJson.fields.Id });
     });
     fetchNextPage();
   }, (err) => {
