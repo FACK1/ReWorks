@@ -8,17 +8,19 @@ import Footer from '../Shared/Footer';
 import Checkbox from '../Shared/Checkbox';
 import Spinner from '../Shared/Spinner';
 
-import { ThanksText, CheckboxContainer, BottomContainer, Para} from './feedback.style';
+import {
+  ThanksText, CheckboxContainer, BottomContainer, Para,
+} from './feedback.style';
 
 class Feedback extends Component {
   state = {
     options: [
-        { text: 'Donate to charity', checked: false },
-        { text: 'Sell on eBay', checked: false },
-        { text: 'Sell on another marketplace', checked: false },
-        { text: 'Swap for something else', checked: false },
-        { text: 'Repair / Refurbish / Upcycle ', checked: false },
-        { text: 'Upload to instagram', checked: false },
+      { text: 'Donate to charity', checked: false },
+      { text: 'Sell on eBay', checked: false },
+      { text: 'Sell on another marketplace', checked: false },
+      { text: 'Swap for something else', checked: false },
+      { text: 'Repair / Refurbish / Upcycle ', checked: false },
+      { text: 'Upload to instagram', checked: false },
     ],
     prevFeedback: [],
     currentFeedback: [],
@@ -27,6 +29,13 @@ class Feedback extends Component {
   };
 
   componentDidMount() {
+    axios.get('/checkcookie')
+      .then(({ data: { cookie } }) => {
+        if (!cookie) {
+          const { history } = this.props;
+          history.push('/');
+        }
+      });
     axios
       .get('/get-feedback')
       .then(({ data }) => {
