@@ -37,6 +37,22 @@ const Popup = ({
         </ChoiceBtn>
       ))
       : null;
+  } else if (name[0] === 'colors') {
+    dataHere = data
+      ? data.map(ele => (
+        <ChoiceBtn
+          type="submit"
+          key={ele.name}
+          name={ele.name}
+          value={ele.name}
+          onClick={changeSelected}
+          hexColor={ele.hex}
+          nameColor={ele.name}
+        >
+          {ele.name}
+        </ChoiceBtn>
+      ))
+      : null;
   } else {
     dataHere = data
       ? data.map(ele => (

@@ -32,6 +32,7 @@ class Form extends Component {
     ],
   };
 
+
   render() {
     const {
       image,
@@ -97,12 +98,23 @@ class Form extends Component {
 
             <StyledSelect onChange={toggleOpen} name="colors" value={selected_colors}>
               {colors.map(color => (colors.indexOf(color) >= 5 ? (
-                <StyledOption key={color} value={color} hidden>
-                  {color}
+                <StyledOption
+                  value={color.name}
+                  hexColor={color.hex}
+                  nameColor={color.name}
+                  {...this.props}
+                  hidden
+                >
+                  {color.name}
                 </StyledOption>
               ) : (
-                <StyledOption key={color} value={color}>
-                  {color}
+                <StyledOption
+                  value={color.name}
+                  hexColor={color.hex}
+                  nameColor={color.name}
+                  {...this.props}
+                >
+                  {color.name}
                 </StyledOption>
               )))}
               <StyledOption value="more">More...</StyledOption>
@@ -110,9 +122,9 @@ class Form extends Component {
 
             <StyledSelect onChange={toggleOpen} name="brands" value={selected_brands.name}>
               {showDefaultOption && (
-                <option default hidden>
+              <option default hidden>
                   Select...
-                </option>
+              </option>
               )}
               {brands.map(brand => (brands.indexOf(brand) >= 5 ? (
                 <StyledOption
@@ -135,9 +147,9 @@ class Form extends Component {
 
             <StyledSelect onChange={toggleOpen} name="condition" value={selected_condition}>
               {showDefaultOption && (
-                <option default hidden>
+              <option default hidden>
                   Select...
-                </option>
+              </option>
               )}
               {condition.map(cond => (condition.indexOf(cond) >= 5 ? (
                 <StyledOption key={cond} value={cond} hidden>
@@ -153,9 +165,9 @@ class Form extends Component {
 
             <StyledSelect onChange={toggleOpen} name="labelSize" value={selected_labelSize}>
               {showDefaultOption && (
-                <option default hidden>
+              <option default hidden>
                   Select...
-                </option>
+              </option>
               )}
               {labelSize.map(size => (labelSize.indexOf(size) >= 5 ? (
                 <StyledOption key={size} value={size} hidden>
@@ -189,9 +201,9 @@ class Form extends Component {
 
             <StyledSelect onChange={toggleOpen} name="age" value={selected_age}>
               {showDefaultOption && (
-                <option default hidden>
+              <option default hidden>
                   Select...
-                </option>
+              </option>
               )}
               {age.map(time => (age.indexOf(time) >= 5 ? (
                 <StyledOption key={time} value={time} hidden>

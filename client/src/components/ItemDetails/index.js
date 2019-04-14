@@ -7,7 +7,7 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
 import {
-  itemType, condition, labelSize, age, sizeCategory,
+  itemType, condition, labelSize, age, sizeCategory, colors,
 } from '../../data';
 
 import { ImgDiv, DeleteButton } from './itemdetails.style';
@@ -32,6 +32,20 @@ class ItemDetails extends Component {
     const { itemDetails } = this.state;
     const clarifaiColors = itemDetails.colors.split(',');
 
+    const clarifaiHex = itemDetails.colorshex.split(',');
+    const allColors = [];
+    clarifaiColors.map((color, i) => {
+      allColors.push({ name: color, hex: clarifaiHex[i] });
+    });
+
+
+    allColors.filter((color) => {
+      colors.map((color2, i) => {
+        if (color.name === color2.name) {
+          colors.splice(i, 1);
+        }
+      });
+    });
     this.setState({
       selected_brands: {
         id: itemDetails.brandId,
@@ -42,11 +56,15 @@ class ItemDetails extends Component {
       selected_labelSize: itemDetails.size,
       selected_age: itemDetails.age,
       selected_colors: itemDetails.color,
+      selected_hex: itemDetails.hex,
       selected_itemType: itemDetails.type,
       selected_price: itemDetails.price,
       selected_details: itemDetails.details,
+      colors: [...allColors, ...colors],
+      clarifaiColors,
+      clarifaiHex,
       selected_sizeCategory: itemDetails.sizeCategory,
-      colors: clarifaiColors,
+
     });
 
     axios.get('/getbrands').then(({ data }) => {
@@ -83,6 +101,10 @@ class ItemDetails extends Component {
     } else if (name === 'brands') {
       const value1 = JSON.parse(value);
       this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
+    } else if (name === 'colors') {
+      const { colors } = this.state;
+      const color = colors.filter(x => (x.name === value ? x.hex : null));
+      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
     } else {
       this.setState({ [`selected_${name}`]: value });
     }
@@ -100,6 +122,10 @@ class ItemDetails extends Component {
     if (name === 'brands') {
       const value1 = JSON.parse(value);
       this.setState({ [selected]: { id, brandName: value1.name, name: value }, isOpen: false });
+    } else if (name === 'colors') {
+      const { colors } = this.state;
+      const color = colors.filter(x => (x.name === value ? x.hex : null));
+      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
     } else {
       this.setState({ [selected]: value, isOpen: false });
     }
@@ -165,6 +191,7 @@ class ItemDetails extends Component {
       selected_labelSize,
       selected_age,
       selected_colors,
+      selected_hex,
       selected_itemType,
       selected_price,
       selected_details,
@@ -180,6 +207,7 @@ class ItemDetails extends Component {
       condition: selected_condition,
       details: selected_details,
       color: selected_colors,
+      hex: selected_hex,
       age: selected_age,
       sizeCategory: selected_sizeCategory,
     };
@@ -199,7 +227,6 @@ class ItemDetails extends Component {
 
   render() {
     const { url } = this.state.itemDetails;
-
     return (
       <React.Fragment>
         <Title {...this.props} />
