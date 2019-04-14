@@ -23,11 +23,17 @@ const Popup = ({
       ))
       : null;
   } else if (name[0] === 'itemType') {
-    console.log(data);
     dataHere = data
       ? data.map(ele => (
-        <ChoiceBtn key={ele.id} type="submit" name={name} value={ele.itemType} onClick={changeSelected}>
-          {ele.itemType}
+        <ChoiceBtn
+          key={ele.id}
+          type="submit"
+          name={name}
+          id={ele.id}
+          value={`{"id": "${ele.id}", "name": "${ele.name}"}`}
+          onClick={changeSelected}
+        >
+          {ele.name}
         </ChoiceBtn>
       ))
       : null;
