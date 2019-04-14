@@ -7,14 +7,14 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  itemType, condition, labelSize, age,
+  condition, labelSize, age,
 } from '../../data';
 
 class GetDetails extends Component {
   state = {
     isOpen: false,
     selectedCat: null,
-    selected_brands: { id: '1', brandName: '2', name: '2' },
+    selected_brands: { id: '', brandName: '', name: '' },
     selected_itemType: { id: '', itemType: '', name: '' },
     itemType: [],
     colors: [],
@@ -32,11 +32,6 @@ class GetDetails extends Component {
   };
 
   componentDidMount() {
-    axios.get('/get-types').then((response) => {
-      const type = response.data.itemType;
-      this.setState({ itemType: type });
-    });
-
     if (this.props.location.details) {
       const { apparel } = this.props.location.details;
       const apiColors = this.props.location.details.colors;
@@ -51,20 +46,16 @@ class GetDetails extends Component {
         });
 
         if (apparel && apparel.data.length > 0) {
-          const outfit = apparel.data.map(ele => ele.tag_name);
+          const outfit = apparel.data.map((ele) => {
+            const name = ele.tag_name;
+            const object = { id: '', itemType: name, name };
+            return object;
+          });
           this.setState({
-            itemType: [...outfit, ...itemType],
+            itemType: outfit,
             selected_itemType: outfit[0],
           });
-        } else {
-          this.setState({
-            selected_itemType: itemType[0],
-          });
         }
-      } else {
-        this.setState({
-          selected_itemType: itemType[0],
-        });
       }
       axios.get('/getbrands').then(({ data }) => {
         if (data.success) {
@@ -78,6 +69,11 @@ class GetDetails extends Component {
       const { history } = this.props;
       history.push('/upload-photo');
     }
+
+    axios.get('/get-types').then(({ data }) => {
+      const type = data.itemType;
+      this.setState({ itemType: [...this.state.itemType, ...type] });
+    });
   }
 
   continue = () => {
@@ -117,9 +113,7 @@ class GetDetails extends Component {
       this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
     } else if (name === 'itemType') {
       const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.itemType } }, () => {
-        console.log(this.state[`selected_${name}`]);
-      });
+      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.itemType } });
     } else {
       this.setState({ [`selected_${name}`]: value });
     }
@@ -139,9 +133,7 @@ class GetDetails extends Component {
        this.setState({ [selected]: { id, brandName: value1.name, name: value }, isOpen: false });
      } else if (name === 'itemType') {
        const value1 = JSON.parse(value);
-       this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.itemType }, isOpen: false }, () => {
-         console.log(this.state[`selected_${name}`]);
-       });
+       this.setState({ [`selected_${name}`]: { id, itemType: value1.itemType, name: value }, isOpen: false });
      } else {
        this.setState({ [selected]: value, isOpen: false });
      }

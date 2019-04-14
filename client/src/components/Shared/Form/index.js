@@ -55,8 +55,6 @@ class Form extends Component {
       age,
       showDefaultOption,
     } = this.props;
-    console.log(itemType);
-
     return (
       <StyledForm>
         <StyledImgCon>
