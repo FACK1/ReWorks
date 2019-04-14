@@ -7,7 +7,7 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  itemType, condition, labelSize, age, colors,
+  itemType, condition, labelSize, age, sizeCategory, colors,
 } from '../../data';
 
 class GetDetails extends Component {
@@ -21,6 +21,7 @@ class GetDetails extends Component {
     condition,
     labelSize,
     age,
+    sizeCategory,
     selected_hex: '',
     clarifaiColors: '',
     clarifaiHex: '',
@@ -29,6 +30,7 @@ class GetDetails extends Component {
     selected_age: '',
     selected_price: '',
     selected_details: '',
+    selected_sizeCategory: '',
     showDefaultOption: true,
     title: '',
   };
@@ -118,7 +120,11 @@ class GetDetails extends Component {
         url: this.props.location.details.image_url,
         details: this.state.selected_details,
         brandId: this.state.selected_brands.id,
+        colorHex: '',
+        colorsHex: '',
+        sizeCategory: this.state.selected_sizeCategory,
       };
+
       if (cookie) {
         axios.post('/add-item', inputs).then(({ data }) => {
           if (data.success) {
