@@ -7,7 +7,6 @@ const Popup = ({
   open, toggleClose, data, changeSelected, name,
 }) => {
   let dataHere;
-
   if (name[0] === 'brands') {
     dataHere = data
       ? data.map(ele => (
@@ -23,7 +22,7 @@ const Popup = ({
         </ChoiceBtn>
       ))
       : null;
-  } if (name[0] === 'colors') {
+  } else if (name[0] === 'colors') {
     dataHere = data
       ? data.map(ele => (
         <ChoiceBtn
