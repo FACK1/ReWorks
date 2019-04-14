@@ -31,6 +31,8 @@ class ItemDetails extends Component {
   componentDidMount() {
     const { itemDetails } = this.state;
     const clarifaiColors = itemDetails.colors.split(',');
+    const price = itemDetails.price.slice(0, itemDetails.price.length - 1);
+    const currency = itemDetails.price.slice(-1);
 
     const clarifaiHex = itemDetails.colorshex.split(',');
     const allColors = [];
@@ -58,7 +60,8 @@ class ItemDetails extends Component {
       selected_colors: itemDetails.color,
       selected_hex: itemDetails.hex,
       selected_itemType: itemDetails.type,
-      selected_price: itemDetails.price,
+      selected_price: price,
+      selected_currency: currency,
       selected_details: itemDetails.details,
       colors: [...allColors, ...colors],
       clarifaiColors,
@@ -140,6 +143,7 @@ class ItemDetails extends Component {
       selected_colors,
       selected_itemType,
       selected_price,
+      selected_currency,
       selected_details,
       selected_sizeCategory,
       itemDetails,
@@ -194,6 +198,7 @@ class ItemDetails extends Component {
       selected_hex,
       selected_itemType,
       selected_price,
+      selected_currency,
       selected_details,
       itemDetails,
       selected_sizeCategory,
@@ -202,7 +207,7 @@ class ItemDetails extends Component {
     const newUpdates = {
       size: selected_labelSize,
       type: selected_itemType,
-      price: selected_price,
+      price: selected_price.concat(selected_currency),
       brandId: selected_brands.id,
       condition: selected_condition,
       details: selected_details,
