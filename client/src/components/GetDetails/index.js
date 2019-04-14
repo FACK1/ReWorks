@@ -15,8 +15,8 @@ class GetDetails extends Component {
     isOpen: false,
     selectedCat: null,
     selected_brands: { id: '1', brandName: '2', name: '2' },
-    selected_itemType: { id: '1', itemType: '1' },
-    itemType,
+    selected_itemType: { id: '', itemType: '', name: '' },
+    itemType: [],
     colors: [],
     brands: [],
     condition,
@@ -34,7 +34,7 @@ class GetDetails extends Component {
   componentDidMount() {
     axios.get('/get-types').then((response) => {
       const type = response.data.itemType;
-      this.setState({ itemType: type, selected_itemType: type[0] });
+      this.setState({ itemType: type });
     });
 
     if (this.props.location.details) {
