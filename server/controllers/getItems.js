@@ -17,7 +17,6 @@ exports.getItems = (req, res) => {
     .eachPage(
       (records, fetchNextPage) => {
         records.forEach((record) => {
-          console.log(record.get('Users'));
           if (record.get('Users') !== undefined) {
             if (record.get('Users')[0] === userAirtableId) {
               data.push({
