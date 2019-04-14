@@ -7,7 +7,7 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
 import {
-  itemType, condition, labelSize, age,
+  itemType, condition, labelSize, age, sizeCategory,
 } from '../../data';
 
 import { ImgDiv, DeleteButton } from './itemdetails.style';
@@ -24,12 +24,15 @@ class ItemDetails extends Component {
     condition,
     labelSize,
     age,
+    sizeCategory,
     showDefaultOption: false,
   };
 
   componentDidMount() {
     const { itemDetails } = this.state;
     const clarifaiColors = itemDetails.colors.split(',');
+    const price = itemDetails.price.slice(0, itemDetails.price.length - 1);
+    const currency = itemDetails.price.slice(-1);
 
     this.setState({
       selected_brands: {
@@ -42,8 +45,10 @@ class ItemDetails extends Component {
       selected_age: itemDetails.age,
       selected_colors: itemDetails.color,
       selected_itemType: itemDetails.type,
-      selected_price: itemDetails.price,
+      selected_price: price,
+      selected_currency: currency,
       selected_details: itemDetails.details,
+      selected_sizeCategory: itemDetails.sizeCategory,
       colors: clarifaiColors,
     });
 
@@ -112,7 +117,9 @@ class ItemDetails extends Component {
       selected_colors,
       selected_itemType,
       selected_price,
+      selected_currency,
       selected_details,
+      selected_sizeCategory,
       itemDetails,
     } = this.state;
 
@@ -139,6 +146,7 @@ class ItemDetails extends Component {
       selected_details,
       selected_brands.id,
       itemDetails.colors,
+      selected_sizeCategory,
     );
 
     let flag = false;
@@ -163,19 +171,22 @@ class ItemDetails extends Component {
       selected_colors,
       selected_itemType,
       selected_price,
+      selected_currency,
       selected_details,
       itemDetails,
+      selected_sizeCategory,
     } = this.state;
 
     const newUpdates = {
       size: selected_labelSize,
       type: selected_itemType,
-      price: selected_price,
+      price: selected_price.concat(selected_currency),
       brandId: selected_brands.id,
       condition: selected_condition,
       details: selected_details,
       color: selected_colors,
       age: selected_age,
+      sizeCategory: selected_sizeCategory,
     };
 
     if (updatedFlag) {
