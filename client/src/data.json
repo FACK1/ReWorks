@@ -6,7 +6,7 @@
   ],
   "colors": [
     {"name":"Aquamarine","hex":"#7FFFD4"},
-    {"name":"Beige","hex":"#F5F5DC"},
+    {"name":"Beige","hex":"#F5DEB3"},
     {"name":"Black","hex":"#000000"},
     {"name":"Blue","hex":"#0000FF"},
     {"name":"Brown","hex":"#8B4513"},
@@ -17,14 +17,14 @@
     {"name":"Magenta","hex":"#FF00FF"},
     {"name":"Maroon","hex":"#800000"},
     {"name":"Navy","hex":"#000080"},
-    {"name":"Off White","hex":"#f5f2d0"}
+    {"name":"Off White","hex":"#faf3dc"},
     {"name":"Olive","hex":"#808000"},
     {"name":"Orange","hex":"#FFA500"},
     {"name":"Pink","hex":"#FFC0CB"},
     {"name":"Purple","hex":"#9370DB"},
     {"name":"Red","hex":"#FF0000"},
     {"name":"Silver","hex":"#C0C0C0"},
-    {"name":"Tan","hex":"#D2B48C"}
+    {"name":"Tan","hex":"#D2B48C"},
     {"name":"Teal","hex":"#008080"},
     {"name":"Turquoise","hex":"#40E0D0"},
     {"name":"Violet","hex":"#800080"},
