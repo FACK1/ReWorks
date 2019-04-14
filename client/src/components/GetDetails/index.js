@@ -21,7 +21,9 @@ class GetDetails extends Component {
     condition,
     labelSize,
     age,
+    selected_hex: '',
     clarifaiColors: '',
+    clarifaiHex: '',
     selected_condition: '',
     selected_labelSize: '',
     selected_age: '',
@@ -48,11 +50,17 @@ class GetDetails extends Component {
         });
 
         const clarifaiColours = apiColors.data.map(ele => (ele.name));
+        const clarifaiColoursHex = apiColors.data.map(ele => (ele.hex));
+
         const clarifaiColors = clarifaiColours.join(',');
+
+        const clarifaiHex = clarifaiColoursHex.join(',');
         this.setState({
           colors: [...colours, ...colors],
           selected_colors: colours[0].name,
+          selected_hex: colours[0].hex,
           clarifaiColors,
+          clarifaiHex,
         });
 
         if (apparel && apparel.data.length > 0) {
@@ -103,6 +111,8 @@ class GetDetails extends Component {
         price: this.state.selected_price,
         color: this.state.selected_colors,
         colors: this.state.clarifaiColors,
+        colorshex: this.state.clarifaiHex,
+        hex: this.state.selected_hex,
         condition: this.state.selected_condition,
         size: this.state.selected_labelSize,
         url: this.props.location.details.image_url,
@@ -130,6 +140,10 @@ class GetDetails extends Component {
       this.setState({
         [`selected_${name}`]: { id: value1.id, brandName: value1.name },
       });
+    } else if (name === 'colors') {
+      const { colors } = this.state;
+      const color = colors.filter(x => (x.name === value ? x : null));
+      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name });
     } else {
       this.setState({ [`selected_${name}`]: value });
     }
@@ -150,6 +164,10 @@ class GetDetails extends Component {
         [selected]: { id, brandName: value1.name, name: value },
         isOpen: false,
       });
+    } else if (name === 'colors') {
+      const { colors } = this.state;
+      const color = colors.filter(x => (x.name === value ? x.hex : null));
+      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
     } else {
       this.setState({ [selected]: value, isOpen: false });
     }
