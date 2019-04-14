@@ -257,8 +257,8 @@ class Form extends Component {
                 $
                 </option>
                 )}
-                <StyledOption value="$">$</StyledOption>
                 <StyledOption value="£">£</StyledOption>
+                <StyledOption value="$">$</StyledOption>
                 <StyledOption value="€">€</StyledOption>
               </StyledSelectCurrency>
             </StyledPriceContainer>

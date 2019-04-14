@@ -32,8 +32,15 @@ class ItemDetails extends Component {
   componentDidMount() {
     const { itemDetails } = this.state;
     const clarifaiColors = itemDetails.colors.split(',');
-    const price = itemDetails.price.slice(0, itemDetails.price.length - 1);
-    const currency = itemDetails.price.slice(-1);
+    let price;
+    let currency;
+    if (itemDetails.price.length > 1) {
+      price = itemDetails.price.slice(0, itemDetails.price.length - 1);
+      currency = itemDetails.price.slice(-1);
+    } else {
+      price = '';
+      currency = itemDetails.price;
+    }
 
     const clarifaiHex = itemDetails.colorshex.split(',');
     const allColors = [];
