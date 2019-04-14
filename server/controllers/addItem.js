@@ -9,7 +9,7 @@ const base = new Airtable({ apiKey: Airtable_API_KEY }).base('appAZnpLnWP0wjAc6'
 exports.addItem = (req, res) => {
   const { userAirtableId } = req;
   const {
-    type, price, age, color, brandId, size, url, details, condition, colors,
+    type, price, age, color, brandId, size, url, details, condition, colors, hex, colorshex,
   } = req.body;
   base('Items').create(
     {
@@ -30,6 +30,8 @@ exports.addItem = (req, res) => {
       Users: [userAirtableId],
       'Image URL': url,
       Details: details,
+      'Colour Hex Code': hex,
+      'Colours Hex Codes': colorshex,
     },
     (err) => {
       if (err) {

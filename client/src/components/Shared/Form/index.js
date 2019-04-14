@@ -89,7 +89,6 @@ class Form extends Component {
             <StyledSelect onChange={toggleOpen} name="colors" value={selected_colors}>
               {colors.map(color => (colors.indexOf(color) >= 5 ? (
                 <StyledOption
-                  key={color.name}
                   value={color.name}
                   hexColor={color.hex}
                   nameColor={color.name}
@@ -100,7 +99,6 @@ class Form extends Component {
                 </StyledOption>
               ) : (
                 <StyledOption
-                  key={color.name}
                   value={color.name}
                   hexColor={color.hex}
                   nameColor={color.name}

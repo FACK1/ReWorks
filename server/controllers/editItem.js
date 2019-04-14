@@ -7,7 +7,7 @@ exports.editItem = (req, res) => {
   const { id } = req.params;
 
   const {
-    size, type, price, brandId, condition, details, color, age,
+    size, type, price, brandId, condition, details, color, age, hex,
   } = req.body;
   base('Items').update(
     id,
@@ -21,6 +21,7 @@ exports.editItem = (req, res) => {
       Condition: condition,
       Name: type,
       Details: details,
+      'Colour Hex Code': hex,
     },
     (err) => {
       if (err) {
