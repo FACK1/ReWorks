@@ -54,8 +54,8 @@ class GetDetails extends Component {
           });
         });
 
-        const clarifaiColours = apiColors.data.map(ele => (ele.name));
-        const clarifaiColoursHex = apiColors.data.map(ele => (ele.hex));
+        const clarifaiColours = apiColors.data.map(ele => ele.name);
+        const clarifaiColoursHex = apiColors.data.map(ele => ele.hex);
 
         const clarifaiColors = clarifaiColours.join(',');
 
@@ -123,9 +123,8 @@ class GetDetails extends Component {
         url: this.props.location.details.image_url,
         details: this.state.selected_details,
         brandId: this.state.selected_brands.id,
-        colorHex: '',
-        colorsHex: '',
         sizeCategory: this.state.selected_sizeCategory,
+        pattern: this.state.selected_patterns,
       };
 
       if (cookie) {
