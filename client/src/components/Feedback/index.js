@@ -161,9 +161,9 @@ class Feedback extends Component {
               <span role="img"> 🎉</span>
             </ThanksText>
           )}
-          <Button />
-          <GButton title="SAVE" onClick={this.updateAirtableFeedback} />
-          <Footer />
+            <Button />
+            <GButton title="SAVE" onClick={this.updateAirtableFeedback} />
+            <Footer />
         </BottomContainer>
       </React.Fragment>
     );
