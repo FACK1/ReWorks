@@ -140,7 +140,7 @@ export const StyledTextarea = styled.textarea`
 
 }
     @media (min-width: 650px) {
-      width: 28%;
-      margin-left: 36%;
+      width: 30%;
+      margin-left: 35%;
   }
 `;
