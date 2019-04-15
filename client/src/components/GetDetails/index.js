@@ -130,9 +130,9 @@ class GetDetails extends Component {
       };
 
       if (inputs.type === '') {
-        axios.post('/add-type', { name: this.state.selected_itemType, shortcut: 'New Type' }).then((res) => {
+        axios.post('/add-type', { name: this.state.selected_itemType.name, shortcut: 'New Type' }).then((res) => {
           const { typeId } = res.data;
-          this.setState({ typeId }, () => {
+          this.setState({ type: typeId }, () => {
             if (cookie) {
               axios.post('/add-item', inputs).then(({ data }) => {
                 if (data.success) {
