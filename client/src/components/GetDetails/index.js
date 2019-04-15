@@ -113,8 +113,7 @@ class GetDetails extends Component {
       const { history } = this.props;
       const price = this.state.selected_price.concat(this.state.selected_currency);
       const inputs = {
-        type: this.state.selected_itemType,
-        typeId: this.state.selected_itemType.id,
+        type: this.state.selected_itemType.id,
         age: this.state.selected_age,
         price,
         color: this.state.selected_colors,
@@ -130,8 +129,8 @@ class GetDetails extends Component {
         pattern: this.state.selected_patterns,
       };
 
-      if (inputs.typeId === '') {
-        axios.post('/add-type', { name: inputs.type.name, shortcut: 'New Type' }).then((res) => {
+      if (inputs.type === '') {
+        axios.post('/add-type', { name: this.state.selected_itemType, shortcut: 'New Type' }).then((res) => {
           const { typeId } = res.data;
           this.setState({ typeId }, () => {
             if (cookie) {
