@@ -21,7 +21,8 @@ exports.getItems = (req, res) => {
             if (record.get('Users')[0] === userAirtableId) {
               data.push({
                 itemId: record.id,
-                type: record.get('Type'),
+                type: record.get('Type Name')[0],
+                typeId: record.get('Type Id')[0],
                 size: record.get('Size'),
                 url: record.get('Image URL'),
                 name: record.get('Name'),
@@ -37,7 +38,6 @@ exports.getItems = (req, res) => {
                 colorshex: record.get('Colours Hex Codes'),
                 sizeCategory: record.get('Size Category'),
                 pattern: record.get('Pattern'),
-
               });
             }
           }
