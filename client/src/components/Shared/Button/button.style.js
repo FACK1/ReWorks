@@ -13,7 +13,7 @@ text-align:center;
 text-decoration:none
 @media (min-width: 650px) {
   font-size: 14px;
-  width: 15%;
-  margin-left:36%;
+  width: 13%;
+  margin-left:37%;
 }
 `;
