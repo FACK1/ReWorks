@@ -26,7 +26,7 @@ exports.editItem = (req, res) => {
       Age: age,
       Colour: color,
       Brand: [brandId],
-      'Type Id': type,
+      'Type Id': [type],
       Price: price,
       Condition: condition,
       Details: details,
