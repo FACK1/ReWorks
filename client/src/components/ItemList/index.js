@@ -23,6 +23,14 @@ class ItemList extends Component {
   };
 
   componentDidMount() {
+    axios.get('/checkcookie')
+      .then(({ data: { cookie } }) => {
+        if (!cookie) {
+          const { history } = this.props;
+          history.push('/');
+        }
+      });
+
     axios
       .get('/items')
       .then(({ data }) => this.setState({ itemlist: data.data, loading: false }))
@@ -76,7 +84,6 @@ class ItemList extends Component {
       { label: 'Age', key: 'age' },
       { label: 'Colour', key: 'color' },
     ];
-
     return (
       <React.Fragment>
         <Title {...this.props} />

@@ -4,7 +4,50 @@
     { "id": "recMr78NZa2akmLW0", "name": "ASOS" },
     { "id": "recqts81sMcIoFMMJ", "name": "Adidas" }
   ],
-  "colors": ["white", "black", "red", "blue", "green", "limegreen", "gray"],
+  "patterns": [
+    "No Pattern",
+    "Stripe",
+    "Plaid / Checkered - Tartan",
+    "Camouflage (Pattern Repeat)",
+    "Animal Print",
+    "Geometric",
+    "Floral",
+    "Basketweave",
+    "Aztec",
+    "Logo / Lettering",
+    "Printed Image",
+    "Other Pattern"
+  ],
+
+  "colors": [
+    { "name": "Aquamarine", "hex": "#7FFFD4" },
+    { "name": "Beige", "hex": "#F5DEB3" },
+    { "name": "Black", "hex": "#000000" },
+    { "name": "Blue", "hex": "#0000FF" },
+    { "name": "Brown", "hex": "#8B4513" },
+    { "name": "Green", "hex": "#008000" },
+    { "name": "Grey", "hex": "#808080" },
+    { "name": "Indigo", "hex": "#4B0082" },
+    { "name": "Lime", "hex": "#00FF00" },
+    { "name": "Magenta", "hex": "#FF00FF" },
+    { "name": "Maroon", "hex": "#800000" },
+    { "name": "Navy", "hex": "#000080" },
+    { "name": "Off White", "hex": "#faf3dc" },
+    { "name": "Olive", "hex": "#808000" },
+    { "name": "Orange", "hex": "#FFA500" },
+    { "name": "Pink", "hex": "#FFC0CB" },
+    { "name": "Purple", "hex": "#9370DB" },
+    { "name": "Red", "hex": "#FF0000" },
+    { "name": "Silver", "hex": "#C0C0C0" },
+    { "name": "Tan", "hex": "#D2B48C" },
+    { "name": "Teal", "hex": "#008080" },
+    { "name": "Turquoise", "hex": "#40E0D0" },
+    { "name": "Violet", "hex": "#800080" },
+    { "name": "Yellow", "hex": "#FFFF00" },
+    { "name": "White", "hex": "#000000" },
+    { "name": "Multi-coloured", "hex": "#000000" }
+  ],
+
   "itemType": [
     "T-shirt",
     "Shirt",
@@ -28,7 +71,7 @@
     "Vintage"
   ],
   "age": ["0-6 Mths", "6-12 Mths", "1-5 Years", "5-10 Years", "10 Years", "10+ Years", "25+ Years"],
-  "gender": ["Mens", "Womens", "Unisex", "Youth", "Kids", "Infant"],
+  "sizeCategory": ["Mens", "Womens", "Unisex", "Youth", "Kids", "Infant"],
   "labelSize": [
     "Small",
     "Average",

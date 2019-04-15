@@ -17,22 +17,29 @@ exports.getItems = (req, res) => {
     .eachPage(
       (records, fetchNextPage) => {
         records.forEach((record) => {
-          if (record.get('Users')[0] === userAirtableId) {
-            data.push({
-              itemId: record.id,
-              type: record.get('Type'),
-              size: record.get('Size'),
-              url: record.get('Image URL'),
-              name: record.get('Name'),
-              price: record.get('Price'),
-              color: record.get('Colour'),
-              brand: record.get('Brand Names')[0],
-              condition: record.get('Condition'),
-              age: record.get('Age'),
-              details: record.get('Details'),
-              brandId: record.get('Brand')[0],
-              colors: record.get('Colours'),
-            });
+          if (record.get('Users') !== undefined) {
+            if (record.get('Users')[0] === userAirtableId) {
+              data.push({
+                itemId: record.id,
+                type: record.get('Type Name')[0],
+                typeId: record.get('Type Id')[0],
+                size: record.get('Size'),
+                url: record.get('Image URL'),
+                name: record.get('Name'),
+                price: record.get('Price'),
+                color: record.get('Colour'),
+                brand: record.get('Brand Names')[0],
+                condition: record.get('Condition'),
+                age: record.get('Age'),
+                details: record.get('Details'),
+                brandId: record.get('Brand')[0],
+                colors: record.get('Colours'),
+                hex: record.get('Colour Hex Code'),
+                colorshex: record.get('Colours Hex Codes'),
+                sizeCategory: record.get('Size Category'),
+                pattern: record.get('Pattern'),
+              });
+            }
           }
         });
         fetchNextPage();

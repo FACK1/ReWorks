@@ -29,6 +29,13 @@ class Feedback extends Component {
   };
 
   componentDidMount() {
+    axios.get('/checkcookie')
+      .then(({ data: { cookie } }) => {
+        if (!cookie) {
+          const { history } = this.props;
+          history.push('/');
+        }
+      });
     axios
       .get('/get-feedback')
       .then(({ data }) => {
