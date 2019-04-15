@@ -262,14 +262,12 @@ class ItemDetails extends Component {
   };
 
   removeDuplicate = (array, item) => {
-    const filteredArray = array;
-
     array.map((object, i) => {
       if (object.id === item.id) {
-        filteredArray.splice(i, 1);
+        array.splice(i, 1);
       }
     });
-    return filteredArray;
+    return array;
   };
 
   render() {
