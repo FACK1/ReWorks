@@ -45,7 +45,7 @@
     { "name": "Violet", "hex": "#800080" },
     { "name": "Yellow", "hex": "#FFFF00" },
     { "name": "White", "hex": "#000000" },
-    { "name": "Multi-colored", "hex": "#000000" }
+    { "name": "Multi-colours", "hex": "#000000" }
   ],
 
   "itemType": [
