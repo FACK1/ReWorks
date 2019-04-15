@@ -11,7 +11,9 @@ export const List = styled.div`
 
 export const Container = styled.div`
   overflow-y: scroll;
-  height:100vh;
+  height:90vh;
+  display: flex;
+  align-content: space-between;
   @media (min-width: 650px) {
     height:50vh;
     width: 33%;
@@ -62,10 +64,10 @@ export const StyledCSVLink = styled(CSVLink)`
   font-weight: bold;
   width: 45%;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   @media (min-width: 650px) {
     font-size: 14px;
-    width: 13%;
+    width: 12%;
     margin-right: 32%;
   }
 `;
@@ -74,4 +76,10 @@ export const GButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top:50px;
+  @media (min-width: 650px) {
+    margin-top: 30%;
+    margin-left: 5%;
+    width: 85%;
+    height:7vh;
+  }
 `;
