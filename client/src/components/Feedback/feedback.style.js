@@ -14,10 +14,8 @@ export const CheckboxContainer = styled.div`
   display: flex;
   margin-bottom: 38px;
   flex-flow: column wrap;
-  font-size: 25px;
   @media (min-width: 650px) {
-    font-size: 50px;
-    width: 35%;
+    width: 40%;
     margin-left: 32%;
   }
 `;
@@ -41,4 +39,7 @@ export const Para = styled.p`
   margin-bottom: 15px;
   margin-left: 30px;
   margin-right: 30px;
+   @media (min-width: 650px) {
+     font-size: 14px;
+   }
 `;
