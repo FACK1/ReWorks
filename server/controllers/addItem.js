@@ -26,8 +26,7 @@ exports.addItem = (req, res) => {
   } = req.body;
   base('Items').create(
     {
-      Name: type,
-      Type: type,
+      'Type Id': type,
       Price: price,
       Colour: color,
       Colours: colors,
