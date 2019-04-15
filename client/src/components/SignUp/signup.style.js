@@ -28,15 +28,19 @@ export const StyledInput = styled.input`
   }
 `;
 export const StyledForm = styled.form`
-  display:flex;
-  flex-shrink: 0;
-  flex-grow: 1;
-  justify-content: space-around;
-  flex-direction:column;
-  margin:20px;
-  width: 28%;
-  margin-left:35%;
-`;
+display:flex;
+justify-content: space-around;
+flex-direction:column;
+margin:20px;
+width: 28%;
+margin-left:35%;
+font-size: 20px;
+  @media (max-width: 650px){
+    width: 75%;
+    margin-left:13%;
+    font-size: 30px;
+  }
+  `;
 export const StyledLabel = styled.label`
   font-size: 20px;
   font-weight:bold;
