@@ -130,7 +130,7 @@ class GetDetails extends Component {
       };
 
       if (inputs.type === '') {
-        axios.post('/add-type', { name: this.state.selected_itemType.name, shortcut: 'New Type' }).then((res) => {
+        axios.post('/add-type', { name: this.state.selected_itemType.itemType, shortcut: 'New Type' }).then((res) => {
           const { typeId } = res.data;
           inputs.type = typeId;
         });
@@ -156,7 +156,9 @@ class GetDetails extends Component {
       this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
     } else if (name === 'itemType') {
       const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.itemType } });
+      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.name, name: value } }, () => {
+        console.log(this.state[`selected_${name}`]);
+      });
     } else if (name === 'colors') {
       const { colors } = this.state;
       const color = colors.filter(x => (x.name === value ? x : null));
@@ -183,7 +185,9 @@ class GetDetails extends Component {
       });
     } else if (name === 'itemType') {
       const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id, itemType: value1.itemType, name: value }, isOpen: false });
+      this.setState({ [`selected_${name}`]: { id, itemType: value1.name, name: value }, isOpen: false }, () => {
+        console.log(this.state[`selected_${name}`]);
+      });
     } else if (name === 'colors') {
       const { colors } = this.state;
       const color = colors.filter(x => (x.name === value ? x.hex : null));
