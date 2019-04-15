@@ -84,13 +84,14 @@ class ItemDetails extends Component {
 
     axios.get('/getbrands').then(({ data }) => {
       if (data.success) {
-        const brands = data.data;
-        this.setState({ brands });
+        const brands = this.removeDuplicate(data.data, this.state.selected_brands);
+        this.setState({ brands: [this.state.selected_brands, ...brands] });
       }
     });
 
     axios.get('/get-types').then(({ data }) => {
-      this.setState({ itemType: data.itemType });
+      const types = this.removeDuplicate(data.itemType, this.state.selected_itemType);
+      this.setState({ itemType: [this.state.selected_itemType, ...types] });
     });
   }
 
@@ -258,6 +259,17 @@ class ItemDetails extends Component {
         .catch(() => history.push('/error'));
     }
     history.push('/item-list');
+  };
+
+  removeDuplicate = (array, item) => {
+    const filteredArray = array;
+
+    array.map((object, i) => {
+      if (object.id === item.id) {
+        filteredArray.splice(i, 1);
+      }
+    });
+    return filteredArray;
   };
 
   render() {
