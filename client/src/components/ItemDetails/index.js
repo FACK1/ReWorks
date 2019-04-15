@@ -7,7 +7,7 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
 import {
-  itemType, condition, labelSize, age, sizeCategory, colors, patterns,
+  condition, labelSize, age, sizeCategory, colors, patterns,
 } from '../../data';
 
 import { ImgDiv, DeleteButton } from './itemdetails.style';
@@ -18,7 +18,8 @@ class ItemDetails extends Component {
     isOpen: false,
     selectedCat: null,
     selected_brands: { id: '', brandName: '', name: '' },
-    itemType,
+    selected_itemType: { id: '', itemType: '', name: '' },
+    itemType: [],
     colors: [],
     brands: [],
     condition,
@@ -66,7 +67,11 @@ class ItemDetails extends Component {
       selected_age: itemDetails.age,
       selected_colors: itemDetails.color,
       selected_hex: itemDetails.hex,
-      selected_itemType: itemDetails.type,
+      selected_itemType: {
+        id: itemDetails.typeId,
+        itemType: itemDetails.type,
+        name: itemDetails.type,
+      },
       selected_price: price,
       selected_currency: currency,
       selected_details: itemDetails.details,
@@ -82,6 +87,10 @@ class ItemDetails extends Component {
         const brands = data.data;
         this.setState({ brands });
       }
+    });
+
+    axios.get('/get-types').then(({ data }) => {
+      this.setState({ itemType: data.itemType });
     });
   }
 
@@ -115,6 +124,9 @@ class ItemDetails extends Component {
       const { colors } = this.state;
       const color = colors.filter(x => (x.name === value ? x.hex : null));
       this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
+    } else if (name === 'itemType') {
+      const value1 = JSON.parse(value);
+      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.itemType } });
     } else {
       this.setState({ [`selected_${name}`]: value });
     }
@@ -136,6 +148,12 @@ class ItemDetails extends Component {
       const { colors } = this.state;
       const color = colors.filter(x => (x.name === value ? x.hex : null));
       this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
+    } else if (name === 'itemType') {
+      const value1 = JSON.parse(value);
+      this.setState({
+        [`selected_${name}`]: { id, itemType: value1.itemType, name: value },
+        isOpen: false,
+      });
     } else {
       this.setState({ [selected]: value, isOpen: false });
     }
@@ -168,7 +186,8 @@ class ItemDetails extends Component {
 
     updateItemDetails.push(
       itemDetails.itemId,
-      selected_itemType,
+      selected_itemType.itemType,
+      selected_itemType.id,
       selected_labelSize,
       itemDetails.url,
       itemDetails.name,
@@ -216,7 +235,7 @@ class ItemDetails extends Component {
 
     const newUpdates = {
       size: selected_labelSize,
-      type: selected_itemType,
+      type: selected_itemType.id,
       price: selected_price.concat(selected_currency),
       brandId: selected_brands.id,
       condition: selected_condition,
