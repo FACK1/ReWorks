@@ -23,7 +23,7 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledInformation = styled.h2`
-  margin-left: 36%;
+  margin-left: 34.5%;
   font-size: 18px;
   color: #909090;
   text-align: left;
@@ -34,7 +34,7 @@ export const StyledInformation = styled.h2`
 `;
 
 export const StyledNotic = styled.h2`
-  margin-left: 36%;
+  margin-left: 34.5%;
 	font-size: 18px;
 	text-align: left;
 	@media (max-width: 650px) {
