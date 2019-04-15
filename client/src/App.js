@@ -1,13 +1,14 @@
-import React from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import GetDetails from './components/GetDetails';
-import Upload from './components/Upload';
-import Splash from './components/SplashPage';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
-import ItemDetails from './components/ItemDetails';
-import ItemList from './components/ItemList';
-import Feedback from './components/Feedback';
+import React from "react";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import GetDetails from "./components/GetDetails";
+import Upload from "./components/Upload";
+import Splash from "./components/SplashPage";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import ItemDetails from "./components/ItemDetails";
+import ItemList from "./components/ItemList";
+import Feedback from "./components/Feedback";
+import SingleSelect from "./components/brands";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/item-details/:id" component={ItemDetails} />
         <Route path="/item-list" component={ItemList} />
         <Route path="/feedback" component={Feedback} />
+        <Route path="/select" component={SingleSelect} />
       </div>
     </Router>
   );
