@@ -72,7 +72,7 @@ class GetDetails extends Component {
         if (apparel && apparel.data.length > 0) {
           const outfit = apparel.data.map((ele) => {
             const name = ele.tag_name;
-            const object = { id: '', itemType: name, name };
+            const object = { itemType: name, name, id: '' };
             return object;
           });
           this.setState({
@@ -114,6 +114,7 @@ class GetDetails extends Component {
       const price = this.state.selected_price.concat(this.state.selected_currency);
       const inputs = {
         type: this.state.selected_itemType,
+        typeId: this.state.selected_itemType.id,
         age: this.state.selected_age,
         price,
         color: this.state.selected_colors,
@@ -129,7 +130,22 @@ class GetDetails extends Component {
         pattern: this.state.selected_patterns,
       };
 
-      if (cookie) {
+      if (inputs.typeId === '') {
+        axios.post('/add-type', { name: inputs.type.name, shortcut: 'New Type' }).then((res) => {
+          const { typeId } = res.data;
+          this.setState({ typeId }, () => {
+            if (cookie) {
+              axios.post('/add-item', inputs).then(({ data }) => {
+                if (data.success) {
+                  history.push({ pathname: '/item-list', logged });
+                }
+              });
+            } else {
+              history.push({ pathname: '/login-form', data: inputs });
+            }
+          });
+        });
+      } else if (cookie) {
         axios.post('/add-item', inputs).then(({ data }) => {
           if (data.success) {
             history.push({ pathname: '/item-list', logged });
