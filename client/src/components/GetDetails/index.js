@@ -72,7 +72,7 @@ class GetDetails extends Component {
         if (apparel && apparel.data.length > 0) {
           const outfit = apparel.data.map((ele) => {
             const name = ele.tag_name;
-            const object = { id: '', itemType: name, name };
+            const object = { itemType: name, name, id: '' };
             return object;
           });
           this.setState({
@@ -113,7 +113,7 @@ class GetDetails extends Component {
       const { history } = this.props;
       const price = this.state.selected_price.concat(this.state.selected_currency);
       const inputs = {
-        type: this.state.selected_itemType,
+        type: this.state.selected_itemType.id,
         age: this.state.selected_age,
         price,
         color: this.state.selected_colors,
@@ -129,6 +129,12 @@ class GetDetails extends Component {
         pattern: this.state.selected_patterns,
       };
 
+      if (inputs.type === '') {
+        axios.post('/add-type', { name: this.state.selected_itemType.itemType, shortcut: 'New Type' }).then((res) => {
+          const { typeId } = res.data;
+          inputs.type = typeId;
+        });
+      }
       if (cookie) {
         axios.post('/add-item', inputs).then(({ data }) => {
           if (data.success) {
@@ -150,7 +156,7 @@ class GetDetails extends Component {
       this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
     } else if (name === 'itemType') {
       const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.itemType } });
+      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.name, name: value } });
     } else if (name === 'colors') {
       const { colors } = this.state;
       const color = colors.filter(x => (x.name === value ? x : null));
@@ -177,7 +183,7 @@ class GetDetails extends Component {
       });
     } else if (name === 'itemType') {
       const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id, itemType: value1.itemType, name: value }, isOpen: false });
+      this.setState({ [`selected_${name}`]: { id, itemType: value1.name, name: value }, isOpen: false });
     } else if (name === 'colors') {
       const { colors } = this.state;
       const color = colors.filter(x => (x.name === value ? x.hex : null));
