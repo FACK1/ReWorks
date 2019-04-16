@@ -7,31 +7,31 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  condition, labelSize, age, sizeCategory, patterns, colors,
+  conditions, sizes, ages, categories, patterns, colors,
 } from '../../data';
 
 class GetDetails extends Component {
   state = {
     isOpen: false,
     selectedCat: null,
-    selected_brands: { id: '', brandName: '', name: '' },
-    selected_itemType: { id: '', itemType: '', name: '' },
-    itemType: [],
+    selectedBrand: null,
+    selectedType: null,
+    types: [],
     colors,
     brands: [],
-    condition,
-    labelSize,
-    age,
-    sizeCategory,
+    conditions,
+    sizes,
+    ages,
+    categories,
     patterns,
     clarifaiColors: '',
     clarifaiHex: '',
-    selected_condition: '',
-    selected_labelSize: '',
-    selected_age: '',
+    selectedCondition: null,
+    selectedSize: null,
+    selectedAge: null,
     selected_price: '',
     selected_details: '',
-    selected_sizeCategory: '',
+    selectedCategory: null,
     selected_hex: '',
     selected_patterns: '',
     selected_currency: '£',
@@ -83,7 +83,15 @@ class GetDetails extends Component {
       }
       axios.get('/getbrands').then(({ data }) => {
         if (data.success) {
-          const brands = data.data;
+          const brands = [];
+          data.data.map((brand) => {
+            brands.push({
+              id: brand.id,
+              value: brand.name,
+              label: brand.name,
+              name: 'Brand',
+            });
+          });
           this.setState({
             brands,
           });
@@ -124,7 +132,7 @@ class GetDetails extends Component {
         size: this.state.selected_labelSize,
         url: this.props.location.details.image_url,
         details: this.state.selected_details,
-        brandId: this.state.selected_brands.id,
+        brandId: this.state.selectedBrand.id,
         sizeCategory: this.state.selected_sizeCategory,
         pattern: this.state.selected_patterns,
       };
@@ -177,7 +185,10 @@ class GetDetails extends Component {
       });
     } else if (name === 'itemType') {
       const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id, itemType: value1.itemType, name: value }, isOpen: false });
+      this.setState({
+        [`selected_${name}`]: { id, itemType: value1.itemType, name: value },
+        isOpen: false,
+      });
     } else if (name === 'colors') {
       const { colors } = this.state;
       const color = colors.filter(x => (x.name === value ? x.hex : null));
@@ -185,6 +196,11 @@ class GetDetails extends Component {
     } else {
       this.setState({ [selected]: value, isOpen: false });
     }
+  };
+
+  handleChange = (selected) => {
+    console.log('asasas', selected);
+    this.setState({ selected_brands: selected });
   };
 
   render() {
@@ -202,6 +218,7 @@ class GetDetails extends Component {
           toggleOpen={this.toggleOpen}
           toggleClose={this.toggleClose}
           changeSelected={this.changeSelected}
+          handleChange={this.handleChange}
         />
         <Button />
         <GButton title={this.state.title} onClick={this.continue} />
