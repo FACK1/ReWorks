@@ -112,7 +112,7 @@ class Form extends Component {
               classNamePrefix="select"
               isDisabled={false}
               isLoading={false}
-              isClearable
+              isClearable={false}
               isRtl={false}
               isSearchable
               name="color"
@@ -125,7 +125,7 @@ class Form extends Component {
               classNamePrefix="select"
               isDisabled={false}
               isLoading={false}
-              isClearable
+              isClearable={false}
               isRtl={false}
               isSearchable
               name="Pattern"
@@ -139,7 +139,7 @@ class Form extends Component {
               classNamePrefix="select"
               isDisabled={false}
               isLoading={false}
-              isClearable
+              isClearable={false}
               isRtl={false}
               isSearchable
               name="Brand"
@@ -153,7 +153,7 @@ class Form extends Component {
               classNamePrefix="select"
               isDisabled={false}
               isLoading={false}
-              isClearable
+              isClearable={false}
               isRtl={false}
               isSearchable
               name="Condition"
@@ -167,7 +167,7 @@ class Form extends Component {
               classNamePrefix="select"
               isDisabled={false}
               isLoading={false}
-              isClearable
+              isClearable={false}
               isRtl={false}
               isSearchable
               name="Size"
@@ -181,7 +181,7 @@ class Form extends Component {
               classNamePrefix="select"
               isDisabled={false}
               isLoading={false}
-              isClearable
+              isClearable={false}
               isRtl={false}
               isSearchable
               name="Category"
@@ -195,7 +195,7 @@ class Form extends Component {
               classNamePrefix="select"
               isDisabled={false}
               isLoading={false}
-              isClearable
+              isClearable={false}
               isRtl={false}
               isSearchable
               name="Age"
