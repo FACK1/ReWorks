@@ -68,12 +68,6 @@
     { "value": "Infant", "label": "Infant" }
   ],
   "sizes": [
-    { "value": "Small", "label": "Small" },
-    { "value": "Average", "label": "Average" },
-    { "value": "Waste", "label": "Waste" },
-    { "value": "Big", "label": "Big" },
-    { "value": "Youths", "label": "Youths" },
-    { "value": "Kids", "label": "Kids" },
     { "value": "XS", "label": "XS" },
     { "value": "S", "label": "S" },
     { "value": "M", "label": "M" },
