@@ -74,6 +74,7 @@ export const StyledSelect = styled.select`
 	width: 150px;
 	margin-bottom: 16px;
 	border: 1px solid #F2F2F2;
+  border-bottom: ${props => (props.StyleError ? '1px solid #D33E1E' : '1px solid #F2F2F2')};
 	padding: 7px 14px;
 	@media (max-width: 650px) {
 		font-size: 16px;
@@ -132,5 +133,15 @@ export const StyledTextarea = styled.textarea`
 	}
   ::placeholder{
     font-family:'Assistant';
+  }
+`;
+
+export const ErrorMessage = styled.h1`
+  font-size: 16px;
+  color:grey;
+  margin-top:-10px;
+  margin-bottom:20px;
+  @media (max-width: 650px) {
+    font-size: 12px;
   }
 `;

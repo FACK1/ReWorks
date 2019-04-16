@@ -18,6 +18,7 @@ import {
   StyledImgCon,
   StyledSelectCurrency,
   StyledPriceContainer,
+  ErrorMessage,
 } from './form.style';
 
 class Form extends Component {
@@ -54,7 +55,6 @@ class Form extends Component {
       selected_details,
       selected_patterns,
       selected_currency,
-
       itemType,
       colors,
       brands,
@@ -65,7 +65,20 @@ class Form extends Component {
       showDefaultOption,
       selected_sizeCategory,
       sizeCategory,
+      patternError,
+      brandError,
+      conditionError,
+      labelSizeError,
+      sizeCategoryError,
+      ageError,
+      isErrorPattern,
+      isErrorBrand,
+      isErrorCondition,
+      isErrorLabelSize,
+      isErrorSizeCategory,
+      isErrorAge,
     } = this.props;
+
     return (
       <StyledForm>
         <StyledImgCon>
@@ -127,7 +140,14 @@ class Form extends Component {
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
 
-            <StyledSelect onChange={toggleOpen} name="patterns" value={selected_patterns}>
+            <StyledSelect
+              onChange={toggleOpen}
+              name="patterns"
+              value={selected_patterns}
+              StyleError={isErrorPattern}
+              {...this.props}
+              errorText={patternError}
+            >
               {showDefaultOption && (
                 <option default hidden>
                   Select...
@@ -144,8 +164,16 @@ class Form extends Component {
               )))}
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
+            <ErrorMessage>{patternError}</ErrorMessage>
 
-            <StyledSelect onChange={toggleOpen} name="brands" value={selected_brands.name}>
+            <StyledSelect
+              onChange={toggleOpen}
+              name="brands"
+              value={selected_brands.name}
+              StyleError={isErrorBrand}
+              {...this.props}
+              errorText={brandError}
+            >
               {showDefaultOption && (
               <option default hidden>
                   Select...
@@ -169,8 +197,16 @@ class Form extends Component {
               )))}
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
+            <ErrorMessage>{brandError}</ErrorMessage>
 
-            <StyledSelect onChange={toggleOpen} name="condition" value={selected_condition}>
+            <StyledSelect
+              onChange={toggleOpen}
+              name="condition"
+              value={selected_condition}
+              StyleError={isErrorCondition}
+              {...this.props}
+              errorText={conditionError}
+            >
               {showDefaultOption && (
               <option default hidden>
                   Select...
@@ -187,8 +223,16 @@ class Form extends Component {
               )))}
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
+            <ErrorMessage>{conditionError}</ErrorMessage>
 
-            <StyledSelect onChange={toggleOpen} name="labelSize" value={selected_labelSize}>
+            <StyledSelect
+              onChange={toggleOpen}
+              name="labelSize"
+              value={selected_labelSize}
+              StyleError={isErrorLabelSize}
+              {...this.props}
+              errorText={labelSizeError}
+            >
               {showDefaultOption && (
               <option default hidden>
                   Select...
@@ -205,8 +249,16 @@ class Form extends Component {
               )))}
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
+            <ErrorMessage>{labelSizeError}</ErrorMessage>
 
-            <StyledSelect onChange={toggleOpen} name="sizeCategory" value={selected_sizeCategory}>
+            <StyledSelect
+              onChange={toggleOpen}
+              name="sizeCategory"
+              value={selected_sizeCategory}
+              StyleError={isErrorSizeCategory}
+              {...this.props}
+              errorText={sizeCategoryError}
+            >
               {showDefaultOption && (
                 <option default hidden>
                   Select...
@@ -223,8 +275,16 @@ class Form extends Component {
               )))}
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
+            <ErrorMessage>{sizeCategoryError}</ErrorMessage>
 
-            <StyledSelect onChange={toggleOpen} name="age" value={selected_age}>
+            <StyledSelect
+              onChange={toggleOpen}
+              name="age"
+              value={selected_age}
+              StyleError={isErrorAge}
+              {...this.props}
+              errorText={ageError}
+            >
               {showDefaultOption && (
               <option default hidden>
                   Select...
@@ -241,6 +301,7 @@ class Form extends Component {
               )))}
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
+            <ErrorMessage>{ageError}</ErrorMessage>
 
             <StyledPriceContainer>
               <StyledInput
