@@ -7,7 +7,7 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  conditions, sizes, ages, categories, patterns, colors,
+  conditions, sizes, ages, categories, patterns, colors, currencies,
 } from '../../data';
 
 class GetDetails extends Component {
@@ -24,6 +24,7 @@ class GetDetails extends Component {
     ages,
     categories,
     patterns,
+    currencies,
     clarifaiColors: '',
     clarifaiHex: '',
     selectedCondition: null,
@@ -34,7 +35,7 @@ class GetDetails extends Component {
     selectedCategory: null,
     selected_hex: '',
     selected_patterns: '',
-    selected_currency: '£',
+    selectedCurrency: { value: '£', label: '£' },
     showDefaultOption: true,
     title: '',
   };
@@ -72,12 +73,12 @@ class GetDetails extends Component {
         if (apparel && apparel.data.length > 0) {
           const outfit = apparel.data.map((ele) => {
             const name = ele.tag_name;
-            const object = { id: '', itemType: name, name };
+            const object = { id: '', value: name, label: name };
             return object;
           });
           this.setState({
-            itemType: outfit,
-            selected_itemType: outfit[0],
+            types: outfit,
+            selectedType: outfit[0],
           });
         }
       }
@@ -89,7 +90,6 @@ class GetDetails extends Component {
               id: brand.id,
               value: brand.name,
               label: brand.name,
-              name: 'Brand',
             });
           });
           this.setState({
@@ -111,8 +111,16 @@ class GetDetails extends Component {
     }
 
     axios.get('/get-types').then(({ data }) => {
-      const type = data.itemType;
-      this.setState({ itemType: [...this.state.itemType, ...type] });
+      const types = [];
+      data.itemType.map((type) => {
+        types.push({
+          id: type.id,
+          value: type.name,
+          label: type.name,
+        });
+      });
+
+      this.setState({ types: [...this.state.types, ...types] });
     });
   }
 
@@ -151,56 +159,12 @@ class GetDetails extends Component {
 
   toggleOpen = (e) => {
     const { value, name } = e.target;
-    if (value === 'more') {
-      this.setState({ isOpen: true, selectedCat: name });
-    } else if (name === 'brands') {
-      const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
-    } else if (name === 'itemType') {
-      const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.itemType } });
-    } else if (name === 'colors') {
-      const { colors } = this.state;
-      const color = colors.filter(x => (x.name === value ? x : null));
-      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name });
-    } else {
-      this.setState({ [`selected_${name}`]: value });
-    }
+    this.setState({ [`selected_${name}`]: value });
   };
 
-  toggleClose = (e) => {
-    e.preventDefault();
-    this.setState({ isOpen: false });
-  };
-
-  changeSelected = (e) => {
-    e.preventDefault();
-    const { value, name, id } = e.target;
-    const selected = `selected_${this.state.selectedCat}`;
-    if (name === 'brands') {
-      const value1 = JSON.parse(value);
-      this.setState({
-        [selected]: { id, brandName: value1.name, name: value },
-        isOpen: false,
-      });
-    } else if (name === 'itemType') {
-      const value1 = JSON.parse(value);
-      this.setState({
-        [`selected_${name}`]: { id, itemType: value1.itemType, name: value },
-        isOpen: false,
-      });
-    } else if (name === 'colors') {
-      const { colors } = this.state;
-      const color = colors.filter(x => (x.name === value ? x.hex : null));
-      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
-    } else {
-      this.setState({ [selected]: value, isOpen: false });
-    }
-  };
-
-  handleChange = (selected) => {
-    console.log('asasas', selected);
-    this.setState({ selected_brands: selected });
+  handleChange = (value, select) => {
+    const { name } = select;
+    this.setState({ [`selected${name}`]: value });
   };
 
   render() {
@@ -216,8 +180,6 @@ class GetDetails extends Component {
           image={imageUrl}
           {...this.state}
           toggleOpen={this.toggleOpen}
-          toggleClose={this.toggleClose}
-          changeSelected={this.changeSelected}
           handleChange={this.handleChange}
         />
         <Button />
