@@ -168,6 +168,7 @@ class Form extends Component {
             </StyledSelect>
             <ErrorMessage>{patternError}</ErrorMessage>
 
+
             <StyledInputBrand
               onChange={toggleOpen}
               type="text"

@@ -13,7 +13,6 @@ exports.addItem = (req, res) => {
     price,
     age,
     color,
-    brandId,
     size,
     url,
     details,
@@ -33,7 +32,6 @@ exports.addItem = (req, res) => {
       Colours: colors,
       Age: age,
       Condition: condition,
-      Brand: [brandId],
       Size: size,
       Image: [
         {
@@ -52,6 +50,7 @@ exports.addItem = (req, res) => {
     (err) => {
       if (err) {
         return res.json({ success: 'false', err });
+        console.log(err);
       }
       return res.json({ success: 'true' });
     },
