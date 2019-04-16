@@ -35,6 +35,9 @@ class Feedback extends Component {
           const { history } = this.props;
           history.push('/');
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
     axios
       .get('/get-feedback')
@@ -48,8 +51,10 @@ class Feedback extends Component {
           }
           this.setState({ loading: false });
         }
-      })
-      .catch(err => console.log(err));
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
+      });
   }
 
   updateOptions = (feedbacks) => {
@@ -127,8 +132,9 @@ class Feedback extends Component {
           if (data.success) {
             history.push('/item-list');
           }
-        })
-        .catch(() => history.push('/error'));
+        }).catch(() => {
+          history.push('/error');
+        });
     }
     history.push('/item-list');
   };

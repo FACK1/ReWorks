@@ -87,11 +87,17 @@ class ItemDetails extends Component {
         const brands = this.removeDuplicate(data.data, this.state.selected_brands);
         this.setState({ brands: [this.state.selected_brands, ...brands] });
       }
+    }).catch(() => {
+      const { history } = this.props;
+      history.push('/error');
     });
 
     axios.get('/get-types').then(({ data }) => {
       const types = this.removeDuplicate(data.itemType, this.state.selected_itemType);
       this.setState({ itemType: [this.state.selected_itemType, ...types] });
+    }).catch(() => {
+      const { history } = this.props;
+      history.push('/error');
     });
   }
 
@@ -110,8 +116,10 @@ class ItemDetails extends Component {
         if (data.success) {
           history.push('/item-list');
         }
-      })
-      .catch(() => history.push('/error'));
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
+      });
   };
 
   toggleOpen = (e) => {
@@ -255,8 +263,10 @@ class ItemDetails extends Component {
           if (data.success) {
             history.push('/item-list');
           }
-        })
-        .catch(() => history.push('/error'));
+        }).catch(() => {
+          const { history } = this.props;
+          history.push('/error');
+        });
     }
     history.push('/item-list');
   };

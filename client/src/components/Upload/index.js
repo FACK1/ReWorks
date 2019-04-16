@@ -23,6 +23,9 @@ class Upload extends Component {
     axios.post('/add-to-amazon', img).then(({ data }) => {
       this.setState({ details: data });
       this.props.history.push({ pathname: '/get-details', details: this.state.details });
+    }).catch(() => {
+      const { history } = this.props;
+      history.push('/error');
     });
   };
 

@@ -17,6 +17,9 @@ class Splash extends Component {
           const { history } = this.props;
           history.push('/item-list');
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
   }
 

@@ -35,6 +35,9 @@ class signUp extends Component {
           const { history } = this.props;
           history.push('/item-list');
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
   }
 
@@ -87,12 +90,14 @@ class signUp extends Component {
         password: this.state.password,
         confirmPassword: this.state.confirmPassword,
       };
-      axios.post('/signup', inputs).then(({ data }) => {
+      axios.post('/signup', 'inputs').then(({ data }) => {
         if (data.success) {
           history.push({ pathname: '/login-form', data: this.props.location.data });
         } else {
           this.setState({ usernameError: 'This username already exists.', isErrorUsername: true });
         }
+      }).catch(() => {
+        history.push('/error');
       });
     }
   };
