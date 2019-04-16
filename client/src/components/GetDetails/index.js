@@ -104,7 +104,9 @@ class GetDetails extends Component {
 
     axios.get('/get-types').then(({ data }) => {
       const type = data.itemType;
-      this.setState({ itemType: [...this.state.itemType, ...type] });
+      const airtableNames = type.map(item => item.name);
+      const filtered = this.state.itemType.filter(item => !airtableNames.includes(item.name));
+      this.setState({ itemType: [...filtered, ...type] });
     });
   }
 
