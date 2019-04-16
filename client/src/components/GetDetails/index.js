@@ -129,7 +129,7 @@ class GetDetails extends Component {
       const { history } = this.props;
       const price = this.state.selected_price.concat(this.state.selected_currency);
       const inputs = {
-        type: this.state.selected_itemType,
+        type: this.state.selected_itemType.id,
         age: this.state.selected_age,
         price,
         color: this.state.selected_colors,
@@ -145,7 +145,26 @@ class GetDetails extends Component {
         pattern: this.state.selected_patterns,
       };
 
-      if (cookie) {
+      if (inputs.type === '') {
+        axios
+          .post('/add-type', { name: this.state.selected_itemType.itemType, shortcut: 'New Type' })
+          .then((res) => {
+            const { typeId } = res.data;
+            inputs.type = typeId;
+            return inputs;
+          })
+          .then((inputs) => {
+            if (cookie) {
+              axios.post('/add-item', inputs).then(({ data }) => {
+                if (data.success) {
+                  history.push({ pathname: '/item-list', logged });
+                }
+              });
+            } else {
+              history.push({ pathname: '/login-form', data: inputs });
+            }
+          });
+      } else if (cookie) {
         axios.post('/add-item', inputs).then(({ data }) => {
           if (data.success) {
             history.push({ pathname: '/item-list', logged });
