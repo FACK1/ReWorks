@@ -29,7 +29,6 @@ class Form extends Component {
       'Colour*',
       'Pattern',
       'Brand',
-      'Other Brand',
       'Condition',
       'Label size',
       'Size Category',
@@ -168,39 +167,6 @@ class Form extends Component {
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
             <ErrorMessage>{patternError}</ErrorMessage>
-
-            <StyledSelect
-              onChange={toggleOpen}
-              name="brands"
-              value={selected_brands.name}
-              StyleError={isErrorBrand}
-              {...this.props}
-              errorText={brandError}
-            >
-              {showDefaultOption && (
-              <option default hidden>
-                  Select...
-              </option>
-              )}
-              {brands.map(brand => (brands.indexOf(brand) >= 5 ? (
-                <StyledOption
-                  key={brand.name}
-                  value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
-                  hidden
-                >
-                  {brand.name}
-                </StyledOption>
-              ) : (
-                <StyledOption
-                  key={brand.name}
-                  value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
-                >
-                  {brand.name}
-                </StyledOption>
-              )))}
-              <StyledOption value="more">More...</StyledOption>
-            </StyledSelect>
-            <ErrorMessage>{brandError}</ErrorMessage>
 
             <StyledInputBrand
               onChange={toggleOpen}

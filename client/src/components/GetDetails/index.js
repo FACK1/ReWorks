@@ -191,7 +191,6 @@ class GetDetails extends Component {
           size: this.state.selected_labelSize,
           url: this.props.location.details.image_url,
           details: this.state.selected_details,
-          brandId: this.state.selected_brands.id,
           sizeCategory: this.state.selected_sizeCategory,
           pattern: this.state.selected_patterns,
           brand: this.state.selected_Brand,
@@ -229,9 +228,6 @@ class GetDetails extends Component {
     const { value, name } = e.target;
     if (value === 'more') {
       this.setState({ isOpen: true, selectedCat: name });
-    } else if (name === 'brands') {
-      const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
     } else if (name === 'itemType') {
       const value1 = JSON.parse(value);
       this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.name, name: value } });
@@ -253,13 +249,7 @@ class GetDetails extends Component {
     e.preventDefault();
     const { value, name, id } = e.target;
     const selected = `selected_${this.state.selectedCat}`;
-    if (name === 'brands') {
-      const value1 = JSON.parse(value);
-      this.setState({
-        [selected]: { id, brandName: value1.name, name: value },
-        isOpen: false,
-      });
-    } else if (name === 'itemType') {
+    if (name === 'itemType') {
       const value1 = JSON.parse(value);
       this.setState({ [`selected_${name}`]: { id, itemType: value1.name, name: value }, isOpen: false });
     } else if (name === 'colors') {
