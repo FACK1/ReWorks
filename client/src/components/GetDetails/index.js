@@ -36,6 +36,7 @@ class GetDetails extends Component {
     selected_patterns: '',
     selected_currency: '£',
     showDefaultOption: true,
+    selected_Brand: '',
     title: '',
   };
 
@@ -193,8 +194,8 @@ class GetDetails extends Component {
           brandId: this.state.selected_brands.id,
           sizeCategory: this.state.selected_sizeCategory,
           pattern: this.state.selected_patterns,
+          brand: this.state.selected_Brand,
         };
-
         if (inputs.type === '') {
           axios.post('/add-type', { name: this.state.selected_itemType.itemType, shortcut: 'New Type' }).then((res) => {
             const { typeId } = res.data;
@@ -212,43 +213,6 @@ class GetDetails extends Component {
             }
           });
         } else if (cookie) {
-          axios.post('/add-item', inputs).then(({ data }) => {
-            if (data.success) {
-              history.push({ pathname: '/item-list', logged });
-            }
-          });
-        } else {
-          history.push({ pathname: '/login-form', data: inputs });
-        }
-      });
-    }
-  };
-
-
-  continue = () => {
-    const err = this.validate();
-    if (!err) {
-      axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
-        const { history } = this.props;
-        const price = this.state.selected_price.concat(this.state.selected_currency);
-        const inputs = {
-          type: this.state.selected_itemType,
-          age: this.state.selected_age,
-          price,
-          color: this.state.selected_colors,
-          colors: this.state.clarifaiColors,
-          colorshex: this.state.clarifaiHex,
-          hex: this.state.selected_hex,
-          condition: this.state.selected_condition,
-          size: this.state.selected_labelSize,
-          url: this.props.location.details.image_url,
-          details: this.state.selected_details,
-          brandId: this.state.selected_brands.id,
-          sizeCategory: this.state.selected_sizeCategory,
-          pattern: this.state.selected_patterns,
-        };
-
-        if (cookie) {
           axios.post('/add-item', inputs).then(({ data }) => {
             if (data.success) {
               history.push({ pathname: '/item-list', logged });
