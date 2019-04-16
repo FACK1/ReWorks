@@ -7,7 +7,7 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
 import {
-  condition, labelSize, age, sizeCategory, colors, patterns,
+  conditions, sizes, ages, categories, colors, patterns,
 } from '../../data';
 
 import { ImgDiv, DeleteButton } from './itemdetails.style';
@@ -22,10 +22,10 @@ class ItemDetails extends Component {
     itemType: [],
     colors: [],
     brands: [],
-    condition,
-    labelSize,
-    age,
-    sizeCategory,
+    conditions,
+    sizes,
+    ages,
+    categories,
     patterns,
     showDefaultOption: false,
   };
