@@ -37,6 +37,9 @@ class Login extends Component {
           const { history } = this.props;
           history.push('/item-list');
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
   }
 
@@ -82,6 +85,8 @@ class Login extends Component {
               } else {
                 history.push('/error');
               }
+            }).catch(() => {
+              history.push('/error');
             });
           } else {
             history.push('/item-list');
@@ -89,6 +94,8 @@ class Login extends Component {
         } else {
           this.setState({ passwordError: 'Username or password is incorrect.', isErrorUsername: true, isErrorPassword: true });
         }
+      }).catch(() => {
+        history.push('/error');
       });
     }
   };

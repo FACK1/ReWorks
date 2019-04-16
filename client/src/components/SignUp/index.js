@@ -35,6 +35,9 @@ class signUp extends Component {
           const { history } = this.props;
           history.push('/item-list');
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
   }
 
@@ -93,6 +96,8 @@ class signUp extends Component {
         } else {
           this.setState({ usernameError: 'This username already exists.', isErrorUsername: true });
         }
+      }).catch(() => {
+        history.push('/error');
       });
     }
   };

@@ -15,6 +15,9 @@ class Title extends Component {
     axios.get('/checkcookie')
       .then(({ data: { cookie } }) => {
         if (cookie) { this.setState({ logged: true }); } else { this.setState({ logged: false }); }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
   }
 
@@ -23,6 +26,8 @@ class Title extends Component {
       axios.get('/logout')
         .then(() => {
           history.push('/login-form');
+        }).catch(() => {
+          history.push('/error');
         });
     };
 

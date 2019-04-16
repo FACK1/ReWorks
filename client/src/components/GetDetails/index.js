@@ -88,6 +88,9 @@ class GetDetails extends Component {
             brands,
           });
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
 
       axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
@@ -96,6 +99,9 @@ class GetDetails extends Component {
         } else {
           this.setState({ title: 'LOGIN TO SAVE YOUR ITEM' });
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
     } else {
       const { history } = this.props;
@@ -107,6 +113,9 @@ class GetDetails extends Component {
       const airtableNames = type.map(item => item.name);
       const filtered = this.state.itemType.filter(item => !airtableNames.includes(item.name));
       this.setState({ itemType: [...filtered, ...type] });
+    }).catch(() => {
+      const { history } = this.props;
+      history.push('/error');
     });
   }
 
@@ -206,6 +215,9 @@ class GetDetails extends Component {
                 if (data.success) {
                   history.push({ pathname: '/item-list', logged });
                 }
+              }).catch(() => {
+                const { history } = this.props;
+                history.push('/error');
               });
             } else {
               history.push({ pathname: '/login-form', data: inputs });
@@ -220,6 +232,9 @@ class GetDetails extends Component {
         } else {
           history.push({ pathname: '/login-form', data: inputs });
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
     }
   };
@@ -257,6 +272,9 @@ class GetDetails extends Component {
         } else {
           history.push({ pathname: '/login-form', data: inputs });
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
     }
   };

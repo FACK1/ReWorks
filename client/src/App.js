@@ -8,6 +8,7 @@ import SignUp from './components/SignUp';
 import ItemDetails from './components/ItemDetails';
 import ItemList from './components/ItemList';
 import Feedback from './components/Feedback';
+import Error from './components/Shared/Error';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/item-details/:id" component={ItemDetails} />
         <Route path="/item-list" component={ItemList} />
         <Route path="/feedback" component={Feedback} />
+        <Route path="/error" component={Error} />
+
       </div>
     </Router>
   );

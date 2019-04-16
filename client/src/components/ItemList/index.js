@@ -29,12 +29,18 @@ class ItemList extends Component {
           const { history } = this.props;
           history.push('/');
         }
+      }).catch(() => {
+        const { history } = this.props;
+        history.push('/error');
       });
 
     axios
       .get('/items')
       .then(({ data }) => this.setState({ itemlist: data.data, loading: false }))
-      .catch(err => console.log(err));
+      .catch(() => {
+        const { history } = this.props;
+        history.push('/error');
+      });
   }
 
   goItemDetails = (id, index) => {
