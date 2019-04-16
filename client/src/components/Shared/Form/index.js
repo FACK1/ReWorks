@@ -36,6 +36,10 @@ class Form extends Component {
     ],
   };
 
+  handleChange = (selected) => {
+    console.log(selected);
+  };
+
   render() {
     const {
       image,
@@ -55,7 +59,7 @@ class Form extends Component {
       selected_price,
       selected_details,
       selectedPattern,
-      selected_currency,
+      selectedCurrency,
       types,
       colors,
       brands,
@@ -64,8 +68,10 @@ class Form extends Component {
       ages,
       patterns,
       categories,
+      currencies,
       showDefaultOption,
     } = this.props;
+
     return (
       <StyledForm>
         <StyledImgCon>
@@ -89,10 +95,10 @@ class Form extends Component {
               classNamePrefix="select"
               isDisabled={false}
               isLoading={false}
-              isClearable
+              isClearable={false}
               isRtl={false}
               isSearchable
-              name="type"
+              name="Type"
               options={types}
               onChange={handleChange}
             />
@@ -118,7 +124,7 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="pattern"
+              name="Pattern"
               options={patterns}
               onChange={handleChange}
             />
@@ -131,7 +137,7 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="brand"
+              name="Brand"
               options={brands}
               onChange={handleChange}
             />
@@ -144,7 +150,7 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="condition"
+              name="Condition"
               options={conditions}
               onChange={handleChange}
             />
@@ -157,7 +163,7 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="size"
+              name="Size"
               options={sizes}
               onChange={handleChange}
             />
@@ -170,7 +176,7 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="size-category"
+              name="Category"
               options={categories}
               onChange={handleChange}
             />
@@ -183,7 +189,7 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="age"
+              name="Age"
               options={ages}
               onChange={handleChange}
             />
@@ -196,17 +202,19 @@ class Form extends Component {
                 value={selected_price}
                 placeholder="price"
               />
-
-              <StyledSelectCurrency onChange={toggleOpen} name="currency" value={selected_currency}>
-                {showDefaultOption && (
-                  <option default hidden>
-                    $
-                  </option>
-                )}
-                <StyledOption value="£">£</StyledOption>
-                <StyledOption value="$">$</StyledOption>
-                <StyledOption value="€">€</StyledOption>
-              </StyledSelectCurrency>
+              <Select
+                value={selectedCurrency}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Currency"
+                options={currencies}
+                onChange={handleChange}
+              />
             </StyledPriceContainer>
           </StyledItem>
         </StyledDiv>
@@ -221,13 +229,5 @@ class Form extends Component {
     );
   }
 }
-// <ModalProvider>
-//   <Popup
-//     open={isOpen}
-//     toggleClose={toggleClose}
-//     changeSelected={changeSelected}
-//     name={[selectedCat]}
-//     data={this.props[selectedCat]}
-//   />
-// </ModalProvider>
+
 export default Form;
