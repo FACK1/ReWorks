@@ -45,26 +45,26 @@ class Form extends Component {
       toggleClose,
       changeSelected,
       handleChange,
-      selected_itemType,
-      selected_colors,
-      selected_brands,
-      selected_condition,
-      selected_labelSize,
-      selected_age,
+      selectedType,
+      // selected_colors,
+      selectedBrand,
+      selectedCondition,
+      selectedSize,
+      selectedAge,
+      selectedCategory,
       selected_price,
       selected_details,
-      selected_patterns,
+      selectedPattern,
       selected_currency,
-      itemType,
+      types,
       colors,
       brands,
-      condition,
-      labelSize,
-      age,
+      conditions,
+      sizes,
+      ages,
       patterns,
+      categories,
       showDefaultOption,
-      selected_sizeCategory,
-      sizeCategory,
     } = this.props;
     return (
       <StyledForm>
@@ -84,7 +84,7 @@ class Form extends Component {
 
           <StyledItem>
             <Select
-              value={selected_itemType}
+              value={selectedType}
               className="basic-single"
               classNamePrefix="select"
               isDisabled={false}
@@ -97,7 +97,33 @@ class Form extends Component {
               onChange={handleChange}
             />
             <Select
-              value={selected_brands}
+              value={null}
+              className="basic-single"
+              classNamePrefix="select"
+              isDisabled={false}
+              isLoading={false}
+              isClearable
+              isRtl={false}
+              isSearchable
+              name="color"
+              options={colors}
+              onChange={handleChange}
+            />
+            <Select
+              value={selectedPattern}
+              className="basic-single"
+              classNamePrefix="select"
+              isDisabled={false}
+              isLoading={false}
+              isClearable
+              isRtl={false}
+              isSearchable
+              name="pattern"
+              options={patterns}
+              onChange={handleChange}
+            />
+            <Select
+              value={selectedBrand}
               className="basic-single"
               classNamePrefix="select"
               isDisabled={false}
@@ -110,7 +136,7 @@ class Form extends Component {
               onChange={handleChange}
             />
             <Select
-              value={selected_patterns}
+              value={selectedCondition}
               className="basic-single"
               classNamePrefix="select"
               isDisabled={false}
@@ -118,12 +144,12 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="brand"
-              options={brands}
+              name="condition"
+              options={conditions}
               onChange={handleChange}
             />
             <Select
-              value={selected_brands}
+              value={selectedSize}
               className="basic-single"
               classNamePrefix="select"
               isDisabled={false}
@@ -131,12 +157,12 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="brand"
-              options={brands}
+              name="size"
+              options={sizes}
               onChange={handleChange}
             />
             <Select
-              value={selected_brands}
+              value={selectedCategory}
               className="basic-single"
               classNamePrefix="select"
               isDisabled={false}
@@ -144,12 +170,12 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="brand"
-              options={brands}
+              name="size-category"
+              options={categories}
               onChange={handleChange}
             />
             <Select
-              value={selected_brands}
+              value={selectedAge}
               className="basic-single"
               classNamePrefix="select"
               isDisabled={false}
@@ -157,34 +183,8 @@ class Form extends Component {
               isClearable
               isRtl={false}
               isSearchable
-              name="brand"
-              options={brands}
-              onChange={handleChange}
-            />
-            <Select
-              value={selected_brands}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable
-              isRtl={false}
-              isSearchable
-              name="brand"
-              options={brands}
-              onChange={handleChange}
-            />
-            <Select
-              value={selected_brands}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable
-              isRtl={false}
-              isSearchable
-              name="brand"
-              options={brands}
+              name="age"
+              options={ages}
               onChange={handleChange}
             />
 
