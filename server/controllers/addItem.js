@@ -23,6 +23,7 @@ exports.addItem = (req, res) => {
     colorshex,
     sizeCategory,
     pattern,
+    brand,
   } = req.body;
   base('Items').create(
     {
@@ -46,6 +47,7 @@ exports.addItem = (req, res) => {
       'Colours Hex Codes': colorshex,
       'Size Category': sizeCategory,
       Pattern: pattern,
+      'Brand Free text': brand,
     },
     (err) => {
       if (err) {

@@ -117,6 +117,19 @@ export const StyledInput = styled.input`
 		font-size: 16px;
 	}
 `;
+export const StyledInputBrand = styled.input`
+	background-color: #FBFBFB;
+	font-size: 20px;
+	max-width: 120px;
+	width: 120px;
+	margin-bottom: 16px;
+	border: 1px solid #F2F2F2;
+	padding: 7px 14px;
+	@media (max-width: 650px) {
+		font-size: 16px;
+	}
+`;
+
 
 export const StyledTextarea = styled.textarea`
 	font-size: 20px;

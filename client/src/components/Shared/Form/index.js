@@ -19,6 +19,7 @@ import {
   StyledSelectCurrency,
   StyledPriceContainer,
   ErrorMessage,
+  StyledInputBrand,
 } from './form.style';
 
 class Form extends Component {
@@ -28,6 +29,7 @@ class Form extends Component {
       'Colour*',
       'Pattern',
       'Brand',
+      'Other Brand',
       'Condition',
       'Label size',
       'Size Category',
@@ -55,6 +57,7 @@ class Form extends Component {
       selected_details,
       selected_patterns,
       selected_currency,
+      selected_Brand,
       itemType,
       colors,
       brands,
@@ -198,6 +201,14 @@ class Form extends Component {
               <StyledOption value="more">More...</StyledOption>
             </StyledSelect>
             <ErrorMessage>{brandError}</ErrorMessage>
+
+            <StyledInputBrand
+              onChange={toggleOpen}
+              type="text"
+              name="Brand"
+              value={selected_Brand}
+              placeholder="brand"
+            />
 
             <StyledSelect
               onChange={toggleOpen}
