@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { CSVLink } from 'react-csv';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { CSVLink } from "react-csv";
 
 export const List = styled.div`
   display: flex;
@@ -10,14 +10,10 @@ export const List = styled.div`
 `;
 
 export const Container = styled.div`
-  overflow-y: scroll;
-  height:90vh;
-  display: flex;
-  align-content: space-between;
-  @media (min-width: 650px) {
+  height:100vh;
+  @media (max-width: 650px) {
+    overflow-y: scroll;
     height:50vh;
-    width: 33%;
-    margin-left: 33%;
   }
 `;
 
@@ -27,9 +23,8 @@ export const StyledHeader = styled.h1`
   padding: 22px 0px;
   text-align: left;
   text-indent: 20px;
-  font-size: 16px;
-  @media (min-width: 650px) {
-    margin-left:34%;
+  @media (max-width: 650px) {
+    font-size: 16px;
   }
 `;
 
@@ -47,10 +42,6 @@ export const StyledLink = styled(Link)`
   margin-left: 15px;
   text-decoration: none;
   margin-bottom:14px;
-  @media (min-width: 650px) {
-    margin-left:35%;
-  }
-
 `;
 
 export const StyledCSVLink = styled(CSVLink)`
@@ -64,11 +55,8 @@ export const StyledCSVLink = styled(CSVLink)`
   font-weight: bold;
   width: 45%;
   text-align: center;
-  font-size: 16px;
-  @media (min-width: 650px) {
+  @media (max-width: 650px) {
     font-size: 14px;
-    width: 12%;
-    margin-right: 32%;
   }
 `;
 
@@ -76,10 +64,4 @@ export const GButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top:50px;
-  @media (min-width: 650px) {
-    margin-top: 30%;
-    margin-left: 5%;
-    width: 85%;
-    height:7vh;
-  }
 `;
