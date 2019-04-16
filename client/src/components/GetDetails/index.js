@@ -98,7 +98,7 @@ class GetDetails extends Component {
         }
       });
 
-      axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
+      axios.get('/checkcookie').then(({ data: { cookie } }) => {
         if (cookie) {
           this.setState({ title: 'SAVE YOUR ITEM' });
         } else {
@@ -127,33 +127,34 @@ class GetDetails extends Component {
   continue = () => {
     axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
       const { history } = this.props;
-      const price = this.state.selected_price.concat(this.state.selected_currency);
+      const price = this.state.selected_price.concat(this.state.selectedCurrency.value);
       const inputs = {
-        type: this.state.selected_itemType.id,
-        age: this.state.selected_age,
+        type: this.state.selectedType.id,
+        age: this.state.selectedAge.value,
         price,
         color: this.state.selected_colors,
         colors: this.state.clarifaiColors,
         colorshex: this.state.clarifaiHex,
         hex: this.state.selected_hex,
-        condition: this.state.selected_condition,
-        size: this.state.selected_labelSize,
+        condition: this.state.selectedCondition.value,
+        size: this.state.selectedSize.value,
         url: this.props.location.details.image_url,
         details: this.state.selected_details,
         brandId: this.state.selectedBrand.id,
-        sizeCategory: this.state.selected_sizeCategory,
-        pattern: this.state.selected_patterns,
+        sizeCategory: this.state.selectedCategory.value,
+        pattern: this.state.selectedPattern.value,
       };
 
       if (inputs.type === '') {
         axios
-          .post('/add-type', { name: this.state.selected_itemType.itemType, shortcut: 'New Type' })
+          .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
           .then((res) => {
             const { typeId } = res.data;
             inputs.type = typeId;
             return inputs;
           })
           .then((inputs) => {
+            console.log(inputs);
             if (cookie) {
               axios.post('/add-item', inputs).then(({ data }) => {
                 if (data.success) {
@@ -165,6 +166,7 @@ class GetDetails extends Component {
             }
           });
       } else if (cookie) {
+        console.log(inputs);
         axios.post('/add-item', inputs).then(({ data }) => {
           if (data.success) {
             history.push({ pathname: '/item-list', logged });
