@@ -19,6 +19,7 @@ import {
   StyledImgCon,
   StyledSelectCurrency,
   StyledPriceContainer,
+  ErrorMessage,
 } from './form.style';
 
 class Form extends Component {
@@ -36,21 +37,13 @@ class Form extends Component {
     ],
   };
 
-  handleChange = (selected) => {
-    console.log(selected);
-  };
-
   render() {
     const {
       image,
       toggleOpen,
-      isOpen,
-      selectedCat,
-      toggleClose,
-      changeSelected,
       handleChange,
       selectedType,
-      // selected_colors,
+      selected_colors,
       selectedBrand,
       selectedCondition,
       selectedSize,
@@ -69,7 +62,18 @@ class Form extends Component {
       patterns,
       categories,
       currencies,
-      showDefaultOption,
+      patternError,
+      brandError,
+      conditionError,
+      labelSizeError,
+      sizeCategoryError,
+      ageError,
+      isErrorPattern,
+      isErrorBrand,
+      isErrorCondition,
+      isErrorLabelSize,
+      isErrorSizeCategory,
+      isErrorAge,
     } = this.props;
 
     return (
@@ -128,6 +132,7 @@ class Form extends Component {
               options={patterns}
               onChange={handleChange}
             />
+            <ErrorMessage StyleError={isErrorPattern}>{patternError}</ErrorMessage>
             <Select
               value={selectedBrand}
               className="basic-single"
@@ -141,6 +146,7 @@ class Form extends Component {
               options={brands}
               onChange={handleChange}
             />
+            <ErrorMessage StyleError={isErrorBrand}>{brandError}</ErrorMessage>
             <Select
               value={selectedCondition}
               className="basic-single"
@@ -154,6 +160,7 @@ class Form extends Component {
               options={conditions}
               onChange={handleChange}
             />
+            <ErrorMessage StyleError={isErrorCondition}>{conditionError}</ErrorMessage>
             <Select
               value={selectedSize}
               className="basic-single"
@@ -167,6 +174,7 @@ class Form extends Component {
               options={sizes}
               onChange={handleChange}
             />
+            <ErrorMessage StyleError={isErrorLabelSize}>{labelSizeError}</ErrorMessage>
             <Select
               value={selectedCategory}
               className="basic-single"
@@ -180,6 +188,7 @@ class Form extends Component {
               options={categories}
               onChange={handleChange}
             />
+            <ErrorMessage StyleError={isErrorSizeCategory}>{sizeCategoryError}</ErrorMessage>
             <Select
               value={selectedAge}
               className="basic-single"
@@ -193,6 +202,7 @@ class Form extends Component {
               options={ages}
               onChange={handleChange}
             />
+            <ErrorMessage StyleError={isErrorAge}>{ageError}</ErrorMessage>
 
             <StyledPriceContainer>
               <StyledInput
