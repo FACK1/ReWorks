@@ -62,7 +62,7 @@
     "Jumpsuit",
     "Tracksuit"
   ],
-  "condition": [
+  "conditions": [
     "New (with tags)",
     "New (without tags)",
     "Supergrade (worn lightly)",
@@ -70,9 +70,17 @@
     "Used (some imperfections)",
     "Vintage"
   ],
-  "age": ["0-6 Mths", "6-12 Mths", "1-5 Years", "5-10 Years", "10 Years", "10+ Years", "25+ Years"],
-  "sizeCategory": ["Mens", "Womens", "Unisex", "Youth", "Kids", "Infant"],
-  "labelSize": [
+  "ages": [
+    "0-6 Mths",
+    "6-12 Mths",
+    "1-5 Years",
+    "5-10 Years",
+    "10 Years",
+    "10+ Years",
+    "25+ Years"
+  ],
+  "categories": ["Mens", "Womens", "Unisex", "Youth", "Kids", "Infant"],
+  "sizes": [
     "Small",
     "Average",
     "Waste",
