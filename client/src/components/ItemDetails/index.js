@@ -7,7 +7,7 @@ import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import deleteIcon from './garbage.png';
 import {
-  conditions, sizes, ages, categories, colors, patterns,
+  conditions, sizes, ages, categories, colors, patterns, currencies,
 } from '../../data';
 
 import { ImgDiv, DeleteButton } from './itemdetails.style';
@@ -17,17 +17,13 @@ class ItemDetails extends Component {
     itemDetails: this.props.location.itemDetails,
     isOpen: false,
     selectedCat: null,
-    selected_brands: { id: '', brandName: '', name: '' },
-    selected_itemType: { id: '', itemType: '', name: '' },
-    itemType: [],
     colors: [],
-    brands: [],
     conditions,
     sizes,
     ages,
     categories,
     patterns,
-    showDefaultOption: false,
+    currencies,
   };
 
   componentDidMount() {
@@ -57,41 +53,55 @@ class ItemDetails extends Component {
       });
     });
     this.setState({
-      selected_brands: {
+      selectedBrand: {
         id: itemDetails.brandId,
-        brandName: itemDetails.brand,
-        name: itemDetails.brand,
+        value: itemDetails.brand,
+        label: itemDetails.brand,
       },
-      selected_condition: itemDetails.condition,
-      selected_labelSize: itemDetails.size,
-      selected_age: itemDetails.age,
+      selectedCondition: { value: itemDetails.condition, label: itemDetails.condition },
+      selectedSize: { value: itemDetails.size, label: itemDetails.size },
+      selectedAge: { value: itemDetails.age, label: itemDetails.age },
       selected_colors: itemDetails.color,
       selected_hex: itemDetails.hex,
-      selected_itemType: {
+      selectedType: {
         id: itemDetails.typeId,
-        itemType: itemDetails.type,
-        name: itemDetails.type,
+        value: itemDetails.type,
+        label: itemDetails.type,
       },
       selected_price: price,
-      selected_currency: currency,
+      selectedCurrency: { value: currency, label: currency },
       selected_details: itemDetails.details,
       colors: [...allColors, ...colors],
       clarifaiColors,
       clarifaiHex,
-      selected_sizeCategory: itemDetails.sizeCategory,
-      selected_patterns: itemDetails.pattern,
+      selectedCategory: { value: itemDetails.sizeCategory, label: itemDetails.sizeCategory },
+      selectedPattern: { value: itemDetails.pattern, label: itemDetails.pattern },
     });
 
     axios.get('/getbrands').then(({ data }) => {
       if (data.success) {
-        const brands = this.removeDuplicate(data.data, this.state.selected_brands);
-        this.setState({ brands: [this.state.selected_brands, ...brands] });
+        const brands = [];
+        data.data.map((brand) => {
+          brands.push({
+            id: brand.id,
+            value: brand.name,
+            label: brand.name,
+          });
+        });
+        this.setState({ brands });
       }
     });
 
     axios.get('/get-types').then(({ data }) => {
-      const types = this.removeDuplicate(data.itemType, this.state.selected_itemType);
-      this.setState({ itemType: [this.state.selected_itemType, ...types] });
+      const types = [];
+      data.itemType.map((type) => {
+        types.push({
+          id: type.id,
+          value: type.name,
+          label: type.name,
+        });
+      });
+      this.setState({ types });
     });
   }
 
@@ -116,158 +126,114 @@ class ItemDetails extends Component {
 
   toggleOpen = (e) => {
     const { value, name } = e.target;
-    if (value === 'more') {
-      this.setState({ isOpen: true, selectedCat: name });
-    } else if (name === 'brands') {
-      const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
-    } else if (name === 'colors') {
-      const { colors } = this.state;
-      const color = colors.filter(x => (x.name === value ? x.hex : null));
-      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
-    } else if (name === 'itemType') {
-      const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.itemType } });
-    } else {
-      this.setState({ [`selected_${name}`]: value });
-    }
+    this.setState({ [`selected_${name}`]: value });
   };
 
-  toggleClose = (e) => {
-    e.preventDefault();
-    this.setState({ isOpen: false });
-  };
-
-  changeSelected = (e) => {
-    e.preventDefault();
-    const { value, name, id } = e.target;
-    const selected = `selected_${this.state.selectedCat}`;
-    if (name === 'brands') {
-      const value1 = JSON.parse(value);
-      this.setState({ [selected]: { id, brandName: value1.name, name: value }, isOpen: false });
-    } else if (name === 'colors') {
-      const { colors } = this.state;
-      const color = colors.filter(x => (x.name === value ? x.hex : null));
-      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
-    } else if (name === 'itemType') {
-      const value1 = JSON.parse(value);
-      this.setState({
-        [`selected_${name}`]: { id, itemType: value1.itemType, name: value },
-        isOpen: false,
-      });
-    } else {
-      this.setState({ [selected]: value, isOpen: false });
-    }
-  };
-
-  checkForChanges = () => {
-    const {
-      selected_brands,
-      selected_condition,
-      selected_labelSize,
-      selected_age,
-      selected_colors,
-      selected_itemType,
-      selected_price,
-      selected_currency,
-      selected_details,
-      selected_sizeCategory,
-      selected_patterns,
-      itemDetails,
-    } = this.state;
-
-    const itemDetailsArray = [];
-    const updateItemDetails = [];
-
-    const keys = Object.keys(itemDetails);
-
-    keys.map((key) => {
-      itemDetailsArray.push(itemDetails[key]);
-    });
-
-    updateItemDetails.push(
-      itemDetails.itemId,
-      selected_itemType.itemType,
-      selected_itemType.id,
-      selected_labelSize,
-      itemDetails.url,
-      itemDetails.name,
-      selected_price,
-      selected_colors,
-      selected_brands.brandName,
-      selected_condition,
-      selected_age,
-      selected_details,
-      selected_brands.id,
-      itemDetails.colors,
-      selected_sizeCategory,
-      selected_patterns,
-    );
-
-    let flag = false;
-    itemDetailsArray.map((object, i) => {
-      if (object !== updateItemDetails[i]) {
-        flag = true;
-      }
-    });
-
-    return flag;
-  };
+  // checkForChanges = () => {
+  //   const {
+  //     selectedBrand,
+  //     selectedCondition,
+  //     selectedSize,
+  //     selectedAge,
+  //     selected_colors,
+  //     selectedType,
+  //     selected_price,
+  //     selectedCurrency,
+  //     selected_details,
+  //     selectedCategory,
+  //     selectedPattern,
+  //     itemDetails,
+  //   } = this.state;
+  //
+  //   const itemDetailsArray = [];
+  //   const updateItemDetails = [];
+  //
+  //   const keys = Object.keys(itemDetails);
+  //
+  //   keys.map((key) => {
+  //     itemDetailsArray.push(itemDetails[key]);
+  //   });
+  //
+  //   updateItemDetails.push(
+  //     itemDetails.itemId,
+  //     selectedType.value,
+  //     selectedType.id,
+  //     selectedSize.value,
+  //     itemDetails.url,
+  //     itemDetails.name,
+  //     selected_price,
+  //     selected_colors,
+  //     selectedBrand.value,
+  //     selectedCondition.value,
+  //     selectedAge.value,
+  //     selected_details,
+  //     selectedBrand.id,
+  //     itemDetails.colors,
+  //     selectedCategory.value,
+  //     selectedPattern.value,
+  //   );
+  //
+  //   let flag = false;
+  //   itemDetailsArray.map((object, i) => {
+  //     if (object !== updateItemDetails[i]) {
+  //       flag = true;
+  //     }
+  //   });
+  //
+  //   return flag;
+  // };
 
   updateItem = () => {
-    const updatedFlag = this.checkForChanges();
+    // const updatedFlag = this.checkForChanges();
     const { history } = this.props;
     const id = this.state.itemDetails.itemId;
     const {
-      selected_brands,
-      selected_condition,
-      selected_labelSize,
-      selected_age,
+      selectedBrand,
+      selectedCondition,
+      selectedSize,
+      selectedAge,
       selected_colors,
       selected_hex,
-      selected_itemType,
+      selectedType,
       selected_price,
-      selected_currency,
+      selectedCurrency,
       selected_details,
       itemDetails,
-      selected_sizeCategory,
-      selected_patterns,
+      selectedCategory,
+      selectedPattern,
     } = this.state;
 
     const newUpdates = {
-      size: selected_labelSize,
-      type: selected_itemType.id,
-      price: selected_price.concat(selected_currency),
-      brandId: selected_brands.id,
-      condition: selected_condition,
+      size: selectedSize.value,
+      type: selectedType.id,
+      price: selected_price.concat(selectedCurrency.value),
+      brandId: selectedBrand.id,
+      condition: selectedCondition.value,
       details: selected_details,
       color: selected_colors,
       hex: selected_hex,
-      age: selected_age,
-      sizeCategory: selected_sizeCategory,
-      pattern: selected_patterns,
+      age: selectedAge.value,
+      sizeCategory: selectedCategory.value,
+      pattern: selectedPattern.value,
     };
 
-    if (updatedFlag) {
-      axios
-        .put(`/edit-item/${id}`, newUpdates)
-        .then(({ data }) => {
-          if (data.success) {
-            history.push('/item-list');
-          }
-        })
-        .catch(() => history.push('/error'));
-    }
-    history.push('/item-list');
+    // if (updatedFlag) {
+    console.log('new', newUpdates);
+    axios
+      .put(`/edit-item/${id}`, newUpdates)
+      .then(({ data }) => {
+        if (data.success) {
+          history.push('/item-list');
+        }
+      })
+      .catch(() => history.push('/error'));
+    // }
+    // history.push('/item-list');
   };
 
-  removeDuplicate = (array, item) => {
-    array.map((object, i) => {
-      if (object.id === item.id) {
-        array.splice(i, 1);
-      }
-    });
-    return array;
+  handleChange = (value, select) => {
+    const { name } = select;
+    this.setState({ [`selected${name}`]: value });
   };
 
   render() {
@@ -286,6 +252,7 @@ class ItemDetails extends Component {
           toggleOpen={this.toggleOpen}
           toggleClose={this.toggleClose}
           changeSelected={this.changeSelected}
+          handleChange={this.handleChange}
         />
         <Button onClick={this.goBack} />
         <GButton title="Save" onClick={this.updateItem} />
