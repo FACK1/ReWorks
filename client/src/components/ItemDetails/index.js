@@ -17,7 +17,7 @@ class ItemDetails extends Component {
     itemDetails: this.props.location.itemDetails,
     isOpen: false,
     selectedCat: null,
-    colors: [],
+    colors,
     conditions,
     sizes,
     ages,
@@ -42,12 +42,12 @@ class ItemDetails extends Component {
     const clarifaiHex = itemDetails.colorshex.split(',');
     const allColors = [];
     clarifaiColors.map((color, i) => {
-      allColors.push({ name: color, hex: clarifaiHex[i] });
+      allColors.push({ value: color, label: color, hex: clarifaiHex[i] });
     });
 
     allColors.filter((color) => {
       colors.map((color2, i) => {
-        if (color.name === color2.name) {
+        if (color.value === color2.value) {
           colors.splice(i, 1);
         }
       });
@@ -61,8 +61,7 @@ class ItemDetails extends Component {
       selectedCondition: { value: itemDetails.condition, label: itemDetails.condition },
       selectedSize: { value: itemDetails.size, label: itemDetails.size },
       selectedAge: { value: itemDetails.age, label: itemDetails.age },
-      selected_colors: itemDetails.color,
-      selected_hex: itemDetails.hex,
+      selectedColor: { value: itemDetails.color, label: itemDetails.color, hex: itemDetails.hex },
       selectedType: {
         id: itemDetails.typeId,
         value: itemDetails.type,
@@ -192,15 +191,13 @@ class ItemDetails extends Component {
       selectedCondition,
       selectedSize,
       selectedAge,
-      selected_colors,
-      selected_hex,
-      selectedType,
+      selectedColor,
       selected_price,
       selectedCurrency,
       selected_details,
-      itemDetails,
       selectedCategory,
       selectedPattern,
+      selectedType,
     } = this.state;
 
     const newUpdates = {
@@ -210,15 +207,15 @@ class ItemDetails extends Component {
       brandId: selectedBrand.id,
       condition: selectedCondition.value,
       details: selected_details,
-      color: selected_colors,
-      hex: selected_hex,
+      color: selectedColor.value,
+      hex: selectedColor.hex,
       age: selectedAge.value,
       sizeCategory: selectedCategory.value,
       pattern: selectedPattern.value,
     };
 
     // if (updatedFlag) {
-    console.log('new', newUpdates);
+
     axios
       .put(`/edit-item/${id}`, newUpdates)
       .then(({ data }) => {
