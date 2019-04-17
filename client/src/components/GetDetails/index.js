@@ -106,7 +106,17 @@ class GetDetails extends Component {
       const type = data.itemType;
       const airtableNames = type.map(item => item.name);
       const filtered = this.state.itemType.filter(item => !airtableNames.includes(item.name));
-      this.setState({ itemType: [...filtered, ...type] });
+      this.setState({ itemType: [...filtered, ...type] }, () => {
+        if (airtableNames.includes(this.state.selected_itemType.name)) {
+          const found = type.filter(item => item.name === this.state.selected_itemType.name);
+          this.setState(prevState => ({
+            selected_itemType: {
+              ...prevState.selected_itemType,
+              id: found[0].id,
+            },
+          }));
+        }
+      });
     });
   }
 
