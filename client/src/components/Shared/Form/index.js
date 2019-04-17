@@ -15,7 +15,8 @@ import {
   StyledTextarea,
   StyledImgCon,
   StyledPriceContainer,
-  ErrorMessage,
+  // ErrorMessage,
+  SelectStyle,
 } from './form.style';
 
 class Form extends Component {
@@ -98,18 +99,18 @@ class Form extends Component {
       patterns,
       categories,
       currencies,
-      patternError,
-      brandError,
-      conditionError,
-      labelSizeError,
-      sizeCategoryError,
-      ageError,
-      isErrorPattern,
-      isErrorBrand,
-      isErrorCondition,
-      isErrorLabelSize,
-      isErrorSizeCategory,
-      isErrorAge,
+      // patternError,
+      // brandError,
+      // conditionError,
+      // labelSizeError,
+      // sizeCategoryError,
+      // ageError,
+      // isErrorPattern,
+      // isErrorBrand,
+      // isErrorCondition,
+      // isErrorLabelSize,
+      // isErrorSizeCategory,
+      // isErrorAge,
     } = this.props;
 
     return (
@@ -129,117 +130,134 @@ class Form extends Component {
           </StyledLabels>
 
           <StyledItem>
-            <Select
-              value={selectedType}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable={false}
-              isRtl={false}
-              isSearchable
-              name="Type"
-              options={types}
-              onChange={handleChange}
-            />
-            <Select
-              value={selectedColor}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable={false}
-              isRtl={false}
-              isSearchable={false}
-              name="Color"
-              options={colors}
-              styles={this.colourStyles}
-              onChange={handleChange}
-            />
-            <Select
-              value={selectedPattern}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable={false}
-              isRtl={false}
-              isSearchable
-              name="Pattern"
-              options={patterns}
-              onChange={handleChange}
-            />
-            <ErrorMessage StyleError={isErrorPattern}>{patternError}</ErrorMessage>
-            <Select
-              value={selectedBrand}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable={false}
-              isRtl={false}
-              isSearchable
-              name="Brand"
-              options={brands}
-              onChange={handleChange}
-            />
-            <ErrorMessage StyleError={isErrorBrand}>{brandError}</ErrorMessage>
-            <Select
-              value={selectedCondition}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable={false}
-              isRtl={false}
-              isSearchable
-              name="Condition"
-              options={conditions}
-              onChange={handleChange}
-            />
-            <ErrorMessage StyleError={isErrorCondition}>{conditionError}</ErrorMessage>
-            <Select
-              value={selectedSize}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable={false}
-              isRtl={false}
-              isSearchable
-              name="Size"
-              options={sizes}
-              onChange={handleChange}
-            />
-            <ErrorMessage StyleError={isErrorLabelSize}>{labelSizeError}</ErrorMessage>
-            <Select
-              value={selectedCategory}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable={false}
-              isRtl={false}
-              isSearchable
-              name="Category"
-              options={categories}
-              onChange={handleChange}
-            />
-            <ErrorMessage StyleError={isErrorSizeCategory}>{sizeCategoryError}</ErrorMessage>
-            <Select
-              value={selectedAge}
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={false}
-              isLoading={false}
-              isClearable={false}
-              isRtl={false}
-              isSearchable
-              name="Age"
-              options={ages}
-              onChange={handleChange}
-            />
-            <ErrorMessage StyleError={isErrorAge}>{ageError}</ErrorMessage>
+            <SelectStyle>
+              <Select
+                value={selectedType}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Type"
+                options={types}
+                onChange={handleChange}
+              />
+            </SelectStyle>
+
+            <SelectStyle>
+              <Select
+                value={selectedColor}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Color"
+                options={colors}
+                styles={this.colourStyles}
+                onChange={handleChange}
+              />
+            </SelectStyle>
+
+            <SelectStyle>
+              <Select
+                value={selectedPattern}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Pattern"
+                options={patterns}
+                onChange={handleChange}
+              />
+            </SelectStyle>
+
+            <SelectStyle>
+              <Select
+                value={selectedBrand}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Brand"
+                options={brands}
+                onChange={handleChange}
+              />
+            </SelectStyle>
+
+            <SelectStyle>
+              <Select
+                value={selectedCondition}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Condition"
+                options={conditions}
+                onChange={handleChange}
+              />
+            </SelectStyle>
+
+            <SelectStyle>
+              <Select
+                value={selectedSize}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Size"
+                options={sizes}
+                onChange={handleChange}
+              />
+            </SelectStyle>
+
+            <SelectStyle>
+              <Select
+                value={selectedCategory}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Category"
+                options={categories}
+                onChange={handleChange}
+              />
+            </SelectStyle>
+
+            <SelectStyle>
+              <Select
+                value={selectedAge}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Age"
+                options={ages}
+                onChange={handleChange}
+              />
+            </SelectStyle>
 
             <StyledPriceContainer>
               <StyledInput
