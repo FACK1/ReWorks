@@ -126,7 +126,17 @@ class GetDetails extends Component {
         });
       });
 
-      this.setState({ types: [...filtered, ...types] });
+      this.setState({ types: [...filtered, ...types] }, () => {
+        if (airtableNames.includes(this.state.selectedType.value)) {
+          const found = data.itemType.filter(item => item.name === this.state.selectedType.value);
+          this.setState(prevState => ({
+            selectedType: {
+              ...prevState.selectedType,
+              id: found[0].id,
+            },
+          }));
+        }
+      });
     });
   }
 
