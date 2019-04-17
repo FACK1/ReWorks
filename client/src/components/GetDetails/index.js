@@ -30,6 +30,7 @@ class GetDetails extends Component {
     selectedCondition: null,
     selectedSize: null,
     selectedAge: null,
+    selectedColor: null,
     selected_price: '0',
     selected_details: '',
     selectedCategory: null,
@@ -45,11 +46,15 @@ class GetDetails extends Component {
       const apiColors = this.props.location.details.colors;
 
       if (apparel || apiColors) {
-        const colours = apiColors.data.map(ele => ({ name: ele.name, hex: ele.hex }));
+        const colours = apiColors.data.map(ele => ({
+          value: ele.name,
+          label: ele.name,
+          hex: ele.hex,
+        }));
 
         colours.filter((color) => {
           colors.map((color2, i) => {
-            if (color.name === color2.name) {
+            if (color.value === color2.value) {
               colors.splice(i, 1);
             }
           });
@@ -63,8 +68,7 @@ class GetDetails extends Component {
         const clarifaiHex = clarifaiColoursHex.join(',');
         this.setState({
           colors: [...colours, ...colors],
-          selected_colors: colours[0].name,
-          selected_hex: colours[0].hex,
+          selectedColor: colours[0],
           clarifaiColors,
           clarifaiHex,
         });
@@ -198,10 +202,10 @@ class GetDetails extends Component {
           type: this.state.selectedType.id,
           age: this.state.selectedAge.value,
           price,
-          color: this.state.selected_colors,
+          color: this.state.selectedColor.value,
           colors: this.state.clarifaiColors,
           colorshex: this.state.clarifaiHex,
-          hex: this.state.selected_hex,
+          hex: this.state.selectedColor.hex,
           condition: this.state.selectedCondition.value,
           size: this.state.selectedSize.value,
           url: this.props.location.details.image_url,
