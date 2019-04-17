@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { ModalProvider } from 'styled-react-modal';
 import Select from 'react-select';
-import Popup from '../Popup';
+import chroma from 'chroma-js';
 
 import {
   StyledForm,
@@ -10,14 +9,11 @@ import {
   StyledNotic,
   StyledDiv,
   StyledLabel,
-  StyledSelect,
-  StyledOption,
   StyledItem,
   StyledLabels,
   StyledInput,
   StyledTextarea,
   StyledImgCon,
-  StyledSelectCurrency,
   StyledPriceContainer,
   ErrorMessage,
 } from './form.style';
@@ -37,13 +33,53 @@ class Form extends Component {
     ],
   };
 
+  colourStyles = {
+    control: styles => ({ ...styles, backgroundColor: 'white' }),
+    option: (styles, {
+      data, isDisabled, isFocused, isSelected,
+    }) => {
+      const color = data.hex;
+
+      return {
+        ...styles,
+        backgroundColor: isDisabled ? null : isSelected ? color : isFocused ? color : null,
+        color: isDisabled
+          ? '#ccc'
+          : isSelected
+            ? chroma.contrast(color, 'white') > 2
+              ? 'white'
+              : 'black'
+            : color,
+        cursor: isDisabled ? 'not-allowed' : 'default',
+      };
+    },
+    input: styles => ({ ...styles, ...this.dot() }),
+    placeholder: styles => ({ ...styles, ...this.dot() }),
+    singleValue: (styles, { data }) => ({ ...styles, ...this.dot(data.hex) }),
+  };
+
+  dot = (color = '#ccc') => ({
+    alignItems: 'center',
+    display: 'flex',
+
+    ':before': {
+      backgroundColor: color,
+      borderRadius: 10,
+      content: '" "',
+      display: 'flex',
+      marginRight: 8,
+      paddingLeft: 10,
+      height: 10,
+    },
+  });
+
   render() {
     const {
       image,
       toggleOpen,
       handleChange,
       selectedType,
-      selected_colors,
+      selectedColor,
       selectedBrand,
       selectedCondition,
       selectedSize,
@@ -107,16 +143,17 @@ class Form extends Component {
               onChange={handleChange}
             />
             <Select
-              value={null}
+              value={selectedColor}
               className="basic-single"
               classNamePrefix="select"
               isDisabled={false}
               isLoading={false}
               isClearable={false}
               isRtl={false}
-              isSearchable
-              name="color"
+              isSearchable={false}
+              name="Color"
               options={colors}
+              styles={this.colourStyles}
               onChange={handleChange}
             />
             <Select
