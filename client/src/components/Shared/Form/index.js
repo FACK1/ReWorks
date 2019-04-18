@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import chroma from 'chroma-js';
+import CreatableSelect from 'react-select/lib/Creatable';
 
 import {
   StyledForm,
@@ -182,10 +183,8 @@ class Form extends Component {
             </SelectStyle>
 
             <SelectStyle>
-              <Select
+              <CreatableSelect
                 value={selectedBrand}
-                className="basic-single"
-                classNamePrefix="select"
                 isDisabled={false}
                 isLoading={false}
                 isClearable={false}
@@ -303,3 +302,17 @@ class Form extends Component {
 }
 
 export default Form;
+// <Select
+//   value={selectedBrand}
+//   className="basic-single"
+//   classNamePrefix="select"
+//   isDisabled={false}
+//   isLoading={false}
+//   isClearable={false}
+//   isRtl={false}
+//   isSearchable
+//   name="Brand"
+//   options={brands}
+//   onChange={handleChange}
+//   styles={this.errorStyle(isErrorBrand)}
+// />
