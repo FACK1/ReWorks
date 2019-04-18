@@ -189,7 +189,6 @@ class GetDetails extends Component {
     const err = this.validate();
     if (!err) {
       axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
-        const { history } = this.props;
         const price = this.state.selectedPrice.concat(this.state.selectedCurrency.value);
         const inputs = {
           type: this.state.selectedType.id,
@@ -208,36 +207,89 @@ class GetDetails extends Component {
           pattern: this.state.selectedPattern.value,
         };
 
-        if (inputs.type === '') {
+        // case 1
+        if (inputs.type === '' && inputs.brandId === '') {
           axios
             .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
             .then((res) => {
               const { typeId } = res.data;
               inputs.type = typeId;
-              return inputs;
+              return typeId;
             })
-            .then((inputs) => {
-              if (cookie) {
-                axios.post('/add-item', inputs).then(({ data }) => {
-                  if (data.success) {
-                    history.push({ pathname: '/item-list', logged });
-                  }
+            .then((id) => {
+              axios
+                .post('/add-brand', { name: this.state.selectedBrand.value, code: 'New Brand' })
+                .then(({ data }) => {
+                  const { brandId } = data;
+                  inputs.typeId = id;
+                  inputs.brandId = brandId;
+                })
+                .then(() => {
+                  this.moveToNextPage(cookie, inputs, logged);
                 });
-              } else {
-                history.push({ pathname: '/login-form', data: inputs });
-              }
             });
-        } else if (cookie) {
-          axios.post('/add-item', inputs).then(({ data }) => {
-            if (data.success) {
-              history.push({ pathname: '/item-list', logged });
-            }
-          });
         } else {
-          history.push({ pathname: '/login-form', data: inputs });
+          if (inputs.type === '' && inputs.brandId !== '') {
+            axios
+              .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
+              .then((res) => {
+                const { typeId } = res.data;
+                return typeId;
+              })
+              .then((id) => {
+                inputs.type = id;
+                this.moveToNextPage(cookie, inputs, logged);
+              });
+          }
+          if (inputs.type !== '' && inputs.brandId === '') {
+            axios
+              .post('/add-brand', { name: this.state.selectedBrand.value, code: 'New Brand' })
+              .then(({ data }) => {
+                const { brandId } = data;
+                return brandId;
+              })
+              .then((id) => {
+                inputs.brandId = id;
+                this.moveToNextPage(cookie, inputs, logged);
+              });
+          }
+          if (inputs.type !== '' && inputs.brandId !== '') {
+            this.moveToNextPage(cookie, inputs, logged);
+          }
         }
       });
     }
+  };
+
+  moveToNextPage = (cookie, inputs, logged) => {
+    const { history } = this.props;
+    if (cookie) {
+      axios.post('/add-item', inputs).then(({ data }) => {
+        if (data.success) {
+          history.push({ pathname: '/item-list', logged });
+        }
+      });
+    } else {
+      history.push({ pathname: '/login-form', data: inputs });
+    }
+  };
+
+  addType = () => {
+    axios
+      .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
+      .then((res) => {
+        const { typeId } = res.data;
+        return typeId;
+      });
+  };
+
+  addBrand = () => {
+    axios
+      .post('/add-brand', { name: this.state.selectedBrand.value, code: 'New Brand' })
+      .then(({ data }) => {
+        const { brandId } = data;
+        return brandId;
+      });
   };
 
   toggleOpen = (e) => {
@@ -247,11 +299,31 @@ class GetDetails extends Component {
 
   handleChange = (value, select) => {
     const { name } = select;
-    this.setState({ [`selected${name}`]: value }, () => {
-      if (this.state.isContinueClicked) {
-        this.validate();
-      }
-    });
+
+    if (select.action === 'create-option') {
+      let brandName = value.value.toLowerCase();
+      brandName = brandName.charAt(0).toUpperCase() + brandName.slice(1);
+
+      const newBrand = { value: brandName, label: brandName, id: '' };
+      const { brands } = this.state;
+
+      brands.push(newBrand);
+      this.setState({ brands }, () => {
+        this.setState({ selectedBrand: newBrand }, () => {
+          this.updateErrorState();
+        });
+      });
+    } else {
+      this.setState({ [`selected${name}`]: value }, () => {
+        this.updateErrorState();
+      });
+    }
+  };
+
+  updateErrorState = () => {
+    if (this.state.isContinueClicked) {
+      this.validate();
+    }
   };
 
   render() {
