@@ -15,7 +15,6 @@ import {
   StyledTextarea,
   StyledImgCon,
   StyledPriceContainer,
-  // ErrorMessage,
   SelectStyle,
 } from './form.style';
 
@@ -59,6 +58,14 @@ class Form extends Component {
     singleValue: (styles, { data }) => ({ ...styles, ...this.dot(data.hex) }),
   };
 
+  errorStyle = errorFlag => ({
+    control: styles => ({
+      ...styles,
+      backgroundColor: 'white',
+      borderColor: errorFlag ? 'red' : '#ccc',
+    }),
+  });
+
   dot = (color = '#ccc') => ({
     alignItems: 'center',
     display: 'flex',
@@ -86,8 +93,8 @@ class Form extends Component {
       selectedSize,
       selectedAge,
       selectedCategory,
-      selected_price,
-      selected_details,
+      selectedPrice,
+      selectedDetails,
       selectedPattern,
       selectedCurrency,
       types,
@@ -99,18 +106,12 @@ class Form extends Component {
       patterns,
       categories,
       currencies,
-      // patternError,
-      // brandError,
-      // conditionError,
-      // labelSizeError,
-      // sizeCategoryError,
-      // ageError,
-      // isErrorPattern,
-      // isErrorBrand,
-      // isErrorCondition,
-      // isErrorLabelSize,
-      // isErrorSizeCategory,
-      // isErrorAge,
+      isErrorPattern,
+      isErrorBrand,
+      isErrorCondition,
+      isErrorLabelSize,
+      isErrorSizeCategory,
+      isErrorAge,
     } = this.props;
 
     return (
@@ -176,6 +177,7 @@ class Form extends Component {
                 name="Pattern"
                 options={patterns}
                 onChange={handleChange}
+                styles={this.errorStyle(isErrorPattern)}
               />
             </SelectStyle>
 
@@ -192,6 +194,7 @@ class Form extends Component {
                 name="Brand"
                 options={brands}
                 onChange={handleChange}
+                styles={this.errorStyle(isErrorBrand)}
               />
             </SelectStyle>
 
@@ -208,6 +211,7 @@ class Form extends Component {
                 name="Condition"
                 options={conditions}
                 onChange={handleChange}
+                styles={this.errorStyle(isErrorCondition)}
               />
             </SelectStyle>
 
@@ -224,6 +228,7 @@ class Form extends Component {
                 name="Size"
                 options={sizes}
                 onChange={handleChange}
+                styles={this.errorStyle(isErrorLabelSize)}
               />
             </SelectStyle>
 
@@ -240,6 +245,7 @@ class Form extends Component {
                 name="Category"
                 options={categories}
                 onChange={handleChange}
+                styles={this.errorStyle(isErrorSizeCategory)}
               />
             </SelectStyle>
 
@@ -256,6 +262,7 @@ class Form extends Component {
                 name="Age"
                 options={ages}
                 onChange={handleChange}
+                styles={this.errorStyle(isErrorAge)}
               />
             </SelectStyle>
 
@@ -263,8 +270,8 @@ class Form extends Component {
               <StyledInput
                 onChange={toggleOpen}
                 type="text"
-                name="price"
-                value={selected_price}
+                name="Price"
+                value={selectedPrice}
                 placeholder="price"
               />
               <Select
@@ -286,8 +293,8 @@ class Form extends Component {
 
         <StyledTextarea
           onChange={toggleOpen}
-          name="details"
-          value={selected_details}
+          name="Details"
+          value={selectedDetails}
           placeholder="More .e.g. What do you love about it?"
         />
       </StyledForm>

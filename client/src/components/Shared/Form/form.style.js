@@ -67,37 +67,6 @@ export const StyledLabels = styled.div`
   flex-direction: column;
 `;
 
-export const StyledSelect = styled.select`
-  background-color: #fbfbfb;
-  font-size: 20px;
-  max-width: 150px;
-  width: 150px;
-  margin-bottom: 16px;
-  border: 1px solid #f2f2f2;
-  border-bottom: ${props => (props.StyleError ? '1px solid #D33E1E' : '1px solid #F2F2F2')};
-  padding: 7px 14px;
-  @media (max-width: 650px) {
-    font-size: 16px;
-  }
-`;
-
-export const StyledSelectCurrency = styled.select`
-  width: 60px;
-  max-width: 60px;
-  background-color: #fbfbfb;
-  font-size: 20px;
-  margin-bottom: 16px;
-  border: 1px solid #f2f2f2;
-  padding: 7px 14px;
-  @media (max-width: 650px) {
-    font-size: 16px;
-  }
-`;
-
-export const StyledOption = styled.option`
-  color: ${props => (props.nameColor === 'White' ? 'Black' : props.hexColor)};
-`;
-
 export const StyledPriceContainer = styled.div`
   display: flex;
   justify-content: space-around;
@@ -117,30 +86,20 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledTextarea = styled.textarea`
-	font-size: 20px;
-	width:242px
-	padding:0 30px;
-	background-color:#FBFBFB;
-	border:1px solid  #F2F2F2;
-	height:80px;
-	margin:20px auto;
-	display:flex;
-	text-align:left;
-	@media (max-width: 650px) {
-	  font-size: 16px;
-	}
+  font-size: 20px;
+  width:242px
+  padding:0 30px;
+  background-color:#FBFBFB;
+  border:1px solid  #F2F2F2;
+  height:80px;
+  margin:20px auto;
+  display:flex;
+  text-align:left;
+  @media (max-width: 650px) {
+    font-size: 16px;
+  }
   ::placeholder{
     font-family:'Assistant';
-  }
-`;
-
-export const ErrorMessage = styled.h1`
-  font-size: 16px;
-  color: grey;
-  margin-top: -10px;
-  margin-bottom: 20px;
-  @media (max-width: 650px) {
-    font-size: 12px;
   }
 `;
 
