@@ -12,8 +12,6 @@ import {
 
 class GetDetails extends Component {
   state = {
-    isOpen: false,
-    selectedCat: null,
     selectedBrand: null,
     selectedType: null,
     types: [],
@@ -31,13 +29,19 @@ class GetDetails extends Component {
     selectedSize: null,
     selectedAge: null,
     selectedColor: null,
-    selected_price: '0',
-    selected_details: '',
+    selectedPrice: '0',
+    selectedDetails: '',
     selectedCategory: null,
-    selected_hex: '',
-    selected_patterns: '',
+    selectedPattern: null,
     selectedCurrency: { value: '£', label: '£' },
     title: '',
+    isErrorPattern: false,
+    isErrorBrand: false,
+    isErrorCondition: false,
+    isErrorLabelSize: false,
+    isErrorSizeCategory: false,
+    isErrorAge: false,
+    isContinueClicked: false,
   };
 
   componentDidMount() {
@@ -142,6 +146,7 @@ class GetDetails extends Component {
 
   validate = () => {
     let isError = false;
+
     this.setState({
       isErrorPattern: false,
       isErrorBrand: false,
@@ -151,63 +156,41 @@ class GetDetails extends Component {
       isErrorAge: false,
     });
 
-    const errors = {
-      patternError: '',
-      brandError: '',
-      conditionError: '',
-      labelSizeError: '',
-      sizeCategoryError: '',
-      ageError: '',
-      isErrorPattern: false,
-      isErrorBrand: false,
-      isErrorCondition: false,
-      isErrorLabelSize: false,
-      isErrorSizeCategory: false,
-      isErrorAge: false,
-    };
     if (this.state.selectedPattern === null) {
       isError = true;
-      errors.isErrorPattern = true;
-      errors.patternError = 'Please select your pattern.';
+      this.setState({ isErrorPattern: true });
     }
     if (this.state.selectedBrand === null) {
       isError = true;
-      errors.isErrorBrand = true;
-      errors.brandError = 'Please select your brand.';
+      this.setState({ isErrorBrand: true });
     }
     if (this.state.selectedCondition === null) {
       isError = true;
-      errors.isErrorCondition = true;
-      errors.conditionError = 'Please select your condition.';
+      this.setState({ isErrorCondition: true });
     }
     if (this.state.selectedSize === null) {
       isError = true;
-      errors.isErrorLabelSize = true;
-      errors.labelSizeError = 'Please select your label size.';
+      this.setState({ isErrorLabelSize: true });
     }
     if (this.state.selectedCategory === null) {
       isError = true;
-      errors.isErrorSizeCategory = true;
-      errors.sizeCategoryError = 'Please select your size category.';
+      this.setState({ isErrorSizeCategory: true });
     }
     if (this.state.selectedAge === null) {
       isError = true;
-      errors.isErrorAge = true;
-      errors.ageError = 'Please select your age.';
+      this.setState({ isErrorAge: true });
     }
-    this.setState({
-      ...this.state,
-      ...errors,
-    });
+
     return isError;
   };
 
   continue = () => {
+    this.setState({ isContinueClicked: true });
     const err = this.validate();
     if (!err) {
       axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
         const { history } = this.props;
-        const price = this.state.selected_price.concat(this.state.selectedCurrency.value);
+        const price = this.state.selectedPrice.concat(this.state.selectedCurrency.value);
         const inputs = {
           type: this.state.selectedType.id,
           age: this.state.selectedAge.value,
@@ -219,7 +202,7 @@ class GetDetails extends Component {
           condition: this.state.selectedCondition.value,
           size: this.state.selectedSize.value,
           url: this.props.location.details.image_url,
-          details: this.state.selected_details,
+          details: this.state.selectedDetails,
           brandId: this.state.selectedBrand.id,
           sizeCategory: this.state.selectedCategory.value,
           pattern: this.state.selectedPattern.value,
@@ -259,12 +242,16 @@ class GetDetails extends Component {
 
   toggleOpen = (e) => {
     const { value, name } = e.target;
-    this.setState({ [`selected_${name}`]: value });
+    this.setState({ [`selected${name}`]: value });
   };
 
   handleChange = (value, select) => {
     const { name } = select;
-    this.setState({ [`selected${name}`]: value });
+    this.setState({ [`selected${name}`]: value }, () => {
+      if (this.state.isContinueClicked) {
+        this.validate();
+      }
+    });
   };
 
   render() {

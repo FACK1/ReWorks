@@ -15,8 +15,6 @@ import { ImgDiv, DeleteButton } from './itemdetails.style';
 class ItemDetails extends Component {
   state = {
     itemDetails: this.props.location.itemDetails,
-    isOpen: false,
-    selectedCat: null,
     colors,
     conditions,
     sizes,
@@ -67,9 +65,9 @@ class ItemDetails extends Component {
         value: itemDetails.type,
         label: itemDetails.type,
       },
-      selected_price: price,
+      selectedPrice: price,
       selectedCurrency: { value: currency, label: currency },
-      selected_details: itemDetails.details,
+      selectedDetails: itemDetails.details,
       colors: [...allColors, ...colors],
       clarifaiColors,
       clarifaiHex,
@@ -125,7 +123,7 @@ class ItemDetails extends Component {
 
   toggleOpen = (e) => {
     const { value, name } = e.target;
-    this.setState({ [`selected_${name}`]: value });
+    this.setState({ [`selected${name}`]: value });
   };
 
   // checkForChanges = () => {
@@ -136,9 +134,9 @@ class ItemDetails extends Component {
   //     selectedAge,
   //     selected_colors,
   //     selectedType,
-  //     selected_price,
+  //     selectedPrice,
   //     selectedCurrency,
-  //     selected_details,
+  //     selectedDetails,
   //     selectedCategory,
   //     selectedPattern,
   //     itemDetails,
@@ -160,12 +158,12 @@ class ItemDetails extends Component {
   //     selectedSize.value,
   //     itemDetails.url,
   //     itemDetails.name,
-  //     selected_price,
+  //     selectedPrice,
   //     selected_colors,
   //     selectedBrand.value,
   //     selectedCondition.value,
   //     selectedAge.value,
-  //     selected_details,
+  //     selectedDetails,
   //     selectedBrand.id,
   //     itemDetails.colors,
   //     selectedCategory.value,
@@ -192,9 +190,9 @@ class ItemDetails extends Component {
       selectedSize,
       selectedAge,
       selectedColor,
-      selected_price,
+      selectedPrice,
       selectedCurrency,
-      selected_details,
+      selectedDetails,
       selectedCategory,
       selectedPattern,
       selectedType,
@@ -203,10 +201,10 @@ class ItemDetails extends Component {
     const newUpdates = {
       size: selectedSize.value,
       type: selectedType.id,
-      price: selected_price.concat(selectedCurrency.value),
+      price: selectedPrice.concat(selectedCurrency.value),
       brandId: selectedBrand.id,
       condition: selectedCondition.value,
-      details: selected_details,
+      details: selectedDetails,
       color: selectedColor.value,
       hex: selectedColor.hex,
       age: selectedAge.value,
