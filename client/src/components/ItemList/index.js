@@ -124,8 +124,8 @@ class ItemList extends Component {
               EXPORT AS CSV
             </StyledCSVLink>
           </GButtonContainer>
-          <Footer />
         </StyledBottom>
+        <Footer />
       </React.Fragment>
     );
   }
