@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { ModalProvider } from 'styled-react-modal';
-import Popup from '../Popup';
+import Select from 'react-select';
+import chroma from 'chroma-js';
+import CreatableSelect from 'react-select/lib/Creatable';
 
 import {
   StyledForm,
@@ -9,16 +10,13 @@ import {
   StyledNotic,
   StyledDiv,
   StyledLabel,
-  StyledSelect,
-  StyledOption,
   StyledItem,
   StyledLabels,
   StyledInput,
   StyledTextarea,
   StyledImgCon,
-  StyledSelectCurrency,
   StyledPriceContainer,
-  ErrorMessage,
+  SelectStyle,
 } from './form.style';
 
 class Form extends Component {
@@ -36,41 +34,79 @@ class Form extends Component {
     ],
   };
 
+  colourStyles = {
+    control: styles => ({ ...styles, backgroundColor: 'white' }),
+    option: (styles, {
+      data, isDisabled, isFocused, isSelected,
+    }) => {
+      const color = data.hex;
+
+      return {
+        ...styles,
+        backgroundColor: isDisabled ? null : isSelected ? color : isFocused ? color : null,
+        color: isDisabled
+          ? '#ccc'
+          : isSelected
+            ? chroma.contrast(color, 'white') > 2
+              ? 'white'
+              : 'black'
+            : color,
+        cursor: isDisabled ? 'not-allowed' : 'default',
+      };
+    },
+    input: styles => ({ ...styles, ...this.dot() }),
+    placeholder: styles => ({ ...styles, ...this.dot() }),
+    singleValue: (styles, { data }) => ({ ...styles, ...this.dot(data.hex) }),
+  };
+
+  errorStyle = errorFlag => ({
+    control: styles => ({
+      ...styles,
+      backgroundColor: 'white',
+      borderColor: errorFlag ? 'red' : '#ccc',
+    }),
+  });
+
+  dot = (color = '#ccc') => ({
+    alignItems: 'center',
+    display: 'flex',
+
+    ':before': {
+      backgroundColor: color,
+      borderRadius: 10,
+      content: '" "',
+      display: 'flex',
+      marginRight: 8,
+      paddingLeft: 10,
+      height: 10,
+    },
+  });
 
   render() {
     const {
       image,
       toggleOpen,
-      isOpen,
-      selectedCat,
-      toggleClose,
-      changeSelected,
-      selected_itemType,
-      selected_colors,
-      selected_brands,
-      selected_condition,
-      selected_labelSize,
-      selected_age,
-      selected_price,
-      selected_details,
-      selected_patterns,
-      selected_currency,
-      itemType,
+      handleChange,
+      selectedType,
+      selectedColor,
+      selectedBrand,
+      selectedCondition,
+      selectedSize,
+      selectedAge,
+      selectedCategory,
+      selectedPrice,
+      selectedDetails,
+      selectedPattern,
+      selectedCurrency,
+      types,
       colors,
       brands,
-      condition,
-      labelSize,
-      age,
+      conditions,
+      sizes,
+      ages,
       patterns,
-      showDefaultOption,
-      selected_sizeCategory,
-      sizeCategory,
-      patternError,
-      brandError,
-      conditionError,
-      labelSizeError,
-      sizeCategoryError,
-      ageError,
+      categories,
+      currencies,
       isErrorPattern,
       isErrorBrand,
       isErrorCondition,
@@ -96,254 +132,187 @@ class Form extends Component {
           </StyledLabels>
 
           <StyledItem>
-            <StyledSelect onChange={toggleOpen} name="itemType" value={selected_itemType.name}>
-              {itemType.map(item => (itemType.indexOf(item) >= 5 ? (
-                <StyledOption
-                  key={item.id}
-                  value={`{"id": "${item.id}", "name": "${item.name}"}`}
-                  hidden
-                >
-                  {item.itemType}
-                </StyledOption>
-              ) : (
-                <StyledOption
-                  key={item.id}
-                  value={`{"id": "${item.id}", "name": "${item.name}"}`}
-                >
-                  {item.itemType}
-                </StyledOption>
-              )))}
-              <StyledOption value="more">More...</StyledOption>
-            </StyledSelect>
+            <SelectStyle>
+              <Select
+                value={selectedType}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Type"
+                options={types}
+                onChange={handleChange}
+              />
+            </SelectStyle>
 
-            <StyledSelect onChange={toggleOpen} name="colors" value={selected_colors}>
-              {colors.map(color => (colors.indexOf(color) >= 5 ? (
-                <StyledOption
-                  value={color.name}
-                  hexColor={color.hex}
-                  nameColor={color.name}
-                  {...this.props}
-                  hidden
-                >
-                  {color.name}
-                </StyledOption>
-              ) : (
-                <StyledOption
-                  value={color.name}
-                  hexColor={color.hex}
-                  nameColor={color.name}
-                  {...this.props}
-                >
-                  {color.name}
-                </StyledOption>
-              )))}
-              <StyledOption value="more">More...</StyledOption>
-            </StyledSelect>
+            <SelectStyle>
+              <Select
+                value={selectedColor}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Color"
+                options={colors}
+                styles={this.colourStyles}
+                onChange={handleChange}
+              />
+            </SelectStyle>
 
-            <StyledSelect
-              onChange={toggleOpen}
-              name="patterns"
-              value={selected_patterns}
-              StyleError={isErrorPattern}
-              {...this.props}
-              errorText={patternError}
-            >
-              {showDefaultOption && (
-                <option default hidden>
-                  Select...
-                </option>
-              )}
-              {patterns.map(pattern => (patterns.indexOf(pattern) >= 5 ? (
-                <StyledOption key={pattern} value={pattern} hidden>
-                  {pattern}
-                </StyledOption>
-              ) : (
-                <StyledOption key={pattern} value={pattern}>
-                  {pattern}
-                </StyledOption>
-              )))}
-              <StyledOption value="more">More...</StyledOption>
-            </StyledSelect>
-            <ErrorMessage>{patternError}</ErrorMessage>
+            <SelectStyle>
+              <Select
+                value={selectedPattern}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Pattern"
+                options={patterns}
+                onChange={handleChange}
+                styles={this.errorStyle(isErrorPattern)}
+              />
+            </SelectStyle>
 
-            <StyledSelect
-              onChange={toggleOpen}
-              name="brands"
-              value={selected_brands.name}
-              StyleError={isErrorBrand}
-              {...this.props}
-              errorText={brandError}
-            >
-              {showDefaultOption && (
-              <option default hidden>
-                  Select...
-              </option>
-              )}
-              {brands.map(brand => (brands.indexOf(brand) >= 5 ? (
-                <StyledOption
-                  key={brand.name}
-                  value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
-                  hidden
-                >
-                  {brand.name}
-                </StyledOption>
-              ) : (
-                <StyledOption
-                  key={brand.name}
-                  value={`{"id": "${brand.id}", "name": "${brand.name}"}`}
-                >
-                  {brand.name}
-                </StyledOption>
-              )))}
-              <StyledOption value="more">More...</StyledOption>
-            </StyledSelect>
-            <ErrorMessage>{brandError}</ErrorMessage>
+            <SelectStyle>
+              <CreatableSelect
+                value={selectedBrand}
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Brand"
+                options={brands}
+                onChange={handleChange}
+                styles={this.errorStyle(isErrorBrand)}
+              />
+            </SelectStyle>
 
-            <StyledSelect
-              onChange={toggleOpen}
-              name="condition"
-              value={selected_condition}
-              StyleError={isErrorCondition}
-              {...this.props}
-              errorText={conditionError}
-            >
-              {showDefaultOption && (
-              <option default hidden>
-                  Select...
-              </option>
-              )}
-              {condition.map(cond => (condition.indexOf(cond) >= 5 ? (
-                <StyledOption key={cond} value={cond} hidden>
-                  {cond}
-                </StyledOption>
-              ) : (
-                <StyledOption key={cond} value={cond}>
-                  {cond}
-                </StyledOption>
-              )))}
-              <StyledOption value="more">More...</StyledOption>
-            </StyledSelect>
-            <ErrorMessage>{conditionError}</ErrorMessage>
+            <SelectStyle>
+              <Select
+                value={selectedCondition}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Condition"
+                options={conditions}
+                onChange={handleChange}
+                styles={this.errorStyle(isErrorCondition)}
+              />
+            </SelectStyle>
 
-            <StyledSelect
-              onChange={toggleOpen}
-              name="labelSize"
-              value={selected_labelSize}
-              StyleError={isErrorLabelSize}
-              {...this.props}
-              errorText={labelSizeError}
-            >
-              {showDefaultOption && (
-              <option default hidden>
-                  Select...
-              </option>
-              )}
-              {labelSize.map(size => (labelSize.indexOf(size) >= 5 ? (
-                <StyledOption key={size} value={size} hidden>
-                  {size}
-                </StyledOption>
-              ) : (
-                <StyledOption key={size} value={size}>
-                  {size}
-                </StyledOption>
-              )))}
-              <StyledOption value="more">More...</StyledOption>
-            </StyledSelect>
-            <ErrorMessage>{labelSizeError}</ErrorMessage>
+            <SelectStyle>
+              <Select
+                value={selectedSize}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Size"
+                options={sizes}
+                onChange={handleChange}
+                styles={this.errorStyle(isErrorLabelSize)}
+              />
+            </SelectStyle>
 
-            <StyledSelect
-              onChange={toggleOpen}
-              name="sizeCategory"
-              value={selected_sizeCategory}
-              StyleError={isErrorSizeCategory}
-              {...this.props}
-              errorText={sizeCategoryError}
-            >
-              {showDefaultOption && (
-                <option default hidden>
-                  Select...
-                </option>
-              )}
-              {sizeCategory.map(size => (sizeCategory.indexOf(size) >= 5 ? (
-                <StyledOption key={size} value={size} hidden>
-                  {size}
-                </StyledOption>
-              ) : (
-                <StyledOption key={size} value={size}>
-                  {size}
-                </StyledOption>
-              )))}
-              <StyledOption value="more">More...</StyledOption>
-            </StyledSelect>
-            <ErrorMessage>{sizeCategoryError}</ErrorMessage>
+            <SelectStyle>
+              <Select
+                value={selectedCategory}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Category"
+                options={categories}
+                onChange={handleChange}
+                styles={this.errorStyle(isErrorSizeCategory)}
+              />
+            </SelectStyle>
 
-            <StyledSelect
-              onChange={toggleOpen}
-              name="age"
-              value={selected_age}
-              StyleError={isErrorAge}
-              {...this.props}
-              errorText={ageError}
-            >
-              {showDefaultOption && (
-              <option default hidden>
-                  Select...
-              </option>
-              )}
-              {age.map(time => (age.indexOf(time) >= 5 ? (
-                <StyledOption key={time} value={time} hidden>
-                  {time}
-                </StyledOption>
-              ) : (
-                <StyledOption key={time} value={time}>
-                  {time}
-                </StyledOption>
-              )))}
-              <StyledOption value="more">More...</StyledOption>
-            </StyledSelect>
-            <ErrorMessage>{ageError}</ErrorMessage>
+            <SelectStyle>
+              <Select
+                value={selectedAge}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Age"
+                options={ages}
+                onChange={handleChange}
+                styles={this.errorStyle(isErrorAge)}
+              />
+            </SelectStyle>
 
             <StyledPriceContainer>
               <StyledInput
                 onChange={toggleOpen}
                 type="text"
-                name="price"
-                value={selected_price}
+                name="Price"
+                value={selectedPrice}
                 placeholder="price"
               />
-
-              <StyledSelectCurrency onChange={toggleOpen} name="currency" value={selected_currency}>
-                {showDefaultOption && (
-                <option default hidden>
-                $
-                </option>
-                )}
-                <StyledOption value="£">£</StyledOption>
-                <StyledOption value="$">$</StyledOption>
-                <StyledOption value="€">€</StyledOption>
-              </StyledSelectCurrency>
+              <Select
+                value={selectedCurrency}
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable
+                name="Currency"
+                options={currencies}
+                onChange={handleChange}
+              />
             </StyledPriceContainer>
           </StyledItem>
         </StyledDiv>
 
         <StyledTextarea
           onChange={toggleOpen}
-          name="details"
-          value={selected_details}
+          name="Details"
+          value={selectedDetails}
           placeholder="More .e.g. What do you love about it?"
         />
-        <ModalProvider>
-          <Popup
-            open={isOpen}
-            toggleClose={toggleClose}
-            changeSelected={changeSelected}
-            name={[selectedCat]}
-            data={this.props[selectedCat]}
-          />
-        </ModalProvider>
       </StyledForm>
     );
   }
 }
 
 export default Form;
+// <Select
+//   value={selectedBrand}
+//   className="basic-single"
+//   classNamePrefix="select"
+//   isDisabled={false}
+//   isLoading={false}
+//   isClearable={false}
+//   isRtl={false}
+//   isSearchable
+//   name="Brand"
+//   options={brands}
+//   onChange={handleChange}
+//   styles={this.errorStyle(isErrorBrand)}
+// />
