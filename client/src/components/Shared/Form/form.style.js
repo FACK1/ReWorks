@@ -92,6 +92,10 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledTextarea = styled.textarea`
+  margin: 10px auto;
+  width: 80%;
+  background: #fbfbfb;
+  font-size: 16px;
   }
   ::placeholder{
   font-family:'Assistant';
@@ -101,7 +105,9 @@ export const StyledTextarea = styled.textarea`
 }
     @media (min-width: 650px) {
       width: 30%;
-      margin-left: 35%;
+      margin: 10px auto;
+      font-size: 16px;
+
   }
 `;
 export const SelectStyle = styled.div`
