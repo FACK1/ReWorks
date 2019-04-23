@@ -7,36 +7,41 @@ import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
 import {
-  condition, labelSize, age, sizeCategory, patterns, colors,
+  conditions, sizes, ages, categories, patterns, colors, currencies,
 } from '../../data';
 
 class GetDetails extends Component {
   state = {
-    isOpen: false,
-    selectedCat: null,
-    selected_brands: { id: '', brandName: '', name: '' },
-    selected_itemType: { id: '', itemType: '', name: '' },
-    itemType: [],
+    selectedBrand: null,
+    selectedType: null,
+    types: [],
     colors,
     brands: [],
-    condition,
-    labelSize,
-    age,
-    sizeCategory,
+    conditions,
+    sizes,
+    ages,
+    categories,
     patterns,
+    currencies,
     clarifaiColors: '',
     clarifaiHex: '',
-    selected_condition: '',
-    selected_labelSize: '',
-    selected_age: '',
-    selected_price: '0',
-    selected_details: '',
-    selected_sizeCategory: '',
-    selected_hex: '',
-    selected_patterns: '',
-    selected_currency: '£',
-    showDefaultOption: true,
+    selectedCondition: null,
+    selectedSize: null,
+    selectedAge: null,
+    selectedColor: null,
+    selectedPrice: '0',
+    selectedDetails: '',
+    selectedCategory: null,
+    selectedPattern: null,
+    selectedCurrency: { value: '£', label: '£' },
     title: '',
+    isErrorPattern: false,
+    isErrorBrand: false,
+    isErrorCondition: false,
+    isErrorLabelSize: false,
+    isErrorSizeCategory: false,
+    isErrorAge: false,
+    isContinueClicked: false,
   };
 
   componentDidMount() {
@@ -45,11 +50,15 @@ class GetDetails extends Component {
       const apiColors = this.props.location.details.colors;
 
       if (apparel || apiColors) {
-        const colours = apiColors.data.map(ele => ({ name: ele.name, hex: ele.hex }));
+        const colours = apiColors.data.map(ele => ({
+          value: ele.name,
+          label: ele.name,
+          hex: ele.hex,
+        }));
 
         colours.filter((color) => {
           colors.map((color2, i) => {
-            if (color.name === color2.name) {
+            if (color.value === color2.value) {
               colors.splice(i, 1);
             }
           });
@@ -63,8 +72,7 @@ class GetDetails extends Component {
         const clarifaiHex = clarifaiColoursHex.join(',');
         this.setState({
           colors: [...colours, ...colors],
-          selected_colors: colours[0].name,
-          selected_hex: colours[0].hex,
+          selectedColor: colours[0],
           clarifaiColors,
           clarifaiHex,
         });
@@ -72,25 +80,32 @@ class GetDetails extends Component {
         if (apparel && apparel.data.length > 0) {
           const outfit = apparel.data.map((ele) => {
             const name = ele.tag_name;
-            const object = { itemType: name, name, id: '' };
+            const object = { id: '', value: name, label: name };
             return object;
           });
           this.setState({
-            itemType: outfit,
-            selected_itemType: outfit[0],
+            types: outfit,
+            selectedType: outfit[0],
           });
         }
       }
       axios.get('/getbrands').then(({ data }) => {
         if (data.success) {
-          const brands = data.data;
+          const brands = [];
+          data.data.map((brand) => {
+            brands.push({
+              id: brand.id,
+              value: brand.name,
+              label: brand.name,
+            });
+          });
           this.setState({
             brands,
           });
         }
       });
 
-      axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
+      axios.get('/checkcookie').then(({ data: { cookie } }) => {
         if (cookie) {
           this.setState({ title: 'SAVE YOUR ITEM' });
         } else {
@@ -103,15 +118,24 @@ class GetDetails extends Component {
     }
 
     axios.get('/get-types').then(({ data }) => {
-      const type = data.itemType;
-      const airtableNames = type.map(item => item.name);
-      const filtered = this.state.itemType.filter(item => !airtableNames.includes(item.name));
-      this.setState({ itemType: [...filtered, ...type] }, () => {
-        if (airtableNames.includes(this.state.selected_itemType.name)) {
-          const found = type.filter(item => item.name === this.state.selected_itemType.name);
+      const airtableNames = data.itemType.map(item => item.name);
+      const filtered = this.state.types.filter(item => !airtableNames.includes(item.value));
+
+      const types = [];
+      data.itemType.map((type) => {
+        types.push({
+          id: type.id,
+          value: type.name,
+          label: type.name,
+        });
+      });
+
+      this.setState({ types: [...filtered, ...types] }, () => {
+        if (airtableNames.includes(this.state.selectedType.value)) {
+          const found = data.itemType.filter(item => item.name === this.state.selectedType.value);
           this.setState(prevState => ({
-            selected_itemType: {
-              ...prevState.selected_itemType,
+            selectedType: {
+              ...prevState.selectedType,
               id: found[0].id,
             },
           }));
@@ -122,6 +146,7 @@ class GetDetails extends Component {
 
   validate = () => {
     let isError = false;
+
     this.setState({
       isErrorPattern: false,
       isErrorBrand: false,
@@ -131,153 +156,173 @@ class GetDetails extends Component {
       isErrorAge: false,
     });
 
-    const errors = {
-      patternError: '',
-      brandError: '',
-      conditionError: '',
-      labelSizeError: '',
-      sizeCategoryError: '',
-      ageError: '',
-      isErrorPattern: false,
-      isErrorBrand: false,
-      isErrorCondition: false,
-      isErrorLabelSize: false,
-      isErrorSizeCategory: false,
-      isErrorAge: false,
-    };
-    if (this.state.selected_patterns < 1) {
+    if (this.state.selectedPattern === null) {
       isError = true;
-      errors.isErrorPattern = true;
-      errors.patternError = 'Please select your pattern.';
+      this.setState({ isErrorPattern: true });
     }
-    if (this.state.selected_brands.id < 1) {
+    if (this.state.selectedBrand === null) {
       isError = true;
-      errors.isErrorBrand = true;
-      errors.brandError = 'Please select your brand.';
+      this.setState({ isErrorBrand: true });
     }
-    if (this.state.selected_condition < 1) {
+    if (this.state.selectedCondition === null) {
       isError = true;
-      errors.isErrorCondition = true;
-      errors.conditionError = 'Please select your condition.';
+      this.setState({ isErrorCondition: true });
     }
-    if (this.state.selected_labelSize < 1) {
+    if (this.state.selectedSize === null) {
       isError = true;
-      errors.isErrorLabelSize = true;
-      errors.labelSizeError = 'Please select your label size.';
+      this.setState({ isErrorLabelSize: true });
     }
-    if (this.state.selected_sizeCategory < 1) {
+    if (this.state.selectedCategory === null) {
       isError = true;
-      errors.isErrorSizeCategory = true;
-      errors.sizeCategoryError = 'Please select your size category.';
+      this.setState({ isErrorSizeCategory: true });
     }
-    if (this.state.selected_age < 1) {
+    if (this.state.selectedAge === null) {
       isError = true;
-      errors.isErrorAge = true;
-      errors.ageError = 'Please select your age.';
+      this.setState({ isErrorAge: true });
     }
-    this.setState({
-      ...this.state,
-      ...errors,
-    });
+
     return isError;
   };
 
   continue = () => {
+    this.setState({ isContinueClicked: true });
     const err = this.validate();
     if (!err) {
       axios.get('/checkcookie').then(({ data: { cookie, logged } }) => {
-        const { history } = this.props;
-        const price = this.state.selected_price.concat(this.state.selected_currency);
+        const price = this.state.selectedPrice.concat(this.state.selectedCurrency.value);
         const inputs = {
-          type: this.state.selected_itemType.id,
-          age: this.state.selected_age,
+          type: this.state.selectedType.id,
+          age: this.state.selectedAge.value,
           price,
-          color: this.state.selected_colors,
+          color: this.state.selectedColor.value,
           colors: this.state.clarifaiColors,
           colorshex: this.state.clarifaiHex,
-          hex: this.state.selected_hex,
-          condition: this.state.selected_condition,
-          size: this.state.selected_labelSize,
+          hex: this.state.selectedColor.hex,
+          condition: this.state.selectedCondition.value,
+          size: this.state.selectedSize.value,
           url: this.props.location.details.image_url,
-          details: this.state.selected_details,
-          brandId: this.state.selected_brands.id,
-          sizeCategory: this.state.selected_sizeCategory,
-          pattern: this.state.selected_patterns,
+          details: this.state.selectedDetails,
+          brandId: this.state.selectedBrand.id,
+          sizeCategory: this.state.selectedCategory.value,
+          pattern: this.state.selectedPattern.value,
         };
 
-        if (inputs.type === '') {
-          axios.post('/add-type', { name: this.state.selected_itemType.itemType, shortcut: 'New Type' }).then((res) => {
-            const { typeId } = res.data;
-            inputs.type = typeId;
-            return inputs;
-          }).then((inputs) => {
-            if (cookie) {
-              axios.post('/add-item', inputs).then(({ data }) => {
-                if (data.success) {
-                  history.push({ pathname: '/item-list', logged });
-                }
-              });
-            } else {
-              history.push({ pathname: '/login-form', data: inputs });
-            }
-          });
-        } else if (cookie) {
-          axios.post('/add-item', inputs).then(({ data }) => {
-            if (data.success) {
-              history.push({ pathname: '/item-list', logged });
-            }
-          });
+        // case 1
+        if (inputs.type === '' && inputs.brandId === '') {
+          axios
+            .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
+            .then((res) => {
+              const { typeId } = res.data;
+              inputs.type = typeId;
+              return typeId;
+            })
+            .then((id) => {
+              axios
+                .post('/add-brand', { name: this.state.selectedBrand.value, code: 'New Brand' })
+                .then(({ data }) => {
+                  const { brandId } = data;
+                  inputs.typeId = id;
+                  inputs.brandId = brandId;
+                })
+                .then(() => {
+                  this.moveToNextPage(cookie, inputs, logged);
+                });
+            });
         } else {
-          history.push({ pathname: '/login-form', data: inputs });
+          if (inputs.type === '' && inputs.brandId !== '') {
+            axios
+              .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
+              .then((res) => {
+                const { typeId } = res.data;
+                return typeId;
+              })
+              .then((id) => {
+                inputs.type = id;
+                this.moveToNextPage(cookie, inputs, logged);
+              });
+          }
+          if (inputs.type !== '' && inputs.brandId === '') {
+            axios
+              .post('/add-brand', { name: this.state.selectedBrand.value, code: 'New Brand' })
+              .then(({ data }) => {
+                const { brandId } = data;
+                return brandId;
+              })
+              .then((id) => {
+                inputs.brandId = id;
+                this.moveToNextPage(cookie, inputs, logged);
+              });
+          }
+          if (inputs.type !== '' && inputs.brandId !== '') {
+            this.moveToNextPage(cookie, inputs, logged);
+          }
         }
       });
     }
   };
 
-
-  toggleOpen = (e) => {
-    const { value, name } = e.target;
-    if (value === 'more') {
-      this.setState({ isOpen: true, selectedCat: name });
-    } else if (name === 'brands') {
-      const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, brandName: value1.name } });
-    } else if (name === 'itemType') {
-      const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id: value1.id, itemType: value1.name, name: value } });
-    } else if (name === 'colors') {
-      const { colors } = this.state;
-      const color = colors.filter(x => (x.name === value ? x : null));
-      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name });
+  moveToNextPage = (cookie, inputs, logged) => {
+    const { history } = this.props;
+    if (cookie) {
+      axios.post('/add-item', inputs).then(({ data }) => {
+        if (data.success) {
+          history.push({ pathname: '/item-list', logged });
+        }
+      });
     } else {
-      this.setState({ [`selected_${name}`]: value });
+      history.push({ pathname: '/login-form', data: inputs });
     }
   };
 
-  toggleClose = (e) => {
-    e.preventDefault();
-    this.setState({ isOpen: false });
+  addType = () => {
+    axios
+      .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
+      .then((res) => {
+        const { typeId } = res.data;
+        return typeId;
+      });
   };
 
-  changeSelected = (e) => {
-    e.preventDefault();
-    const { value, name, id } = e.target;
-    const selected = `selected_${this.state.selectedCat}`;
-    if (name === 'brands') {
-      const value1 = JSON.parse(value);
-      this.setState({
-        [selected]: { id, brandName: value1.name, name: value },
-        isOpen: false,
+  addBrand = () => {
+    axios
+      .post('/add-brand', { name: this.state.selectedBrand.value, code: 'New Brand' })
+      .then(({ data }) => {
+        const { brandId } = data;
+        return brandId;
       });
-    } else if (name === 'itemType') {
-      const value1 = JSON.parse(value);
-      this.setState({ [`selected_${name}`]: { id, itemType: value1.name, name: value }, isOpen: false });
-    } else if (name === 'colors') {
-      const { colors } = this.state;
-      const color = colors.filter(x => (x.name === value ? x.hex : null));
-      this.setState({ selected_hex: color[0].hex, selected_colors: color[0].name, isOpen: false });
+  };
+
+  toggleOpen = (e) => {
+    const { value, name } = e.target;
+    this.setState({ [`selected${name}`]: value });
+  };
+
+  handleChange = (value, select) => {
+    const { name } = select;
+
+    if (select.action === 'create-option') {
+      let brandName = value.value.toLowerCase();
+      brandName = brandName.charAt(0).toUpperCase() + brandName.slice(1);
+
+      const newBrand = { value: brandName, label: brandName, id: '' };
+      const { brands } = this.state;
+
+      brands.push(newBrand);
+      this.setState({ brands }, () => {
+        this.setState({ selectedBrand: newBrand }, () => {
+          this.updateErrorState();
+        });
+      });
     } else {
-      this.setState({ [selected]: value, isOpen: false });
+      this.setState({ [`selected${name}`]: value }, () => {
+        this.updateErrorState();
+      });
+    }
+  };
+
+  updateErrorState = () => {
+    if (this.state.isContinueClicked) {
+      this.validate();
     }
   };
 
@@ -294,8 +339,7 @@ class GetDetails extends Component {
           image={imageUrl}
           {...this.state}
           toggleOpen={this.toggleOpen}
-          toggleClose={this.toggleClose}
-          changeSelected={this.changeSelected}
+          handleChange={this.handleChange}
         />
         <Button />
         <GButton title={this.state.title} onClick={this.continue} />
