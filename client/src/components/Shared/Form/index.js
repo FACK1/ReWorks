@@ -17,6 +17,7 @@ import {
   StyledImgCon,
   StyledPriceContainer,
   SelectStyle,
+  StyledInputBrand,
 } from './form.style';
 
 class Form extends Component {
@@ -182,20 +183,13 @@ class Form extends Component {
               />
             </SelectStyle>
 
-            <SelectStyle>
-              <CreatableSelect
-                value={selectedBrand}
-                isDisabled={false}
-                isLoading={false}
-                isClearable={false}
-                isRtl={false}
-                isSearchable
-                name="Brand"
-                options={brands}
-                onChange={handleChange}
-                styles={this.errorStyle(isErrorBrand)}
-              />
-            </SelectStyle>
+            <StyledInputBrand
+              onChange={toggleOpen}
+              type="text"
+              name="Brand"
+              value={selectedBrand}
+              placeholder="Brand"
+            />
 
             <SelectStyle>
               <Select

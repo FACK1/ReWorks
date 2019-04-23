@@ -13,7 +13,7 @@ exports.addItem = (req, res) => {
     price,
     age,
     color,
-    brandId,
+    brand,
     size,
     url,
     details,
@@ -32,7 +32,7 @@ exports.addItem = (req, res) => {
       Colours: colors,
       Age: age,
       Condition: condition,
-      Brand: [brandId],
+      'Brand Text': brand,
       Size: size,
       Image: [
         {
