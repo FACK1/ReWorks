@@ -12,7 +12,7 @@ import {
 
 class GetDetails extends Component {
   state = {
-    selectedBrand: null,
+    selectedBrand: 'No Brand',
     selectedType: null,
     types: [],
     colors,
