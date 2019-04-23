@@ -6,6 +6,7 @@ import Form from '../Shared/Form';
 import GButton from '../Shared/GreenButton';
 import Button from '../Shared/Button';
 import Footer from '../Shared/Footer';
+import {StyledBottom} from "./getdetails.style"
 import {
   conditions, sizes, ages, categories, patterns, colors, currencies,
 } from '../../data';
@@ -341,8 +342,10 @@ class GetDetails extends Component {
           toggleOpen={this.toggleOpen}
           handleChange={this.handleChange}
         />
-        <Button />
-        <GButton title={this.state.title} onClick={this.continue} />
+        <StyledBottom>
+          <Button />
+          <GButton title={this.state.title} onClick={this.continue} />
+        </StyledBottom>
         <Footer />
       </React.Fragment>
     );
