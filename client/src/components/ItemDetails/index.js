@@ -166,8 +166,8 @@ class ItemDetails extends Component {
     // const updatedFlag = this.checkForChanges();
     const { history } = this.props;
     const id = this.state.itemDetails.itemId;
+    let { selectedBrand } = this.state;
     const {
-      selectedBrand,
       selectedCondition,
       selectedSize,
       selectedAge,
@@ -179,7 +179,9 @@ class ItemDetails extends Component {
       selectedPattern,
       selectedType,
     } = this.state;
-
+    if (selectedBrand === undefined || selectedBrand === '') {
+      selectedBrand = 'No Brand';
+    }
     const newUpdates = {
       size: selectedSize.value,
       type: selectedType.id,

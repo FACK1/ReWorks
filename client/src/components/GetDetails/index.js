@@ -184,7 +184,9 @@ class GetDetails extends Component {
           sizeCategory: this.state.selectedCategory.value,
           pattern: this.state.selectedPattern.value,
         };
-
+        if (inputs.brand === '') {
+          inputs.brand = 'No Brand';
+        }
         if (inputs.type === '') {
           axios
             .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
