@@ -245,8 +245,6 @@ class ItemDetails extends Component {
           image={url}
           {...this.state}
           toggleOpen={this.toggleOpen}
-          toggleClose={this.toggleClose}
-          changeSelected={this.changeSelected}
           handleChange={this.handleChange}
         />
         <Button onClick={this.goBack} />
