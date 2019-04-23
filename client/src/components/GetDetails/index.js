@@ -12,7 +12,7 @@ import {
 
 class GetDetails extends Component {
   state = {
-    selectedBrand: null,
+    selectedBrand: 'No Brand',
     selectedType: null,
     types: [],
     colors,
@@ -36,7 +36,6 @@ class GetDetails extends Component {
     selectedCurrency: { value: '£', label: '£' },
     title: '',
     isErrorPattern: false,
-    isErrorBrand: false,
     isErrorCondition: false,
     isErrorLabelSize: false,
     isErrorSizeCategory: false,
@@ -89,22 +88,6 @@ class GetDetails extends Component {
           });
         }
       }
-      axios.get('/getbrands').then(({ data }) => {
-        if (data.success) {
-          const brands = [];
-          data.data.map((brand) => {
-            brands.push({
-              id: brand.id,
-              value: brand.name,
-              label: brand.name,
-            });
-          });
-          this.setState({
-            brands,
-          });
-        }
-      });
-
       axios.get('/checkcookie').then(({ data: { cookie } }) => {
         if (cookie) {
           this.setState({ title: 'SAVE YOUR ITEM' });
@@ -149,7 +132,6 @@ class GetDetails extends Component {
 
     this.setState({
       isErrorPattern: false,
-      isErrorBrand: false,
       isErrorCondition: false,
       isErrorLabelSize: false,
       isErrorSizeCategory: false,
@@ -159,10 +141,6 @@ class GetDetails extends Component {
     if (this.state.selectedPattern === null) {
       isError = true;
       this.setState({ isErrorPattern: true });
-    }
-    if (this.state.selectedBrand === null) {
-      isError = true;
-      this.setState({ isErrorBrand: true });
     }
     if (this.state.selectedCondition === null) {
       isError = true;
@@ -202,13 +180,14 @@ class GetDetails extends Component {
           size: this.state.selectedSize.value,
           url: this.props.location.details.image_url,
           details: this.state.selectedDetails,
-          brandId: this.state.selectedBrand.id,
+          brand: this.state.selectedBrand,
           sizeCategory: this.state.selectedCategory.value,
           pattern: this.state.selectedPattern.value,
         };
-
-        // case 1
-        if (inputs.type === '' && inputs.brandId === '') {
+        if (inputs.brand === '') {
+          inputs.brand = 'No Brand';
+        }
+        if (inputs.type === '') {
           axios
             .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
             .then((res) => {
@@ -217,45 +196,13 @@ class GetDetails extends Component {
               return typeId;
             })
             .then((id) => {
-              axios
-                .post('/add-brand', { name: this.state.selectedBrand.value, code: 'New Brand' })
-                .then(({ data }) => {
-                  const { brandId } = data;
-                  inputs.typeId = id;
-                  inputs.brandId = brandId;
-                })
-                .then(() => {
-                  this.moveToNextPage(cookie, inputs, logged);
-                });
+              inputs.typeId = id;
+            })
+            .then(() => {
+              this.moveToNextPage(cookie, inputs, logged);
             });
         } else {
-          if (inputs.type === '' && inputs.brandId !== '') {
-            axios
-              .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
-              .then((res) => {
-                const { typeId } = res.data;
-                return typeId;
-              })
-              .then((id) => {
-                inputs.type = id;
-                this.moveToNextPage(cookie, inputs, logged);
-              });
-          }
-          if (inputs.type !== '' && inputs.brandId === '') {
-            axios
-              .post('/add-brand', { name: this.state.selectedBrand.value, code: 'New Brand' })
-              .then(({ data }) => {
-                const { brandId } = data;
-                return brandId;
-              })
-              .then((id) => {
-                inputs.brandId = id;
-                this.moveToNextPage(cookie, inputs, logged);
-              });
-          }
-          if (inputs.type !== '' && inputs.brandId !== '') {
-            this.moveToNextPage(cookie, inputs, logged);
-          }
+          this.moveToNextPage(cookie, inputs, logged);
         }
       });
     }
@@ -274,24 +221,6 @@ class GetDetails extends Component {
     }
   };
 
-  addType = () => {
-    axios
-      .post('/add-type', { name: this.state.selectedType.value, shortcut: 'New Type' })
-      .then((res) => {
-        const { typeId } = res.data;
-        return typeId;
-      });
-  };
-
-  addBrand = () => {
-    axios
-      .post('/add-brand', { name: this.state.selectedBrand.value, code: 'New Brand' })
-      .then(({ data }) => {
-        const { brandId } = data;
-        return brandId;
-      });
-  };
-
   toggleOpen = (e) => {
     const { value, name } = e.target;
     this.setState({ [`selected${name}`]: value });
@@ -299,25 +228,9 @@ class GetDetails extends Component {
 
   handleChange = (value, select) => {
     const { name } = select;
-
-    if (select.action === 'create-option') {
-      let brandName = value.value.toLowerCase();
-      brandName = brandName.charAt(0).toUpperCase() + brandName.slice(1);
-
-      const newBrand = { value: brandName, label: brandName, id: '' };
-      const { brands } = this.state;
-
-      brands.push(newBrand);
-      this.setState({ brands }, () => {
-        this.setState({ selectedBrand: newBrand }, () => {
-          this.updateErrorState();
-        });
-      });
-    } else {
-      this.setState({ [`selected${name}`]: value }, () => {
-        this.updateErrorState();
-      });
-    }
+    this.setState({ [`selected${name}`]: value }, () => {
+      this.updateErrorState();
+    });
   };
 
   updateErrorState = () => {
