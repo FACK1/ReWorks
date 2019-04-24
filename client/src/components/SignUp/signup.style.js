@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const StyledContainer = styled.form`
   min-height: 100%;
+  margin-bottom:40px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -10,7 +11,7 @@ export const StyledContainer = styled.form`
 export const StyledBottom = styled.form`
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: -7%;
   left: 0;
 `;
 export const StyledInput = styled.input`
@@ -79,4 +80,16 @@ export const ErrorMessage = styled.h1`
   @media (max-width: 650px) {
     font-size: 12px;
   }
+`;
+
+export const BtnsContainer = styled.div`
+ display:flex;
+ justify-content:center;
+ width:50%;
+ height:30%;
+ margin:auto;
+ @media (max-width: 650px) {
+  width:100%;
+  height:5%;
+}
 `;

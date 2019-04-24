@@ -15,6 +15,7 @@ import {
   StyledP,
   StyledText,
   ErrorMessage,
+  BtnsContainer
 } from './login.style';
 
 class Login extends Component {
@@ -143,8 +144,10 @@ class Login extends Component {
         </StyledForm>
 
         <StyledBottom>
-          <Button />
-          <GButton title="LOGIN" onClick={this.login} />
+          <BtnsContainer> 
+            <Button />
+            <GButton title="LOGIN" onClick={this.login} />
+          </BtnsContainer>
           <Footer />
         </StyledBottom>
       </React.Fragment>

@@ -83,3 +83,15 @@ export const ErrorMessage = styled.h1`
     font-size: 12px;
   }
 `;
+
+export const BtnsContainer = styled.div`
+ display:flex;
+ justify-content:center;
+ width:50%;
+ margin:auto;
+ @media (max-width: 650px) {
+  width:100%
+}
+`;
+
+
