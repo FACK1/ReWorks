@@ -10,18 +10,14 @@ export const ThanksText = styled.p`
 `;
 
 export const CheckboxContainer = styled.div`
-  margin-top: 30px;
+  margin: 30px 0px 20px;
   display: flex;
-  margin-bottom: 38px;
   flex-flow: column wrap;
   font-size: 25px;
 `;
 
 export const BottomContainer = styled.div`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+
 `;
 
 export const Para = styled.p`
@@ -37,3 +33,25 @@ export const Para = styled.p`
   margin-left: 30px;
   margin-right: 30px;
 `;
+
+export const ButtonsContainer = styled.div`
+display:flex;
+justify-content: center;
+width:40vw;
+margin:auto;
+@media (max-width: 650px) {
+  width:90vw;
+}
+`;
+
+export const OptionsContainer = styled.div`
+height:50vh; 
+margin:10px auto;
+width:30vw;
+@media (max-width: 650px) {
+  width:70vw;
+}
+
+`;
+
+

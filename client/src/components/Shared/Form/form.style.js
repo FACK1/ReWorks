@@ -23,22 +23,24 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledInformation = styled.h2`
-  margin-left: 30px;
+  margin-left: 34.5%;
   font-size: 18px;
   color: #909090;
   text-align: left;
   @media (max-width: 650px) {
-    font-size: 12px;
+     font-size: 12px;
+     margin-left: 10%;
   }
 `;
 
 export const StyledNotic = styled.h2`
-  margin-left: 30px;
-  font-size: 18px;
-  text-align: left;
-  @media (max-width: 650px) {
-    font-size: 12px;
-  }
+  margin-left: 34.5%;
+	font-size: 18px;
+	text-align: left;
+	@media (max-width: 650px) {
+		font-size: 12px;
+    margin-left: 10%;
+	}
 `;
 
 export const StyledLabel = styled.label`
@@ -51,9 +53,13 @@ export const StyledLabel = styled.label`
 `;
 
 export const StyledDiv = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+  @media (min-width: 650px) {
+    width:40%;
+    margin-left: 30%;
+  }
 `;
 
 export const StyledItem = styled.div`
@@ -117,10 +123,18 @@ export const StyledTextarea = styled.textarea`
     font-size: 16px;
   }
   ::placeholder{
-    font-family:'Assistant';
+  font-family:'Assistant';
+  padding-left: 2%;
+  padding-top: 2%;
+
+}
+    @media (min-width: 650px) {
+      width: 30%;
+      margin: 10px auto;
+      font-size: 16px;
+
   }
 `;
-
 export const SelectStyle = styled.div`
   max-width: 150px;
   margin-bottom: 16px;

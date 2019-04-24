@@ -82,7 +82,7 @@ class ItemList extends Component {
       { label: 'BrandName', key: 'brand' },
       { label: 'Condition', key: 'condition' },
       { label: 'Age', key: 'age' },
-      { label: 'Color', key: 'color' },
+      { label: 'Colour', key: 'color' },
     ];
     return (
       <React.Fragment>
@@ -124,8 +124,8 @@ class ItemList extends Component {
               EXPORT AS CSV
             </StyledCSVLink>
           </GButtonContainer>
-          <Footer />
         </StyledBottom>
+        <Footer />
       </React.Fragment>
     );
   }

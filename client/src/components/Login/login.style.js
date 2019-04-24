@@ -15,18 +15,25 @@ export const StyledBottom = styled.form`
 `;
 export const StyledForm = styled.form`
     display:flex;
-    flex-shrink: 0;
-    flex-grow: 1;
     justify-content: space-around;
     flex-direction:column;
     margin:20px;
-`;
+    width: 28%;
+    margin-left:35%;
+    font-size: 20px;
+      @media (max-width: 650px){
+        width: 75%;
+        margin-left:13%;
+        font-size: 30px;
+      }
+      `;
+
 export const StyledLabel = styled.label`
     font-size: 20px;
     font-weight:bold;
     color:#1ED390;
     margin-bottom:3px;
-    @media (max-width: 650px) {
+      @media (max-width: 650px) {
       font-size: 16px;
     }
 `;
@@ -76,3 +83,15 @@ export const ErrorMessage = styled.h1`
     font-size: 12px;
   }
 `;
+
+export const BtnsContainer = styled.div`
+ display:flex;
+ justify-content:center;
+ width:50%;
+ margin:auto;
+ @media (max-width: 650px) {
+  width:100%
+}
+`;
+
+

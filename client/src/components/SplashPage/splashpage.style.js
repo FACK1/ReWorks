@@ -13,15 +13,24 @@ background:  linear-gradient(#3CBA92, #1F604B)
 
 export const AppDescription = styled.p`
 font-family: Assistant;
-padding: 0px 40px 0 40px;
 line-height: 2;
-font-size:20px;
-@media (max-width: 650px) {
-  font-size: 20px;
+width:auto;
+font-size:19px;
+padding: 0px 40px 0 40px;
+justify-content:center;
+align-content: space-between;
+display: flex;
+flex-direction: column;
+
+@media (min-width: 650px) {
+  line-height: 2;
+  font-size: 19px;
+  display: flex;
+  flex-direction: column;
+  width:35%;
+
 }
-
 `;
-
 
 export const GButton = styled.button`
 font-size: 18px;
@@ -34,7 +43,8 @@ border:none;
 font-weight: bold;
 width:45%;
 text-align:center;
-@media (max-width: 650px) {
+@media (min-width: 650px) {
   font-size: 14px;
+  width: 20%
 }
 `;

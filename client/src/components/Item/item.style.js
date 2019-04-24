@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const ItemContainer = styled.div`
+  box-shadow: 1px 2px 2px rgba(195, 184, 184, 0.25);
   width: 90%;
   height: 100px;
-  box-shadow: 1px 2px 2px rgba(195, 184, 184, 0.25);
   display: flex;
   justify-content: space-between;
 `;
@@ -11,12 +11,20 @@ export const ItemContainer = styled.div`
 export const ItemDiv = styled.div`
   margin-top: 20px;
   display: flex;
+  width:100%;
   justify-content: center;
+  @media (min-width: 650px) {
+    width:45%;
+    margin:20px auto;
+  }
 }`;
 
 export const ItemImage = styled.img`
   height: 100px;
   width: 30%;
+  @media (min-width: 650px) {
+    width: 25%;
+  }
 }`;
 
 export const Line = styled.div`
@@ -24,6 +32,9 @@ export const Line = styled.div`
   width: 5px;
   background-color: #1ed390;
   margin-right: 10px;
+  @media (min-width: 650px) {
+    width: 10px;
+  }
 `;
 
 export const ItemTitle = styled.p`
