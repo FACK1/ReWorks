@@ -9,7 +9,7 @@ import Checkbox from '../Shared/Checkbox';
 import Spinner from '../Shared/Spinner';
 
 import {
-  ThanksText, CheckboxContainer, BottomContainer, Para,
+  ThanksText, CheckboxContainer, BottomContainer, Para, ButtonsContainer, OptionsContainer
 } from './feedback.style';
 
 class Feedback extends Component {
@@ -140,7 +140,10 @@ class Feedback extends Component {
       <React.Fragment>
         <Title {...this.props} />
         <Header title="What do you want to do with your items?" />
-        <Para>Future releases of the app will add new features. We welcome your feedback.</Para>
+        <Para>Future releases of the app will add new features.
+          <br/>
+           We welcome your feedback.</Para>
+        <OptionsContainer>
         {!loading && (
           <CheckboxContainer>
             {options.map((option, i) => (
@@ -154,6 +157,7 @@ class Feedback extends Component {
           </CheckboxContainer>
         )}
         {loading && <Spinner />}
+        </OptionsContainer>
         <BottomContainer>
           {feedbackFlag && (
             <ThanksText>
@@ -161,10 +165,13 @@ class Feedback extends Component {
               <span role="img"> 🎉</span>
             </ThanksText>
           )}
-            <Button />
-            <GButton title="SAVE" onClick={this.updateAirtableFeedback} />
-            <Footer />
         </BottomContainer>
+
+        <ButtonsContainer>
+        <Button />
+        <GButton title="SAVE" onClick={this.updateAirtableFeedback} />
+        </ButtonsContainer>
+        <Footer />
       </React.Fragment>
     );
   }

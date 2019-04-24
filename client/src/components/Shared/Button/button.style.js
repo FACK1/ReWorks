@@ -8,12 +8,12 @@ export default styled.button`
   padding: 20px 0px;
   border:none;
   font-weight: bold;
-  width:35%;
+  width:25%;
   margin:0px 10px;
   text-align:center;
   text-decoration:none;
   @media (max-width: 650px) {
     font-size: 14px;
-    width:45%;
+    width:35%;
   }
 `;
