@@ -12,7 +12,6 @@ import {
 
 class GetDetails extends Component {
   state = {
-    selectedBrand: 'No Brand',
     selectedType: null,
     types: [],
     colors,
@@ -29,7 +28,7 @@ class GetDetails extends Component {
     selectedSize: null,
     selectedAge: null,
     selectedColor: null,
-    selectedPrice: '0',
+    selectedPrice: '',
     selectedDetails: '',
     selectedCategory: null,
     selectedPattern: null,
