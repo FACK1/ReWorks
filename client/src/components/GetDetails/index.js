@@ -183,8 +183,12 @@ class GetDetails extends Component {
           sizeCategory: this.state.selectedCategory.value,
           pattern: this.state.selectedPattern.value,
         };
-        if (inputs.brand === '') {
+
+        if (!inputs.brand) {
           inputs.brand = 'No Brand';
+        }
+        if (inputs.price) {
+          inputs.price = `0${inputs.price}`;
         }
         if (inputs.type === '') {
           axios
