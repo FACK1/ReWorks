@@ -26,12 +26,12 @@ class Form extends Component {
       'Item Type*',
       'Colour*',
       'Pattern',
-      'Brand',
       'Condition',
       'Label size',
       'Size Category',
       'Age',
       'Purchase price',
+      'Brand',
     ],
   };
 
@@ -183,14 +183,6 @@ class Form extends Component {
               />
             </SelectStyle>
 
-            <StyledInputBrand
-              onChange={toggleOpen}
-              type="text"
-              name="Brand"
-              value={selectedBrand}
-              placeholder="Brand"
-            />
-
             <SelectStyle>
               <Select
                 value={selectedCondition}
@@ -265,7 +257,7 @@ class Form extends Component {
                 type="text"
                 name="Price"
                 value={selectedPrice}
-                placeholder="price"
+                placeholder="Price"
               />
               <Select
                 value={selectedCurrency}
@@ -281,6 +273,14 @@ class Form extends Component {
                 onChange={handleChange}
               />
             </StyledPriceContainer>
+
+            <StyledInputBrand
+              onChange={toggleOpen}
+              type="text"
+              name="Brand"
+              value={selectedBrand}
+              placeholder="Brand Name"
+            />
           </StyledItem>
         </StyledDiv>
 
