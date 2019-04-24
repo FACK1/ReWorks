@@ -14,6 +14,6 @@ export default styled.button`
   text-decoration:none;
   @media (max-width: 650px) {
     font-size: 14px;
-    width:45%;
+    width:35%;
   }
 `;
