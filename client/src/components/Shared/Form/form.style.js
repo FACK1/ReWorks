@@ -87,7 +87,7 @@ export const StyledInput = styled.input`
     color: #b9b9b9;
   }
 `;
-// #808080
+
 export const StyledInputBrand = styled.input`
   background-color: #fff;
   font-size: 20px;
