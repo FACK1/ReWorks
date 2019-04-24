@@ -79,23 +79,48 @@ export const StyledPriceContainer = styled.div`
   flex-direction: row;
 `;
 export const StyledInput = styled.input`
-  background-color: #fbfbfb;
+  background-color: #fff;
   font-size: 20px;
-  max-width: 60px;
-  width: 60px;
+  max-width: 50px;
+  width: 50px;
   margin-bottom: 16px;
-  border: 1px solid #f2f2f2;
+  border: 1px solid #ccc;
+  padding: 8px 14px;
+  @media (max-width: 650px) {
+    font-size: 16px;
+  }
+  ::placeholder {
+    color: #b9b9b9;
+  }
+`;
+
+export const StyledInputBrand = styled.input`
+  background-color: #fff;
+  font-size: 20px;
+  max-width: 120px;
+  width: 120px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
   padding: 7px 14px;
   @media (max-width: 650px) {
     font-size: 16px;
   }
+  ::placeholder {
+    color: #b9b9b9;
+  }
 `;
-
 export const StyledTextarea = styled.textarea`
-  margin: 10px auto;
-  width: 80%;
-  background: #fbfbfb;
-  font-size: 16px;
+  font-size: 20px;
+  width:242px
+  padding:0 30px;
+  background-color:#FBFBFB;
+  border:1px solid  #ccc;
+  height:80px;
+  margin:20px auto;
+  display:flex;
+  text-align:left;
+  @media (max-width: 650px) {
+    font-size: 16px;
   }
   ::placeholder{
   font-family:'Assistant';

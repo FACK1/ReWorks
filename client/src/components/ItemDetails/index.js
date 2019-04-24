@@ -51,11 +51,7 @@ class ItemDetails extends Component {
       });
     });
     this.setState({
-      selectedBrand: {
-        id: itemDetails.brandId,
-        value: itemDetails.brand,
-        label: itemDetails.brand,
-      },
+      selectedBrand: itemDetails.brand,
       selectedCondition: { value: itemDetails.condition, label: itemDetails.condition },
       selectedSize: { value: itemDetails.size, label: itemDetails.size },
       selectedAge: { value: itemDetails.age, label: itemDetails.age },
@@ -73,20 +69,6 @@ class ItemDetails extends Component {
       clarifaiHex,
       selectedCategory: { value: itemDetails.sizeCategory, label: itemDetails.sizeCategory },
       selectedPattern: { value: itemDetails.pattern, label: itemDetails.pattern },
-    });
-
-    axios.get('/getbrands').then(({ data }) => {
-      if (data.success) {
-        const brands = [];
-        data.data.map((brand) => {
-          brands.push({
-            id: brand.id,
-            value: brand.name,
-            label: brand.name,
-          });
-        });
-        this.setState({ brands });
-      }
     });
 
     axios.get('/get-types').then(({ data }) => {
@@ -184,8 +166,8 @@ class ItemDetails extends Component {
     // const updatedFlag = this.checkForChanges();
     const { history } = this.props;
     const id = this.state.itemDetails.itemId;
+    let { selectedBrand } = this.state;
     const {
-      selectedBrand,
       selectedCondition,
       selectedSize,
       selectedAge,
@@ -197,12 +179,14 @@ class ItemDetails extends Component {
       selectedPattern,
       selectedType,
     } = this.state;
-
+    if (selectedBrand === undefined || selectedBrand === '') {
+      selectedBrand = 'No Brand';
+    }
     const newUpdates = {
       size: selectedSize.value,
       type: selectedType.id,
       price: selectedPrice.concat(selectedCurrency.value),
-      brandId: selectedBrand.id,
+      brand: selectedBrand,
       condition: selectedCondition.value,
       details: selectedDetails,
       color: selectedColor.value,

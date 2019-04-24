@@ -33,6 +33,7 @@ export const StyledHeader = styled.h1`
 `;
 
 export const StyledBottom = styled.div`
+
 `;
 
 export const StyledLink = styled(Link)`
@@ -62,7 +63,10 @@ export const StyledCSVLink = styled(CSVLink)`
 `;
 
 export const GButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top:50px;
+width:60%
+display:flex;
+justify-content:space-evenly;
+margin:40px auto;
+@media (max-width: 650px) {
+  width:100%}
 `;

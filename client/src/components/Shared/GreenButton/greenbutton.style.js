@@ -7,7 +7,7 @@ padding: 20px 0px;
 color:white;
 border:none;
 font-weight: bold;
-width:35%;
+width:45%;
 margin:0px 10px;
 text-align:center;
 font-size: 14px;
