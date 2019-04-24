@@ -39,7 +39,7 @@
     { "value": "Turquoise", "label": "Turquoise", "hex": "#40E0D0" },
     { "value": "Violet", "label": "Violet", "hex": "#800080" },
     { "value": "Yellow", "label": "Yellow", "hex": "#FFFF00" },
-    { "value": "White", "label": "White", "hex": "#000000" },
+    { "value": "White", "label": "White", "hex": "#FFF" },
     { "value": "Multi-coloured", "label": "Multi-coloured", "hex": "#000000" }
   ],
   "conditions": [
